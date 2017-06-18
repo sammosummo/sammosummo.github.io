@@ -1,5 +1,5 @@
 ---
-bibliography: papers.bib
+bibliography: mybib.bib
 nocite: '@*'
 ...
 

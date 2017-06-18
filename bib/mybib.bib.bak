@@ -1,0 +1,340 @@
+% Encoding: UTF-8
+Exported References will appear here ...
+
+trying to export 18 references ...
+% 28480992
+
+@Article{pmid28480992,
+  author   = {Yao, N. and Winkler, A. M. and Barrett, J. and Book, G. A. and Beetham, T. and Horseman, R. and Leach, O. and Hodgson, K. and Knowles, E. E. and Mathias, S. and Stevens, M. C. and Assaf, M. and van Erp, T. G. M. and Pearlson, G. D. and Glahn, D. C.},
+  title    = {{{I}nferring pathobiology from structural {M}{R}{I} in schizophrenia and bipolar disorder: {M}odeling head motion and neuroanatomical specificity}},
+  journal  = {Human Brain Mapping},
+  year     = {2017},
+  month    = {May},
+  note     = {[DOI:\href{https://dx.doi.org/10.1002/hbm.23612}{10.1002/hbm.23612}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28480992}{28480992}]},
+  abstract = {Despite over 400 peer-reviewed structural MRI publications documenting neuroanatomic abnormalities in bipolar disorder and schizophrenia, the confounding effects of head motion and the regional specificity of these defects are unclear. Using a large cohort of individuals scanned on the same research dedicated MRI with broadly similar protocols, we observe reduced cortical thickness indices in both illnesses, though less pronounced in bipolar disorder. While schizophrenia (n = 226) was associated with wide-spread surface area reductions, bipolar disorder (n = 227) and healthy comparison subjects (n = 370) did not differ. We replicate earlier reports that head motion (estimated from time-series data) influences surface area and cortical thickness measurements and demonstrate that motion influences a portion, but not all, of the observed between-group structural differences. Although the effect sizes for these differences were small to medium, when global indices were covaried during vertex-level analyses, between-group effects became nonsignificant. This analysis raises doubts about the regional specificity of structural brain changes, possible in contrast to functional changes, in affective and psychotic illnesses as measured with current imaging technology. Given that both schizophrenia and bipolar disorder showed cortical thickness reductions, but only schizophrenia showed surface area changes, and assuming these measures are influenced by at least partially unique sets of biological factors, then our results could indicate some degree of specificity between bipolar disorder and schizophrenia. Hum Brain Mapp, 2017. © 2017 Wiley Periodicals, Inc.},
+  doi      = {10.1002/hbm.23612},
+}
+
+% 28464677
+
+@Article{pmid28464677,
+  author   = {Varghese, L. and Mathias, S. R. and Bensussen, S. and Chou, K. and Goldberg, H. R. and Sun, Y. and Sekuler, R. and Shinn-Cunningham, B. G.},
+  title    = {{{B}i-directional audiovisual influences on temporal modulation discrimination}},
+  journal  = {Journal of the Acoustical Society of America},
+  year     = {2017},
+  volume   = {141},
+  number   = {4},
+  pages    = {2474},
+  month    = {Apr},
+  note     = {[DOI:\href{https://dx.doi.org/10.1121/1.4979470}{10.1121/1.4979470}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28464677}{28464677}]},
+  abstract = {Cross-modal interactions of auditory and visual temporal modulation were examined in a game-like experimental framework. Participants observed an audiovisual stimulus (an animated, sound-emitting fish) whose sound intensity and/or visual size oscillated sinusoidally at either 6 or 7 Hz. Participants made speeded judgments about the modulation rate in either the auditory or visual modality while doing their best to ignore information from the other modality. Modulation rate in the task-irrelevant modality matched the modulation rate in the task-relevant modality (congruent conditions), was at the other rate (incongruent conditions), or had no modulation (unmodulated conditions). Both performance accuracy and parameter estimates from drift-diffusion decision modeling indicated that (1) the presence of temporal modulation in both modalities, regardless of whether modulations were matched or mismatched in rate, resulted in audiovisual interactions; (2) congruence in audiovisual temporal modulation resulted in more reliable information processing; and (3) the effects of congruence appeared to be stronger when judging visual modulation rates (i.e., audition influencing vision), than when judging auditory modulation rates (i.e., vision influencing audition). The results demonstrate that audiovisual interactions from temporal modulations are bi-directional in nature, but with potential asymmetries in the size of the effect in each direction.},
+  doi      = {10.1121/1.4979470},
+}
+
+% 28385874
+
+@Article{pmid28385874,
+  author   = {Hodgson, K. and Carless, M. A. and Kulkarni, H. and Curran, J. E. and Sprooten, E. and Knowles, E. E. and Mathias, S. and Goring, H. H. H. and Yao, N. and Olvera, R. L. and Fox, P. T. and Almasy, L. and Duggirala, R. and Blangero, J. and Glahn, D. C.},
+  title    = {{{E}pigenetic {A}ge {A}cceleration {A}ssessed with {H}uman {W}hite-{M}atter {I}mages}},
+  journal  = {Journal of Neuroscience},
+  year     = {2017},
+  volume   = {37},
+  number   = {18},
+  pages    = {4735--4743},
+  month    = {May},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5426566}{PMC5426566}] [DOI:\href{https://dx.doi.org/10.1523/JNEUROSCI.0177-17.2017}{10.1523/JNEUROSCI.0177-17.2017}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28385874}{28385874}]},
+  abstract = {The accurate estimation of age using methylation data has proved a useful and heritable biomarker, with acceleration in epigenetic age predicting a number of age-related phenotypes. Measures of white matter integrity in the brain are also heritable and highly sensitive to both normal and pathological aging processes across adulthood. We consider the phenotypic and genetic interrelationships between epigenetic age acceleration and white matter integrity in humans. Our goal was to investigate processes that underlie interindividual variability in age-related changes in the brain. Using blood taken from a Mexican-American extended pedigree sample (n = 628; age = 23.28-93.11 years), epigenetic age was estimated using the method developed by Horvath (2013). For n = 376 individuals, diffusion tensor imaging scans were also available. The interrelationship between epigenetic age acceleration and global white matter integrity was investigated with variance decomposition methods. To test for neuroanatomical specificity, 16 specific tracts were additionally considered. We observed negative phenotypic correlations between epigenetic age acceleration and global white matter tract integrity (Ïpheno = -0.119, p = 0.028), with evidence of shared genetic (Ïgene = -0.463, p = 0.013) but not environmental influences. Negative phenotypic and genetic correlations with age acceleration were also seen for a number of specific white matter tracts, along with additional negative phenotypic correlations between granulocyte abundance and white matter integrity. These findings (i.e., increased acceleration in epigenetic age in peripheral blood correlates with reduced white matter integrity in the brain and shares common genetic influences) provide a window into the neurobiology of aging processes within the brain and a potential biomarker of normal and pathological brain aging.SIGNIFICANCE STATEMENT Epigenetic measures can be used to predict age with a high degree of accuracy and so capture acceleration in biological age, relative to chronological age. The white matter tracts within the brain are also highly sensitive to aging processes. We show that increased biological aging (measured using epigenetic data from blood samples) is correlated with reduced integrity of white matter tracts within the human brain (measured using diffusion tensor imaging) with data from a large sample of Mexican-American families. Given the family design of the sample, we are also able to demonstrate that epigenetic aging and white matter tract integrity also share common genetic influences. Therefore, epigenetic age may be a potential, and accessible, biomarker of brain aging.},
+  doi      = {10.1523/jneurosci.0177-17.2017},
+}
+
+% 28365467
+
+@Article{pmid28365467,
+  author   = {Knowles, E. E. M. and Huynh, K. and Meikle, P. J. and Goring, H. H. H. and Olvera, R. L. and Mathias, S. R. and Duggirala, R. and Almasy, L. and Blangero, J. and Curran, J. E. and Glahn, D. C.},
+  title    = {{{T}he lipidome in major depressive disorder: {S}hared genetic influence for ether-phosphatidylcholines, a plasma-based phenotype related to inflammation, and disease risk}},
+  journal  = {European Psychiatry},
+  year     = {2017},
+  volume   = {43},
+  pages    = {44--50},
+  month    = {Jun},
+  note     = {[DOI:\href{https://dx.doi.org/10.1016/j.eurpsy.2017.02.479}{10.1016/j.eurpsy.2017.02.479}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28365467}{28365467}]},
+  abstract = {The lipidome is rapidly garnering interest in the field of psychiatry. Recent studies have implicated lipidomic changes across numerous psychiatric disorders. In particular, there is growing evidence that the concentrations of several classes of lipids are altered in those diagnosed with MDD. However, for lipidomic abnormalities to be considered potential treatment targets for MDD (rather than secondary manifestations of the disease), a shared etiology between lipid concentrations and MDD should be demonstrated.\\ In a sample of 567 individuals from 37 extended pedigrees (average size 13.57 people, range=3-80), we used mass spectrometry lipidomic measures to evaluate the genetic overlap between twenty-three biologically distinct lipid classes and a dimensional scale of MDD.\\ We found that the lipid class with the largest endophenotype ranking value (ERV, a standardized parametric measure of pleiotropy) were ether-phosphodatidylcholines (alkylphosphatidylcholine, PC(O) and alkenylphosphatidylcholine, PC(P) subclasses). Furthermore, we examined the cluster structure of the twenty-five species within the top-ranked lipid class, and the relationship of those clusters with MDD. This analysis revealed that species containing arachidonic acid generally exhibited the greatest degree of genetic overlap with MDD.\\ This study is the first to demonstrate a shared genetic etiology between MDD and ether-phosphatidylcholine species containing arachidonic acid, an omega-6 fatty acid that is a precursor to inflammatory mediators, such as prostaglandins. The study highlights the potential utility of the well-characterized linoleic/arachidonic acid inflammation pathway as a diagnostic marker and/or treatment target for MDD.},
+  doi      = {10.1016/j.eurpsy.2017.02.479},
+}
+
+% 28230325
+
+@Article{pmid28230325,
+  author   = {Knowles, E. E. and Meikle, P. J. and Huynh, K. and Goring, H. H. and Olvera, R. L. and Mathias, S. R. and Duggirala, R. and Almasy, L. and Blangero, J. and Curran, J. E. and Glahn, D. C.},
+  title    = {{{S}erum phosphatidylinositol as a biomarker for bipolar disorder liability}},
+  journal  = {Bipolar Disorders},
+  year     = {2017},
+  volume   = {19},
+  number   = {2},
+  pages    = {107--115},
+  month    = {Mar},
+  note     = {[DOI:\href{https://dx.doi.org/10.1111/bdi.12468}{10.1111/bdi.12468}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28230325}{28230325}]},
+  abstract = {Individuals with bipolar disorder (BPD) exhibit alterations in their phospholipid levels. It is unclear whether these alterations are a secondary consequence of illness state, or if phospholipids and illness risk overlap genetically. If the latter were true, then phospholipids might provide key insights into the pathophysiology of the illness. Therefore, we rank-ordered phospholipid classes by their genetic overlap with BPD risk in order to establish which class might be most informative in terms of increasing our understanding of illness pathophysiology.\\ Analyses were conducted in a sample of 558 individuals, unselected for BPD, from 38 extended pedigrees (average family size=14.79, range=2-82). We calculated a coefficient of relatedness for all family members of nine individuals with BPD in the sample (N=185); this coefficient was set to be zero in unrelated individuals (N=373). Then, under an endophenotype ranking value (ERV) approach, this scalar index was tested against 13 serum-based phospholipid concentrations in order to rank-order lipid classes by their respective overlap with BPD risk.\\ The phosphatidylinositol class was significantly heritable (h(2) =0.26, P=6.71 Ã— 10(-05) ). It was the top-ranked class, and was significantly associated with BPD risk after correction for multiple testing (Î²=-1.18, P=2.10 Ã— 10(-03) , ERV=0.49).\\ We identified a peripheral biomarker, serum-based phosphatidylinositol, which exhibits a significant association with BPD risk. Therefore, given that phosphatidylinositol and BPD risk share partially common etiology, it seems that this lipid class warrants further investigation, not only in terms of treatment, but also as a promising diagnostic and risk marker.},
+  doi      = {10.1111/bdi.12468},
+}
+
+% 28062652
+
+@Article{pmid28062652,
+  author   = {Mathias, S. R. and Knowles, E. E. and Barrett, J. and Leach, O. and Buccheri, S. and Beetham, T. and Blangero, J. and Poldrack, R. A. and Glahn, D. C.},
+  title    = {{{T}he {P}rocessing-{S}peed {I}mpairment in {P}sychosis {I}s {M}ore {T}han {J}ust {A}ccelerated {A}ging}},
+  journal  = {Schizophrenia Bulletin},
+  year     = {2017},
+  month    = {Jan},
+  note     = {[DOI:\href{https://dx.doi.org/10.1093/schbul/sbw168}{10.1093/schbul/sbw168}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/28062652}{28062652}]},
+  abstract = {Processing speed is impaired in patients with psychosis, and deteriorates as a function of normal aging. These observations, in combination with other lines of research, suggest that psychosis may be a syndrome of accelerated aging. But do patients with psychosis perform poorly on tasks of processing speed for the same reasons as older adults? Fifty-one patients with psychotic illnesses and 90 controls with similar mean IQ (aged 19-69 years, all African American) completed a computerized processing-speed task, reminiscent of the classic digit-symbol coding task. The data were analyzed using the drift-diffusion model (DDM), and Bayesian inference was used to determine whether psychosis and aging had similar or divergent effects on the DDM parameters. Psychosis and aging were both associated with poor performance, but had divergent effects on the DDM parameters. Patients had lower information-processing efficiency ("drift rate") and longer nondecision time than controls, and psychosis per se did not influence response caution. By contrast, the primary effect of aging was to increase response caution, and had inconsistent effects on drift rate and nondecision time across patients and controls. The results reveal that psychosis and aging influenced performance in different ways, suggesting that the processing-speed impairment in psychosis is more than just accelerated aging. This study also demonstrates the potential utility of computational models and Bayesian inference for finely mapping the contributions of cognitive functions on simple neurocognitive tests.},
+  doi      = {10.1093/schbul/sbw168},
+}
+
+% 27744290
+
+@Article{pmid27744290,
+  author   = {Hodgson, K. and Poldrack, R. A. and Curran, J. E. and Knowles, E. E. and Mathias, S. and Goring, H. H. and Yao, N. and Olvera, R. L. and Fox, P. T. and Almasy, L. and Duggirala, R. and Barch, D. M. and Blangero, J. and Glahn, D. C.},
+  title    = {{{S}hared {G}enetic {F}actors {I}nfluence {H}ead {M}otion {D}uring {M}{R}{I} and {B}ody {M}ass {I}ndex}},
+  journal  = {Cerebral Cortex},
+  year     = {2016},
+  month    = {Oct},
+  note     = {[DOI:\href{https://dx.doi.org/10.1093/cercor/bhw321}{10.1093/cercor/bhw321}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/27744290}{27744290}]},
+  abstract = {Head movements are typically viewed as a nuisance to functional magnetic resonance imaging (fMRI) analysis, and are particularly problematic for resting state fMRI. However, there is growing evidence that head motion is a behavioral trait with neural and genetic underpinnings. Using data from a large randomly ascertained extended pedigree sample of Mexican Americans (n = 689), we modeled the genetic structure of head motion during resting state fMRI and its relation to 48 other demographic and behavioral phenotypes. A replication analysis was performed using data from the Human Connectome Project, which uses an extended twin design (n = 864). In both samples, head motion was significantly heritable (h(2) = 0.313 and 0.427, respectively), and phenotypically correlated with numerous traits. The most strongly replicated relationship was between head motion and body mass index, which showed evidence of shared genetic influences in both data sets. These results highlight the need to view head motion in fMRI as a complex neurobehavioral trait correlated with a number of other demographic and behavioral phenotypes. Given this, when examining individual differences in functional connectivity, the confounding of head motion with other traits of interest needs to be taken into consideration alongside the critical important of addressing head motion artifacts.},
+  doi      = {10.1093/cercor/bhw321},
+}
+
+% 27738994
+
+@Article{pmid27738994,
+  author   = {Guadalupe, T. and Mathias, S. R. and vanErp, T. G. and Whelan, C. D. and Zwiers, M. P. and Abe, Y. and Abramovic, L. and Agartz, I. and Andreassen, O. A. and Arias-Vasquez, A. and Aribisala, B. S. and Armstrong, N. J. and Arolt, V. and Artiges, E. and Ayesa-Arriola, R. and Baboyan, V. G. and Banaschewski, T. and Barker, G. and Bastin, M. E. and Baune, B. T. and Blangero, J. and Bokde, A. L. and Boedhoe, P. S. and Bose, A. and Brem, S. and Brodaty, H. and Bromberg, U. and Brooks, S. and Buchel, C. and Buitelaar, J. and Calhoun, V. D. and Cannon, D. M. and Cattrell, A. and Cheng, Y. and Conrod, P. J. and Conzelmann, A. and Corvin, A. and Crespo-Facorro, B. and Crivello, F. and Dannlowski, U. and de Zubicaray, G. I. and de Zwarte, S. M. and Deary, I. J. and Desrivieres, S. and Doan, N. T. and Donohoe, G. and D?rum, E. S. and Ehrlich, S. and Espeseth, T. and Fernandez, G. and Flor, H. and Fouche, J. P. and Frouin, V. and Fukunaga, M. and Gallinat, J. and Garavan, H. and Gill, M. and Suarez, A. G. and Gowland, P. and Grabe, H. J. and Grotegerd, D. and Gruber, O. and Hagenaars, S. and Hashimoto, R. and Hauser, T. U. and Heinz, A. and Hibar, D. P. and Hoekstra, P. J. and Hoogman, M. and Howells, F. M. and Hu, H. and Hulshoff Pol, H. E. and Huyser, C. and Ittermann, B. and Jahanshad, N. and Jonsson, E. G. and Jurk, S. and Kahn, R. S. and Kelly, S. and Kraemer, B. and Kugel, H. and Kwon, J. S. and Lemaitre, H. and Lesch, K. P. and Lochner, C. and Luciano, M. and Marquand, A. F. and Martin, N. G. and Martinez-Zalacain, I. and Martinot, J. L. and Mataix-Cols, D. and Mather, K. and McDonald, C. and McMahon, K. L. and Medland, S. E. and Menchon, J. M. and Morris, D. W. and Mothersill, O. and Maniega, S. M. and Mwangi, B. and Nakamae, T. and Nakao, T. and Narayanaswaamy, J. C. and Nees, F. and Nordvik, J. E. and Onnink, A. M. and Opel, N. and Ophoff, R. and Paillere Martinot, M. L. and Papadopoulos Orfanos, D. and Pauli, P. and Paus, T. and Poustka, L. and Reddy, J. Y. and Renteria, M. E. and Roiz-Santianez, R. and Roos, A. and Royle, N. A. and Sachdev, P. and Sanchez-Juan, P. and Schmaal, L. and Schumann, G. and Shumskaya, E. and Smolka, M. N. and Soares, J. C. and Soriano-Mas, C. and Stein, D. J. and Strike, L. T. and Toro, R. and Turner, J. A. and Tzourio-Mazoyer, N. and Uhlmann, A. and Hernandez, M. V. and van den Heuvel, O. A. and van der Meer, D. and van Haren, N. E. and Veltman, D. J. and Venkatasubramanian, G. and Vetter, N. C. and Vuletic, D. and Walitza, S. and Walter, H. and Walton, E. and Wang, Z. and Wardlaw, J. and Wen, W. and Westlye, L. T. and Whelan, R. and Wittfeld, K. and Wolfers, T. and Wright, M. J. and Xu, J. and Xu, X. and Yun, J. Y. and Zhao, J. and Franke, B. and Thompson, P. M. and Glahn, D. C. and Mazoyer, B. and Fisher, S. E. and Francks, C.},
+  title    = {{{H}uman subcortical brain asymmetries in 15,847 people worldwide reveal effects of age and sex}},
+  journal  = {Brain Imaging and Behavior},
+  year     = {2016},
+  month    = {Oct},
+  note     = {[DOI:\href{https://dx.doi.org/10.1007/s11682-016-9629-z}{10.1007/s11682-016-9629-z}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/27738994}{27738994}]},
+  abstract = {The two hemispheres of the human brain differ functionally and structurally. Despite over a century of research, the extent to which brain asymmetry is influenced by sex, handedness, age, and genetic factors is still controversial. Here we present the largest ever analysis of subcortical brain asymmetries, in a harmonized multi-site study using meta-analysis methods. Volumetric asymmetry of seven subcortical structures was assessed in 15,847 MRI scans from 52 datasets worldwide. There were sex differences in the asymmetry of the globus pallidus and putamen. Heritability estimates, derived from 1170 subjects belonging to 71 extended pedigrees, revealed that additive genetic factors influenced the asymmetry of these two structures and that of the hippocampus and thalamus. Handedness had no detectable effect on subcortical asymmetries, even in this unprecedented sample size, but the asymmetry of the putamen varied with age. Genetic drivers of asymmetry in the hippocampus, thalamus and basal ganglia may affect variability in human cognition, including susceptibility to psychiatric disorders.},
+  doi      = {10.1007/s11682-016-9629-z},
+}
+
+% 27198848
+
+@Article{pmid27198848,
+  author   = {Sprooten, E. and Barrett, J. and McKay, D. R. and Knowles, E. E. and Mathias, S. R. and Winkler, A. M. and Brumbaugh, M. S. and Landau, S. and Cyr, L. and Kochunov, P. and Glahn, D. C.},
+  title    = {{{A} comprehensive tractography study of patients with bipolar disorder and their unaffected siblings}},
+  journal  = {Human Brain Mapping},
+  year     = {2016},
+  volume   = {37},
+  number   = {10},
+  pages    = {3474--3485},
+  month    = {Oct},
+  note     = {[DOI:\href{https://dx.doi.org/10.1002/hbm.23253}{10.1002/hbm.23253}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/27198848}{27198848}]},
+  abstract = {Diffusion tensor imaging studies show reductions in fractional anisotropy (FA) in individuals with bipolar disorder and their unaffected siblings. However, the use of various analysis methods is an important source of between-study heterogeneity. Using tract-based spatial statistics, we previously demonstrated widespread FA reductions in patients and unaffected relatives. To better interpret the neuroanatomical pattern of this previous finding and to assess the influence of methodological heterogeneity, we here applied tractography to the same sample.\\ Diffusion-weighted images were acquired for 96 patients, 69 unaffected siblings and 56 controls. We applied TRACULA, an extension of a global probabilistic tractography algorithm, to automatically segment 18 major fiber tracts. Average FA within each tract and at each cross-section along each tract was compared between groups.\\ Patients had reduced FA compared to healthy controls and their unaffected siblings in general, and in particular in the parietal part of the superior longitudinal fasciculus. In unaffected siblings, FA was nominally reduced compared to controls in the corpus callosum. Point-wise analyses indicated that similar effects were present along extended sections, but with variable effect sizes. Current symptom severity negatively correlated with FA in several fronto-limbic association tracts.\\ The differential sensitivity of analysis techniques likely explains between-study heterogeneity in anatomical localization of FA reductions. The present tractography analysis confirms the presence of overall FA reductions in patients with bipolar disorder, which are most pronounced in the superior longitudinal fasciculus. Unaffected siblings may display similar, albeit more subtle and anatomically restricted FA reductions. Hum Brain Mapp 37:3474-3485, 2016. © 2016 Wiley Periodicals, Inc.},
+  doi      = {10.1002/hbm.23253},
+}
+
+% 26655122
+
+@Article{pmid26655122,
+  author   = {Knowles, E. E. and Kent, J. W. and McKay, D. R. and Sprooten, E. and Mathias, S. R. and Curran, J. E. and Carless, M. A. and de Almeida, M. A. and Harald, H. H. and Dyer, T. D. and Olvera, R. L. and Fox, P. T. and Duggirala, R. and Almasy, L. and Blangero, J. and Glahn, D. C.},
+  title    = {{{G}enome-wide linkage on chromosome 10q26 for a dimensional scale of major depression}},
+  journal  = {Journal of Affective Disorders},
+  year     = {2016},
+  volume   = {191},
+  pages    = {123--131},
+  month    = {Feb},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4715913}{PMC4715913}] [DOI:\href{https://dx.doi.org/10.1016/j.jad.2015.11.012}{10.1016/j.jad.2015.11.012}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/26655122}{26655122}]},
+  abstract = {Major depressive disorder (MDD) is a common and potentially life-threatening mood disorder. Identifying genetic markers for depression might provide reliable indicators of depression risk, which would, in turn, substantially improve detection, enabling earlier and more effective treatment. The aim of this study was to identify rare variants for depression, modeled as a continuous trait, using linkage and post-hoc association analysis. The sample comprised 1221 Mexican-American individuals from extended pedigrees. A single dimensional scale of MDD was derived using confirmatory factor analysis applied to all items from the Past Major Depressive Episode section of the Mini-International Neuropsychiatric Interview. Scores on this scale of depression were subjected to linkage analysis followed by QTL region-specific association analysis. Linkage analysis revealed a single genome-wide significant QTL (LOD=3.43) on 10q26.13, QTL-specific association analysis conducted in the entire sample revealed a suggestive variant within an intron of the gene LHPP (rs11245316, p=7.8×10(-04); LD-adjusted Bonferroni-corrected p=8.6×10(-05)). This region of the genome has previously been implicated in the etiology of MDD; the present study extends our understanding of the involvement of this region by highlighting a putative gene of interest (LHPP).},
+  doi      = {10.1016/j.jad.2015.11.012},
+}
+
+% 26485182
+
+@Article{pmid26485182,
+  author   = {Mathias, S. R. and Knowles, E. E. and Kent, J. W. and McKay, D. R. and Curran, J. E. and de Almeida, M. A. and Dyer, T. D. and Goring, H. H. and Olvera, R. L. and Duggirala, R. and Fox, P. T. and Almasy, L. and Blangero, J. and Glahn, D. C.},
+  title    = {{{R}ecurrent major depression and right hippocampal volume: {A} bivariate linkage and association study}},
+  journal  = {Human Brain Mapping},
+  year     = {2016},
+  volume   = {37},
+  number   = {1},
+  pages    = {191--202},
+  month    = {Jan},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4981180}{PMC4981180}] [DOI:\href{https://dx.doi.org/10.1002/hbm.23025}{10.1002/hbm.23025}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/26485182}{26485182}]},
+  abstract = {Previous work has shown that the hippocampus is smaller in the brains of individuals suffering from major depressive disorder (MDD) than those of healthy controls. Moreover, right hippocampal volume specifically has been found to predict the probability of subsequent depressive episodes. This study explored the utility of right hippocampal volume as an endophenotype of recurrent MDD (rMDD). We observed a significant genetic correlation between the two traits in a large sample of Mexican American individuals from extended pedigrees (Ïg = -0.34, p = 0.013). A bivariate linkage scan revealed a significant pleiotropic quantitative trait locus on chromosome 18p11.31-32 (LOD = 3.61). Bivariate association analysis conducted under the linkage peak revealed a variant (rs574972) within an intron of the gene SMCHD1 meeting the corrected significance level (Ï‡(2) = 19.0, p = 7.4 Ã— 10(-5)). Univariate association analyses of each phenotype separately revealed that the same variant was significant for right hippocampal volume alone, and also revealed a suggestively significant variant (rs12455524) within the gene DLGAP1 for rMDD alone. The results implicate right-hemisphere hippocampal volume as a possible endophenotype of rMDD, and in so doing highlight a potential gene of interest for rMDD risk.},
+  doi      = {10.1002/hbm.23025},
+}
+
+% 26440917
+
+@Article{pmid26440917,
+  author   = {Sprooten, E. and Gupta, C. N. and Knowles, E. E. and McKay, D. R. and Mathias, S. R. and Curran, J. E. and Kent, J. W. and Carless, M. A. and Almeida, M. A. and Dyer, T. D. and Goring, H. H. and Olvera, R. L. and Kochunov, P. and Fox, P. T. and Duggirala, R. and Almasy, L. and Calhoun, V. D. and Blangero, J. and Turner, J. A. and Glahn, D. C.},
+  title    = {{{G}enome-wide significant linkage of schizophrenia-related neuroanatomical trait to 12q24}},
+  journal  = {American Journal of Medical Genetics. Part B, Neuropsychiatric Genetics},
+  year     = {2015},
+  volume   = {168},
+  number   = {8},
+  pages    = {678--686},
+  month    = {Dec},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4639444}{PMC4639444}] [DOI:\href{https://dx.doi.org/10.1002/ajmg.b.32360}{10.1002/ajmg.b.32360}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/26440917}{26440917}]},
+  abstract = {The insula and medial prefrontal cortex (mPFC) share functional, histological, transcriptional, and developmental characteristics, and they serve higher cognitive functions of theoretical relevance to schizophrenia and related disorders. Meta-analyses and multivariate analysis of structural magnetic resonance imaging (MRI) scans indicate that gray matter density and volume reductions in schizophrenia are the most consistent and pronounced in a network primarily composed of the insula and mPFC. We used source-based morphometry, a multivariate technique optimized for structural MRI, in a large sample of randomly ascertained pedigrees (N = 887) to derive an insula-mPFC component and to investigate its genetic determinants. Firstly, we replicated the insula-mPFC gray matter component as an independent source of gray matter variation in the general population, and verified its relevance to schizophrenia in an independent case-control sample. Secondly, we showed that the neuroanatomical variation defined by this component is largely determined by additive genetic variation (h(2) = 0.59), and genome-wide linkage analysis resulted in a significant linkage peak at 12q24 (LOD = 3.76). This region has been of significant interest to psychiatric genetics as it contains the Darier's disease locus and other proposed susceptibility genes (e.g., DAO, NOS1), and it has been linked to affective disorders and schizophrenia in multiple populations. Thus, in conjunction with previous clinical studies, our data imply that one or more psychiatric risk variants at 12q24 are co-inherited with reductions in mPFC and insula gray matter concentration. © 2015 Wiley Periodicals, Inc.},
+  doi      = {10.1002/ajmg.b.32360},
+}
+
+% 25729637
+
+@Article{pmid25729637,
+  author   = {Knowles, E. E. and Mathias, S. R. and McKay, D. R. and Sprooten, E. and Blangero, J. and Almasy, L. and Glahn, D. C.},
+  title    = {{{G}enome-{W}ide {A}nalyses of {W}orking-{M}emory {A}bility: {A} {R}eview}},
+  journal  = {Current Behavioral Neuroscience Reports},
+  year     = {2014},
+  volume   = {1},
+  number   = {4},
+  pages    = {224--233},
+  month    = {Dec},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4339023}{PMC4339023}] [DOI:\href{https://dx.doi.org/10.1007/s40473-014-0028-8}{10.1007/s40473-014-0028-8}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/25729637}{25729637}]},
+  abstract = {Working memory, a theoretical construct from the field of cognitive psychology, is crucial to everyday life. It refers to the ability to temporarily store and manipulate task-relevant information. The identification of genes for working memory might shed light on the molecular mechanisms of this important cognitive ability and-given the genetic overlap between, for example, schizophrenia risk and working-memory ability-might also reveal important candidate genes for psychiatric illness. A number of genome-wide searches for genes that influence working memory have been conducted in recent years. Interestingly, the results of those searches converge on the mediating role of neuronal excitability in working-memory performance, such that the role of each gene highlighted by genome-wide methods plays a part in ion channel formation and/or dopaminergic signaling in the brain, with either direct or indirect influence on dopamine levels in the prefrontal cortex. This result dovetails with animal models of working memory that highlight the role of dynamic network connectivity, as mediated by dopaminergic signaling, in the dorsolateral prefrontal cortex. Future work, which aims to characterize functional variants influencing working-memory ability, might choose to focus on those genes highlighted in the present review and also those networks in which the genes fall. Confirming gene associations and highlighting functional characterization of those associations might have implications for the understanding of normal variation in working-memory ability and also for the development of drugs for mental illness.},
+  doi      = {10.1007/s40473-014-0028-8},
+}
+
+% 25264258
+
+@Article{pmid25264258,
+  author   = {Roswandowitz, C. and Mathias, S. R. and Hintz, F. and Kreitewolf, J. and Schelinski, S. and von Kriegstein, K.},
+  title    = {{{T}wo cases of selective developmental voice-recognition impairments}},
+  journal  = {Current Biology},
+  year     = {2014},
+  volume   = {24},
+  number   = {19},
+  pages    = {2348--2353},
+  month    = {Oct},
+  note     = {[DOI:\href{https://dx.doi.org/10.1016/j.cub.2014.08.048}{10.1016/j.cub.2014.08.048}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/25264258}{25264258}]},
+  abstract = {Recognizing other individuals is an essential skill in humans and in other species. Over the last decade, it has become increasingly clear that person-identity recognition abilities are highly variable. Roughly 2% of the population has developmental prosopagnosia, a congenital deficit in recognizing others by their faces. It is currently unclear whether developmental phonagnosia, a deficit in recognizing others by their voices, is equally prevalent, or even whether it actually exists. Here, we aimed to identify cases of developmental phonagnosia. We collected more than 1,000 data sets from self-selected German individuals by using a web-based screening test that was designed to assess their voice-recognition abilities. We then examined potentially phonagnosic individuals by using a comprehensive laboratory test battery. We found two novel cases of phonagnosia: AS, a 32-year-old female, and SP, a 32-year-old male; both are otherwise healthy academics, have normal hearing, and show no pathological abnormalities in brain structure. The two cases have comparable patterns of impairments: both performed at least 2 SDs below the level of matched controls on tests that required learning new voices, judging the familiarity of famous voices, and discriminating pitch differences between voices. In both cases, only voice-identity processing per se was affected: face recognition, speech intelligibility, emotion recognition, and musical ability were all comparable to controls. The findings confirm the existence of developmental phonagnosia as a modality-specific impairment and allow a first rough prevalence estimate.},
+  doi      = {10.1016/j.cub.2014.08.048},
+}
+
+% 24389264
+
+@Article{pmid24389264,
+  author   = {Mathias, S. R. and von Kriegstein, K.},
+  title    = {{{H}ow do we recognise who is speaking?}},
+  journal  = {Frontiers Bioscience (Scholar Edition)},
+  year     = {2014},
+  volume   = {6},
+  pages    = {92--109},
+  month    = {Jan},
+  note     = {[PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/24389264}{24389264}]},
+  abstract = {The human brain effortlessly extracts a wealth of information from natural speech, which allows the listener to both understand the speech message and recognise who is speaking. This article reviews behavioural and neuroscientific work that has attempted to characterise how listeners achieve speaker recognition. Behavioural studies suggest that the action of a speaker's glottal folds and the overall length of their vocal tract carry important voice-quality information. Although these cues are useful for discriminating and recognising speakers under certain circumstances, listeners may use virtually any systematic feature for recognition. Neuroscientific studies have revealed that speaker recognition relies upon a predominantly right-lateralised network of brain regions. Specifically, the posterior parts of superior temporal sulcus appear to perform some of the acoustical analyses necessary for the perception of speaker and message, whilst anterior portions may play a more abstract role in perceiving speaker identity. This voice-processing network is supported by direct, early connections to non-auditory regions, such as the visual face-sensitive area in the fusiform gyrus, which may serve to optimize person recognition.},
+  doi      = {10.2741/s417},
+}
+
+% 24188404
+
+@Article{pmid24188404,
+  author   = {Mathias, S. R. and von Kriegstein, K.},
+  title    = {{{P}ercepts, not acoustic properties, are the units of auditory short-term memory}},
+  journal  = {Journal of Experimental Psychology: Human Perception and Performance},
+  year     = {2014},
+  volume   = {40},
+  number   = {2},
+  pages    = {445--450},
+  month    = {Apr},
+  note     = {[DOI:\href{https://dx.doi.org/10.1037/a0034890}{10.1037/a0034890}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/24188404}{24188404}]},
+  abstract = {For decades, researchers have sought to understand the organizing principles of auditory and visual short-term memory (STM). Previous work in audition has suggested that there are independent memory stores for different sound features, but the nature of the representations retained within these stores is currently unclear. Do they retain perceptual features, or do they instead retain representations of the sound's specific acoustic properties? In the present study we addressed this question by measuring listeners' abilities to keep one of three acoustic properties (interaural time difference [ITD], interaural level difference [ILD], or frequency) in memory when the target sound was followed by interfering sounds that varied randomly in one of the same properties. Critically, ITD and ILD evoked the same percept (spatial location), despite being acoustically different and having different physiological correlates, whereas frequency evoked a different percept (pitch). The results showed that listeners found it difficult to remember the percept of spatial location when the interfering tones varied either in ITD or ILD, but not when they varied in frequency. The study demonstrates that percepts are the units of auditory STM, and provides testable predictions for future neuroscientific work on both auditory and visual STM.},
+  doi      = {10.1037/a0034890},
+}
+
+% 21974481
+
+@Article{pmid21974481,
+  author   = {Mathias, S. R. and Bailey, P. J. and Semal, C. and Demany, L.},
+  title    = {{{A} note about insensitivity to pitch-change direction}},
+  journal  = {Journal of the Acoustical Society of America},
+  year     = {2011},
+  volume   = {130},
+  number   = {4},
+  pages    = {L129--134},
+  month    = {Oct},
+  note     = {[DOI:\href{https://dx.doi.org/10.1121/1.3629139}{10.1121/1.3629139}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/21974481}{21974481}]},
+  abstract = {Some listeners are insensitive to the direction of pure-tone frequency changes when the standard frequency is roved widely over trials, but less so when the standard frequency is fixed and trial-by-trial feedback is provided. The present experiment tested the hypothesis that fixing the standard frequency and providing feedback is advantageous for direction-impaired listeners because under these conditions the listeners can learn to respond correctly without genuinely perceiving frequency-change direction. This hypothesis was ruled out by the experiment. It appears instead that direction-impaired listeners find it difficult to ignore the irrelevant frequency changes introduced by roving.},
+  doi      = {10.1121/1.3629139},
+}
+
+% 21117752
+
+@Article{pmid21117752,
+  author   = {Mathias, S. R. and Micheyl, C. and Bailey, P. J.},
+  title    = {{{S}timulus uncertainty and insensitivity to pitch-change direction}},
+  journal  = {Journal of the Acoustical Society of America},
+  year     = {2010},
+  volume   = {127},
+  number   = {5},
+  pages    = {3026--3037},
+  month    = {May},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2882662}{PMC2882662}] [DOI:\href{https://dx.doi.org/10.1121/1.3365252}{10.1121/1.3365252}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/21117752}{21117752}]},
+  abstract = {In a series of experiments, Semal and Demany [(2006). J. Acoust. Soc. Am. 120, 3907-3915] demonstrated that some normally hearing listeners are unable to determine the direction of small but detectable differences in frequency between pure tones. Unlike studies demonstrating similar effects in patients with brain damage, the authors used stimuli in which the standard frequency of the tones was highly uncertain (roved) over trials. In Experiment 1, listeners were identified as insensitive to the direction of pitch changes using stimuli with frequency roving. When listeners were retested using stimuli without roving in Experiment 2, impairments in pitch-direction identification were generally much less profound. In Experiment 3, frequency-roving range had a systematic effect on listeners' thresholds, and impairments in pitch-direction identification tended to occur only when the roving range was widest. In Experiment 4, the influence of frequency roving was similar for continuous frequency changes as for discrete changes. Possible explanations for the influence of roving on listeners' insensitivity to pitch-change direction are discussed.},
+  doi      = {10.1121/1.3365252},
+}
+
+@Article{doi:10.1121/2.0000219,
+  author  = {Samuel R. Mathias},
+  title   = {Unified analysis of accuracy and reaction times via models of decision making},
+  journal = {Proceedings of Meetings on Acoustics},
+  year    = {2016},
+  volume  = {26},
+  number  = {1},
+  pages   = {050001},
+  doi     = {10.1121/2.0000219},
+  eprint  = {http://asa.scitation.org/doi/pdf/10.1121/2.0000219},
+  url     = { 
+        http://asa.scitation.org/doi/abs/10.1121/2.0000219
+    
+},
+}
+
+@InCollection{Glahn2016487,
+  author    = {David C. Glahn and Emma E.M. Knowles and Samuel R. Mathias and Laura Almasy and Karen Hodgson and Nailin Yao and Rene L. Olvera and Joanne E. Curran and John Blangero},
+  title     = {Chapter 31 - Conceptualizing Major Depression: From Genes to Neuroanatomy to Epidemiology},
+  booktitle = {Genomics, Circuits, and Pathways in Clinical Neuropsychiatry},
+  publisher = {Academic Press},
+  year      = {2016},
+  editor    = {Lehner, Thomas and Miller, Bruce L. and State, Matthew W.},
+  pages     = {487 - 501},
+  address   = {San Diego},
+  isbn      = {978-0-12-800105-9},
+  abstract  = {Abstract Because its etiology remains largely unexplained, major depression, like other psychiatric diseases, is understood entirely on the basis of symptomatology. Major depression is the most common mental illness and is responsible for substantial mortality, morbidity, and disability. Arguably we know less about the root causes of major depression than about other major mental illnesses (eg, schizophrenia, bipolar disorder, autism). In the current chapter, we examine the literature on the prevalence, diagnostic heterogeneity, risk factors, neuroanatomy, neurophysiology, heritability, endophenotypes, and genetic architecture of major depressive disorder. In addition, we briefly discuss current treatments. Whereas epidemiological results stress the heterogeneity and complex nature of the illness, neuroimaging-based models typically ignore the diversity of clinical factors, potentially limiting their usefulness. Although certainly influenced by environmental factors, there is ample evidence for a genetic component to major depression. However, to date no specific genomic variant or gene has been implicated for depression.},
+  doi       = {10.1016/B978-0-12-800105-9.00031-7},
+  keywords  = {Diagnostic heterogeneity, Endophenotypes, Genetics, Heritability, Major depression, Neuroanatomy, Neurophysiology, Prevalence, Risk factors },
+  url       = {http://www.sciencedirect.com/science/article/pii/B9780128001059000317},
+}
+
+@InCollection{Glahn2015929,
+  author    = {D.C. Glahn and E. Sprooten and E.E. Knowles and D. Reese McKay and S.R. Mathias and L. Almasy and J. Blangero},
+  title     = {Imaging Genetics},
+  booktitle = {Brain Mapping},
+  publisher = {Academic Press},
+  year      = {2015},
+  editor    = {Toga, Arthur W.},
+  pages     = {929 - 932},
+  address   = {Waltham},
+  isbn      = {978-0-12-397316-0},
+  abstract  = {Abstract The primary goals of imaging genetics are to identify and to characterize genes influencing neuroanatomical or neurophysiological variation using brain images. Over the last 15 years, the field has grown considerably and now includes multiple thousands of papers. Substantial progress has been made demonstrating the heritability of and genetic correlation (pleiotropy) between imaging traits. Numerous candidate gene studies helped to characterize the impact of theoretically selected genes on brain structure and function. Several large-scale genome-wide association and linkage studies have generated a number of novel loci for neuroanatomical and connectivity traits, and the field is poised for gene identification. },
+  doi       = {10.1016/B978-0-12-397025-1.00112-3},
+  keywords  = {Candidate gene, Connectivity, Functional MRI, Genetic correlation, Genome-wide association, Heritability, Imaging genomics, Linkage, Magnetic resonance imaging, Neuroanatomy, Pleiotropy, White matter },
+  url       = {http://www.sciencedirect.com/science/article/pii/B9780123970251001123},
+}
+
+@Article{pmid25168609,
+  author   = {Glahn, D. C. and Williams, J. T. and McKay, D. R. and Knowles, E. E. and Sprooten, E. and Mathias, S. R. and Curran, J. E. and Kent, J. W. and Carless, M. A. and Goring, H. H. and Dyer, T. D. and Woolsey, M. D. and Winkler, A. M. and Olvera, R. L. and Kochunov, P. and Fox, P. T. and Duggirala, R. and Almasy, L. and Blangero, J.},
+  title    = {{{D}iscovering schizophrenia endophenotypes in randomly ascertained pedigrees}},
+  journal  = {Biological Psychiatry},
+  year     = {2015},
+  volume   = {77},
+  number   = {1},
+  pages    = {75--83},
+  month    = {Jan},
+  note     = {[PubMed Central:\href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4261014}{PMC4261014}] [DOI:\href{https://dx.doi.org/10.1016/j.biopsych.2014.06.027}{10.1016/j.biopsych.2014.06.027}] [PubMed:\href{https://www.ncbi.nlm.nih.gov/pubmed/25168609}{25168609}]},
+  abstract = {Although case-control approaches are beginning to disentangle schizophrenia's complex polygenic burden, other methods will likely be necessary to fully identify and characterize risk genes. Endophenotypes, traits genetically correlated with an illness, can help characterize the impact of risk genes by providing genetically relevant traits that are more tractable than the behavioral symptoms that classify mental illness. Here, we present an analytic approach for discovering and empirically validating endophenotypes in extended pedigrees with very few affected individuals. Our approach indexes each family member's risk as a function of shared genetic kinship with an affected individual, often referred to as the coefficient of relatedness. To demonstrate the utility of this approach, we search for neurocognitive and neuroanatomic endophenotypes for schizophrenia in large unselected multigenerational pedigrees.\\ A fixed-effects test within the variance component framework was performed on neurocognitive and cortical surface area traits in 1606 Mexican-American individuals from large, randomly ascertained extended pedigrees who participated in the Genetics of Brain Structure and Function study. As affecteds were excluded from analyses, results were not influenced by disease state or medication usage.\\ Despite having sampled just 6 individuals with schizophrenia, our sample provided 233 individuals at various levels of genetic risk for the disorder. We identified three neurocognitive measures (digit-symbol substitution, facial memory, and emotion recognition) and six medial temporal and prefrontal cortical surfaces associated with liability for schizophrenia.\\ With our novel analytic approach, one can discover and rank endophenotypes for schizophrenia, or any heritable disease, in randomly ascertained pedigrees.},
+  doi      = {10.1016/j.biopsych.2014.06.027},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
