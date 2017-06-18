@@ -52,14 +52,12 @@
 /* #Basic Styles
 ================================================== */
 	body {
-  font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 22px;
-  color: #222222;
-  font-weight: 400;
-  /* 300,400,600,700,900 */
-  padding: 0;
-  margin: 0 auto; }
+		background: #fff;
+		font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+		color: #444;
+		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+		-webkit-text-size-adjust: 100%;
+ }
 
 
 /* #Typography
@@ -333,3 +331,4 @@
 	.remove-bottom { margin-bottom: 0 !important; }
 	.half-bottom { margin-bottom: 10px !important; }
 	.add-bottom { margin-bottom: 20px !important; }
+
