@@ -6,12 +6,13 @@ highlight_color: '#639956'
 
 # Profile links on the left sidebar, leave blank to ignore
 social:
-  github: swanson
+  github: sammosummo
   #bitbucket: philipj
-  hacker_news: swanson
+  #hacker_news: swanson
   #stackexchange: 348619
-  #stackoverflow: 348619
-  twitter: _swanson
+  stackoverflow: sammosummo
+  crossvalidated: sammosummo
+  #twitter: _swanson
   #facebook: zuck
   #tumblr: animalygifs
   #linkedin: philipjagielski
