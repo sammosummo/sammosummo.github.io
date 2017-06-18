@@ -85,7 +85,7 @@ ul.posts li {
 }
 
 ul.posts span {
-  font-family: 'Lucida Console', 'Andale Mono', monospace;
+  /*font-family: 'Lucida Console', 'Andale Mono', monospace;*/
   color: #aaa;
   padding-right: 5px;
   font-size:14px;
@@ -145,7 +145,7 @@ nav h1, nav h2 {
 
 .sidebar {
   padding-top: 25px;
-  font-family: "open sans", sans-serif;
+  /*font-family: "open sans", sans-serif;*/
 }
 
 .sidebar p {
@@ -218,7 +218,7 @@ nav h1, nav h2 {
 }
 
 i.fa-hn {
-  font-family: "open sans", sans-serif;
+  /*font-family: "open sans", sans-serif;*/
   text-align: center;
   font-size: 18px !important;
   position: relative;
