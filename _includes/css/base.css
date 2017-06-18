@@ -56,7 +56,7 @@
 		/*font-family: "Libre Baskerville", Libre, Georgia, Times, serif;*/
 		/*font: 14px/21px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
 		/*font: 14px/21px "Libre Baskerville", Libre, Georgia, Times, serif;*/
-		/*color: #444;*/
+		color: #444;
 		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 		-webkit-text-size-adjust: 100%;
  }
