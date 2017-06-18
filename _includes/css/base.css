@@ -57,9 +57,9 @@
 		font-family: "Libre Baskerville", Libre, Georgia, Times, serif;
 		font-size: 18px;
 		font-size: 1rem;
-	line-height: 1.75;
-		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
-		-webkit-text-size-adjust: 100%;
+	/*line-height: 1.75;*/
+		/*-webkit-font-smoothing: antialiased; !* Fix for webkit rendering *!*/
+		/*-webkit-text-size-adjust: 100%;*/
  }
 
 
