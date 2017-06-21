@@ -3,12 +3,13 @@
     {% if site.data.theme.social.gravatar %}
     <img src="http://www.gravatar.com/avatar/{{ site.data.theme.social.gravatar }}?s=200" id="gravatar" alt="My photo"/>
     {% else %}
-    <img src="/logo.png" id="logo" height="150" width="150" style="border:7px solid #639956"/>
+    <img src="/logo.png" id="logo" height="150" width="150" />
+    <!--style="border:7px solid #639956"-->
     {% endif %}
   </a>
-  <h2>I'm <a href="/">{{ site.data.theme.name }}</a>.</h2>
+  <h2>{{ site.data.theme.name }}</h2>
   <div id="bio">
-    <p>I'm a researcher at <a href="http://www.medicine.yale.edu/psychiatry/research/divisions/samuel_mathias.profile">Yale <sup><i class="fa fa-external-link"></i></sup></a>. Here is my <a>CV <sup><i class="fa fa-file-pdf-o"></i></sup></a> and a <a>list of my publications</a>.</p>
+    <p>I'm a researcher at Yale. I mostly post code related to my work.</p>
   </div>
   <div id="social">
     {% include social.html %}

@@ -1,18 +1,9 @@
-# Color for top bar, links, etc
 highlight_color: '#639956'
-
-# Profile links on the left sidebar
 social:
   email: samuel.mathias@yale.edu
   github: sammosummo
   stackoverflow: 1637894
   crossvalidated: 52379
-
-# "Hi, I'm _______"
 name: The Cracked Bassoon
-
-# Google Analytics key, leave blank to ignore
 google_analytics_key: UA-101418619-1
-
-# Toggle link/icon to view atom feed (/atom.xml) in sidebar
 show_atom_feed: true
