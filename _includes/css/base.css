@@ -65,15 +65,15 @@ Version: 1.2.1
 /*.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active p, .wf-active li, .wf-active code, .wf-active blockquote, .wf-active span, .wf-inactive h1, .wf-inactive h2, .wf-inactive h3, .wf-inactive h4, .wf-inactive h5, .wf-inactive p, .wf-inactive li, .wf-inactive code, .wf-inactive blockquote, .wf-inactive span {*/
   /*visibility: visible; }*/
 
-/*body {*/
-  /*font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;*/
-  /*font-size: 16px;*/
-  /*line-height: 22px;*/
-  /*color: #222222;*/
-  /*font-weight: 400;*/
-  /*!* 300,400,600,700,900 *!*/
-  /*padding: 0;*/
-  /*margin: 0 auto; }*/
+body {
+  font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222222;
+  font-weight: 400;
+  /* 300,400,600,700,900 */
+  padding: 0;
+  margin: 0 auto; }
 
 /*img {*/
   /*max-width: 100%;*/
