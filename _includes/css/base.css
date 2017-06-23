@@ -128,15 +128,15 @@ body {
   /*p .alignright {*/
     /*margin: 0 0 15px 20px; } }*/
 
-/*strong, b {*/
-  /*font-weight: 700; }*/
+strong, b {
+  font-weight: 700; }
 
-/*em, i {*/
-  /*font-style: italic; }*/
+em, i {
+  font-style: italic; }
 
-/*small {*/
-  /*font-size: 85%;*/
-  /*color: #777777; }*/
+small {
+  font-size: 85%;
+  color: #777777; }
 
 /*a {*/
   /*color: #222222;*/
