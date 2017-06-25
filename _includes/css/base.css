@@ -1,45 +1,7 @@
 /* css reset */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
 
-body {
-  line-height: 1; }
 
-ol, ul {
-  list-style: none; }
-
-blockquote, q {
-  quotes: none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
 
 /*!* @end *!*/
 /*!* @group global styles *!*/
@@ -55,15 +17,6 @@ table {
 /*.wf-active h1, .wf-active h2, .wf-active h3, .wf-active h4, .wf-active h5, .wf-active p, .wf-active li, .wf-active code, .wf-active blockquote, .wf-active span, .wf-inactive h1, .wf-inactive h2, .wf-inactive h3, .wf-inactive h4, .wf-inactive h5, .wf-inactive p, .wf-inactive li, .wf-inactive code, .wf-inactive blockquote, .wf-inactive span {*/
   /*visibility: visible; }*/
 
-body {
-  font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 22px;
-  color: #222222;
-  font-weight: 300;
-  /* 300,400,600,700,900 */
-  padding: 0;
-  margin: 0 auto; }
 
 /*img {*/
   /*max-width: 100%;*/
@@ -155,11 +108,11 @@ a {
     /*cursor: pointer; }*/
 
 /* pxl css */
-header {
-  text-align: center;
-  border-bottom: 1px solid #cccccc;
-  padding: 0 0 10px; }
-  /*@media only screen and (min-width: 420px) {*/
+/*header {*/
+  /*text-align: center;*/
+  /*border-bottom: 1px solid #cccccc;*/
+  /*padding: 0 0 10px; }*/
+  /*!*@media only screen and (min-width: 420px) {*!*/
     /*header {*/
       /*padding: 0 5% 10px; } }*/
   /*@media only screen and (min-width: 900px) {*/
@@ -1268,7 +1221,7 @@ header {
 
 /* Table of Content
 ==================================================
-	#Reset & Basics
+	#Reset
 	#Basic Styles
 	#Site Styles
 	#Typography
@@ -1281,43 +1234,62 @@ header {
 	#Misc */
 
 
-/* #Reset & Basics (Inspired by E. Meyers)
+/* #Reset
 /*================================================== *!*/
-	/*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {*!*/
-		/*margin: 0;*!*/
-		/*padding: 0;*!*/
-		/*border: 0;*!*/
-		/*font-size: 100%;*!*/
-		/*font: inherit;*!*/
-		/*vertical-align: baseline; }*!*/
-	/*article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {*!*/
-		/*display: block; }*!*/
-	/*body {*!*/
-		/*line-height: 1; }*!*/
-	/*ol, ul {*!*/
-		/*list-style: none; }*!*/
-	/*blockquote, q {*!*/
-		/*quotes: none; }*!*/
-	/*blockquote:before, blockquote:after,*!*/
-	/*q:before, q:after {*!*/
-		/*content: '';*!*/
-		/*content: none; }*!*/
-	/*table {*!*/
-		/*border-collapse: collapse;*!*/
-		/*border-spacing: 0; }*!*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
 
 /* #Basic Styles
 /*================================================== *!*/
-/*body {*/
-  /*font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;}*/
-  /*!*font-size: 16px;*!*/
-  /*line-height: 22px;*/
-  /*color: #222222;*/
-  /*font-weight: 400;*/
-  /*!* 300,400,600,700,900 *!*/
-  /*padding: 0;*/
-  /*margin: 0 auto;
+body {
+  font-family: 'Source Sans Pro', Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  color: #222222;
+  font-weight: 300;
+  /* 300,400,600,700,900 */
+  padding: 0;
+  margin: 0 auto; }
 
 /* #Typography
 ================================================== */
