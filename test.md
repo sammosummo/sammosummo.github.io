@@ -5,10 +5,10 @@ title: test
 
 # Mou
 
-- TOC
-{:toc}
+<!--- TOC-->
+<!--{:toc}-->
 
-![Mou icon](http://mouapp.com/Mou_128.png)
+<!--![Mou icon](http://mouapp.com/Mou_128.png)-->
 
 ## Overview
 
