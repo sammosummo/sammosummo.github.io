@@ -32,8 +32,9 @@ class WUDM(object):
             425. https://doi.org/10.3758/BF03334107
             
         """
+        self.done = False
         self.phase = 0
-        self.init_val = init_val
+        self.val = init_val
         self.xp = xp
         self.factor = self.xp / (1 - self.xp)
 
@@ -53,10 +54,87 @@ class WUDM(object):
 
             self.ustep = [ustep]
 
+        assert len(self.reversals) == len(
+            self.ustep), 'Lists of reversals and step sizes are not the ' \
+                         'same length.'
+
         self.geometric = geometric
         self.outcomes = [[] for i in self.reversals]
+        self.vals = [[] for i in self.reversals]
 
-    def count_reversals(self, outcomes):
+        @property
+        def dstep():
+            """Calculate the down step; depends on `ustep` and `xp`."""
+            if self.geometric is True:
+
+                return self.ustep ** (1 / self.factor)
+
+            else:
+
+                return self.ustep * (1 / self.factor)
+
+        self.dstep = dstep
+
+        @property
+        def revs():
+            """Mark the reversals in the current phase."""
+            from itertools import tee
+
+            _outcomes = self.outcomes[self.phase]
+            _a, _b = tee(_outcomes)
+            _b.__next__()
+
+            return [a != b for a, b in zip(_a, _b)]
+
+        self.revs = revs
+
+        @property
+        def countr():
+            """Count the number of reversals in the current phase."""
+            return sum(self.revs)
+
+        self.countr = countr
+
+    def trial(self, previous_trial_correct):
+        """Progress the staircase by one trial, updating all the internal
+        attributes accordingly.
+
+        Args:
+            previous_trial_correct (bool): Was the previous trial correct?
+
+        """
+        self.outcomes[self.phase].append(previous_trial_correct)
+        self.vals[self.phase].append(self.val)
+
+        if self.countr == self.reversals[self.phase]:
+
+            if self.phase == len(self.reversals):
+
+                self.done = True
+
+            else:
+
+                self.phase += 1
+
+        if self.geometric is True:
+
+            if previous_trial_correct is True:
+
+                self.val *= self.ustep
+
+            else:
+
+                self.val /= self.dstep
+
+        else:
+
+            if previous_trial_correct is True:
+
+                self.val += self.ustep
+
+            else:
+
+                self.val -= self.dstep
 
 
 
