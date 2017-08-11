@@ -5,7 +5,14 @@ layout: default
 <div id="home">
   {% for post in site.posts limit:50 %}
   <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
-  <p>{{ post.date | date: "%b %Y" }}</p>
+  <p>Posted on {% assign day = page.date | date: "%-d"  %}
+  {% case day %}
+    {% when '1' or '21' or '31' %}{{ day }}st
+    {% when '2' or '22' %}{{ day }}nd
+    {% when '3' or '23' %}{{ day }}rd
+    {% else %}{{ day }}th
+  {% endcase %}
+  {{ page.date | date: "%B, %Y" }}</p>
   <p>{{ post.excerpt }}</p>
   {% endfor %}
   </ul>
