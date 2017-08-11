@@ -212,44 +212,24 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  display: inline-block;
-  height: 36px; /*height: 36px;*/
-  padding: 3px 6px; /*padding: 0 30px*/
-  color: #555;
-  text-align: center;
-  font-size: 18px; /*font-size: 11px;*/
-  font-weight: 400;
-  line-height: 24px; /*line-height: 38px;*/
-  /*letter-spacing: .1rem;*/
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  background-color: transparent;
-  /*border-radius: 4px;*/  /*commented by me*/
-  border: 3px solid #bbb; /*border: 1px solid #bbb;*/
-  cursor: pointer;
-  box-sizing: border-box;
-  margin: 0 6px 3px 0;} /*new*/
-
-
-
-/* Larger than phablet */
-@media (min-width: 550px) {
-  body {
-  font-size: 1.6em; }
-}
-
-/* Larger than tablet */
-@media (min-width: 750px) {
-  body {
-  font-size: 1.8em; }
-}
-
-/* Larger than desktop */
-@media (min-width: 1000px) {
-  body {
-  font-size: 2em; }
-}
+  /*display: inline-block;*/
+  /*height: 36px; !*height: 36px;*!*/
+  /*padding: 3px 6px; !*padding: 0 30px*!*/
+  /*color: #555;*/
+  /*text-align: center;*/
+  /*font-size: 18px; !*font-size: 11px;*!*/
+  /*font-weight: 400;*/
+  /*line-height: 24px; !*line-height: 38px;*!*/
+  /*!*letter-spacing: .1rem;*!*/
+  /*text-transform: uppercase;*/
+  /*text-decoration: none;*/
+  /*white-space: nowrap;*/
+  /*background-color: transparent;*/
+  /*!*border-radius: 4px;*!  !*commented by me*!*/
+  /*border: 3px solid #bbb; !*border: 1px solid #bbb;*!*/
+  /*cursor: pointer;*/
+  /*box-sizing: border-box;*/
+  /*margin: 0 6px 3px 0;} !*new*!*/
 
 
 /* Larger than desktop */
@@ -259,12 +239,12 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  height: 3.6rem; /*height: 36px;*/
-  padding: 3px 6px; /*padding: 0 30px*/
-  font-size: 2.0rem; /*font-size: 11px;*/
-  line-height: 2.4rem; /*line-height: 38px;*/
-  border: 3px; /*border: 1px solid #bbb;*/
-  margin: 0 6px 3px 0;} /*new*/
+  /*height: 3.6rem; !*height: 36px;*!*/
+  /*padding: 3px 6px; !*padding: 0 30px*!*/
+  /*font-size: 2.0rem; !*font-size: 11px;*!*/
+  /*line-height: 2.4rem; !*line-height: 38px;*!*/
+  /*border: 3px; !*border: 1px solid #bbb;*!*/
+  /*margin: 0 6px 3px 0;} !*new*!*/
 }
 
 
