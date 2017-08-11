@@ -56,9 +56,9 @@
 @media (min-width: 550px) {
   .container {
     width: 80%; }
-  .column,
-  .columns {
-    margin-left: 4%; }
+  /*.column,*/
+  /*.columns {*/
+    /*margin-left: 4%; }*/
   .column:first-child,
   .columns:first-child {
     margin-left: 0; }
