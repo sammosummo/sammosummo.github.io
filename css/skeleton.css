@@ -131,14 +131,14 @@ body {
   font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222222; }
 
-/* Larger than tablet */
-@media (min-width: 400px) {
+/* Larger than phablet */
+@media (min-width: 550px) {
   body {
   font-size: 1.6em; }
 }
 
 /* Larger than tablet */
-@media (min-width: 550px) {
+@media (min-width: 750px) {
   body {
   font-size: 1.8em; }
 }
