@@ -1,5 +1,6 @@
 /*
-* Edited by Sam Mathias, 2017
+* Edited for the Cracked Bassoon
+* by Sam Mathias, 2017
 */
 
 /*
@@ -56,9 +57,9 @@
 @media (min-width: 550px) {
   .container {
     width: 80%; }
-  /*.column,*/
-  /*.columns {*/
-    /*margin-left: 4%; }*/
+  .column,
+  .columns {
+    margin-left: 4%; }
   .column:first-child,
   .columns:first-child {
     margin-left: 0; }
@@ -82,7 +83,6 @@
 
   .one-half.column                { width: 48%; }
 
-  /* Offsets */
   .offset-by-one.column,
   .offset-by-one.columns          { margin-left: 8.66666666667%; }
   .offset-by-two.column,
@@ -125,14 +125,26 @@ are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
   font-size: 62.5%; }
 body {
-  font-size: 1.8em; /* currently ems cause chrome bug misinterpreting rems on body element */ /* changed from 1.5em */
+  font-size: 1.4em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6; /* changed from 1.6 */
   font-weight: 400;
   font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #222222; } /* changed from #222 */
+  color: #222222; }
 
 /* Larger than tablet */
-@media (min-width: 750px) {
+@media (min-width: 400px) {
+  body {
+  font-size: 1.6em; }
+}
+
+/* Larger than tablet */
+@media (min-width: 550px) {
+  body {
+  font-size: 1.8em; }
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
   body {
   font-size: 2em; }
 }
