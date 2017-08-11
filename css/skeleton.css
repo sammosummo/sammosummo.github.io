@@ -184,7 +184,7 @@ input[type="button"] {
   padding: 3px 6px; /*padding: 0 30px*/
   color: #555;
   text-align: center;
-  font-size: 16px; /*font-size: 11px;*/
+  font-size: 18px; /*font-size: 11px;*/
   font-weight: 400;
   line-height: 24px; /*line-height: 38px;*/
   /*letter-spacing: .1rem;*/
@@ -197,6 +197,34 @@ input[type="button"] {
   cursor: pointer;
   box-sizing: border-box;
   margin: 0 6px 3px 0;} /*new*/
+
+/* Larger than tablet */
+@media (min-width: 750px) {
+  .button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 36px; /*height: 36px;*/
+  padding: 3px 6px; /*padding: 0 30px*/
+  color: #555;
+  text-align: center;
+  font-size: 18px; /*font-size: 11px;*/
+  font-weight: 400;
+  line-height: 24px; /*line-height: 38px;*/
+  /*letter-spacing: .1rem;*/
+  /*text-transform: uppercase;*/
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  /*border-radius: 4px;*/  /*commented by me*/
+  border: 3px solid #bbb; /*border: 1px solid #bbb;*/
+  cursor: pointer;
+  box-sizing: border-box;
+  margin: 0 6px 3px 0;} /*new*/
+}
+
 .button:hover,
 button:hover,
 input[type="submit"]:hover,
