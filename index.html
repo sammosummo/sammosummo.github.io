@@ -5,14 +5,7 @@ layout: default
 <div id="home">
   {% for post in site.posts limit:50 %}
   <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
-  <p>Posted on {% assign day = page.date | date: "%-d"  %}
-  {% case day %}
-    {% when '1' or '21' or '31' %}{{ day }}st
-    {% when '2' or '22' %}{{ day }}nd
-    {% when '3' or '23' %}{{ day }}rd
-    {% else %}{{ day }}th
-  {% endcase %}
-  {{ page.date | date: "%B, %Y" }}</p>
+  <p>Posted on {{ page.date | date_to_long_string }}</p>
   <p>{{ post.excerpt }}</p>
   {% endfor %}
   </ul>
