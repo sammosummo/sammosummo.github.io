@@ -180,3 +180,15 @@ First Header | Second Header | Third Header
 :----------- | :-----------: | -----------:
 Left         | Center        | Right
 Left         | Center        | Right
+
+<!-- Standard buttons -->
+<a class="button" href="#">Anchor button</a>
+<button>Button element</button>
+<input type="submit" value="submit input">
+<input type="button" value="button input">
+
+<!-- Primary buttons -->
+<a class="button button-primary" href="#">Anchor button</a>
+<button class="button-primary">Button element</button>
+<input class="button-primary" type="submit" value="submit input">
+<input class="button-primary" type="button" value="button input">
