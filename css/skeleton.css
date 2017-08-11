@@ -212,7 +212,7 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  /*display: inline-block;*/
+  display: inline-block;
   /*height: 36px; !*height: 36px;*!*/
   /*padding: 3px 6px; !*padding: 0 30px*!*/
   /*color: #555;*/
