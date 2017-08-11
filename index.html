@@ -5,7 +5,7 @@ layout: default
 <div id="home">
   {% for post in site.posts limit:50 %}
   <a href="{{ post.url }}"><h1>{{ post.title }}</h1></a>
-  <p>Posted on {{ page.date | date_to_long_string }}</p>
+  <p>Posted on {{ post.date | date_to_long_string }}</p>
   <p>{{ post.excerpt }}</p>
   {% endfor %}
   </ul>
