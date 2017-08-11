@@ -229,8 +229,7 @@ input[type="button"] {
   /*border: 3px solid #bbb; !*border: 1px solid #bbb;*!*/
   /*cursor: pointer;*/
   box-sizing: border-box;
-  /*margin: 0 6px 3px 0;} !*new*!*/
-
+  /*margin: 0 6px 3px 0;} !*new*!*/ }
 
 /* Larger than desktop */
 @media (min-width: 1000px) {
