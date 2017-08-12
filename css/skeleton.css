@@ -126,7 +126,7 @@ html {
   font-size: 62.5%; }
 body {
   font-size: 1.4em; /* currently ems cause chrome bug misinterpreting rems on body element */
-  line-height: 1.2; /* changed from 1.6 */
+  line-height: 1.4; /* changed from 1.6 */
   font-weight: 400;
   font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222222; }
@@ -146,7 +146,7 @@ body {
 /* Larger than desktop */
 @media (min-width: 1000px) {
   body {
-  font-size: 1.6em; }
+  font-size: 1.8em; }
 }
 
 /* Typography
