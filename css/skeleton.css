@@ -222,7 +222,7 @@ input[type="button"] {
   /*line-height: 24px; !*line-height: 38px;*!*/
   /*!*letter-spacing: .1rem;*!*/
   /*text-transform: uppercase;*/
-  /*text-decoration: none;*/
+  text-decoration: none;
   /*white-space: nowrap;*/
   /*background-color: transparent;*/
   /*!*border-radius: 4px;*!  !*commented by me*!*/
