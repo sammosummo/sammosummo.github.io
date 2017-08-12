@@ -227,6 +227,7 @@ input[type="button"] {
   /*background-color: transparent;*/
   /*!*border-radius: 4px;*!  !*commented by me*!*/
   border: 2px solid #cccccc; /*border: 1px solid #bbb;*/
+  color: #cccccc;
   /*cursor: pointer;*/
   box-sizing: border-box;
   margin: 0 6px 0 0;}
