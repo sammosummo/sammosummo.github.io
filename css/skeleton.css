@@ -226,7 +226,7 @@ input[type="button"] {
   /*white-space: nowrap;*/
   /*background-color: transparent;*/
   /*!*border-radius: 4px;*!  !*commented by me*!*/
-  border: 2px solid #777777; /*border: 1px solid #bbb;*/
+  border: 2px solid #cccccc; /*border: 1px solid #bbb;*/
   color: #777777;
   font-weight: 300;
   /*cursor: pointer;*/
