@@ -4,7 +4,7 @@ layout: default
 
 <div id="home">
   {% for post in site.posts limit:50 %}
-  <p><a href="{{ post.url }}" class="postheader"><h1>{{ post.title }}</h1></a>
+  <p><a href="{{ post.url }}" class="postheader"><h2>{{ post.title }}</h2></a>
     (posted {% assign day = post.date | date: "%-d"  %}
 {% case day %}
   {% when '1' or '21' or '31' %}{{ day }}st
