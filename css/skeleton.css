@@ -228,8 +228,8 @@ input[type="button"] {
   /*!*border-radius: 4px;*!  !*commented by me*!*/
   border: 2px solid #222222; /*border: 1px solid #bbb;*/
   /*cursor: pointer;*/
-  /*box-sizing: border-box;*/
-  margin: 0 6px 0px 0;}
+  box-sizing: border-box;
+  margin: 0 6px 0 0;}
 
 /* Larger than desktop */
 @media (min-width: 1000px) {
