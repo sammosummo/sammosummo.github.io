@@ -242,7 +242,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  border-color: #1EAEDB; }
+    color: #777777;
+    border-color: #1EAEDB; }
 /*.button.button-primary,*/
 /*button.button-primary,*/
 /*input[type="submit"].button-primary,*/
