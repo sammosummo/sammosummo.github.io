@@ -15,6 +15,6 @@ others will experience this too. Therefore, I’m moving.
 GitHub pages is integrated with the static site-generating software, [
 Jekyll](http://jekyllrb.com). My previous site was made using
 [WordPress](https://wordpress.com), and I haven’t written any HTML for a
-long, long time.From what I’ve seen of Jekyll so far though, it looks pretty
+long, long time. But from what I’ve seen so far, it looks pretty
 cool! Things have certainly moved along since the days of good old 
 [GeoCities](http://blog.geocities.institute)!
