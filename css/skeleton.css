@@ -243,7 +243,7 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
     color: #777777;
-    border-color: #1EAEDB; }
+    border-color: #4a9ae1; }
 /*.button.button-primary,*/
 /*button.button-primary,*/
 /*input[type="submit"].button-primary,*/
@@ -263,8 +263,8 @@ input[type="button"]:focus {
 /*input[type="reset"].button-primary:focus,*/
 /*input[type="button"].button-primary:focus {*/
   /*color: #FFF;*/
-  /*background-color: #1EAEDB;*/
-  /*border-color: #1EAEDB; }*/
+  /*background-color: #4a9ae1;*/
+  /*border-color: #4a9ae1; }*/
 
 
 /* Forms
