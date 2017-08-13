@@ -219,6 +219,7 @@ input[type="button"] {
   text-decoration: none;
   border: 2px solid #cccccc;
   color: #777777;
+  font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   box-sizing: border-box;
   margin: 0 6px 0 0; }
