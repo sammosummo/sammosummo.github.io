@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Moving to GitHub pages
+title: Moving to GitHub Pages
+tags: news
 ---
 Welcome to my new blog! I’m in the process of moving my site over to [GitHub pages](https://pages.github.com).
 My original site was hosted by [DreamHost](https://www.dreamhost.com). While
