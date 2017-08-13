@@ -5,6 +5,11 @@
     display: block;
     margin:0 auto; }
 
+.strapline {
+    font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 2em;
+}
+
 /* Larger than desktop */
 @media (min-width: 550px) {
   .logo {
