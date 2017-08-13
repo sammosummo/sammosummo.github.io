@@ -6,7 +6,7 @@ layout: default
   {% for post in site.posts limit:20 %}
 
 
-  <p><a href="{{ post.url }}" class="postheader"><h2>{{ post.title }}</h2></a>
+  <p><a href="{{ post.url }}" class="postheader"><h3>{{ post.title }}</h3></a>
     {{ post.content | truncatewords: 30 | strip_html }}
     (posted {% assign day = post.date | date: "%-d"  %}
 {% case day %}
@@ -15,6 +15,6 @@ layout: default
   {% when '3' or '23' %}{{ day }}rd
   {% else %}{{ day }}th
 {% endcase %}
-{{ post.date | date: "%B, %Y" }}; {{ post.content | number_of_words }} words): </p>
+{{ post.date | date: "%B, %Y" }}; {{ post.content | number_of_words }} words).</p>
   {% endfor %}
 </div>
