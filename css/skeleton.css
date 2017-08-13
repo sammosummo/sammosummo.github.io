@@ -128,7 +128,7 @@ body {
   font-size: 1.4em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.5; /* changed from 1.6 */
   font-weight: 400;
-  font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;
   color: #222222; }
 
 /* Larger than phablet */
@@ -154,7 +154,8 @@ body {
 h1, h2, h3, h4, h5, h6 {
   /*margin-top: 0;*/
   /*margin-bottom: 2rem;*/
-  font-weight: 700; } /* changed from 300 */
+  font-weight: 700;
+  font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 h1 { font-size: 3.0rem; line-height: 1.0;}  /*letter-spacing: -.1rem;}*/
 h2 { font-size: 2.4rem; line-height: 1.1;} /*letter-spacing: -.1rem; }*/
 h3 { font-size: 2.0rem; line-height: 1.2;}  /*letter-spacing: -.1rem; }*/
