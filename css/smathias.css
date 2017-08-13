@@ -5,11 +5,6 @@
     display: block;
     margin:0 auto; }
 
-.strapline {
-    font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 20px;
-}
-
 /* Larger than desktop */
 @media (min-width: 550px) {
   .logo {
@@ -25,6 +20,27 @@
     height:180px;
     border:8px solid #1EAEDB; }
 }
+
+.strapline {
+    font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+}
+
+@media (min-width: 550px) {
+    .strapline {
+    font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.6em;
+}
+}
+
+@media (min-width: 750px) {
+    .strapline {
+    font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.8em;
+}
+}
+
+
 
 .postheader {
     text-decoration: none; }
