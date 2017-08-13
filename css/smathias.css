@@ -23,20 +23,20 @@
 
 .strapline {
     font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 
 @media (min-width: 550px) {
     .strapline {
     font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 }
 }
 
 @media (min-width: 750px) {
     .strapline {
     font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.0rem;
 }
 }
 
