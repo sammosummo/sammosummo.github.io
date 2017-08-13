@@ -7,8 +7,8 @@ My original site was hosted by [DreamHost](https://www.dreamhost.com). While
 I was very happy with DreamHost’s products and services, their cheapest
 Shared Hosting plan had one major drawback: slow loading times. I mean _super_
 slow. It wasn’t all that obvious on a home or mobile connection, but on faster
-connections like my office, pages would load noticeably slower than those
-of other websites. I imagine that most readers of my stuff will be academics,
+connections like in my office, pages would load noticeably slower than those
+on other websites. I imagine that most readers of my blog will be academics,
 and academic institutions tend to have pretty fast networks, so I expect
 others will experience this too. Therefore, I’m moving.
 
