@@ -129,7 +129,9 @@ body {
   line-height: 1.5; /* changed from 1.6 */
   font-weight: 400;
   font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;
-  color: #222222; }
+  color: #222222;
+  text-align: justify;
+  text-justify: inter-word;}
 
 /* Larger than phablet */
 @media (min-width: 550px) {
@@ -194,9 +196,7 @@ h6 { font-size: 1.4rem; line-height: 1.6;}  /*letter-spacing: 0; }*/
 }
 
 p {
-  margin-top: 0;
-  text-align: justify;
-  text-justify: inter-word; }
+  margin-top: 0; }
 
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
