@@ -36,7 +36,7 @@
 .container {
   position: relative;
   width: 100%;
-  max-width: 800px; /*originally 960*/
+  max-width: 960px; /*originally 960*/
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box; }
