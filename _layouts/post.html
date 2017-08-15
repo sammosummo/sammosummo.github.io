@@ -1,7 +1,9 @@
 ---
 layout: default
 ---
-<img src="{{site.baseurl}}/images/{{ page.img }}" class="u-max-full-width">
+<p><img src="{{site.baseurl}}/images/{{ page.img }}" class="u-max-full-width">
+  <em>{{page.painting}}</em>em> by {{page.artist}}.
+</p>
 <p class="meta">
   Posted {% assign day = page.date | date: "%-d"  %}
 {% case day %}
@@ -11,9 +13,9 @@ layout: default
   {% else %}{{ day }}th
 {% endcase %}
 {{ page.date | date: "%B, %Y" }}
-  <a href="/">
-    <i class="home fa fa-home"></i>
-  </a>
+  <!--<a href="/">-->
+    <!--<i class="home fa fa-home"></i>-->
+  <!--</a>-->
 </p>
 
 <h1 class="title">{{ page.title }}</h1>
