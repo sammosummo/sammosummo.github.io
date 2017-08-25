@@ -115,54 +115,56 @@ layout. Don't mess with this section. */
 html {
   font-size: 62.5%; } /*so that 1.5rem = 15px */
 body {
-  font-size: 1.8em; /* currently ems cause chrome bug misinterpreting rems on body element */
-  line-height: 1.6;
+  font-size: 1.6em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  line-height: 1.5;
   font-weight: 400;
-  font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  /*font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;*/
+  font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;
   color: #222222;
   text-align: justify;
-  text-justify: inter-word;}
+  text-justify: inter-word;
+  margin: 0;
+  padding: 0; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700; }
+  font-weight: 700;
+  font-family: "Source Sans Pro", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1 { font-size: 3.0rem; line-height: 0.7;}  /*letter-spacing: -.1rem;}*/
-h2 { font-size: 2.4rem; line-height: 1;} /*letter-spacing: -.1rem; }*/
-h3 { font-size: 2.0rem; line-height: 1;}  /*letter-spacing: -.1rem; }*/
-h4 { font-size: 1.8rem; } /*letter-spacing: -.08rem; }*/
-h5 { font-size: 1.6rem; }  /*letter-spacing: -.05rem; }*/
-h6 { font-size: 1.4rem; }  /*letter-spacing: 0; }*/
+/*h1 { font-size: 3.0rem; }*/
+/*h2 { font-size: 2.4rem; }*/
+/*h3 { font-size: 2.0rem; }*/
+/*h4 { font-size: 1.8rem; }*/
+/*h5 { font-size: 1.6rem; }*/
+/*h6 { font-size: 1.4rem; }*/
 
-/* Larger than phablet */
-@media (min-width: 550px) {
-  h1 { font-size: 3.6rem; }
-  h2 { font-size: 3.0rem; }
-  h3 { font-size: 2.4rem; }
-  h4 { font-size: 2.0rem; }
-  h5 { font-size: 1.8rem; }
-  h6 { font-size: 1.6rem; }
-}
+/*!* Larger than phablet *!*/
+/*@media (min-width: 550px) {*/
+  /*h1 { font-size: 3.6rem; }*/
+  /*h2 { font-size: 3.0rem; }*/
+  /*h3 { font-size: 2.4rem; }*/
+  /*h4 { font-size: 2.0rem; }*/
+  /*h5 { font-size: 1.8rem; }*/
+  /*h6 { font-size: 1.6rem; }*/
+/*}*/
 
-/* Larger than tablet */
-@media (min-width: 750px) {
-  h1 { font-size: 4.2rem; }
-  h2 { font-size: 3.6rem; }
-  h3 { font-size: 3.0rem; }
-  h4 { font-size: 2.4rem; }
-  h5 { font-size: 2.0rem; }
-  h6 { font-size: 1.8rem; }
-}
+/*!* Larger than tablet *!*/
+/*@media (min-width: 750px) {*/
+  /*h1 { font-size: 4.2rem; }*/
+  /*h2 { font-size: 3.6rem; }*/
+  /*h3 { font-size: 3.0rem; }*/
+  /*h4 { font-size: 2.4rem; }*/
+  /*h5 { font-size: 2.0rem; }*/
+  /*h6 { font-size: 1.8rem; }*/
+/*}*/
 
-/* Larger than phablet */
-@media (min-width: 1000px) {
-  h1 { font-size: 5.0rem; }
-  h2 { font-size: 4.2rem; }
-  h3 { font-size: 3.6rem; }
-  h4 { font-size: 3.0rem; }
-  h5 { font-size: 2.4rem; }
-  h6 { font-size: 2.0rem; }
-}
+/*!* Larger than phablet *!*/
+/*@media (min-width: 1000px) {*/
+  /*h1 { font-size: 5.0rem; }*/
+  /*h2 { font-size: 4.2rem; }*/
+  /*h3 { font-size: 3.6rem; }*/
+  /*h4 { font-size: 3.0rem; }*/
+  /*h5 { font-size: 2.4rem; }*/
+  /*h6 { font-size: 2.0rem; }*/
+/*}*/
 
 p {
   margin-top: 0;
