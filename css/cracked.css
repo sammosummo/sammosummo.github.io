@@ -1,6 +1,6 @@
 .logo {
-    width:100px;
-    height:100px;
+    width:250px;
+    height:250px;
     border:5px solid;
     display: block;
     margin:0 auto; }
@@ -8,12 +8,13 @@
 .indextitle {
     font-family: 'Lobster', cursive;
     font-size: 40px;
+    text-align: center;
 }
 
 .indexstrapline {
     font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 18px;
-    text-align: left;
+    text-align: center;
 }
 
 /*!* Larger than desktop *!*/
