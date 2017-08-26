@@ -17,6 +17,12 @@
     text-align: center;
 }
 
+.indexsubtitle {
+    font-family: 'Lobster', cursive;
+    font-size: 18px;
+    text-align: center;
+}
+
 /*!* Larger than desktop *!*/
 /*@media (min-width: 550px) {*/
   /*.logo {*/
