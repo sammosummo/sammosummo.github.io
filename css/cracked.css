@@ -31,6 +31,19 @@
     text-decoration: underline;
 }
 
+.containerleft {
+    width: 48%;
+    margin: 0 0 0 0;
+    box-sizing: border-box;
+}
+
+.containerright {
+    width: 48%;
+    margin: 0 0 0 0;
+    box-sizing: border-box;
+}
+
+
 /*!* Larger than desktop *!*/
 /*@media (min-width: 550px) {*/
   /*.logo {*/
