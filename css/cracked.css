@@ -32,13 +32,13 @@
 }
 
 .containerleft {
-    width: 48%;
+    width: 40%;
     margin: 0 0 0 0;
     box-sizing: border-box;
 }
 
 .containerright {
-    width: 48%;
+    width: 40%;
     margin: 0 0 0 0;
     box-sizing: border-box;
 }
