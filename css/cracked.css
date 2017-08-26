@@ -17,10 +17,18 @@
     text-align: center;
 }
 
-.indexsubtitle {
+.indexsubtitleleft {
     font-family: 'Lobster', cursive;
-    font-size: 18px;
-    text-align: center;
+    font-size: 22px;
+    text-align: right;
+    text-decoration: underline;
+}
+
+.indexsubtitleright {
+    font-family: 'Lobster', cursive;
+    font-size: 22px;
+    text-align: left;
+    text-decoration: underline;
 }
 
 /*!* Larger than desktop *!*/
