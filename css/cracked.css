@@ -13,6 +13,7 @@
 .indexstrapline {
     font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 18px;
+    text-align: left;
 }
 
 /*!* Larger than desktop *!*/
