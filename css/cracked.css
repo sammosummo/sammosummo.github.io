@@ -1,10 +1,25 @@
-.logo {
-    width:150px;
-    height:150px;
-    border:8px solid;
-    display: block;
-    margin:0 auto; }
+img.logo {
+    width: 100px;
+    height: 100px;
+    border: 6px solid;
+    display: none;
+    margin: 0 auto; }
 
+@media (min-width: 550px) {
+    img.logo {
+        display: block; }
+}
+
+@media (min-width: 550px) {
+    img.logo {
+        width: 150px;
+        height: 150px;
+        border: 8px solid; }
+}
+
+.title {
+    font-family: 'Lobster', cursive;
+}
 .indextitle {
     font-family: 'Lobster', cursive;
     font-size: 40px;
