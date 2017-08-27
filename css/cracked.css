@@ -1,5 +1,6 @@
-/* Logo image with border
+/* Logo
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
 img.logo {
     width: 100px;
     height: 100px;
@@ -19,13 +20,25 @@ img.logo {
         border: 8px solid; }
 }
 
-.title {
+
+/* Logo image with border
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+h1.title {
     font-family: 'Lobster', cursive;
+    font-weight: 400;
+    color: #222222;
+    font-size: 3.0rem;
+    text-align: center; }
+
+@media (min-width: 550px) {
+    h1.title {
+        font-size: 3.5rem; }
 }
-.indextitle {
-    font-family: 'Lobster', cursive;
-    font-size: 40px;
-    text-align: center;
+
+@media (min-width: 750px) {
+    h1.title {
+        font-size: 4.0rem; }
 }
 
 .indexstrapline {
