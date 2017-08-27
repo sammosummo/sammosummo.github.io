@@ -7,7 +7,12 @@ layout: default
   interested in hearing, cognition, genetics, and psychiatry.  Here, I post mostly
   thoughts and code related to my work.</div></p>
 <div class="row">
-<div class="one-half column"style="margin-left: 0; margin-right: 10px"><div class="indexsubtitleleft">Pages</div></div>
+<div class="one-half column"style="margin-left: 0; margin-right: 10px">
+  <div class="indexsubtitleleft">Pages</div>
+  {% for page in site.pages %}
+  {{ page.title }}
+  {% endfor %}
+</div>
 <div class="one-half column" style="margin-left: 10px;"><div class="indexsubtitleright">Categories</div></div>
 </div>
 
