@@ -21,7 +21,7 @@ img.logo {
 }
 
 
-/* Logo image with border
+/* Main title
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 h1.title {
@@ -41,11 +41,27 @@ h1.title {
         font-size: 4.0rem; }
 }
 
-.indexstrapline {
+
+/* Strapline
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+h2.strapline {
     font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 18px;
-    text-align: center;
+    font-size: 1.4rem;
+    text-align: center; }
+
+@media (min-width: 550px) {
+    h2.strapline {
+        font-size: 1.6rem; }
 }
+
+@media (min-width: 750px) {
+    h2.strapline {
+        font-size: 1.8rem; }
+}
+
+
+
 
 .indexsubtitleleft {
     font-family: 'Lobster', cursive;
