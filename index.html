@@ -6,19 +6,11 @@ layout: default
 <h2 class="strapline">I’m Sam Mathias, a researcher Yale University.  I’m
   interested in hearing, cognition, genetics, and psychiatry.  Here, I post mostly
   thoughts and code related to my work.</h2>
-
 <div class="row">
-
-  <div class="one-half column" style="margin-left: 0; margin-right: 10px">
-
-    <div class="indexsubtitleleft">Pages</div>
-
+  <div class="one-half column" style="margin-left: 0; margin-right: 10px; text-align: right;">
     {% for page in site.pages %}
-
-      {{ page.title }}
-
+      <button class="link">{{ page.title }}</button>
     {% endfor %}
-
   </div>
 <div class="one-half column" style="margin-left: 10px;"><div class="indexsubtitleright">Categories</div></div>
 </div>
