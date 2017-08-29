@@ -9,7 +9,9 @@ layout: default
 <div class="row">
   <div class="one-half column" style="margin-left: 0; margin-right: 10px; text-align: right;">
     {% for page in site.pages %}
-      <button class="link">{{ page.title }}</button>
+      {% if page.title == '' %}
+        <button class="link">{{ page.title }}</button>
+      {% end if %}
     {% endfor %}
   </div>
 <div class="one-half column" style="margin-left: 10px;"><div class="indexsubtitleright">Categories</div></div>
