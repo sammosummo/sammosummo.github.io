@@ -29,23 +29,23 @@ img.logo {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Smallest title */
-h1.title {
+title {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     color: #222222;
-    font-size: 3.0rem;
-    text-align: center; }
+    font-size: 2.0rem;
+    text-align: left; }
 
 /* Slightly larger */
 @media (min-width: 550px) {
-    h1.title {
-        font-size: 3.5rem; }
+    title {
+        font-size: 2.0rem; }
 }
 
 /* Largest */
 @media (min-width: 750px) {
-    h1.title {
-        font-size: 4.0rem; }
+    title {
+        font-size: 3.0rem; }
 }
 
 
