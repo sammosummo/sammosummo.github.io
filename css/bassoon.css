@@ -29,7 +29,7 @@ layout. Don't mess with this section. */
 .container {
   position: relative;
   width: 100%;
-  max-width: 960px;
+  max-width: 800px; /* formerly 960 */
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box; }
