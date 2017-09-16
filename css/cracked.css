@@ -1,29 +1,34 @@
-/* Logo
+/* Logo in the top left
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+/* Doesn't display on small screens */
+/* TODO: Specify border colour! */
 img.logo {
-    width: 100px;
-    height: 100px;
-    border: 6px solid;
+    width: 50px;
+    height: 50px;
+    border: 4px solid;
     display: none;
     margin: 0 auto; }
 
+/* Appears when wider than 550 px */
 @media (min-width: 550px) {
     img.logo {
         display: block; }
 }
 
+/* Full size when larger than 750 px */
 @media (min-width: 750px) {
     img.logo {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
         border: 8px solid; }
 }
 
 
-/* Main title
+/* Main title; to right of logo
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
+/* Smallest title */
 h1.title {
     font-family: 'Lobster', cursive;
     font-weight: 400;
@@ -31,90 +36,92 @@ h1.title {
     font-size: 3.0rem;
     text-align: center; }
 
+/* Slightly larger */
 @media (min-width: 550px) {
     h1.title {
         font-size: 3.5rem; }
 }
 
+/* Largest */
 @media (min-width: 750px) {
     h1.title {
         font-size: 4.0rem; }
 }
 
 
-/* Strapline
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*!* Strapline*/
+/*–––––––––––––––––––––––––––––––––––––––––––––––––– *!*/
 
-h2.strapline {
-    font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    text-align: center; }
+/*h2.strapline {*/
+    /*font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    /*font-size: 1.4rem;*/
+    /*font-weight: 400;*/
+    /*text-align: center; }*/
 
-@media (min-width: 550px) {
-    h2.strapline {
-        font-size: 1.6rem; }
-}
+/*@media (min-width: 550px) {*/
+    /*h2.strapline {*/
+        /*font-size: 1.6rem; }*/
+/*}*/
 
-@media (min-width: 750px) {
-    h2.strapline {
-        font-size: 1.8rem; }
-}
+/*@media (min-width: 750px) {*/
+    /*h2.strapline {*/
+        /*font-size: 1.8rem; }*/
+/*}*/
 
-/* Links
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*!* Links*/
+/*–––––––––––––––––––––––––––––––––––––––––––––––––– *!*/
 
-button.link {
-    display: inline-block;
-    padding: 3px 6px; /*padding: 0 30px*/
-    text-decoration: none;
-    border: 2px solid #cccccc;
-    color: #777777;
-    font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    box-sizing: border-box;
-    margin: 0 6px 0 0; }
+/*button.link {*/
+    /*display: inline-block;*/
+    /*padding: 3px 6px; !*padding: 0 30px*!*/
+    /*text-decoration: none;*/
+    /*border: 2px solid #cccccc;*/
+    /*color: #777777;*/
+    /*font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+    /*font-size: 1.4rem;*/
+    /*font-weight: 400;*/
+    /*box-sizing: border-box;*/
+    /*margin: 0 6px 0 0; }*/
 
-@media (min-width: 550px) {
-    button.link {
-        font-size: 1.6rem; }
-}
+/*@media (min-width: 550px) {*/
+    /*button.link {*/
+        /*font-size: 1.6rem; }*/
+/*}*/
 
-@media (min-width: 750px) {
-    button.link {
-        font-size: 1.8rem; }
-}
-
-
+/*@media (min-width: 750px) {*/
+    /*button.link {*/
+        /*font-size: 1.8rem; }*/
+/*}*/
 
 
 
-.indexsubtitleleft {
-    font-family: 'Lobster', cursive;
-    font-size: 22px;
-    text-align: right;
-    text-decoration: underline;
-}
 
-.indexsubtitleright {
-    font-family: 'Lobster', cursive;
-    font-size: 22px;
-    text-align: left;
-    text-decoration: underline;
-}
 
-.containerleft {
-    width: 40%;
-    margin: 0 0 0 0;
-    box-sizing: border-box;
-}
+/*.indexsubtitleleft {*/
+    /*font-family: 'Lobster', cursive;*/
+    /*font-size: 22px;*/
+    /*text-align: right;*/
+    /*text-decoration: underline;*/
+/*}*/
 
-.containerright {
-    width: 40%;
-    margin: 0 0 0 0;
-    box-sizing: border-box;
-}
+/*.indexsubtitleright {*/
+    /*font-family: 'Lobster', cursive;*/
+    /*font-size: 22px;*/
+    /*text-align: left;*/
+    /*text-decoration: underline;*/
+/*}*/
+
+/*.containerleft {*/
+    /*width: 40%;*/
+    /*margin: 0 0 0 0;*/
+    /*box-sizing: border-box;*/
+/*}*/
+
+/*.containerright {*/
+    /*width: 40%;*/
+    /*margin: 0 0 0 0;*/
+    /*box-sizing: border-box;*/
+/*}*/
 
 
 /*!* Larger than desktop *!*/
