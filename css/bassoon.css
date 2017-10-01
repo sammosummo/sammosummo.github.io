@@ -112,7 +112,7 @@ body {
   font-size: 1.6em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.5;
   font-weight: 400;
-  font-family: 'Libre Baskerville', 'Times New Roman', Times, serif;
+  font-family: 'Bitter', 'Times New Roman', Times, serif;
   color: #222222;
   text-align: justify;
   text-justify: inter-word;
@@ -120,7 +120,7 @@ body {
   padding: 0; }
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  font-family: 'Noto Sans', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  font-family: 'Bitter', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 /*!*h1 { font-size: 3.0rem; }*!*/
 /*!*h2 { font-size: 2.4rem; }*!*/
