@@ -4,8 +4,8 @@
 /* Doesn't display on small screens */
 /* TODO: Specify border colour! */
 img.logo {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 74px;
     border: 4px solid;
     display: none;
     margin: 0 auto; }
@@ -19,9 +19,9 @@ img.logo {
 /* Full size when larger than 750 px */
 @media (min-width: 750px) {
     img.logo {
-        width: 100px;
-        height: 100px;
-        border: 8px solid; }
+        width: 125px;
+        height: 125px;
+        border: 6px solid; }
 }
 
 
@@ -29,7 +29,7 @@ img.logo {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Smallest title */
-title {
+.title {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     color: #222222;
@@ -38,13 +38,13 @@ title {
 
 /* Slightly larger */
 @media (min-width: 550px) {
-    title {
+    .title {
         font-size: 2.0rem; }
 }
 
 /* Largest */
 @media (min-width: 750px) {
-    title {
+    .title {
         font-size: 3.0rem; }
 }
 

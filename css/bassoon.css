@@ -32,6 +32,7 @@ layout. Don't mess with this section. */
   max-width: 800px; /* formerly 960 */
   margin: 0 auto;
   padding: 0 20px;
+  background-color: #fafafa;
   box-sizing: border-box; }
 .column,
 .columns {
