@@ -9,5 +9,5 @@ twitter_username: crackedbassoon
 github_username:  sammosummo
 
 # Build settings
-permalink: /:year/:month/:day/:title/
+permalink: /:year/:month/:day/:title.html
 markdown: kramdown
