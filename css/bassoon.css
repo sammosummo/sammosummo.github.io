@@ -32,7 +32,6 @@ layout. Don't mess with this section. */
   max-width: 800px; /* formerly 960 */
   margin: 0 auto;
   padding: 0 20px;
-  background-color: #fdfdfd;
   box-sizing: border-box; }
 .column,
 .columns {
@@ -117,7 +116,8 @@ body {
   text-align: justify;
   text-justify: inter-word;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  background-color: #fdfdfd; }
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   font-family: 'Bitter', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
