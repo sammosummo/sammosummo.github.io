@@ -6,3 +6,4 @@ description: Personal website of Sam Mathias
 twitter: crackedbassoon
 githube:  sammosummo
 markdown: kramdown
+baseurl: ""
