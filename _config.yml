@@ -15,7 +15,7 @@ default_img: "logo.png"
 # Profile settings
 name: Sam Mathias
 profile_img: 
-profile: I'm a UK-born scientist at Yale University. I'm interested in the genetic and environmental factors underlying individual differences in perceptual abilities. Download my CV here, or view my publication list.
+profile: I'm a UK-born scientist at Yale University. I'm interested in human perception, and why people differ in terms of their perceptual abilities. I like to blog about genetics, psychophysics, and statistics. Download my CV here, or view my publication list.
 social:
   github: sammosummo
 
