@@ -10,12 +10,12 @@ title: The Cracked Bassoon
 description: Website of Sam Mathias, a researcher at Yale
 url: ""
 twitter_username: crackedbassoon
-default_img: "logo.png"
+default_img:
 
 # Profile settings
 name: Sam Mathias
-profile_img: 
-profile: I'm a UK-born scientist at Yale University. I'm interested in human perception, and why people differ in terms of their perceptual abilities. I like to blog about genetics, psychophysics, and statistics. Download my CV here, or view my publication list.
+profile_img: "logo.png"
+profile: I'm a UK-born scientist at Yale. I'm interested why people differ in their perceptual abilities. I like to blog about genetics, psychophysics, and statistics. Download my CV here.
 social:
   github: sammosummo
 
