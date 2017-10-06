@@ -9,18 +9,18 @@ google_analytics:
 title: The Cracked Bassoon
 description: Website of Sam Mathias, a researcher at Yale
 url: ""
-twitter_username: 
-default_img: 
+twitter_username: crackedbassoon
+default_img: "logo.png"
 
 # Profile settings
 name: Sam Mathias
 profile_img: 
-profile: I'm a UK-born scientist at Yale University. I'm interested in human perception, and the genetic and environmental factors underlying individual differences in perceptual abilities. Download my CV here, or view my publication list.
+profile: I'm a UK-born scientist at Yale University. I'm interested in the genetic and environmental factors underlying individual differences in perceptual abilities. Download my CV here, or view my publication list.
 social:
   github: sammosummo
 
 # Build settings
-exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt", "README.md"]
+exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
 markdown: kramdown
 permalink: /:year/:month/:day/:title/
 
