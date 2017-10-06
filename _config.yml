@@ -16,6 +16,7 @@ default_img:
 name: Sam Mathias
 profile_img: 
 profile: I'm a UK-born scientist at Yale University. I do quantitative genetics, psychiatry, and hearing. Here is my CV and publication list.
+social:
   github: sammosummo
 
 # Build settings
