@@ -19,6 +19,7 @@ profile: I'm a UK-born scientist at Yale. I'm interested why people differ in th
 social:
   github: https://github.com/sammosummo
   feed:
+  id-card-o:
 
 # Build settings
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
