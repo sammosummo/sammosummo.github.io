@@ -388,6 +388,7 @@
   margin: 0 auto;
 
   font-family: $font-post;
+  font-weight: 300;
 
   @media (min-width: $mq-md) {
     width: 55%;
@@ -433,6 +434,8 @@
 
   p:first-child {
     font-size: 1.5em;
+    font-weight: 400;
+    font-style: italic;
   }
 
   a {
