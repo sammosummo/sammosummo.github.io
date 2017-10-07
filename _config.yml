@@ -17,7 +17,8 @@ name: Sam Mathias
 profile_img: https://sammosummo.github.io/images/wedding_photo_2.jpg
 profile: I'm a UK-born scientist at Yale. I'm interested why people differ in their perceptual abilities. I like to blog about genetics, psychophysics, and statistics. Download my CV here.
 social:
-  github: sammosummo
+  github: https://github.com/sammosummo
+  feed:
 
 # Build settings
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
