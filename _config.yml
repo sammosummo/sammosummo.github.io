@@ -24,8 +24,6 @@ social:
 # Build settings
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
 markdown: kramdown
-kramdown:
-  input: GFM
 permalink: /:year/:month/:day/:title/
 
 # Sass
