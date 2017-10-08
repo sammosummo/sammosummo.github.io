@@ -23,7 +23,7 @@ social:
 
 # Build settings
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
-markdown: redcarpet
+markdown: kramdown
 permalink: /:year/:month/:day/:title/
 
 # Sass
