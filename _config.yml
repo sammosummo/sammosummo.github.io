@@ -24,6 +24,7 @@ social:
 # Build settings
 exclude: ["_screenshots", "Gemfile", "Gemfile.lock", "LICENSE.txt"]
 markdown: kramdown
+highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
 # Sass
