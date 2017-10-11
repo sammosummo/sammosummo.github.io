@@ -30,8 +30,20 @@ def get_toy_data():
 def fcn(s):
     """Nicely format a covariate name for LaTeX."""
 
-    return '_{\mathrm{__' + ''.join(i for i in s if i not in "',") + '}}'
+    return '_{_\mathrm{' + ''.join(i for i in s if i not in "',") + '}}'
+
+
+def formuale_list_to_dic(formulae, params):
+    """Convert a list of formulae into a dic."""
+
+    dic = {p: '1' for p in params}
+    dic.update(
+        {f.split('~')[0].replace(' ', ''): f.split('~')[1] for f in formulae}
+    )
+
+    return dic
 
 if __name__ == '__main__':
 
     print(get_toy_data())
+    print(formuale_list_to_dic(["k~c('subj')"]))
