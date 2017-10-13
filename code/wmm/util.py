@@ -1,10 +1,14 @@
 import urllib.request
 import numpy as np
 import pandas as pd
+from patsy import dmatrix
 
 
 def get_toy_data():
-    """Download and return the formatted Rouder PNAS data as a dataframe.
+    """Download the Rouder et al. data. Requires internet access.
+
+    Returns:
+        pd.DataFrame: Rouder et al. data.
 
     """
 
@@ -14,36 +18,48 @@ def get_toy_data():
     ))
     data = data[['sub', 'prch', 'N', 'ischange', 'resp', 'oldcol']]
     data['subj'] = data['sub']
-    data['clr'] = data.oldcol
+    data['prob_D'] = data.prch
+    data['colour'] = data.oldcol
     data['M'] = data.N
     data['D'] = data.ischange
     data['H'] = data.ischange * data.resp
     data['S'] = (1 - data.ischange)
     data['F'] = (1 - data.ischange) * data.resp
-    data = data[['subj', 'prch', 'clr', 'M', 'D', 'S', 'H', 'F']]
+    data = data[['subj', 'M', 'D', 'S', 'H', 'F', 'prob_D', 'colour']]
 
-    return pd.pivot_table(
-        data, index=['subj', 'prch', 'clr', 'M'], aggfunc=np.sum
+    return data
+
+
+def pivot(data, formulae):
+    """Convert data from long-form to pivoted format.
+
+    Args:
+        data (pd.DataFrame): Long-form data.
+        formulae (list): List of patsy-style formulae.
+
+    """
+    a = ['subj', 'M']
+    b = ['D', 'S', 'H', 'F']
+    terms = set(c for f in formulae for c in data.columns if c in f)
+    data = pd.pivot_table(
+        data, index=terms | set(a), aggfunc=np.sum
     ).reset_index()
 
-
-def fcn(s):
-    """Nicely format a covariate name for LaTeX."""
-
-    return '_{_\mathrm{' + ''.join(i for i in s if i not in "',") + '}}'
+    return data[a + list(terms) + b]
 
 
-def formuale_list_to_dic(formulae, params):
-    """Convert a list of formulae into a dic."""
+def dmforoffsets(data):
+    """Create a design matrix for the offset variables (deltas)."""
 
-    dic = {p: '1' for p in params}
-    dic.update(
-        {f.split('~')[0].replace(' ', ''): f.split('~')[1] for f in formulae}
-    )
+    terms = (c for c in data.columns if c not in ['M', 'D', 'S', 'H', 'F'])
+    formula = '0+' + ':'.join('C(%s)' % t for t in terms)
 
-    return dic
+    return dmatrix(formula, data)
 
 if __name__ == '__main__':
 
-    print(get_toy_data())
-    print(formuale_list_to_dic(["k~c('subj')"]))
+    data = get_toy_data()
+    formulae = ['kappa ~ C(colour)', 'gamma ~ 1', 'zeta ~ 1']
+    data = pivot(data, formulae)
+    print(dmforoffsets(data))
+
