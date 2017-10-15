@@ -7,112 +7,98 @@ from theano import dot
 from patsy import dmatrix
 
 
-def wmm_morey_cowan(data, formulae, scale=2.5):
-    """Constructs a Morey--Cowan-style model for measuring working-memory
-    capacity from change-detection tasks.
+def wmcap_morey_cowan(data, formulae, scale=5):
+    r"""Constructs a Bayesian hierarchical model for the estimation of working-
+    memory capacity, bias, and lapse rate using the method described by Morey
+    for Cowan-style change detection tasks. This is a "fixed-effects" version
+    of the model, which is best suited to studies with between-subjects
+    designs.
 
     Args:
-        data (pd.DataFrame): Data formatted in the appropriate way.
-        formulae (dict): Dictionary of formulae. A constant is used for any
-            missing formulae.
-        scale (float): Scale value for hyperpriors.
+        data (pd.DataFrame): Data.
+        formulae (list): List of patsy-style formulae; e.g.,
+            `kappa ~ C(subject)`. Accepts up to three formulae for $\kappa$,
+            $\gamma$, and/or $\zeta$. Missing formulae with default to an
+            intercept-only model.
+        scale (float): A scale parameter for all the stochastic nodes. Defaults
+            to `5`.
 
     Returns:
-        None: Model is placed in context, ready for sampling.
+        None: All model components are placed in the context.
 
     """
 
-    # 'Pivot' long-form data. Safe to re-pivoting pivoted data.
+    # "Compress" the data so we can create the correct amount stochastic nodes
+    # later on.
 
-    data = util.pivot(data, formulae)
+    data = util.compress(data, formulae)
 
-    # Make a dict out of the formulae.
+    # Make a dictionary out of the formulae so they can be indexed easier.
 
     param_names = ['kappa', 'gamma', 'zeta']
-    params = {}
     dic = {p: '1' for p in param_names}
     dic.update(
         {f.split('~')[0].replace(' ', ''): f.split('~')[1] for f in formulae}
     )
 
-    print(data)
-
+    # Loop over parameters in the decision model. This is just more elegant
+    # than hard coding each one.
 
     for p in param_names:
 
-        # Place linear model on mu of parameter.
+        # Construct a linear model for the predictions on the parameter.
 
         dm = dmatrix(dic[p], data)
         X = np.asarray(dm)
         covs = dm.design_info.column_names
-        vecbeta = []
+        beta = []
 
-        # Make regression coefficients.
+        # Make regression coefficients for the linear model.
 
         for cov in covs:
 
-            # Make nicely formatted name for coefficient.
+            # Nicely format the name of the coefficient.
 
             c = ''.join(i for i in cov if i not in '"\',$')
             name = r'$\beta_{(\%s)_\mathrm{%s}}$' % (p, c)
+            beta.append(pm.Cauchy(name=name, alpha=0, beta=scale))
 
-            beta = pm.Cauchy(name=name, alpha=0, beta=scale)
-            vecbeta.append(beta)
+        # Make the predictions of the linear model on the parameter.
 
-        mu = dot(X, tt.stack(*vecbeta))
+        mu = dot(X, tt.stack(*beta))
 
         # Make delta vector of parameter.
 
         name = r'$\delta_{(\%s)}$' % p
-        X = np.asarray(util.dmforoffsets(data))
-        delta = pm.Cauchy(name=name, alpha=0, beta=scale, shape=X.shape[1])
-        delta = dot(X, delta)
+        dm_ = util.dm_for_lower_stochastics(data)
+        X_ = np.asarray(dm_)
+        delta_ = pm.Cauchy(name=name, alpha=0, beta=scale, shape=X_.shape[1])
+        delta = dot(X_, delta_)
 
         # Make sigma of parameter.
 
         sigma = pm.HalfCauchy(name=r'$\sigma_{(\%s)}$' % p, beta=scale)
 
-        # Make the paramater.
+        # Make the parameter.
 
-        params[p] = pm.Deterministic(r'$\%s$' % p, mu + delta * sigma)
+        dic[p] = pm.Deterministic(r'$\%s$' % p, mu + delta * sigma)
 
     # Transform parameters into meaningful decision parameters.
 
-    k = pm.Deterministic(
-        '$k$', tt.max((params['kappa'], np.zeros(len(data))), axis=0)
-    )
-    g = pm.Deterministic('$g$', pm.invlogit(params['gamma']))
-    z = pm.Deterministic('$z$', pm.invlogit(params['zeta']))
+    zeros = np.zeros(len(data))
+    k = pm.Deterministic('$k$', tt.max((dic['kappa'], zeros), axis=0))
+    g = pm.Deterministic('$g$', pm.invlogit(dic['gamma']))
+    z = pm.Deterministic('$z$', pm.invlogit(dic['zeta']))
 
     # Calculate hit and false-alarm probabilities.
 
-    q = tt.min((k / data.M.values, np.ones(len(data))), axis=0)
+    q = tt.min((k / data.set_size.values, zeros + 1), axis=0)
     f = (1 - z) * g + z * (1 - q) * g
     h = (1 - z) * g + z * q + z * (1 - q) * g
 
-    # likelihoods
+    # Construct the Likelihoods.
 
-    pm.Binomial(name='$H$', p=h, n=data.D.values, observed=data.H.values)
-    pm.Binomial(name='$F$', p=f, n=data.S.values, observed=data.F.values)
-
-
-def main():
-
-    with pm.Model():
-
-        data = util.get_toy_data()
-        formulae = [
-            'kappa ~ 1',
-            'gamma ~ 1',
-            'zeta ~ 1'
-        ]
-        wmm_morey_cowan(data, formulae)
-        # backend = pm.backends.Text('wmm')
-        trace = pm.sample()
-        pm.traceplot(trace)
-        plt.savefig('traceplot.png')
-
-
-if __name__ == '__main__':
-
-    main()
+    pm.Binomial(name='$H$', p=h, n=data.different_trials.values,
+                observed=data.hits.values)
+    pm.Binomial(name='$F$', p=f, n=data.same_trials.values,
+                observed=data.false_alarms.values)
