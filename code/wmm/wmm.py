@@ -41,8 +41,8 @@ def wmcap_morey_cowan(data, formulae, scale=5):
         {f.split('~')[0].replace(' ', ''): f.split('~')[1] for f in formulae}
     )
 
-    # Loop over parameters in the decision model. This is just more elegant
-    # than hard coding each one.
+    # Loop over parameters in the decision model. This is just less code than
+    # hard-coding each one.
 
     for p in param_names:
 
@@ -72,7 +72,7 @@ def wmcap_morey_cowan(data, formulae, scale=5):
         name = r'$\delta_{(\%s)}$' % p
         dm_ = util.dm_for_lower_stochastics(data)
         X_ = np.asarray(dm_)
-        delta_ = pm.Cauchy(name=name, alpha=0, beta=scale, shape=X_.shape[1])
+        delta_ = pm.Normal(name=name, mu=0, sd=1., shape=X_.shape[1])
         delta = dot(X_, delta_)
 
         # Make sigma of parameter.
