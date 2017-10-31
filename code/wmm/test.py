@@ -4,12 +4,12 @@ from wmm import *
 with pm.Model():
     data = util.get_rouder_data()
     formulae = [
-        'kappa ~ C(subject) + C(colour)',
-        'gamma ~ C(subject) + C(prob_different)',
-        'zeta ~ C(subject)'
+        'kappa ~ C(colour, Sum)',
+        'gamma ~ C(prob_different, Treatment(0.5))',
+        'zeta ~ 1'
     ]
     wmcap_morey_cowan(data, formulae)
-    backend = pm.backends.Text('wmcap_morey_cowan')
-    trace = pm.sample(draws=10000, tune=2000, trace=backend)
+    backend = pm.backends.Text('rouder_example')
+    trace = pm.sample(draws=1000, tune=2000, trace=backend)
     pm.traceplot(trace)
-    plt.savefig('traceplot.png')
+    plt.savefig('rouder_example/traceplot.png')

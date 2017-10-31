@@ -1,6 +1,7 @@
 import urllib.request
 import numpy as np
 import pandas as pd
+from collections import OrderedDict
 from itertools import product
 from patsy import dmatrix
 
@@ -47,8 +48,16 @@ def compress(data, formulae):
     """
     a = ['subject']
     b = ['set_size', 'different_trials', 'same_trials', 'hits', 'false_alarms']
-    terms = [c for f in formulae for c in data.columns if
-             c not in a + b and c in f]
+    terms = []
+
+    for f in formulae:
+
+        for c in data.columns:
+
+            if c not in a + b and c in f and c not in terms:
+
+                terms.append(c)
+
     data = pd.pivot_table(data, index=a + terms + b[:1], aggfunc=np.sum)
     data = data.drop([c for c in data.columns if c not in a + b + terms],
                      axis=1).reset_index()
