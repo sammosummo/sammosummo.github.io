@@ -199,17 +199,21 @@ def test():
 
         data = get_rouder_data()
         formulae = [
-            'kappa ~ C(subject) + C(colour, Helmert) + C(prob_different, '
+            'kappa ~ C(subject) + C(colour, Sum) + C(prob_different, '
             'Treatment(0.5))',
-            'gamma ~ C(subject) + C(colour, Helmert) + C(prob_different, '
+            'gamma ~ C(subject) + C(prob_different, '
             'Treatment(0.5))',
-            'zeta ~ C(subject) + C(colour, Helmert) + C(prob_different, '
-            'Treatment(0.5))'
+            'zeta ~ C(subject)'
         ]
         wmcap_morey_cowan(data, formulae)
         backend = pm.backends.Text('rouder')
         trace = pm.sample(draws=1000, tune=2000, trace=backend)
         pm.traceplot(trace)
         plt.savefig('rouder_example/traceplot.png')
+
+
+if __name__ == '__main__':
+
+    test()
 
 
