@@ -29,8 +29,15 @@ One could also delay and add the original waveform (IRNO) rather than the same w
 </audio>
 </center>
 
-One can also create IRN with a dynamic pitch contour by changing $$d$$ from a constant to a time-varying function[<sup>3</sup>] [<sup>4</sup>], as in the example below. You should hear an upward-sweeping pitch:
+One can also create IRN with a dynamic pitch contour by changing $$d$$ from a constant to a time-varying function (see [<sup>3</sup>] and [<sup>4</sup>]), as in the example below. You should hear an upward-sweeping pitch:
 
 [<sup>3</sup>]: https://doi.org/10.1016/j.biosystems.2004.09.008 "Denham, S. (2005). Pitch detection of dynamic iterated rippled noise by humans and a modified auditory model. Biosystems, 79(1–3), 199–206."
 
 [<sup>4</sup>]: https://doi.org/10.1109/TBME.2007.896592 "Swaminathan, J., Krishnan, A., Gandour, J.T., & Xu, Y. (2008). Applications of static and dynamic iterated rippled noise to evaluate pitch encoding in the human auditory brainstem. IEEE Transactions on Biomedical Engineering, 55(1), 281–287."
+
+<center>
+<audio controls="controls">
+  <source type="audio/wav" src="https://sammosummo.github.io/sounds/IRN_increasing_f.wav"></source>
+  <p>Your browser does not support the audio element.</p>
+</audio>
+</center>
