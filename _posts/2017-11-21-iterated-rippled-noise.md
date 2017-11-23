@@ -12,7 +12,7 @@ image-description: "The Great Wave off Kanagawa (1831) by Katsushika Hokusai"
 ---
 Iterated rippled noise (IRN) is one of the more popular stimuli in the psychoacoustics literature. In this post, I describe IRN and provide some code for generating it.
 
-**(Disclaimer: This is a re-post. The code below uses the `brian` Python package, which has been recently superseded by `brian2`, [see here](http://briansimulator.org).)**
+**(Disclaimer: This is a re-post. The code below uses the `brian` Python package, which has been recently superseded by `brian2`; see [here](http://briansimulator.org).)**
 
 In its basic form, IRN is generated in the time domain using broadband noise which is delayed and added back to itself repeatedly. This creates something that sounds like a ‘cracked bassoon’ (according to some authors[<sup>1</sup>]) with a flat noisy pitch at $$\frac{1}{d}$$ Hz, where $$d$$ is the delay interval in seconds. The strength of the pitch depends on the number of delay-and-add iterations, $$n$$. The original formulation by Yost[<sup>2</sup>] also multiplied the delayed waveform by a gain factor $$g$$ prior to adding, but this is normally just set to 1 in most studies. This process is represented mathematically by:
 
