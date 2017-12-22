@@ -21,6 +21,13 @@ To create a ripple, we first need to create a mixture of many sinusoids whose fr
 
 $$
 y\left(t\right) = \sum_{i=1}^{N}{s_i\left(t\right)}\\
-\textrm{where }s_i\left(t\right) = \gamma_i\cdot\frac{1}{\sqrt{f_i}}\cdot{}\sin{\left(2\pi\cdot{}f_i\cdot{}t+\phi_i\right)}\\
-f_i = f_1\cdot{}\left(\frac{f_N}{f_1}\right)^\frac{i-1}{N-1}\\
+s_i\left(t\right) = \gamma_i\cdot\frac{1}{\sqrt{f_i}}\sin{\left(2\pif_it+\phi_i\right)}\\
+f_i = f_1\left(\frac{f_N}{f_1}\right)^\frac{i-1}{N-1}\\
+\gamma_i\sim\mathrm{Uniform}\left(0,1\right)\\
+\phi{}_i\sim\mathrm{Uniform}\left(0,2\pi{}\right)\\
+f_1 = 250\\
+f_N = 8000\\
+N = 1000
 $$
+
+These equations work as follows. The first equation sums together $$N$$ sinusoids. The second equation generates each sinusoid, and scales and randomises their amplitudes. The third equation determines the frequency of the sinusoids in Hz, and ensures that they are evenly spaced on a musical (log2) scale between 250 Hz and 8 KHz. The random variable $$\gamma_i$$ is the amplitude randomisation applied to the $$i$$th tone; this is not strictly necessary, so $$\gamma_i$$ could be set to 1. The second random variable $$\phi_i$$ represents the phase of the $$i$$th tone in radians. The python snippet below implements this process:
