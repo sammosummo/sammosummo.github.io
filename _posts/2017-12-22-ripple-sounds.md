@@ -10,18 +10,6 @@ image-sm: https://sammosummo.github.io/images/kanagawa-1831-sm.jpg
 image-description: "The Great Wave off Kanagawa (1831) by Katsushika Hokusai"
 
 ---
----
-layout: post
-title: Ripple sounds
-date: 2017-12-22
-categories:
- - Sound
-description:
-image: https://sammosummo.github.io/images/kanagawa-1831.jpg
-image-sm: https://sammosummo.github.io/images/kanagawa-1831-sm.jpg
-image-description: "The Great Wave off Kanagawa (1831) by Katsushika Hokusai"
-
----
 
 Ripples are synthetic sounds with sinusoidal spectral or spectro-temporal profiles. Here, I provide a conceptual description of ripples and some code to generate them.
 
