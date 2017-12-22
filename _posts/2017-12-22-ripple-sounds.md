@@ -7,7 +7,7 @@ categories:
 description:
 image: https://sammosummo.github.io/images/lake-george-1857.jpg
 image-sm: https://sammosummo.github.io/images/lake-george-1857-sm.jpg
-image-description: “Lake George (1857) by John William Casilear"
+image-description: "Lake George (1857) by John William Casilear"
 
 ---
 
@@ -135,7 +135,7 @@ It also adds a striking new perceptual feature to the sound: <audio controls="co
 
 Finally, we can go one step further and create dynamic moving ripples[<sup>3</sup>]. To implement these, we need to slightly modify the equations:
 
-[<sup>3</sup>] https://www.ncbi.nlm.nih.gov/pubmed/12019330 "Escabi, M. E. & Schreiner, C. E. (2002). Nonlinear spectrotemporal sound analysis by neurons in the auditory midbrain. The Journal of Neuroscience, 22(10), 4114–4131."
+[<sup>3</sup>]: https://www.ncbi.nlm.nih.gov/pubmed/12019330 "Escabi, M. E. & Schreiner, C. E. (2002). Nonlinear spectrotemporal sound analysis by neurons in the auditory midbrain. The Journal of Neuroscience, 22(10), 4114–4131."
 
 $$a_i\left(t\right) = 1 + d\sin\left \{2\pi\left[w^\prime\left(t\right)+\Omega{}\left(t\right)x_i\right] + \varphi\right \}\\w^\prime\left(t\right) = \int_0^\tau{}w(\tau)\,\mathrm{d}\tau$$
 
