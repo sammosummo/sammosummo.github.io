@@ -5,9 +5,9 @@ date: 2017-12-22
 categories:
  - Sound
 description:
-image: https://sammosummo.github.io/images/kanagawa-1831.jpg
-image-sm: https://sammosummo.github.io/images/kanagawa-1831-sm.jpg
-image-description: "The Great Wave off Kanagawa (1831) by Katsushika Hokusai"
+image: https://sammosummo.github.io/images/lake-george-1857.jpg
+image-sm: https://sammosummo.github.io/images/lake-george-1857-sm.jpg
+image-description: “Lake George (1857) by John William Casilear"
 
 ---
 
@@ -16,6 +16,11 @@ Ripples are synthetic sounds with sinusoidal spectral or spectro-temporal prof
 **(Disclaimer: This is a re-post. The code below uses the `brian` Python package, which has been recently superseded by `brian2`; see [here](http://briansimulator.org).)**
 
 Ripples are commonly used to measure the response properties of neurons in the auditory system, and are frequently compared with visual gratings[<sup>1</sup>]. They have also been used to study auditory short-term memory [<sup>2</sup>].
+
+[<sup>1</sup>]: https://doi.org/10.1016/S1364-6613(00)01704-6 "Shamma, S. (2001). On the role of space and time in auditory processing. Trends in Cognitive Sciences, 5(8), 340–348."
+
+[<sup>2</sup>]: https://doi.org/10.1371/journal.pbio.0050056 “Visscher, K. M., Kaplan, E., Kahana, M. J., & Sekuler, R. (2007). Auditory short-term memory behaves like visual short-term memory. PLoS Biology, 5(3), e56.”
+
 
 To create a ripple, we first need to create a mixture of many sinusoids whose frequencies are spaced evenly along a logarithmic frequency axis. Each sinusoid should also have a random starting phase, and their amplitudes should be modified so that the resulting sound has approximately equal power-spectrum density per octave. We’ll also randomise the amplitude of each sinusoid. Symbolically,
 
@@ -58,7 +63,7 @@ Y = Gamma * np.sin(2 * np.pi * F * T + Phi) / np.sqrt(F)
 y = np.sum(Y, axis=0)
 ~~~
 
-Click to hear it: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_1.wav"></source><p>Your browser does not support the audio element.</p></audio></center>
+Click to hear it: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_1.wav"></source><p>Your browser does not support the audio element.</p></audio>
 
 All we have done so far is create pink noise, albeit via a rather circuitous method. The spectrogram of the stimulus looks like this:
 
@@ -110,7 +115,7 @@ Y = A * S
 y = np.sum(Y, axis=0)
 ~~~
 
-Click to hear it: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_2.wav"></source><p>Your browser does not support the audio element.</p></audio></center>
+Click to hear it: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_2.wav"></source><p>Your browser does not support the audio element.</p></audio>
 
 We can see the spectral ripple in the new sound's spectrogram (though due to the linear vertical axis, it is not as clear as in the previous figure):
 
@@ -126,14 +131,12 @@ This modification adds a ‘drift’ to the amplitude-modulation function corres
 
 ![](https://sammosummo.github.io/images/ripple_3_env.png)
 
-It also adds a striking new perceptual feature to the sound: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_3.wav"></source><p>Your browser does not support the audio element.</p></audio></center>
-
-(code)
+It also adds a striking new perceptual feature to the sound: <audio controls="controls"><source type="audio/wav" src="https://sammosummo.github.io/sounds/ripple_3.wav"></source><p>Your browser does not support the audio element.</p></audio>
 
 Finally, we can go one step further and create dynamic moving ripples[<sup>3</sup>]. To implement these, we need to slightly modify the equations:
 
-$$a_i\left(t\right) = 1 + d\\sin\left \{2\pi\left[w^\prime\left(t\right)+\Omega{}\left(t\right)x_i\right] + \varphi\right \}\\\w^\prime\left(t\right) = \int_0^\tau{}w(\tau)\,d\tau$$
+$$a_i\left(t\right) = 1 + d\sin\left \{2\pi\left[w^\prime\left(t\right)+\Omega{}\left(t\right)x_i\right] + \varphi\right \}\\\w^\prime\left(t\right) = \int_0^\tau{}w(\tau)\,\mathrm{d}\tau$$
 
 Now $$\Omega$$ and $$w$$ are arbitrary vectors of length $$t$$, describing the instantaneous ripple density and ripple velocity of the sound, respectively.
 
-The code below puts everything together. Note that any of the sounds you heard earlier can be created by passing the appropriate arguments to the ripple_sound() function in this script. A featureless, noise-like sound like the first example is created by setting both $$\Omega$$ and $$w$$ to zero; a stationary ripple like the second example has a non-zero $$\Omega$$; and so on.
+The gist below puts everything together. Any of the sounds you heard earlier can be created by passing the appropriate arguments to the `ripple_sound()` function in this script. A featureless, noise-like sound like the first example is created by setting both $$\Omega$$ and $$w$$ to zero; a stationary ripple like the second example has a non-zero $$\Omega$$; and so on.
