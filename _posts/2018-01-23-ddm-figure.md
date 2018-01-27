@@ -4,6 +4,7 @@ title: DDM figure
 date: 2018-01-23
 categories:
  - Decision making
+ - Psychophysics
 description:
 image: https://sammosummo.github.io/images/the-rec-center-2017.jpg
 image-sm: https://sammosummo.github.io/images/the-rec-center-2017-sm.jpg
@@ -14,7 +15,7 @@ Here is a small python snippet to create a simple figure illustrating the drift-
 
 It produces something along these lines:
 
-![](https://sammosummo.github.io/images/ddm.png){:width=10px}
+![](https://sammosummo.github.io/images/ddm.png)
 
 A nice feature of the code is that it takes real values of drift rate, threshold, etc., so you have the option to plot several parameter configurations and compare them visually. Another feature is that the traces in the central panel get coloured depending on whether they cross the an upper or lower boundary. Enjoy!
 
