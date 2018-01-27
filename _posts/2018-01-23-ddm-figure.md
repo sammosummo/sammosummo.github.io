@@ -14,7 +14,9 @@ Here is a small python snippet to create a simple figure illustrating the drift-
 
 It produces something along these lines:
 
+<span>
 <img src="https://sammosummo.github.io/images/ddm.png" width="50%"/>
+</span>
 
 A nice feature of the code is that it takes real values of drift rate, threshold, etc., so you have the option to plot several parameter configurations and compare them visually. Another feature is that the traces in the central panel get coloured depending on whether they cross the an upper or lower boundary. Enjoy!
 
