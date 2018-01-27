@@ -3,7 +3,6 @@ layout: post
 title: DDM Figure
 date: 2018-01-23
 categories:
- - Python
  - Decision making
 description:
 image: https://sammosummo.github.io/images/the-rec-center-2017.jpg
