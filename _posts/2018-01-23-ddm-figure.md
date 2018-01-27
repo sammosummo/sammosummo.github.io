@@ -16,6 +16,8 @@ It produces something along these lines:
 
 ![](https://sammosummo.github.io/images/ddm.png){:height="36px" width="36px"}
 
+<img src="https://sammosummo.github.io/images/ddm.png"/>
+
 A nice feature of the code is that it takes real values of drift rate, threshold, etc., so you have the option to plot several parameter configurations and compare them visually. Another feature is that the traces in the central panel get coloured depending on whether they cross the an upper or lower boundary. Enjoy!
 
 <script src="https://gist.github.com/sammosummo/dbc28e35cc40bd7f9e020f6920a43142.js"></script>
