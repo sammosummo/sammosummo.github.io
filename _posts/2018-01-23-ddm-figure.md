@@ -1,6 +1,6 @@
 ---
 layout: post
-title: DDM Figure
+title: DDM figure
 date: 2018-01-23
 categories:
  - Decision making
