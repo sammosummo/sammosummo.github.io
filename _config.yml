@@ -15,7 +15,7 @@ default_img:
 # Profile settings
 name: Sam Mathias
 profile_img: https://sammosummo.github.io/images/wedding_photo_2.jpg
-profile: I'm a UK-born scientist at Yale. I'm interested in human perception and individual differences. I like to blog about genetics, psychophysics, and statistics. See my publications, <a href="https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AJsN-F6bhxUQRiJw3rhkKZENaNO_j3LGBLAAf3y8cweTb3zQgNRR474xaLdNUZ05E3iSB0VHzdqzCmCXTCTrK8aH9zpk62GzoAOJ-gA4NDo-TPxcNXi4JLU&user=fRRZs_4AAAAJ"><u>Google Scholar profile</u></a> or <a href="https://drive.google.com/file/d/0B68CY3v4cg7teWtvOUNnSkQtUmM/view?usp=sharing"><u>CV</u></a>.
+profile: I'm a UK-born scientist at Yale. I'm interested in human perception and individual differences. I like to blog about genetics, psychophysics, and statistics. See my <a href="https://sammosummo.github.io/pages/publications.html"><u>publications</a></u>, <a href="https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AJsN-F6bhxUQRiJw3rhkKZENaNO_j3LGBLAAf3y8cweTb3zQgNRR474xaLdNUZ05E3iSB0VHzdqzCmCXTCTrK8aH9zpk62GzoAOJ-gA4NDo-TPxcNXi4JLU&user=fRRZs_4AAAAJ"><u>Google Scholar profile</u></a> or <a href="https://drive.google.com/file/d/0B68CY3v4cg7teWtvOUNnSkQtUmM/view?usp=sharing"><u>CV</u></a>.
 social:
   github: https://github.com/sammosummo
   feed:
