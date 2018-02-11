@@ -13,6 +13,8 @@ image-description: "One of the Small Towers on Frederiksborg Castle (1834–1835
 ---
 Heritability is the proportion of a trait’s variance that is explained by genetic factors[<sup>1</sup>]. Here, I show that it is quite easy to build a simple Bayesian model to estimate heritability using data from related individuals.
 
+[<sup>1</sup>]: "Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to Quantitative Genetics. Harlow, UK: Longman."
+
 Consider the quantitative trait vector $$\mathbf{y}$$, which has a multivariate normal distribution:
 
 $$
