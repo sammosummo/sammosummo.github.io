@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Bayesian estimation of heritability
-date: 2017-12-22
+date: 2018-02-10
 categories:
  - Bayesian
  - Genetics
