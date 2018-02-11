@@ -1,22 +1,21 @@
 ---
 layout: post
-title: Bayesian estimation of heritability
+title: Heritability
 date: 2018-02-10
 categories:
- - Bayesian
  - Genetics
 description:
-image: https://sammosummo.github.io/images/one-of-the-small-towers-on-frederiksborg-castle-1834.jpg
-image-sm: https://sammosummo.github.io/images/one-of-the-small-towers-on-frederiksborg-castle-1834-sm.jpg
-image-description: "One of the Small Towers on Frederiksborg Castle (1834–1835) by Christen Købke"
+image: https://sammosummo.github.io/images/6005224610_3c82918a2f_o.jpg
+image-sm: https://sammosummo.github.io/images/
+6005224610_81af12b832_z.jpg
+image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca. 1906) by E. Schachtzabel"
 
 ---
-Heritability is the proportion of a trait’s variance that is explained by genetic factors[<sup>1</sup>]. Here, I show that it is quite easy to build a simple Bayesian model to estimate heritability using data from related individuals.
 
-[<sup>1</sup>]: "Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to Quantitative Genetics. Harlow, UK: Longman."
+Heritability remains one of the core concepts in quantitative genetics. It is actually quite easy to build a model to estimate the heritability of a quantitative trait, provided one knows the familial relationships between individuals in the sample.
 
-Consider the quantitative trait vector $$\mathbf{y}$$, which has a multivariate normal distribution:
+The total or phenotypic variance of a trait has both a genetic and environmental component:
 
 $$
-\mathbf{y}\sim{}\mathrm{MvNormal}\left{\textbf{\mu},\textbf{\Sigma}\right)
+\sigma^2_\textrm{P} = \sigma^2_\textrm{G} + \sigma^2_\textrm{E}
 $$
