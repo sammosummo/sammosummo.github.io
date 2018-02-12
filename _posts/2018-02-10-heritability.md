@@ -52,13 +52,22 @@ $$
 
 With these concepts defined, how do we estimate $$h^2$$?
 
-Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual. First, we place a linear mixed-effects model on $$\mathbf{y}$$:
+Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
+
+$$
+\mathbf{y} = \begin{pmatrix} 
+a & b \\
+c & d 
+\end{pmatrix}
+$$
+
+ First, we place a linear mixed-effects model on $$\mathbf{y}$$:
 
 $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{g} + \mathbf{e}
 $$
 
-Here, $$\mathbf{X}$$ is a $$m$$-by-$$n$$ matrix of fixed-effects covariates (i.e., a design matrix). Typically, values in the first column are all 1 (the intercept). The remaining columns are filled with non-genetic covariates that are likely to influence the trait, such as age and sex. $$\beta$$ is a 1-by-$$m$$ matrix of coefficients to be estimated. $$g$$ is a 1-by-$$n$$ matrix of genetic (or breeding values). Typically, breeding values are unknown, so we model this as a multivariate normal random distribution:
+Here, $$\mathbf{X}$$ is a $$m$$-by-$$n$$ matrix of fixed-effects covariates (i.e., a design matrix). Typically, values in the first column are all 1 (the intercept). The remaining columns are filled with non-genetic covariates that are likely to influence the trait, such as age and sex. $$\beta$$ is a 1-by-$$m$$ matrix of coefficients to be estimated. $$g$$ is a 1-by-$$n$$ matrix of genetic (or breeding) values. Typically, breeding values are unknown, so we model this as a multivariate normal random distribution:
 
 $$
 g\sim{}\mathrm{MvNormal}\left(0, \mathbf{A}\right)
