@@ -38,12 +38,30 @@ $$
 h^2 = \frac{\sigma^2_\textrm{A}}{\sigma^2_\textrm{P}}
 $$
 
-Environmental variance can be decomposed into common factors, unique factors, and residual error:
+Environmental variance can be decomposed into common effects, unique effects, and residual error:
 
 $$
 \sigma^2_\textrm{E} = \sigma^2_\textrm{CE} + \sigma^2_\textrm{UE} + \sigma^2_\textrm{RE}
 $$
 
-Common environmental factors are those shared between two or more individuals in the cohort. Unique environmental factors are those specific to one individual—these would be shared, however, between multiple measurements of the trait taken from the same individual (i.e., repeated measures). Residual error is specific to a single individual and measure.
+Common environmental effects are those shared between two or more individuals in the cohort. Unique environmental effects are those specific to one individual—these would be shared, however, between multiple measurements of the trait taken from the same individual (i.e., repeated measures). Residual error is specific to a single individual and measure. Here, just like we assumed no dominance or epistasis, we are going to assume no common or unique environment effects, so that
 
-Suppose we have a normal distributed trait
+$$
+\sigma^2_\textrm{E} = \sigma^2_\textrm{RE}
+$$
+
+With these concepts defined, how do we estimate $$h^2$$?
+
+Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual. First, we place a linear mixed-effects model on $$\mathbf{y}$$:
+
+$$
+\mathbf{y} = \mathbf{X}\beta + \mathbf{g} + \mathbf{e}
+$$
+
+Here, $$\mathbf{X}$$ is a $$m$$-by-$$n$$ matrix of fixed-effects covariates (i.e., a design matrix). Typically, values in the first column are all 1 (the intercept). The remaining columns are filled with non-genetic covariates that are likely to influence the trait, such as age and sex. $$\beta$$ is a 1-by-$$m$$ matrix of coefficients to be estimated. $$g$$ is a 1-by-$$n$$ matrix of genetic (or breeding values). Typically, breeding values are unknown, so we model this as a multivariate normal random distribution:
+
+$$
+g\sim{}\mathrm{MvNormal}\left(0, \mathbf{A}\right)
+$$
+
+where $$A$$ is a variance-covariance matrix.
