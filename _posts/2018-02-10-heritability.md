@@ -32,11 +32,18 @@ $$
 \sigma^2_\textrm{G} = \sigma^2_\textrm{A} + \sigma^2_\textrm{D} + \sigma^2_\textrm{I}
 $$
 
-“Dominance” refers to the effects of interactions between alleles at the same locus, whereas “epistatic” refers to interactions between alleles at different loci. For complex traits, it is likely that most genetic variance is additive. Therefore, nowadays quantitative genetics is mostly interested in narrow-sense heritability, denoted by $$h^2$$, which is defined as the proportion of the phenotypic variance that is explained by additive genetic factors:
-
-
-Environmental variance also has common environment,
+Dominance refers to the effects of interactions between alleles at the same locus, whereas epistatic refers to interactions between alleles at different loci. For complex traits, it is likely that most genetic variance is additive. Therefore, nowadays quantitative genetics is mostly interested in narrow-sense heritability, denoted by $$h^2$$, which is defined as the proportion of the phenotypic variance that is explained by additive genetic factors:
 
 $$
 h^2 = \frac{\sigma^2_\textrm{A}}{\sigma^2_\textrm{P}}
 $$
+
+Environmental variance can be decomposed into common factors, unique factors, and residual error:
+
+$$
+\sigma^2_\textrm{E} = \sigma^2_\textrm{CE} + \sigma^2_\textrm{UE} + \sigma^2_\textrm{RE}
+$$
+
+Common environmental factors are those shared between two or more individuals in the cohort. Unique environmental factors are those specific to one individual—these would be shared, however, between multiple measurements of the trait taken from the same individual (i.e., repeated measures). Residual error is specific to a single individual and measure.
+
+Suppose we have a normal distributed trait
