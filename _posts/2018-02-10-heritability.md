@@ -50,7 +50,7 @@ $$
 H^2 = \frac{\sigma^2_\textrm{G}}{\sigma^2_\textrm{P}}
 $$
 
-This is also called *broad-sense heritability*. Another kind of heritability, or *narrow-sense heritability*, is defined as the proportion of the phenotypic variance that is explained by additive genetic factors (i.e., ignoring dominance and epistasis):
+This is also called *broad-sense heritability*. Another kind of heritability, *narrow-sense heritability*, is defined as the proportion of the phenotypic variance that is explained by additive genetic factors (i.e., ignoring dominance and epistasis):
 
 $$
 h^2 = \frac{\sigma^2_\textrm{A}}{\sigma^2_\textrm{P}}
@@ -67,6 +67,7 @@ The first step is to place a linear mixed-effects model on the quantitative trai
 Linear mixed-effects model assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
 
 <center>dependent variable = fixed effect(s) + random effect(s) + error</center>
+
 
 Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
 
@@ -120,7 +121,7 @@ $$
 \vdots \\
 1\beta_1 + x_{n2}\beta_2 + \cdots + x_{nm}\beta_m 
 \end{pmatrix}
-$$.
+$$
 
 Like fixed effects, random effects are found by matrix multiplying a design matrix $$\mathbf{Z}$$ and a vector $$\mathbf{u}$$. The critical difference is that the values within $$\mathbf{u}$$ are not free parameters but rather the whole vector is considered to be random. We’ll get back to random effects a little later on.
 
@@ -136,7 +137,13 @@ $$
 \epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\epsilon\right)
 $$
 
-Where $$\mathbf{I}$$ is an $$n$$-by-$$n$$ identity matrix. Why we would want to write it this way will become clear later.
+Where $$\mathbf{I}$$ is an $$n$$-by-$$n$$ identity matrix. Earlier we equated environmental variance with residual error. Therefore we can replace $$sigma^2_\epsilon$$ with $$sigma^2_\mathrm{E}$$:
+
+$$
+\epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\mathrm{E}\right)
+$$
+
+Why we would want to write it this way will become clear later.
 
 Putting all of this together, we get:
 
@@ -144,10 +151,33 @@ $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
 $$
 
-This is the linear mixed-effects model in its general form. For the present purposes, we can simplify the model. We are only interested in one random effect, the additive effect of genetics, and we assume that we have exactly one value of the trait per individual. Therefore, $$\mathbf{Z}$$ is just an identity matrix and can be omitted:
+This is the linear mixed-effects model in its general form. This form can accept any number of random effects, but here we are only interested in one in particular, namely the additive effect of genetics. Therefore, the vector $$u$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects. We consider $$u$$ to be a random vector with multivariate random normal distribution:
 
 $$
-\mathbf{y} = \mathbf{X}\beta + \mathbf{u} + \epsilon
+\mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
 $$
 
-The random additive effect of genetics has zero mean and — as defined earlier — overall variance (or scale) $$\sigma_2_A$$. We can therefore write it as:
+$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. $$\mathbf{A}$$ can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA, LDAK, or IBDLD.
+
+Since $$u$$ is of length $$n$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
+
+$$
+\mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
+$$
+
+where
+
+$$
+\mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
+\epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\mathrm{E}\right)
+$$
+
+Bayesians amongst you might prefer the more compact form:
+
+$$
+\mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \mathbf{A}\sigma^2_\mathrm{A} + \mathbf{I}\sigma^2_\mathrm{E}\right)
+$$
+
+where $$\mathbf{X}$$, $$\mathbf{A}$$, and $$\mathbf{I}$$ are known and $$\beta$$, $$\sigma^2_\mathrm{A}$$, and $$\sigma^2_\mathrm{E}$$ are unknown.
+
+And that’s it! In a future post, I will describe for to fit this to data using maximum likelihood and Bayesian inference.
