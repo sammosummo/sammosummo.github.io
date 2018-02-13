@@ -38,7 +38,7 @@ $$
 \sigma^2_\textrm{E} = \sigma^2_\textrm{CE} + \sigma^2_\textrm{UE} + \sigma^2_\textrm{RE}
 $$
 
-*Common* environmental effects are those shared between two or more individuals in the cohort. *Unique* environmental effects are those specific to one individual—these would be shared, however, between multiple measurements of the trait taken from the same individual (i.e., repeated measures). *Residual error* is specific to a single individual and measure. To keep things simple going forward, let’s assume no common or unique environmental effects, so that:
+*Common* environmental effects are those shared between two or more individuals in the cohort. *Unique* environmental effects are those specific to one individual — these would be shared, however, between multiple measurements of the trait taken from the same individual (i.e., repeated measures). *Residual error* is specific to a single individual and measure. To keep things simple going forward, let’s assume no common or unique environmental effects, so that:
 
 $$
 \sigma^2_\textrm{E} = \sigma^2_\textrm{RE}
@@ -62,4 +62,32 @@ It turns out that for complex traits, most genetic variance is additive[<sup>2</
 
 So now that we have defined heritability, how do we estimate it?
 
-The first step is to place a linear mixed-effects model on the quantitative trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)).
+The first step is to place a linear mixed-effects model on the quantitative trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)). If not, don’t worry — they are actually a little easier to understand in the context of heritability estimation.
+
+Linear mixed-effects model assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
+
+$$
+\mathrm{dependent variable} = \mathrm{fixed effect(s)} + \mathrm{random effect(s)} + \mathrm{error}
+$$
+
+Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
+
+$$
+\mathbf{y} = \begin{pmatrix} 
+y_1 \\
+y_2 \\
+\vdots \\
+y_n 
+\end{pmatrix}
+$$
+
+Fixed effects include things like an intercept, age, and sex, whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of fixed effects, denoted by $$\mathbf{X}$$:
+
+$$
+\mathbf{X} = \begin{pmatrix} 
+x_{1_1} & x_{1_1} & \cdots x_{1_m} \\
+x_{2_1} \\
+\vdots \\
+x_{n_1} 
+\end{pmatrix}
+$$
