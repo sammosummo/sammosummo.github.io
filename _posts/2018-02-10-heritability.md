@@ -85,9 +85,9 @@ Fixed effects include things like an intercept, age, and sex, whose values per i
 
 $$
 \mathbf{X} = \begin{pmatrix} 
-x_{1_1} & x_{1_1} & \cdots x_{1_m} \\
-x_{2_1} \\
-\vdots \\
-x_{n_1} 
+1 & x_{11} & \cdots & x_{1m} \\
+1 & x_{21} & \cdots & x_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & \cdots & x_{nm}
 \end{pmatrix}
 $$
