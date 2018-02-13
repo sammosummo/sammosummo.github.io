@@ -10,7 +10,7 @@ image-sm: https://sammosummo.github.io/images/6005224610_81af12b832_z.jpg
 image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca. 1906) by E. Schachtzabel"
 ---
 
-Heritability remains one of the core concepts in quantitative genetics. It is actually quite easy to build a model to estimate the heritability of a quantitative trait, provided one knows the familial relationships between individuals in the sample.
+Heritability remains one of the core concepts in quantitative genetics. It is actually quite easy to build a model to estimate the heritability of a quantitative trait, provided one knows the familial relationships between individuals in the sample. This is called the variance-components method, and is described below.
 
 As explained nicely in this article[<sup>1</sup>], the total (or phenotypic) variance of a trait has both genetic and environmental components:
 
@@ -66,9 +66,7 @@ The first step is to place a linear mixed-effects model on the quantitative trai
 
 Linear mixed-effects model assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
 
-$$
-\mathrm{dependent variable} = \mathrm{fixed effect(s)} + \mathrm{random effect(s)} + \mathrm{error}
-$$
+dependent variable = fixed effect(s) + random effect(s) + error
 
 Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
 
@@ -81,7 +79,7 @@ y_n
 \end{pmatrix}
 $$
 
-Fixed effects include things like an intercept, age, and sex, whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of fixed effects, denoted by $$\mathbf{X}$$:
+Fixed effects are independent variables, or covariates, whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of covariates, denoted by $$\mathbf{X}$$:
 
 $$
 \mathbf{X} = \begin{pmatrix} 
@@ -91,3 +89,51 @@ $$
 1 & x_{n1} & \cdots & x_{nm}
 \end{pmatrix}
 $$
+
+Notice that the values in the first column are all 1 (i.e., this is an intercept). Each covariate in $$\mathbf{X}$$, including the intercept, has a corresponding coefficient in the vector $$\beta$$:
+
+$$
+\beta = \begin{pmatrix} 
+\beta_1 \\
+\beta_2 \\
+\vdots \\
+\beta_m 
+\end{pmatrix}
+$$
+
+The coefficients within $$\beta$$ are free parameters in the model. To obtain a combined prediction of all the fixed effects, $$\mathbf{X}$$ and $$\beta$$ are matrix multiplied:
+
+$$
+\mathbf{X}\beta = \begin{pmatrix} 
+1 & x_{12} & \cdots & x_{1m} \\
+1 & x_{22} & \cdots & x_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & x_{n2} & \cdots & x_{nm}
+\end{pmatrix} \begin{pmatrix} 
+\beta_1 \\
+\beta_2 \\
+\vdots \\
+\beta_m 
+\end{pmatrix} = \begin{pmatrix} 
+1\beta_1 + x_{12}beta_2 + \cdots + x_{1m}beta_m\\
+1\beta_1 + x_{22}beta_2 + \cdots + x_{2m}beta_m \\
+\vdots \\
+1\beta_1 + x_{n2}beta_2 + \cdots + x_{nm}beta_m 
+\end{pmatrix}
+$$.
+
+Like fixed effects, random effects are found by matrix multiplying a design matrix $$\mathbf{Z}$$ and a vector $\mathbf{u}$$. The critical difference is that the values within $$\mathbf{u}$$ are not considered free parameters but rather the whole vector is considered to be random. We’ll get back to random effects a little later on.
+
+The final term is the error term, denoted by $$\epsilon$$, which is a random vector of length $$n$$. We consider it to have a univariate random normal distribution with zero mean:
+
+$$
+\epsilon \sim \mathrm{Normal}\left(0, \sigma^2\right)
+$$
+
+Putting all of this together, we get:
+
+$$
+\mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
+$$
+
+This is the linear mixed-effects model in its general form.
