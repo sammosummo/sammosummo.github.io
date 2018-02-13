@@ -66,7 +66,7 @@ The first step is to place a linear mixed-effects model on the quantitative trai
 
 Linear mixed-effects model assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
 
-dependent variable = fixed effect(s) + random effect(s) + error
+<center>dependent variable = fixed effect(s) + random effect(s) + error</center>
 
 Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
 
@@ -83,10 +83,10 @@ Fixed effects are independent variables, or covariates, whose values per individ
 
 $$
 \mathbf{X} = \begin{pmatrix} 
-1 & x_{11} & \cdots & x_{1m} \\
-1 & x_{21} & \cdots & x_{2m} \\
+1 & x_{12} & \cdots & x_{1m} \\
+1 & x_{22} & \cdots & x_{2m} \\
 \vdots & \vdots & \ddots & \vdots \\
-1 & x_{n1} & \cdots & x_{nm}
+1 & x_{n2} & \cdots & x_{nm}
 \end{pmatrix}
 $$
 
@@ -115,20 +115,28 @@ $$
 \vdots \\
 \beta_m 
 \end{pmatrix} = \begin{pmatrix} 
-1\beta_1 + x_{12}beta_2 + \cdots + x_{1m}beta_m\\
-1\beta_1 + x_{22}beta_2 + \cdots + x_{2m}beta_m \\
+1\beta_1 + x_{12}\beta_2 + \cdots + x_{1m}\beta_m\\
+1\beta_1 + x_{22}\beta_2 + \cdots + x_{2m}\beta_m \\
 \vdots \\
-1\beta_1 + x_{n2}beta_2 + \cdots + x_{nm}beta_m 
+1\beta_1 + x_{n2}\beta_2 + \cdots + x_{nm}\beta_m 
 \end{pmatrix}
 $$.
 
-Like fixed effects, random effects are found by matrix multiplying a design matrix $$\mathbf{Z}$$ and a vector $\mathbf{u}$$. The critical difference is that the values within $$\mathbf{u}$$ are not considered free parameters but rather the whole vector is considered to be random. We’ll get back to random effects a little later on.
+Like fixed effects, random effects are found by matrix multiplying a design matrix $$\mathbf{Z}$$ and a vector $$\mathbf{u}$$. The critical difference is that the values within $$\mathbf{u}$$ are not free parameters but rather the whole vector is considered to be random. We’ll get back to random effects a little later on.
 
 The final term is the error term, denoted by $$\epsilon$$, which is a random vector of length $$n$$. We consider it to have a univariate random normal distribution with zero mean:
 
 $$
-\epsilon \sim \mathrm{Normal}\left(0, \sigma^2\right)
+\epsilon \sim \mathrm{Normal}\left(0, \sigma^2_\epsilon\right)
 $$
+
+The above can also be written as a multivariate random normal distribution as follows:
+
+$$
+\epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\epsilon\right)
+$$
+
+Where $$\mathbf{I}$$ is an $$n$$-by-$$n$$ identity matrix. Why we would want to write it this way will become clear later.
 
 Putting all of this together, we get:
 
@@ -136,4 +144,10 @@ $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
 $$
 
-This is the linear mixed-effects model in its general form.
+This is the linear mixed-effects model in its general form. For the present purposes, we can simplify the model. We are only interested in one random effect, the additive effect of genetics, and we assume that we have exactly one value of the trait per individual. Therefore, $$\mathbf{Z}$$ is just an identity matrix and can be omitted:
+
+$$
+\mathbf{y} = \mathbf{X}\beta + \mathbf{u} + \epsilon
+$$
+
+The random additive effect of genetics has zero mean and — as defined earlier — overall variance (or scale) $$\sigma_2_A$$. We can therefore write it as:
