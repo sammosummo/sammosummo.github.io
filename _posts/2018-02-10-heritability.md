@@ -10,7 +10,7 @@ image-sm: https://sammosummo.github.io/images/6005224610_81af12b832_z.jpg
 image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca. 1906) by E. Schachtzabel"
 ---
 
-Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed, but these days the most commonly used method is variance-components decomposition. This method is actually is quite straightforward, and is described below
+Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed, but these days the most commonly used method is variance-components decomposition. This method is actually is quite straightforward, and is described below.
 
 As explained in this article[<sup>1</sup>], the total (or phenotypic) variance of a trait has both genetic and environmental components:
 
