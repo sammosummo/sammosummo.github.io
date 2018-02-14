@@ -10,9 +10,9 @@ image-sm: https://sammosummo.github.io/images/6005224610_81af12b832_z.jpg
 image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca. 1906) by E. Schachtzabel"
 ---
 
-Heritability remains one of the core concepts in quantitative genetics. It is actually quite easy to build a model to estimate the heritability of a quantitative trait, provided one knows the familial relationships between individuals in the sample. This is called the variance-components method, and is described below.
+Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed, but these days the most commonly used method is variance-components decomposition. This method is actually is quite straightforward, and is described below
 
-As explained nicely in this article[<sup>1</sup>], the total (or phenotypic) variance of a trait has both genetic and environmental components:
+As explained in this article[<sup>1</sup>], the total (or phenotypic) variance of a trait has both genetic and environmental components:
 
 [<sup>1</sup>]: https://doi.org/10.1038/nrg2322 "Visscher, P. M., Hill, W. G., & Wray, N. R. (2008). Heritability in the genomics era — concepts and misconceptions. Nature Reviews Genetics, 9(4), 255–266."
 
@@ -62,12 +62,13 @@ It turns out that for complex traits, most genetic variance is additive[<sup>2</
 
 So now that we have defined heritability, how do we estimate it?
 
-The first step is to place a linear mixed-effects model on the quantitative trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)). If not, don’t worry — they are actually a little easier to understand in the context of heritability estimation.
+The first step towards estimating heritability using the variance-components method is to place a linear mixed-effects model on the quantitative trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)). If not, don’t worry — they are actually a little easier to understand in the context of heritability estimation, in my opinion.
 
-Linear mixed-effects model assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
+Linear mixed-effects models assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
 
+<p>
 <center>dependent variable = fixed effect(s) + random effect(s) + error</center>
-
+</p>
 
 Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
 
@@ -80,7 +81,7 @@ y_n
 \end{pmatrix}
 $$
 
-Fixed effects are independent variables, or covariates, whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of covariates, denoted by $$\mathbf{X}$$:
+Fixed effects are covariates whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of covariates, denoted by $$\mathbf{X}$$:
 
 $$
 \mathbf{X} = \begin{pmatrix} 
@@ -91,7 +92,7 @@ $$
 \end{pmatrix}
 $$
 
-Notice that the values in the first column are all 1 (i.e., this is an intercept). Each covariate in $$\mathbf{X}$$, including the intercept, has a corresponding coefficient in the vector $$\beta$$:
+Notice that the values in the first column are all 1, meaning that the first covariate is always an intercept. Other covariates are usually environmental factors influencing the trait, such as age, sex, and so on. Each covariate in $$\mathbf{X}$$, including the intercept, has a corresponding coefficient in the vector $$\beta$$:
 
 $$
 \beta = \begin{pmatrix} 
@@ -125,7 +126,7 @@ $$
 
 Like fixed effects, random effects are found by matrix multiplying a design matrix $$\mathbf{Z}$$ and a vector $$\mathbf{u}$$. The critical difference is that the values within $$\mathbf{u}$$ are not free parameters but rather the whole vector is considered to be random. We’ll get back to random effects a little later on.
 
-The final term is the error term, denoted by $$\epsilon$$, which is a random vector of length $$n$$. We consider it to have a univariate random normal distribution with zero mean:
+The final term is the error, denoted by $$\epsilon$$, which is a random vector of length $$n$$. We consider it to have a univariate random normal distribution with zero mean:
 
 $$
 \epsilon \sim \mathrm{Normal}\left(0, \sigma^2_\epsilon\right)
@@ -151,15 +152,21 @@ $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
 $$
 
-This is the linear mixed-effects model in its general form. This form can accept any number of random effects, but here we are only interested in one in particular, namely the additive effect of genetics. Therefore, the vector $$u$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects. We consider $$u$$ to be a random vector with multivariate random normal distribution:
+This is the linear mixed-effects model in its general form. This form can accept any number of fixed or random effects, but here we are only interested in one random effect in particular, namely the additive effect of genetics. Therefore, the vector $$u$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects. We consider $$u$$ to be a random vector with multivariate random normal distribution:
 
 $$
 \mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
 $$
 
-$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. $$\mathbf{A}$$ can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA, LDAK, or IBDLD.
+$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>].
 
-Since $$u$$ is of length $$n$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
+[<sup>3</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82."
+
+[<sup>4</sup>]: http://doi.org/10.1016/j.ajhg.2012.10.010 "Speed, D., Hemani, G., Johnson, M. R., & Balding, D. J. (2012). Improved heritability estimation from genome-wide SNPs. American Journal of Human Genetics, 91(6), 1011–1021."
+
+[<sup>5</sup>]:http://doi.org/10.1002/gepi.20606 "Han, L., & Abney, M. (2011). Identity by descent estimation with dense genome-wide genotype data. Genetic Epidemiology, 35(6), 557–567."
+
+Since $$u$$ is of length $$n$$ and each individual contributes one data point to $$\mathbf{y}$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
 
 $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
@@ -172,12 +179,10 @@ $$
 \epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
-Bayesians amongst you might prefer the more compact form:
+Bayesians amongst you might prefer the more compact form, as I do:
 
 $$
 \mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \mathbf{A}\sigma^2_\mathrm{A} + \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
-where $$\mathbf{X}$$, $$\mathbf{A}$$, and $$\mathbf{I}$$ are known and $$\beta$$, $$\sigma^2_\mathrm{A}$$, and $$\sigma^2_\mathrm{E}$$ are unknown.
-
-And that’s it! In a future post, I will describe for to fit this to data using maximum likelihood and Bayesian inference.
+And that’s it. In a future post, I will describe how to fit this model to data.
