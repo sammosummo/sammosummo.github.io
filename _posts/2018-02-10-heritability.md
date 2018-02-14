@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Heritability
+title: Heritability, part I
 date: 2018-02-10
 categories:
 - Genetics
@@ -138,7 +138,7 @@ $$
 \epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\epsilon\right)
 $$
 
-Where $$\mathbf{I}$$ is an $$n$$-by-$$n$$ identity matrix. Earlier we equated environmental variance with residual error. Therefore we can replace $$sigma^2_\epsilon$$ with $$sigma^2_\mathrm{E}$$:
+Where $$\mathbf{I}$$ is an $$n$$-by-$$n$$ identity matrix. Earlier we equated environmental variance with residual error. Therefore we can replace $$\sigma^2_\epsilon$$ with $$\sigma^2_\mathrm{E}$$:
 
 $$
 \epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\mathrm{E}\right)
@@ -152,13 +152,24 @@ $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
 $$
 
-This is the linear mixed-effects model in its general form. This form can accept any number of fixed or random effects, but here we are only interested in one random effect in particular, namely the additive effect of genetics. Therefore, the vector $$u$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects. We consider $$u$$ to be a random vector with multivariate random normal distribution:
+This is the linear mixed-effects model in its general form. This form can accept any number of fixed or random effects, but here we are only interested in one random effect in particular, namely the additive effect of genetics. Therefore, the vector $$$\mathbf{u}$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects, dominance, or epistasis:
+
+$$
+\mathbf{u} = \begin{pmatrix} 
+u_1 \\
+u_2 \\
+\vdots \\
+u_n 
+\end{pmatrix}
+$$
+
+We consider $$\mathbf{u}$$ to be a random vector with multivariate random normal distribution:
 
 $$
 \mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
 $$
 
-$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>].
+$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>]. From my limited experience of reading these papers and using empirical matrices, it seems like IBDLD may be the best current choice.
 
 [<sup>3</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82."
 
@@ -166,16 +177,16 @@ $$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similari
 
 [<sup>5</sup>]:http://doi.org/10.1002/gepi.20606 "Han, L., & Abney, M. (2011). Identity by descent estimation with dense genome-wide genotype data. Genetic Epidemiology, 35(6), 557–567."
 
-Since $$u$$ is of length $$n$$ and each individual contributes one data point to $$\mathbf{y}$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
+Since $$\mathbf{u}$$ is of length $$n$$ and each individual contributes one data point to $$\mathbf{y}$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
 
 $$
-\mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
+\mathbf{y} = \mathbf{X}\beta + \mathbf{u} + \epsilon
 $$
 
 where
 
 $$
-\mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
+\mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)\\
 \epsilon \sim \mathrm{MvNormal}\left(0, \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
@@ -185,4 +196,4 @@ $$
 \mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \mathbf{A}\sigma^2_\mathrm{A} + \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
-And that’s it. In a future post, I will describe how to fit this model to data.
+And that’s it! In a future post, I will describe how to fit this model to data.
