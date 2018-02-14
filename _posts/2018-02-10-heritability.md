@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Heritability, part I
+title: Heritability
 date: 2018-02-10
 categories:
 - Genetics
@@ -137,7 +137,7 @@ $$
 \end{pmatrix}
 $$
 
-Values of $\epsilon_i$ are random. We consider it to have a univariate normal distribution with zero mean:
+Values of $$\epsilon_i$$ are random. We consider it to have a univariate normal distribution with zero mean:
 
 $$
 \epsilon \sim \mathrm{Normal}\left(0, \sigma^2_\epsilon\right)
@@ -163,7 +163,7 @@ $$
 \mathbf{y} = \mathbf{X}\beta + \mathbf{Z}\mathbf{u} + \epsilon
 $$
 
-This is the linear mixed-effects model in its general form. This form can accept any number of fixed or random effects, but here we are only interested in one random effect in particular, namely the additive effect of genetics. Therefore, the vector $$$\mathbf{u}$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects, dominance, or epistasis:
+This is the linear mixed-effects model in its general form. This form can accept any number of fixed or random effects, but here we are only interested in one random effect in particular, namely the additive effect of genetics. Therefore, the vector $$\mathbf{u}$$ is of length $$n$$ and contains what are sometimes called *breeding values*. An individual’s breeding value represents what the value of the trait would be if it was 100% heritable and not influenced by any fixed effects, dominance, or epistasis:
 
 $$
 \mathbf{u} = \begin{pmatrix} 
@@ -180,7 +180,7 @@ $$
 \mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
 $$
 
-$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>]. From my limited experience of reading these papers and using empirical matrices, it seems like IBDLD may be the best current choice.
+$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>].
 
 [<sup>3</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82."
 
