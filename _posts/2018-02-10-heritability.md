@@ -16,7 +16,7 @@ Heritability remains one of the core concepts in quantitative genetics. A number
 
 [<sup>2</sup>]: http://doi.org/10.1086/301844 "Almasy, L., & Blangero, J. (1998). Multipoint quantitative-trait linkage analysis in general pedigrees. American Journal of Human Genetics, 62(5), 1198–1211."
 
-As explained in by various authors (e.g., [<sup>3</sup>] [<sup>4</sup>]), the total or *phenotypic* variance of a trait has both genetic and environmental components:
+As explained in by various authors (e.g., [<sup>3</sup>] and [<sup>4</sup>]), the total or *phenotypic* variance of a trait has both genetic and environmental components:
 
 [<sup>3</sup>]: https://doi.org/10.1038/nrg2322 "Visscher, P. M., Hill, W. G., & Wray, N. R. (2008). Heritability in the genomics era — concepts and misconceptions. Nature Reviews Genetics, 9(4), 255–266."
 
