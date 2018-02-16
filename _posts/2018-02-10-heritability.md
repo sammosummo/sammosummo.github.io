@@ -10,11 +10,17 @@ image-sm: https://sammosummo.github.io/images/6005224610_81af12b832_z.jpg
 image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca. 1906) by E. Schachtzabel"
 ---
 
-Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed, but these days the most commonly used method is variance-components decomposition. This method is actually is quite straightforward, and is described below
+Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed (see [here](http://www.cureffi.org/2013/02/04/how-to-calculate-heritability/) for a discussion of some of them), but the most common is the method of variance components, which is implemented in popular genetics software such as GCTA[<sup>1</sup>] and SOLAR[<sup>2</sup>]. The fundamentals of this method are described below.
 
-As explained in this article[<sup>1</sup>], the total (or phenotypic) variance of a trait has both genetic and environmental components:
+[<sup>1</sup>] http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82.
 
-[<sup>1</sup>]: https://doi.org/10.1038/nrg2322 "Visscher, P. M., Hill, W. G., & Wray, N. R. (2008). Heritability in the genomics era — concepts and misconceptions. Nature Reviews Genetics, 9(4), 255–266."
+[<sup>2</sup>]http://doi.org/10.1086/301844 "Almasy, L., & Blangero, J. (1998). Multipoint quantitative-trait linkage analysis in general pedigrees. American Journal of Human Genetics, 62(5), 1198–1211."
+
+As explained in by various authors (e.g., [<sup>3</sup>][<sup>4</sup>]), the total or *phenotypic* variance of a trait has both genetic and environmental components:
+
+[<sup>3</sup>]: https://doi.org/10.1038/nrg2322 "Visscher, P. M., Hill, W. G., & Wray, N. R. (2008). Heritability in the genomics era — concepts and misconceptions. Nature Reviews Genetics, 9(4), 255–266."
+
+[<sup>4</sup>]: https://doi.org/10.1101/pdb.top77 "Almasy, L., & Blangero, J. (2010). Variance component methods for analysis of complex phenotypes. Cold Spring Harbor Protocols, 2010(5), pdb.top77."
 
 $$
 \sigma^2_\textrm{P} = \sigma^2_\textrm{G} + \sigma^2_\textrm{E}
@@ -26,7 +32,7 @@ $$
 \sigma^2_\textrm{G} = \sigma^2_\textrm{A} + \sigma^2_\textrm{D} + \sigma^2_\textrm{I}
 $$
 
-An *additive* genetic effect is when an allele at a given locus contributes to the trait. For example, suppose a specific locus influences human height. A person with a copy of the minor allele at this locus (Aa) will be taller, all other things being equal, than a person without a copy of the minor allele (AA). A person with two copies of the minor allele (aa) will be even taller, on average.
+An *additive* genetic effect is when an allele at a given locus contributes to the trait. For example, suppose a specific locus influences human height, such that a person with a copy of the minor allele at this locus (Aa) will be taller, all other things being equal, than a person without a copy of the minor allele (AA). A person with two copies of the minor allele (aa) will be even taller, on average.
 
 *Dominance* refers to the effects of interactions between alleles at the same locus. For example, suppose a locus influences height, but that the major allele is dominant over the minor allele. In this case, a single copy of the minor allele would make no difference to a person’s height. However, two copies of the minor allele (aa) would cause them to be taller, all other things being equal.
 
@@ -56,13 +62,13 @@ $$
 h^2 = \frac{\sigma^2_\textrm{A}}{\sigma^2_\textrm{P}}
 $$
 
-It turns out that for complex traits, most genetic variance is additive[<sup>2</sup>], making narrow-sense heritability a useful statistic in the modern genomics era. From here on, I refer to narrow-sense heritability as just heritability.
+It is generally believed that for complex traits, most genetic variance is additive[<sup>5</sup>], making narrow-sense heritability a useful statistic in the modern genomics era. From here on, I refer to narrow-sense heritability as just heritability.
 
-[<sup>2</sup>]: https://doi.org/10.1371/journal.pgen.1000008 "Hill, W. G., Goddard, G. E., & Visscher, P. M. (2008). Data and theory point to mainly additive genetic variance for complex traits. PLoS Genetics, 4(2): e1000008."
+[<sup>5</sup>]: https://doi.org/10.1371/journal.pgen.1000008 "Hill, W. G., Goddard, G. E., & Visscher, P. M. (2008). Data and theory point to mainly additive genetic variance for complex traits. PLoS Genetics, 4(2): e1000008."
 
 So now that we have defined heritability, how do we estimate it?
 
-The first step towards estimating heritability using the variance-components method is to place a linear mixed-effects model on the quantitative trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)). If not, don’t worry — they are actually a little easier to understand in the context of heritability estimation, in my opinion.
+The first step towards estimating heritability is to place a linear mixed-effects model on the trait. You may be familiar with linear mixed-effects models from the perspective of regression (see [here](https://ourcodingclub.github.io/2017/03/15/mixed-models.html)). If not, don’t worry — they are actually a little easier to understand in the context of heritability estimation, in my opinion.
 
 Linear mixed-effects models assume that a dependent variable is the sum of one or more fixed effects, one or more random effects, and error:
 
@@ -70,7 +76,7 @@ Linear mixed-effects models assume that a dependent variable is the sum of one o
 <center>dependent variable = fixed effect(s) + random effect(s) + error</center>
 </p>
 
-Here, the dependent variable is the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
+The dependent variable is of course the trait. Let $$\mathbf{y}$$ denote a 1-by-$$n$$ matrix (or vector), where $$n$$ is the number of individuals for whom we have data, and where $$y_i$$ is the trait value for the $$i$$th individual:
 
 $$
 \mathbf{y} = \begin{pmatrix} 
@@ -81,7 +87,7 @@ y_n
 \end{pmatrix}
 $$
 
-Fixed effects are covariates whose values per individual are known. These values are stored in an $$m$$-by-$$n$$ design matrix, where $$m$$ is the number of covariates, denoted by $$\mathbf{X}$$:
+A fixed effect is a covariate multiplied by a coefficient. Covariate values are stored in an $$m$$-by-$$n$$ design matrix (where $$m$$ is the number of covariates) denoted by $$\mathbf{X}$$:
 
 $$
 \mathbf{X} = \begin{pmatrix} 
@@ -180,13 +186,11 @@ $$
 \mathbf{u} \sim \mathrm{MvNormal}\left(0, \mathbf{A}\sigma^2_\mathrm{A}\right)
 $$
 
-$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>3</sup>], LDAK[<sup>4</sup>], or IBDLD[<sup>5</sup>].
+$$\mathbf{A}$$ is an $$n$$-by-$$n$$ matrix which summarises the genetic similarities between all individuals in the sample. This must be known prior to setting up the model. It can be generated in various ways. For a family study, often $$\mathbf{A}=2\Phi$$, where $$\Phi$$ is the *kinship matrix* constructed using pedigree information as described [here](https://brainder.org/2015/06/13/genetic-resemblance-between-relatives/). Alternatively, if there are genetic data from the individuals, an empirical genetic similarity/relatedness/kinship matrix can be generated using various software packages, including GCTA[<sup>1</sup>], LDAK[<sup>6</sup>], or IBDLD[<sup>7</sup>].
 
-[<sup>3</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82."
+[<sup>6</sup>]: http://doi.org/10.1016/j.ajhg.2012.10.010 "Speed, D., Hemani, G., Johnson, M. R., & Balding, D. J. (2012). Improved heritability estimation from genome-wide SNPs. American Journal of Human Genetics, 91(6), 1011–1021."
 
-[<sup>4</sup>]: http://doi.org/10.1016/j.ajhg.2012.10.010 "Speed, D., Hemani, G., Johnson, M. R., & Balding, D. J. (2012). Improved heritability estimation from genome-wide SNPs. American Journal of Human Genetics, 91(6), 1011–1021."
-
-[<sup>5</sup>]:http://doi.org/10.1002/gepi.20606 "Han, L., & Abney, M. (2011). Identity by descent estimation with dense genome-wide genotype data. Genetic Epidemiology, 35(6), 557–567."
+[<sup>7</sup>]:http://doi.org/10.1002/gepi.20606 "Han, L., & Abney, M. (2011). Identity by descent estimation with dense genome-wide genotype data. Genetic Epidemiology, 35(6), 557–567."
 
 Since $$\mathbf{u}$$ is of length $$n$$ and each individual contributes one data point to $$\mathbf{y}$$, $$\mathbf{Z}$$ must be an $$n$$-by-$$n$$ identity matrix, and therefore can be ignored. Now we have a simpler equation for the model:
 
