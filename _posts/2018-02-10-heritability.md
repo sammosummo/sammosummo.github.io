@@ -12,7 +12,7 @@ image-description: "From Illustriertes Prachtwerk sämtlicher Tauben-rassen (ca.
 
 Heritability remains one of the core concepts in quantitative genetics. A number of methods for estimating heritability have been proposed (see [here](http://www.cureffi.org/2013/02/04/how-to-calculate-heritability/) for a discussion of some of them), but the most common is the method of variance components, which is implemented in popular genetics software such as GCTA[<sup>1</sup>] and SOLAR[<sup>2</sup>]. The fundamentals of this method are described below.
 
-[<sup>1</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82.
+[<sup>1</sup>]: http://doi.org/10.1016/j.ajhg.2010.11.011 "Yang, J., Lee, S. H., Goddard, M. E., & Visscher, P. M. (2011). GCTA: A tool for genome-wide complex trait analysis. American Journal of Human Genetics, 88(1), 76–82."
 
 [<sup>2</sup>]: http://doi.org/10.1086/301844 "Almasy, L., & Blangero, J. (1998). Multipoint quantitative-trait linkage analysis in general pedigrees. American Journal of Human Genetics, 62(5), 1198–1211."
 
