@@ -211,6 +211,10 @@ $$
 \mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \mathbf{A}\sigma^2_\mathrm{A} + \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
-And that’s it. In a future post, I will describe how to fit this model to data.
+An alternative parameterisation which expresses $$y$$ directly in terms of heritability is
+
+$$
+\mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, left[\mathbf{A}h^2 + \mathbf{I}'left(1-h^2\right)\right]\right)
+$$
 
 
