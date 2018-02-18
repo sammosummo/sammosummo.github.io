@@ -21,10 +21,10 @@ $$
 where $$\mathbf{y}$$ is the trait vector, $$\mathbf{X}$$ is an arbitrary design matrix, $$\beta$$ is a vector of coefficients, $$\mathbf{A}$$ is an arbitrary kinship matrix, $$\sigma^2_\mathrm{A}$$ is the additive genetic variance, $$\mathbf{I}$$ is an identity matrix, and $$\sigma^2_\mathrm{E}$$ is the residual variance. As a reminder, the narrow-sense heritability is the proportion of the total variance explained by additive genetic factors, or
 
 $$
-h^2 = \frac{\sigma^2_\textrm{A}}{\sigma^2_\textrm{P}}
+h^2 = \frac{\sigma^2_\textrm{A}}{\left(\sigma^2_\textrm{A}+\sigma^2_\textrm{E}\right)}
 $$
 
-The following Python code will generate a trait with $$h^2 = 0.75$$ for 500 individuals:
+The following Python code will generate a trait with a heritability of 0.75 for 500 individuals:
  
 ~~~ python
 import numpy as np
@@ -64,4 +64,4 @@ x0 = np.ones(X.shape[1] + 2)
 result = minimize(f, x0, method='L-BFGS-B')
 ~~~
 
-This produced a heritability estimate of 0.76 in about 6 seconds on my MacBook Air (2011). Not bad!
+This produced a heritability estimate of 0.76 in about 6 seconds on my MacBook Air (2011). Not bad for illustrative purposes, but this solution is impractically slow for real-world data sets with thousands — if not tens or even hundreds of thousands — of data points. It also doesn’t help improve our understanding because the most important steps (calculation of the log likelihood and the minimisation routine) are done under-the-hood by SciPy.

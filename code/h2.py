@@ -62,7 +62,7 @@ def crude_mle(X, A, y):
 def main():
 
     print('generating data ...')
-    X, A, u, e, y = gen_data([1, 2, 3], 9, 3, 500)
+    X, A, u, e, y = gen_data([1, 2, 3], 9, 3, 1500)
     print('recovering parameters ...')
     start = time()
     θ = crude_mle(X, A, y)
