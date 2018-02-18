@@ -112,7 +112,7 @@ $$
 The coefficients within $$\beta$$ are free parameters in the model. To obtain a combined prediction of all the fixed effects, $$\mathbf{X}$$ and $$\beta$$ are matrix multiplied:
 
 $$
-\mathbf{X}\beta &=& \begin{pmatrix} 
+\mathbf{X}\beta = \begin{pmatrix} 
 1 & x_{12} & \cdots & x_{1m} \\
 1 & x_{22} & \cdots & x_{2m} \\
 \vdots & \vdots & \ddots & \vdots \\
@@ -122,7 +122,7 @@ $$
 \beta_2 \\
 \vdots \\
 \beta_m 
-\end{pmatrix} \\ &=& \begin{pmatrix} 
+\end{pmatrix} \\ = \begin{pmatrix} 
 1\beta_1 + x_{12}\beta_2 + \cdots + x_{1m}\beta_m\\
 1\beta_1 + x_{22}\beta_2 + \cdots + x_{2m}\beta_m \\
 \vdots \\
