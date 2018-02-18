@@ -122,7 +122,7 @@ $$
 \beta_2 \\
 \vdots \\
 \beta_m 
-\end{pmatrix} = \begin{pmatrix} 
+\end{pmatrix} \\= \begin{pmatrix} 
 1\beta_1 + x_{12}\beta_2 + \cdots + x_{1m}\beta_m\\
 1\beta_1 + x_{22}\beta_2 + \cdots + x_{2m}\beta_m \\
 \vdots \\
