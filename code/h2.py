@@ -4,50 +4,73 @@ from scipy.optimize import minimize
 from time import time
 
 
-# parameters and other constants
-n = 1000
-beta = np.array([4, 10])
-sigma_g = 7
-sigma_e = 3
+def gen_data(β, σA, σE, n):
+    """Generate a trait.
 
-# seed
-np.random.seed(1)
+    Args:
+        β (array): m-length vector of coefficients.
+        σA (float): Additive genetic std.
+        σE (float): Residual std.
+        n (int): number of observations.
 
-# arbitrary "kinship" matrix
-A = np.array([np.random.randn(n) + np.random.randn(1) for i in range(n)])
-A = np.dot(A, np.transpose(A))
-D_half = np.diag(np.diag(A) ** -0.5)
-A = np.dot(D_half, np.dot(A, D_half))
+    Returns:
+        X (array): n-by-m design matrix.
+        A (array): n-by-n kinship matrix.
+        u (array): n-length vector of breeding values.
+        e (array): n-length vector of errors.
+        y (array): n-length phenotype vector.
 
-# fixed-effects design matrix
-X = np.array([np.ones(n), np.random.rand(n)]).transpose()
+    """
+    if not hasattr(β, '__iter__'):
 
-# breeding values
-g = np.random.multivariate_normal(np.zeros(n), A * sigma_g ** 2)
+        β = np.array(β)
 
-# error
-e = np.random.normal(0, sigma_e, n)
+    X = np.random.rand(n, len(β))
+    X[:, 0] = np.ones(n)
 
-# phenotype
-y = np.dot(X, beta) + g + e
+    A = np.array([np.random.randn(n) + np.random.randn(1) for i in range(n)])
+    A = np.dot(A, np.transpose(A))
+    D_half = np.diag(np.diag(A) ** -0.5)
+    A = np.dot(D_half, np.dot(A, D_half))
+
+    u = np.random.multivariate_normal(np.zeros(n), A * σA ** 2)
+
+    e = np.random.normal(0, σE, n)
+
+    y = np.dot(X, β) + u + e
+
+    return X, A, u, e, y
 
 
-def nll_1(params):
+def crude_mle(X, A, y):
+    """Crudely find parameter values using iterative MLE.
 
-    *beta_, sigma_g_, sigma_e_ = params
-    mu = np.dot(X, np.array(beta_))
-    sigma = A * sigma_g_ ** 2 + np.eye(n) * sigma_e_ ** 2
-    return -multivariate_normal.logpdf(y, mu, sigma)
+    """
+    def f(θ):
+        """Function to minimise."""
+        *_β, _σA, _σE = θ
+        μ = np.dot(X, _β)
+        Σ = np.dot(A, _σA ** 2) + np.dot(np.eye(len(y)), _σE ** 2)
+
+        return -multivariate_normal.logpdf(y, μ, Σ)
+
+    result = minimize(f, np.ones(X.shape[1] + 2), method='L-BFGS-B')
+
+    return result.x
 
 
-def min(func, method):
+def main():
 
+    print('generating data ...')
+    X, A, u, e, y = gen_data([1, 2, 3], 9, 3, 500)
+    print('recovering parameters ...')
     start = time()
-    x = minimize(func, [1, 1, 1, 1], method=method)
+    θ = crude_mle(X, A, y)
     stop = time()
-    print(x.x, (stop - start))
+    print('values:', θ)
+    print('time taken: %i second(s)' % np.round(stop - start))
 
 
-for method in ['Nelder-Mead', 'Powell', 'L-BFGS-B']:
+if __name__ == '__main__':
 
-    min(nll_1, method)
+    main()
