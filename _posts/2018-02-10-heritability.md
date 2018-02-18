@@ -211,10 +211,10 @@ $$
 \mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \mathbf{A}\sigma^2_\mathrm{A} + \mathbf{I}\sigma^2_\mathrm{E}\right)
 $$
 
-An alternative parameterisation which expresses $$y$$ directly in terms of heritability is
+An alternative parameterisation which expresses $$\mathbf{y}$$ directly in terms of heritability is
 
 $$
-\mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, left[\mathbf{A}h^2 + \mathbf{I}'left(1-h^2\right)\right]\right)
+\mathbf{y} \sim \mathrm{MvNormal}\left(\mathbf{X}\beta, \left[\mathbf{A}h^2 + \mathbf{I}\left(1-h^2\right)\right]\right)
 $$
 
 
