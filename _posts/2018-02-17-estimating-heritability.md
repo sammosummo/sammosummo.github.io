@@ -93,6 +93,5 @@ This produced the correct estimates in just a few seconds on my MacBook Air (201
 Let’s implement our own version of the multivariate normal log likelihood function, which is
 
 $$
-\ln\left(L\right)=-\frac{1}{2}\ln\left(\lvert\Sigma\rvert\right)
+\ln\left(L\right)=-\frac{1}{2}\ln\left(\lvert\Sigma\rvert\right)+\left(\mathbf{x}-\mu\right)^\mathrm{T}\Sigma^{-1}\left(\mathbf{x}-\mu\right)+k\ln\left(2\pi\right)
 $$
-
