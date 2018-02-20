@@ -10,7 +10,7 @@ image-sm: https://sammosummo.github.io/images/Pieter_Bruegel_the_Elder-_The_Seve
 image-description: "Guttony (1558) by Pieter Bruegel the Elder"
 ---
 
-[Previously](https://sammosummo.github.io/2018/02/10/heritability/), I presented the theory behind the method of variance components for estimating heritability. Here, I simulate some data according to the theory, and attempt to recover its parameters using maximum likelihood (ML).
+[Previously](https://sammosummo.github.io/2018/02/10/heritability/), I presented the theory behind the method of variance components for estimating heritability. Here, I simulate some data according to the theory, and recover its parameters using maximum likelihood (ML).
  
 We can simulate a trait according to the process
 
@@ -88,4 +88,11 @@ The `result` object looks like this:
         x: array([ 1.05540513,  1.78761443,  3.16921527,  0.54159681])
 ~~~
 
-This produced a correct estimates in just a few seconds on my MacBook Air (2011). Not bad for illustrative purposes, but this might impractically slow for real-world data sets with thousands — if not tens or even hundreds of thousands — of data points. It also doesn’t help improve our understanding because the most important steps (calculation of the log likelihood and the minimisation routine) were done under the hood by SciPy.
+This produced the correct estimates in just a few seconds on my MacBook Air (2011). Not bad for illustrative purposes, but this might impractically slow for real-world data sets with thousands — if not tens or even hundreds of thousands — of data points. It also doesn’t help improve our understanding because the most important steps (calculation of the log likelihood and the minimisation routine) were done under the hood by SciPy.
+
+Let’s implement our own version of the multivariate normal log likelihood function, which is
+
+$$
+\ln\left(L\right)=-\frac{1}{2}\ln\left(\lvert\Sigma\rvert\right)
+$$
+
