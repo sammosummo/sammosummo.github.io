@@ -6,29 +6,20 @@
 table, th, td {
   border: 1px solid black;
 }
-div#lH {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
-  z-index: 1;
-  font-size: 25px;
-  text-align:center;
-}
-audio#aH {
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  z-index: 2;
-  opacity: 0.01;
-}
-
 </style>
 </head>
 <body>
 <!DOCTYPE html>
 <html>
 <body>
+
+<script>
+  function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+</script>
+
 <h2>Voice morphs</h2>
 
 <p>
@@ -67,7 +58,7 @@ audio#aH {
     <th>Veridical B (non-vocal)</th>
   </tr>
   <tr>
-    <th><div id="lH"><audio controls id="aH"><source src="http://www.w3schools.com/html/horse.ogg" type="audio/ogg"><source src="https://sammosummo.github.io/sounds/demo/1_1.wav" type="audio/wav">Your browser does not support the audio element.</audio>H</div></th>
+    <th><input type="button" value="PLAY"  onclick="play()"><audio id="audio" src="https://sammosummo.github.io/sounds/demos/1_1.wav" ></audio></th>
 
   </tr>
 </table>
