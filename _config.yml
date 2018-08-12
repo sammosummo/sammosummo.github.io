@@ -1,79 +1,50 @@
 text_skin: default
 highlight_theme: default
 url: https://sammosummo.github.io
-baseurl:
+baseurl:  # unsure what this does
 title: The Cracked Bassoon
 description: >
-  Personal website of Sam Mathias, a researcher at Yale University
+  Personal website of Sam Mathias.
 lang: en
-timezone: EST
+timezone: America/New_York
 
 author:
   type: person
   name: Samuel R. Mathias
   url: https://sammosummo.github.io
   avatar: https://www.gravatar.com/avatar/cf88687e01c21b5cd0fd0c7f5d5fe2c5
-  bio       : I am an amazing person.
-  email     :
-  facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
-  twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
-  github    : # "user_name" the last part of your profile url, e.g. https://github.com/user_name
-  linkedin  : # "user_name" the last part of your profile url, e.g. https://www.linkedin.com/in/user_name/
-  googleplus: # "user_id"   the last part of your profile url, e.g. https://plus.google.com/u/0/user_id
-  weibo     : # "user_id"   the last part of your profile url, e.g. https://www.weibo.com/user_id/profile?...
-  douban    : # "user_name" the last part of your profile url, e.g. https://www.douban.com/people/user_name/
+  bio: Researcher at Yale University
+  email: samuel.mathias@gmail.com
 
-
-## => GitHub Repository (if the site is hosted by GitHub)
-##############################
-repository: user_name/repo_name
+repository: sammosummo/sammosummo.github.io
 repository_tree: master
 
-
-## => Paths
-##############################
 paths:
-  root    : # title link url, "/" (default)
-  home    : # home layout url, "/" (default)
+  root : # title link url, "/" (default)
+  home : # home layout url, "/" (default)
   archive : # "/archive.html" (default)
-  rss     : # "/feed.xml" (default)
+  rss: # "/feed.xml" (default)
 
-
-## => Post
-##############################
-## excerpt
 excerpt_separator: <!--more-->
-excerpt_type: html # text (default), html
+excerpt_type: html
 
-## license
-license: CC-BY-NC-4.0 # "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-NC-4.0", "CC-BY-ND-4.0"
+license: CC-BY-NC-4.0
 
-## TOC
 toc:
-  selectors: # "h1,h2,h3" (default)
+  selectors: "h1,h2,h3"
 
 
-## => Markdown Enhancements
-##############################
-## Mathjax
-mathjax: # false (default), true
-mathjax_autoNumber: # false (default), true
+mathjax: true
+mathjax_autoNumber: true
 
-## Mermaid
-mermaid: # false (default), true
+mermaid: true
 
-## Chart
-chart: # false (default), true
+chart: true
 
-
-## => Paginate
-##############################
 paginate: 8
-paginate_path: /page:num # don't change this unless for special need
+paginate_path: /page:num
 
 
-## => Sources
-##############################
 sources: # bootcdn (default), unpkg
 
 
