@@ -5,7 +5,7 @@ header:
       zh-Hans:  关于
       zh-Hant:  關於
     url:        /index.html
-- titles:
+  - titles:
       en:       Archive
       zh:       归档
       zh-Hans:  归档
