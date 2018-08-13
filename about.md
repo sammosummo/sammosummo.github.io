@@ -30,4 +30,4 @@ Here is a list of my peer-reviewed work. Feel free to email me for reprints!
 
 Please visit my GitHub profile to see code I have written. My most significant project is Charlie, an open-source neurocognitive test battery written in Python, now in its second iteration.
 
-
+---
