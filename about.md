@@ -12,7 +12,7 @@ I’m **Sam Mathias**, an Associate Research Scientitst at [Yale University](htt
 
 I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in England. Wigan is perhaps most famous for its innaccurately named [wharf](https://en.wikipedia.org/wiki/Wigan_Pier) and the [voracious consumption of meat pies](https://www.independent.co.uk/news/long_reads/british-pie-week-2018-wigan-pooles-potato-steak-kidney-onion-cheese-a8242376.html) by its inhabitants. It is home to [Wigan Athletic Football Club](https://en.wikipedia.org/wiki/Wigan_Athletic_F.C.), who once won the FA Cup and were relagated from the Premier League in the [same season](https://en.wikipedia.org/wiki/2012–13_FA_Cup). It’s also where [Wallace and Gromit come from](http://wallaceandgromit.wikia.com/wiki/Wigan).
 
-I recieved my PhD in Psychology from the University of York, under the supervision of Peter Bailey. My thesis was about individual differences in pitch perception. I was a postdoc first at the Max Planck Institute for Human Cognitive and Brain Sciences in Leipzig, Germany (under Katharina von Kriegstein), then at Boston University (under Barbara Shinn-Cunningham). During this time, I studied various aspects of auditory perception.
+I recieved my PhD in Psychology from the [University of York](https://www.york.ac.uk), under the supervision of Peter Bailey. My thesis was about individual differences in pitch perception. I was a postdoc first at the [Max Planck Institute for Human Cognitive and Brain Sciences](https://www.mpg.de/149614/kognition_neuro) in Leipzig, Germany (under Katharina von Kriegstein), then at [Boston University](http://www.bu.edu) (under Barbara Shinn-Cunningham). During this time, I studied various aspects of auditory perception.
 
 More recently, I transistioned into the field of statistical genetics under my current boss, David Glahn. I now live in New Haven.
 
@@ -23,7 +23,9 @@ I’ve studied a number of different things over the years, including auditory p
 
 *The Cracked Bassoon* is my personal blog. I like to write about topics that interest me and post code whenever I have to solve a new problem. Obviously, the contents do not necesarily reflect the opinions of my employer or colleagues!
 
-The name comes from a fun though not particularly accurate description of iterated rippled noise, an auditory stimulus used in the early days of auditory fMRI research.
+The name comes from a fun though not particularly accurate description of iterated rippled noise, an auditory stimulus used in the early days of auditory fMRI research (Griffiths et al., 1998)[^1].
+
+[^1]: Griffiths, T., Büchel, C., Frackowiak, R., & Patterson, R. (1998). Analysis of temporal structure in sound by the human brain. *Nature Neuroscience*, 1(5), 422–427. [doi:10.1038/1637]( https://doi.org/10.1038/1637)
 
 # Publications
 
