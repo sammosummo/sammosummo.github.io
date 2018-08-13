@@ -3,6 +3,8 @@ title: About
 key: page-about
 ---
 
+![](https://raw.githubusercontent.com/sammosummo/sammosummo.github.io/master/assets/images/photos/me.jpg)
+
 # About me
 
 I’m Sam Mathias, an Associate Research Scientitst at Yale University in the Glahn Lab.
