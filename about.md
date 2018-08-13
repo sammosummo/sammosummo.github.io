@@ -8,9 +8,9 @@ key: page-about
 
 # About me
 
-I’m Sam Mathias, an Associate Research Scientitst at Yale University in the Glahn Lab.
+I’m **Sam Mathias**, an Associate Research Scientitst at [Yale University](https://www.yale.edu) in the [Glahn Lab](https://medicine.yale.edu/lab/glahn/).
 
-I was born in Wigan, a medium-sized town in England. Wigan is perhaps most famous for its innaccurately named wharf and the voracious consumption of meat pies by its inhabitants. It is home to Wigan Athletic football club, who once won the FA Cup and were relagated from the Premier League in the same season. It’s also where Wallace and Gromit come from.
+I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in England. Wigan is perhaps most famous for its innaccurately named [wharf](https://en.wikipedia.org/wiki/Wigan_Pier) and the [voracious consumption of meat pies](https://www.independent.co.uk/news/long_reads/british-pie-week-2018-wigan-pooles-potato-steak-kidney-onion-cheese-a8242376.html) by its inhabitants. It is home to [Wigan Athletic Football Club](https://en.wikipedia.org/wiki/Wigan_Athletic_F.C.), who once won the FA Cup and were relagated from the Premier League in the [same season](https://en.wikipedia.org/wiki/2012–13_FA_Cup). It’s also where [Wallace and Gromit come from](http://wallaceandgromit.wikia.com/wiki/Wigan).
 
 I recieved my PhD in Psychology from the University of York, under the supervision of Peter Bailey. My thesis was about individual differences in pitch perception. I was a postdoc first at the Max Planck Institute for Human Cognitive and Brain Sciences in Leipzig, Germany (under Katharina von Kriegstein), then at Boston University (under Barbara Shinn-Cunningham). During this time, I studied various aspects of auditory perception.
 
