@@ -49,17 +49,15 @@ sources: bootcdn
 comments:
   provider: disqus
 
-  ## Disqus
   disqus:
     shortname: crackedbassoon
 
 pageview:
-  provider: false # false (default), "leancloud", "custom"
+  provider: false
 
 analytics:
   provider: google
 
-  ## Google Analytics
   google:
     tracking_id : UA-101418619-1
     anonymize_ip: false
