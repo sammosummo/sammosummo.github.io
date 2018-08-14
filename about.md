@@ -4,7 +4,7 @@ layout: article
 key: page-about
 ---
 
-![](https://raw.githubusercontent.com/sammosummo/sammosummo.github.io/master/assets/images/photos/me1.jpg){: .center-image }
+![](https://sammosummo.github.io/assets/images/photos/me1.jpg){: .center-image }
 
 I’m **Sam Mathias**, an Associate Research Scientitst at Yale University[^1] in the Glahn Lab[^2].
 
@@ -16,7 +16,7 @@ I’m **Sam Mathias**, an Associate Research Scientitst at Yale University[^1] i
 
 I was born in Wigan[^3], a medium-sized town and exemplar of the post-industrial North of England. Wigan is a funny place. It is perhaps most famous for its innaccurately named wharf[^4] and the voracious consumption of meat pies by its inhabitants[^5]. The following, completely genuine image says it all.
 
-![](https://raw.githubusercontent.com/sammosummo/sammosummo.github.io/master/assets/images/photos/piebarm.jpg){: .center-image }
+![](https://sammosummo.github.io/assets/images/photos/piebarm.jpg){: .center-image }
 
 [^3]: [Wikipedia article for Wigan](https://en.wikipedia.org/wiki/Wigan)
 [^4]: [Wikipedia article for Wigan Pier](https://en.wikipedia.org/wiki/Wigan_Pier)
@@ -33,7 +33,7 @@ I recieved my undergraduate degree, Masters and PhD in Psychology from the Unive
 
 [^9]: [York homepage](https://www.york.ac.uk)
 
-![](https://raw.githubusercontent.com/sammosummo/sammosummo.github.io/master/assets/images/photos/me2.jpg){: .center-image }
+![](https://sammosummo.github.io/assets/images/photos/me2.jpg){: .center-image }
 
 York is my favourite place I’ve ever lived. I guess I’m not alone, because The Sunday Times named it the best place to live in Britain in 2018[^10]. I was lucky enough to spend about 7 years there.
 
@@ -46,7 +46,7 @@ I was a postdoc at the Max Planck Institute for Human Cognitive and Brain Scienc
 [^13]: [English-language webpage about the building](https://www.musikermuseen.de/home/Leipzig_Edvard-Grieg-Gedenkstaette)
 [^14]: [Wikipedia article for Edvard Grieg](https://en.wikipedia.org/wiki/Edvard_Grieg)
 
-![](https://raw.githubusercontent.com/sammosummo/sammosummo.github.io/master/assets/images/photos/talstrasse.jpg){: .center-image }
+![](https://sammosummo.github.io/assets/images/photos/talstrasse.jpg){: .center-image }
 
 I completed a second postdoc at Boston University[^15] under Barbara Shinn-Cunningham[^16]. I studied auditory short-term memory. Boston comes a close second in my list of favourite places.
 
