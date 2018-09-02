@@ -4,6 +4,8 @@ layout: article
 key: page-about
 ---
 
+# Biography
+
 My name is Sam Mathias. This is me:
 
 ![](https://sammosummo.github.io/assets/images/photos/me1.jpg)
