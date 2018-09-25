@@ -10,13 +10,13 @@ My name is Sam Mathias. This is me:
 
 ![](https://sammosummo.github.io/assets/images/photos/me1.jpg)
 
-I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in the North of England perhaps best known for its innaccurately named [wharf](https://en.wikipedia.org/wiki/Wigan_Pier) and the [voracious consumption of meat pies by its inhabitants](https://www.independent.co.uk/news/long_reads/british-pie-week-2018-wigan-pooles-potato-steak-kidney-onion-cheese-a8242376.html), as the following image illustrates:
+I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in the North of England perhaps best known for its inaccurately named [wharf](https://en.wikipedia.org/wiki/Wigan_Pier) and the [voracious consumption of meat pies by its inhabitants](https://www.independent.co.uk/news/long_reads/british-pie-week-2018-wigan-pooles-potato-steak-kidney-onion-cheese-a8242376.html), as the following image illustrates:
 
 ![](https://sammosummo.github.io/assets/images/photos/piebarm.jpg)
 
-Wigan is also home to [Wigan Athletic Football Club](https://en.wikipedia.org/wiki/Wigan_Athletic_F.C.) — I don’t support them, but that’s only because I don’t follow football at all — who in 2012 both won the FA Cup and were relagated [in same season](https://en.wikipedia.org/wiki/2012–13_FA_Cup).
+Wigan is also home to [Wigan Athletic Football Club](https://en.wikipedia.org/wiki/Wigan_Athletic_F.C.) — I don’t support them, but that’s only because I don’t follow football at all — who in 2012 both won the FA Cup and were relegated [in same season](https://en.wikipedia.org/wiki/2012–13_FA_Cup).
 
-I recieved my undergraduate degree, Masters and PhD in Psychology from the [University of York](https://en.wikipedia.org/wiki/2012–13_FA_Cup), all under the supervision of Peter Bailey. Peter is the supine participant in the image below. The other guy is a much younger me. My thesis was about individual
+I received my undergraduate degree, Masters and PhD in Psychology from the [University of York](https://en.wikipedia.org/wiki/2012–13_FA_Cup), all under the supervision of Peter Bailey. Peter is the supine participant in the image below. The other guy is a much younger me. My thesis was about individual
 differences in pitch perception.
 
 ![](https://sammosummo.github.io/assets/images/photos/me2.jpg)
@@ -32,7 +32,7 @@ This is the entry way to the apartment building I liven in:
 
 I completed another postdoc at [Boston University](http://www.bu.edu) under [Barbara Shinn-Cunningham](https://scholar.google.com/citations?user=cz-8qKoAAAAJ&hl=en). I studied auditory short-term memory. Boston comes a close second in my list of favourite places.
 
-I later transistioned into the field of statistical genetics under my current boss,
+I later transitioned into the field of statistical genetics under my current boss,
 [David Glahn](https://scholar.google.com/citations?user=S1egpyMAAAAJ&hl=en). I now live in New Haven.
 
 # Publications
