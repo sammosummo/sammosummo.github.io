@@ -1,5 +1,5 @@
 header:
-- titles:
+  - titles:
     en:         Home
     url:        /index.html
   - titles:
@@ -11,6 +11,6 @@ header:
   - titles:
       en:       Projects
     url:        /projects.html
-- titles:
+  - titles:
       en:       Publications
       url:      /publications.html
