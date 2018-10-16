@@ -188,6 +188,6 @@
     width: 100%;
   }
   .hero__content {
-    padding-top: map-get($layout, 1rem);
+    padding-top: map-get($layout, header-height);
   }
 }
