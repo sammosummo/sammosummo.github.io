@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/github/license/kitian616/jekyll-TeXt-theme.svg)](https://github.com/kitian616/jekyll-TeXt-theme/blob/master/LICENSE)
 [![Travis](https://img.shields.io/travis/kitian616/jekyll-TeXt-theme.svg)](https://travis-ci.org/kitian616/jekyll-TeXt-theme)
 
-![TeXt Theme](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/TeXt-home.png)
+![TeXt Theme](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/TeXt-home.jpg)
 
 ![TeXt Theme Details](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/TeXt-layouts.png)
 
@@ -19,7 +19,7 @@ TeXt 是针对个人或团队网站、博客、项目、文档等的一款高度
 - 代码高亮主题
 - 目录
 - 多作者
-- 多语言支持（English, 简体中文, 繁體中文）
+- 多语言支持
 - 搜索
 - Web 语意化
 - RSS（[jekyll-feed](https://github.com/jekyll/jekyll-feed)）
@@ -33,15 +33,15 @@ TeXt 是针对个人或团队网站、博客、项目、文档等的一款高度
 
 ## 皮肤
 
-TeXt 内置以下 6 套皮肤：
+TeXt 内置有 6 套皮肤，你也可以定制自己的皮肤。
 
 | `default` | `dark` | `forest` |
 | --- |  --- | --- |
-| ![Default](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_default.png) | ![Dark](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_dark.png) | ![Forest](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_forest.png) |
+| ![Default](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_default.jpg) | ![Dark](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_dark.jpg) | ![Forest](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_forest.jpg) |
 
 | `ocean` | `chocolate` | `orange` |
 | --- |  --- | --- |
-| ![Ocean](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_ocean.png) | ![Chocolate](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_chocolate.png) | ![Orange](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_orange.png) |
+| ![Ocean](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_ocean.jpg) | ![Chocolate](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_chocolate.jpg) | ![Orange](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_orange.jpg) |
 
 ### 代码高亮主题
 
@@ -80,8 +80,9 @@ TeXt 使用 [Tomorrow](https://github.com/chriskempson/tomorrow-theme) 作为它
 
 | Name | Description |
 | --- | --- |
-| [Home](https://tianqi.name/jekyll-TeXt-theme/test/) | 文章列表页 |
-| [Archive](https://tianqi.name/jekyll-TeXt-theme/archive.html) | 过滤标签和查询 |
+| [Home](https://tianqi.name/jekyll-TeXt-theme/test/) | 列表页 |
+| [Archive](https://tianqi.name/jekyll-TeXt-theme/archive.html) | 归档页 |
+| [Layout Examples](https://tianqi.name/jekyll-TeXt-theme/samples.html) | 各种布局示例 |
 
 ## 协议
 
