@@ -1,16 +1,16 @@
 header:
   - titles:
-    en:         Home
-    url:        /index.html
+      en: Home
+    url:  /index.html
   - titles:
-      en:       Archive
-    url:        /archive.html
+      en: About
+    url:  /about.html
   - titles:
-      en:       About
-    url:        /about.html
+      en: Archive
+    url:  /archive.html
   - titles:
-      en:       Projects
-    url:        /projects.html
+      en: Projects
+    url:  /projects.html
   - titles:
-      en:       Publications
-      url:      /publications.html
+      en: Publications
+    url: /publications.html
