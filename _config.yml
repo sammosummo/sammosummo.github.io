@@ -185,7 +185,7 @@ defaults:
       sharing: true
       license: true
       aside:
-        toc: true
+        toc: false
       show_edit_on_github: true
       pageview: true
 
