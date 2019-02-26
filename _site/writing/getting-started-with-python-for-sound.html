@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="canonical" href="http://localhost:4000/writing/getting-started-with-python-for-sound" />
+        <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="/assets/index.css">
+        <title>The Cracked Bassoon</title>
+        <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Cracked Bassoon" />
+        <style>
+          @media (max-width:600px) {
+            img#profile-photo {
+              display: none;
+            }
+          }
+        </style>
+    </head>
+    <body>
+        <div id="main-container">
+
+            <div id="header" class="border-bottom">
+
+                <div id="title-nav-bar">
+                  <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
+
+                  <div id="nav-bar">
+                      <a href="/" class="nav-bar__item">Home</a>
+                      <a href="/about" class="nav-bar__item">About</a>
+                      <a href="/writing" class="nav-bar__item">Writing</a>
+                      <a href="/publications" class="nav-bar__item">Publications</a>
+                      <a href="/cocktails" class="nav-bar__item">Cocktails</a>
+                      <a href="/contact" class="nav-bar__item">Contact</a>
+                  </div>
+                </div>
+
+                <div id="title-profile-photo">
+                  <img id="profile-photo" src="/assets/logos/02.png" />
+                </div>
+
+                <div style="clear: left; clear right"></div>
+            </div
+
+            <span/>
+
+
+  <link rel="stylesheet" type="text/css" href="/assets/code.css">
+
+
+
+
+<section>
+  <h2>Getting started with Python for sound</h2>
+
+  
+    <p class="small"><i>Originally posted February 13, 2019.</i></p>
+  
+
+  <p>This is the first post in a series about generating and playing sounds using the Python
+programming language. The series will go slowly and cover several topics, including Python
+best practices, psychoacoustics, and digital audio. My hope is that by the end, a reader
+will able to perform sound synthesis with a firm basis in psychoacoustics using idiomatic
+Python. To kick things off, I present my (highly opinionated) guide to getting started
+with Python. I assume no prior knowledge, so readers already familiar with Python and its
+core concepts—packages, environments, and so on—may wish to <a href="#">skip to the next post</a>,
+which will actually get down to the business of making sounds.</p>
+
+<h3 id="get-a-github-account-fork-the-repository">Get a GitHub account, fork the repository</h3>
+
+<p>My first piece of advice on getting started with Python doesn’t involve Python at all.
+<a href="https://github.com/">GitHub</a> is an online service for hosting code, built on top of the
+popular version control software (VCS) <a href="https://git-scm.com/">Git</a>. There are several
+similar alternative services, including <a href="https://bitbucket.org">BitBucket</a> and
+<a href="https://about.gitlab.com">GitLab</a>, and the internet is replete with comparisons between
+them. GitHub is simply the only one I have tried and I haven’t found any reason to switch.</p>
+
+<p>For this series of posts, I have created a public GitHub repository or <em>repo</em> called
+<code class="highlighter-rouge">klangfarbe</code>, the German word for timbre (literally, “sound color”). The German language
+makes for an excellent generator for repository names, in my opinion. Head over to the
+<a href="https://github.com/">GitHub website</a>, sign up for a free account and <em>fork</em> (create your
+own copy of) <a href="https://github.com/sammosummo/klangfarbe">this repo</a>. Since
+<a href="https://www.msn.com/en-us/news/technology/microsoft-completes-github-acquisition/ar-BBOVVOT">Microsoft acquired GitHub</a>,
+with a free account, users can create unlimited private repositories, so you can make
+yours private, if you wish.</p>
+
+<h3 id="install-git-if-not-using-a-mac">Install Git (if not using a Mac)</h3>
+
+<p>In order to follow my recommendations later on, you’ll need <a href="https://git-scm.com/">Git</a>
+installed on your computer. Macs come with an old version of Git pre-installed, which you
+may update if you wish. Personally, I find this version to work just fine. If you are
+using Windows, however, you won’t have a pre-installed version so you’ll need to download
+and install Git. I’m not sure whether Git comes with Linux; I assume it depends on your
+distribution.</p>
+
+<h3 id="install-conda-and-python">Install conda and Python</h3>
+
+<p>Programming  languages are either <em>compiled</em> or <em>interpreted</em>. <a href="https://www.python.org/">Python</a>
+is interpreted, meaning that it requires an <em>interpreter</em> to execute the code. There are
+many different ways to obtain a Python interpreter, but I strongly recommend using
+<a href="https://conda.io/en/latest/">conda</a>.</p>
+
+<p>Conda is software for managing installing and managing other software. It runs on Windows,
+macOS and Linux. In my opinion, conda is currently the best way to install Python for
+scientists and engineers. One of the primary advantages of conda over other approaches is
+that it installs everything in your local directory by default. This means that you never
+require administrator privileges, making it easy to use your own particular Python
+instances on multi-user computers or remote servers. For example, I sometimes use a
+relatively obscure Python package with numerous dependencies called 
+<a href="http://ski.clps.brown.edu/hddm_docs/">HDDM</a>. Typically it is not feasible to install HDDM
+on academic computing clusters using the Python interpreter(s) provided by the admins, so
+instead I just install a local Python interpreter into my user directory via conda. A
+potential disadvantage of conda is that it is maintained by a for-profit company called
+<a href="https://www.anaconda.com/">Anaconda, Inc.</a>, which means there is a possibility for them
+to change their business model in the future.</p>
+
+<p>The most direct way to get conda is to download and install <a href="https://conda.io/miniconda.html">Miniconda</a>,
+a software bundle containing just conda and its dependencies. Alternatively, you can use
+the “full-stack” <a href="https://www.anaconda.com/distribution/">Anaconda distribution</a>, which
+includes conda, Python, <a href="https://www.r-project.org/">R</a>, over a thousand third-party
+packages and their dependencies. I prefer Miniconda because I will probably never use the
+majority of packages included in Anaconda, and those I do need can be installed easily
+later.</p>
+
+<p>If you are on a Mac, an alternative approach to obtaining a Python interpreter is
+<a href="https://docs.brew.sh/Homebrew-and-Python">Homebrew</a>. Homebrew is a package manager
+similar to conda. While I personally use Homebrew for other software, I don’t recommend
+it for Python because installing Hombrew to begin with requires administrator privileges.</p>
+
+<p>A third approach is to download and install Python <a href="https://www.python.org/downloads/">directly from the official website</a>.
+This is fine but requires a little more work, since you’ll need to install at least one
+extra thing, <a href="https://pypi.org/project/pip/">pip</a>, yourself. I’ll talk about pip again
+later.</p>
+
+<h3 id="create-a-new-environment">Create a new environment</h3>
+
+<p><em>Environments</em>—sometimes called <em>virtual environments</em> or simply <em>envs</em>—are separate
+instances of Python that are isolated from one another. You can modify Python within an
+environment without influencing other environments. To return to my earlier example, some
+time ago, HDDM only worked with
+<a href="https://groups.google.com/forum/#!topic/hddm-users/pAj9eCLhIss">out-of-date versions of NumPy</a>.
+My (temporary) solution to this problem was to create an environment with NumPy rolled
+back to its earlier version. This allowed me to run my HDDM project within this
+environment without screwing up my other projects, which relied on the latest version of
+NumPy.</p>
+
+<p>Python has multiple methods for creating environments; see
+<a href="https://realpython.com/python-virtual-environments-a-primer/">here</a> for a nice primer
+describing some of them. However, because environment management is one of the primary
+functions of conda, you should use this one, assuming you have followed my advice up to
+now.</p>
+
+<p>I like to create a new conda environment for each new project, and give it the same name
+as its GitHub repository, in this case <code class="highlighter-rouge">klangfarbe</code>. Do this yourself by typing the
+following command into a terminal.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda create <span class="nt">-n</span> klangfarbe</code></pre></figure>
+
+<p>While we are on the subject of terminals, I recommend Mac users consider
+<a href="https://www.iterm2.com/">iTerm</a> as a replacement for the built-in terminal tool. Windows
+users, if you installed Mini/Anaconda with the default configuration options, you won’t be
+able to access conda from the standard command prompt. Instead, you can use the
+<a href="https://docs.anaconda.com/anaconda/user-guide/getting-started/#write-a-python-program-using-anaconda-prompt-or-terminal">Anaconda Prompt</a>
+utility. Alternatively, if for whatever reason you have a burning desire to run conda
+from the command prompt, simply locate and execute <code class="highlighter-rouge">\Scripts\activate.bat</code>, which should
+be somewhere in your Mini/Anaconda installation directory.</p>
+
+<h3 id="install-numpy">Install NumPy</h3>
+
+<p>Conceivably, we could use nothing but the
+<a href="https://docs.python.org/3/library/">Python standard library</a> for sound synthesis and
+playback, but this would require writing a huge amount of code. A better approach is to
+take advantage of third-party packages to perform as much of the heavy lifting as
+possible. For now, install one such package, <a href="http://www.numpy.org/">NumPy</a>. Others will
+be installed later, as and when required.</p>
+
+<p>NumPy is the foundational package for scientific Python, adding support for array-based
+computation. Without NumPy, creating and manipulating sound waveforms would be tedious
+and inefficient. Our code would be long and slow to run.</p>
+
+<p>Conda can install packages into specific environments. The simplest way to do this is to
+<em>activate</em> the desired environment, then install the package without additional arguments:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">conda activate klangfarbe
+conda <span class="nb">install </span>numpy</code></pre></figure>
+
+<p>If you have been following my recommendations up to this point, and are using Miniconda,
+the above commands will install NumPy and all its dependencies for you. One of these
+dependencies is the Python interpreter itself.  Therefore, the above might take a few
+minutes to complete.</p>
+
+<p>Conda packages are curated by the Anaconda team. This means that a particular package
+might exist within the conda package repository, or that its latest version might not be
+available. Fortunately, conda also installs
+<a href="https://www.w3schools.com/python/python_pip.asp">pip</a>, Python’s de facto package manager,
+by default. Conda and pip generally play well together. When it comes to installing a new
+package, I recommend trying <code class="highlighter-rouge">conda install &lt;packagename&gt;</code> first, and if that fails, try
+<code class="highlighter-rouge">pip install &lt;packagename&gt;</code>. You can also use either method to remove packages.</p>
+
+<p>Depending on the package, a little playing around with conda and pip might be necessary.
+For example, recently I wanted to use <a href="https://pypi.org/project/PyQt5/">PyQt5</a>, a set of
+Python bindings for <a href="https://www.qt.io/">Qt</a>. While <code class="highlighter-rouge">conda install pyqt</code> installed the
+packages successfully, many of Qt’s features were actually missing (<code class="highlighter-rouge">QtMultimedia</code>, for
+instance). This was quickly remedied by installing a newer version of PyQt5 via
+<code class="highlighter-rouge">pip install PyQt5</code>.</p>
+
+<h3 id="install-pycharm-clone-the-repository-configure">Install PyCharm, clone the repository, configure</h3>
+
+<p>Serious coding is facilitated enormously by an integrated development environment (IDE).
+Python ships with a bare-bones IDE called <a href="https://docs.python.org/3/library/idle.html">IDLE</a>,
+which is OK for <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">hello-world</a>ing
+but is not suited to serious projects. <a href="https://www.spyder-ide.org/">Spyder</a> is a popular
+powerful IDE, but my favorite is <a href="https://www.jetbrains.com/pycharm/">PyCharm</a>. Like
+conda, PyCharm is made by a for-profit company, although its community edition is free and
+the professional edition can be obtained for free if you are in full-time education (you
+just need a <code class="highlighter-rouge">.edu</code> email address).</p>
+
+<p>PyCharm is awesome. It has highly sophisticated code introspection tools, a powerful
+debugger, and
+<a href="https://www.jetbrains.com/help/pycharm/version-control-integration.html">tight integration with VCS, including Git</a>.
+I cannot emphasize strongly enough how convenient I find PyCharm’s Git integration. I
+hate dealing with Git directly from the terminal and PyCharm allows me to eschew this.</p>
+
+<p>The unit of PyCharm is called a <em>project</em>, which is really just a directory containing
+your Python scripts. When you launch PyCharm for the first time, you will be presented
+with the option to
+<a href="https://www.jetbrains.com/help/pycharm/set-up-a-git-repository.html">Checkout from Version Control</a>.
+Choose this, choose Git as your VCS—remember, Git must be installed for this to work!
+Enter your GitHub credentials, and select your <code class="highlighter-rouge">klangfarbe</code> fork. PyCharm will then 
+<em>clone</em> (download a copy of) the repository, and the files will be visible within the
+PyCharm window.</p>
+
+<p>Before running or writing any code, you should change PyCharm’s settings. Most
+importantly, set the Python interpreter for the new project to be the <code class="highlighter-rouge">klangfarbe</code>
+environment we created earlier. Now your repository, environment and project all have
+identical names. After scanning your environment, PyCharm may recognize that there are
+some missing dependencies based on the contents of <code class="highlighter-rouge">requirments.txt</code> and can attempt to
+install them for you (another nice PyCharm feature!), but its easy enough to do this
+yourself using conda and/or pip. Other settings I recommend but are entirely optional
+include changing the right-hand margin in the text editor to 88 characters (this is the
+value used by black, see later), using Google-style auto-completion for docstrings (again,
+see later), enabling Pycharm to expand <code class="highlighter-rouge">main</code> into
+<a href="https://python-reference.readthedocs.io/en/latest/docs/boilerplate/">boilerplate</a>, and
+the darkula theme.</p>
+
+<h3 id="install-audacity-optional">Install Audacity (optional)</h3>
+
+<p><a href="https://www.audacityteam.org/">Audacity</a> has nothing to do with Python—it is software
+for manipulating digital audio. This series won’t require Audacity, but it may be useful
+for occasionally inspecting waveforms, spectrograms etc. of sounds you created. Audacity
+is free, small (at least compared GarageBand or Audition) and easy to use.</p>
+
+<h3 id="learn-python">Learn Python</h3>
+
+<p>The <a href="https://docs.python-guide.org/intro/learning/">Hitchiker’s Guide to Python</a> provides
+a comprehensive list of the best resources for learning Python. If you are completely new
+to Python, you should go there and at the very least, work through
+<a href="https://thepythonguru.com/">one</a> <a href="https://docs.python.org/3/tutorial/index.html">of</a>
+<a href="https://pythonbasics.org/">these</a> introductory tutorials. Since we’ll be using NumPy a
+great deal in this series, you should also try a NumPy tutorial,
+<a href="https://realpython.com/numpy-array-programming/">such as this one</a>.</p>
+
+<p>I also recommend reading the entire
+<a href="https://docs.python.org/3/glossary.html">Python glossary</a> from start to finish. The
+lion’s share of your Python knowledge will be learned while working on real projects and
+fixing real issues in your code. I’m not exaggerating when I say that almost every coding
+problem I have is solved by Googling it and finding that someone has posted almost the
+exact same thing on <a href="https://stackoverflow.com/questions/tagged/python">Stack Overflow</a>.
+Knowing how to describe a problem using the correct terminology is key to efficient
+Googling/Stack Overflowing.</p>
+
+<h3 id="make-your-code-pythonic">Make your code “Pythonic”</h3>
+
+<p>In Python, there is usually a preferred or <em>Pythonic</em> way of doing something. To quote
+the <a href="There%20should%20be%20one%E2%80%94and%20preferably%20only%20one%E2%80%94obvious%20way%20to%20do%20it.">Zen of Python</a>,
+“There should be one—and preferably only one—obvious way to do it.” This is worth keeping
+in mind as you write your own code. For example, try to stick to the style rules laid out
+in <a href="https://www.python.org/dev/peps/pep-0008/">Python Enhancement Proposal 8 (PEP 8)</a>
+(<a href="https://realpython.com/python-pep8/">see also here</a>) and try to use
+<a href="https://en.wikibooks.org/wiki/Python_Programming/Idioms">Python idioms</a> wherever
+possible.</p>
+
+<p>Of course, time spent ensuring code is Pythonic could be spent writing more code. I try to
+avoid wasting too much time on formatting and instead run all my scripts through
+<a href="https://black.readthedocs.io/en/stable/">black</a> after they’re done. Black can be
+installed via pip, in your current environment if you wish.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pip <span class="nb">install </span>black</code></pre></figure>
+
+<p>Now code can be formatted directly from the terminal with <code class="highlighter-rouge">black &lt;mysript.py&gt;</code>
+(or <code class="highlighter-rouge">black *.py</code> to run it on all Python scripts in the current directory).</p>
+
+<h3 id="write-comprehensive-documentation">Write comprehensive documentation</h3>
+
+<p>Documenting your own code can feel like a chore but trust me, it is an incredibly
+beneficial habit in the long run and you should try to cultivate it straight away. Force
+yourself to document every script at the top level. Within each script, document all
+functions and methods of all classes (even <code class="highlighter-rouge">__init__()</code>!). Consider adding a comment to
+each line used to define an object unless it is absolutely 100% clear what the object
+does and how it will be used. Pick a pre-existing documentation style and stick to
+it—<a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Google style</a>
+is my personal favorite, but
+<a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy">NumPy style</a>
+is good too.</p>
+
+<h3 id="make-some-sounds">Make some sounds</h3>
+
+<p>Now that Python is installed and configured correctly, we can start to generate our first
+sounds. Continue to the next post.</p>
+
+  
+  <p class="small"><i>I haven't enabled comments yet. Meanwhile, if you spot an error
+  or have a question, email me at <a href="mailto:sam@crackedbassoon.com">sam@crackedbassoon.com</a>.</i></p>
+</section>
+
+        </div>
+    </body>
+</html>

@@ -1,56 +1,46 @@
 ---
-layout: article
-titles:
-  en: About
-  zh: 关于
-  zh-Hans: 关于
-  zh-Hant: 關於
-key: page-about
+layout: page
+title: About
 ---
 
-![TeXt Theme](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/TeXt-home.jpg)
+My name is Sam Mathias. I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a
+medium-sized town in the North of England perhaps best known for its inaccurately named
+[wharf](https://en.wikipedia.org/wiki/Wigan_Pier) and the
+[voracious consumption of meat pies](https://www.independent.co.uk/news/long_reads/british-pie-week-2018-wigan-pooles-potato-steak-kidney-onion-cheese-a8242376.html) by its inhabitants.
 
-TeXt is a super customizable Jekyll theme for personal site, team site, blog, project, documentation, etc. Similar to iOS 11 style, it has large and prominent titles, round buttons and cards.
+I recieved BSc, MSc, and PhD degrees from the [University of York](https://www.york.ac.uk)
+all under the supervision of [Peter Bailey](https://www.york.ac.uk/psychology/staff/emeritusfaculty/pjb1/).
+*The Sunday Times* named York [the best place to live in Britain in 2018](https://www.thetimes.co.uk/article/york-best-places-to-live-8grhj85sn).
+I was fortunate to spend about seven years there.
 
-```javascript
-(() => console.log('Hello, World!'))();
-```
+I was a postdoc at the [Max Planck Institute for Human Cognitive and Brain Sciences](https://www.mpg.de/149614/kognition_neuro)
+in Leipzig, Germany under [Katharina von Kriegstein](https://scholar.google.de/citations?user=6lGfJQMAAAAJ&hl=de)
+and at [Boston University](http://www.bu.edu) under
+[Barbara Shinn-Cunningham](https://scholar.google.com/citations?user=cz-8qKoAAAAJ&hl=en).
 
-## Features
+Later I transitioned into psychiatric genetics at
+[Yale School of Medicine](https://medicine.yale.edu/) under
+[David Glahn](https://scholar.google.com/citations?user=S1egpyMAAAAJ&hl=en). I’m still in
+David’s lab. The lot of us recently moved to the [Department of Psychiatry at Boston Children’s Hospital](http://www.childrenshospital.org/centers-and-services/departments-and-divisions/department-of-psychiatry).
 
-- Responsive
-- Skins
-- Highlight Theme
-- Table of contents
-- Authors
-- Multi-language support
-- Search
-- Semantic HTML
-- RSS（[jekyll-feed](https://github.com/jekyll/jekyll-feed))
-- Contact information (Email, Facebook, Twitter, Linkedin, Weibo, Zhihu, etc)
-- Mathematical formula ([MathJax](https://www.mathjax.org/))
-- Flowchart, Sequence diagram, Gantt diagram ([mermaid](https://mermaidjs.github.io/))
-- Line Chart, Bar Chart, Radar Chart, Pie Chart ([chartjs](http://www.chartjs.org/))
-- Page views ([LeanCloud](https://leancloud.cn/))
-- Comments ([Disqus](https://disqus.com/))
-- Google Analytics
+I live in [Charlestown](https://en.wikipedia.org/wiki/Charlestown,_Boston) with my wife,
+[Emma Knowles](https://scholar.google.com/citations?user=RLeVS8IAAAAJ&hl=en). She is the
+superior scientist by every metric. Please check out her work. We have a goldendoodle
+named Charlie.
 
-## Skins
+## What the hell is this?
 
-TeXt has 6 built-in skins, you can also set up your own skin.
+*The Cracked Bassoon* is my personal website.
 
-| `default` | `dark` | `forest` |
-| --- |  --- | --- |
-| ![Default](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_default.jpg) | ![Dark](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_dark.jpg) | ![Forest](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_forest.jpg) |
+The name comes from a fun description—though not an accurate one—of iterated rippled
+noise, an auditory stimulus used in the early days of auditory fMRI research.
 
-| `ocean` | `chocolate` | `orange` |
-| --- |  --- | --- |
-| ![Ocean](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_ocean.jpg) | ![Chocolate](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_chocolate.jpg) | ![Orange](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/skins_orange.jpg) |
+The site itself was built using [Jekyll](https://jekyllrb.com/). It is hosted for free
+on [GitHub Pages](https://pages.github.com/). It uses [Cloudflare](https://www.cloudflare.com/),
+also for free.
 
-### Highlight Theme
+It doesn't use a theme—I found all of them to be far too busy, even the ostensibly
+"minimalist" ones. Instead I cloned [Michael Cypher](http://cypher.codes)'s website and
+made some minor edits here and there.
 
-TeXt use [Tomorrow](https://github.com/chriskempson/tomorrow-theme) as the highlight theme.
-
-| `tomorrow` | `tomorrow-night` | `tomorrow-night-eighties` | `tomorrow-night-blue` | `tomorrow-night-bright` |
-| --- |  --- | --- | --- |  --- |
-| ![Tomorrow](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow.png) | ![Tomorrow Night](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night.png) | ![Tomorrow Night Eighties](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-eighties.png) | ![Tomorrow Night Blue](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-blue.png) | ![Tomorrow Night Bright](https://raw.githubusercontent.com/kitian616/jekyll-TeXt-theme/master/screenshots/highlight_tomorrow-night-bright.png) |
+The logo is a 1950s black-and-white stock photo colorized using [DeOldify](https://github.com/jantic/DeOldify).
