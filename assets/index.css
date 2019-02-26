@@ -14,6 +14,39 @@ html {
 
 }
 
+@font-face {
+    font-family: 'crimson';
+    src: url('/assets/fonts/crimson-bold-webfont.eot');
+    src: url('/assets/fonts/crimson-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/crimson-bold-webfont.woff') format('woff'),
+         url('/assets/fonts/crimson-bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'crimson';
+    src: url('/assets/fonts/crimson-bolditalic-webfont.eot');
+    src: url('/assets/fonts/crimson-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/crimson-bolditalic-webfont.woff') format('woff'),
+         url('/assets/fonts/crimson-bolditalic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'crimson';
+    src: url('/assets/fonts/crimson-italic-webfont.eot');
+    src: url('/assets/fonts/crimson-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/crimson-italic-webfont.woff') format('woff'),
+         url('/assets/fonts/crimson-italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
 body {
     font-family: 'crimson', serif;
     /*font-size: larger;*/
