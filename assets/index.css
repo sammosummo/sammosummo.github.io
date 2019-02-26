@@ -3,6 +3,17 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+@font-face {
+    font-family: 'crimson';
+    src: url('/assets/fonts/crimson-roman-webfont.eot');
+    src: url('/assets/fonts/crimson-roman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/crimson-roman-webfont.woff') format('woff'),
+         url('/assets/fonts/crimson-roman-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
     font-family: 'crimson', serif;
     font-size: larger;

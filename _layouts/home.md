@@ -4,7 +4,7 @@ layout: default
 
 {% include about_short.html %}
 
-<h3>Latest post</h3>
+<h3>Latest writing</h3>
 <ul>
 {% for post in site.posts limit:1%}
     <li>
