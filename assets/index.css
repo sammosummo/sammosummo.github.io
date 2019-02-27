@@ -5,10 +5,10 @@ html {
 
 @font-face {
     font-family: 'newfont';
-    src: url('/assets/fonts/alegreya-regular-webfont.eot');
-    src: url('/assets/fonts/alegreya-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/alegreya-regular-webfont.woff') format('woff'),
-         url('/assets/fonts/alegreya-regular-webfont.ttf') format('truetype');
+    src: url('/assets/fonts/andada-regular-webfont.eot');
+    src: url('/assets/fonts/andada-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/andada-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/andada-regular-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -16,10 +16,10 @@ html {
 
 @font-face {
     font-family: 'newfont';
-    src: url('/assets/fonts/alegreya-bold-webfont.eot');
-    src: url('/assets/fonts/alegreya-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/alegreya-bold-webfont.woff') format('woff'),
-         url('/assets/fonts/alegreya-bold-webfont.ttf') format('truetype');
+    src: url('/assets/fonts/andada-bold-webfont.eot');
+    src: url('/assets/fonts/andada-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/andada-bold-webfont.woff') format('woff'),
+         url('/assets/fonts/andada-bold-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 
@@ -27,10 +27,10 @@ html {
 
 @font-face {
     font-family: 'newfont';
-    src: url('/assets/fonts/alegreya-bolditalic-webfont.eot');
-    src: url('/assets/fonts/alegreya-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/alegreya-bolditalic-webfont.woff') format('woff'),
-         url('/assets/fonts/alegreya-bolditalic-webfont.ttf') format('truetype');
+    src: url('/assets/fonts/andada-bolditalic-webfont.eot');
+    src: url('/assets/fonts/andada-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/andada-bolditalic-webfont.woff') format('woff'),
+         url('/assets/fonts/andada-bolditalic-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
 
@@ -38,10 +38,10 @@ html {
 
 @font-face {
     font-family: 'newfont';
-    src: url('/assets/fonts/alegreya-italic-webfont.eot');
-    src: url('/assets/fonts/alegreya-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/alegreya-italic-webfont.woff') format('woff'),
-         url('/assets/fonts/alegreya-italic-webfont.ttf') format('truetype');
+    src: url('/assets/fonts/andada-italic-webfont.eot');
+    src: url('/assets/fonts/andada-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/andada-italic-webfont.woff') format('woff'),
+         url('/assets/fonts/andada-italic-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 
