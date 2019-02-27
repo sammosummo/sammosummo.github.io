@@ -92,6 +92,7 @@ hr {
 #title, #title:hover {
     color: black;
     text-decoration: none;
+    font-weight: normal;
 }
 
 a {
