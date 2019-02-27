@@ -92,7 +92,8 @@ hr {
 #title, #title:hover {
     color: black;
     text-decoration: none;
-    font-weight: normal;
+    font-weight: bold;
+    font-family: 'newfont', 'Times', serif;
 }
 
 a {
