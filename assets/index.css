@@ -3,52 +3,52 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
-/*@font-face {*/
-    /*font-family: 'crimson';*/
-    /*src: url('/assets/fonts/crimson-roman-webfont.eot');*/
-    /*src: url('/assets/fonts/crimson-roman-webfont.eot?#iefix') format('embedded-opentype'),*/
-         /*url('/assets/fonts/crimson-roman-webfont.woff') format('woff'),*/
-         /*url('/assets/fonts/crimson-roman-webfont.ttf') format('truetype');*/
-    /*font-weight: normal;*/
-    /*font-style: normal;*/
+@font-face {
+    font-family: 'newfont';
+    src: url('/assets/fonts/alegreya-regular-webfont.eot');
+    src: url('/assets/fonts/alegreya-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/alegreya-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/alegreya-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 
-/*}*/
+}
 
-/*@font-face {*/
-    /*font-family: 'crimson';*/
-    /*src: url('/assets/fonts/crimson-bold-webfont.eot');*/
-    /*src: url('/assets/fonts/crimson-bold-webfont.eot?#iefix') format('embedded-opentype'),*/
-         /*url('/assets/fonts/crimson-bold-webfont.woff') format('woff'),*/
-         /*url('/assets/fonts/crimson-bold-webfont.ttf') format('truetype');*/
-    /*font-weight: bold;*/
-    /*font-style: normal;*/
+@font-face {
+    font-family: 'newfont';
+    src: url('/assets/fonts/alegreya-bold-webfont.eot');
+    src: url('/assets/fonts/alegreya-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/alegreya-bold-webfont.woff') format('woff'),
+         url('/assets/fonts/alegreya-bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 
-/*}*/
+}
 
-/*@font-face {*/
-    /*font-family: 'crimson';*/
-    /*src: url('/assets/fonts/crimson-bolditalic-webfont.eot');*/
-    /*src: url('/assets/fonts/crimson-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),*/
-         /*url('/assets/fonts/crimson-bolditalic-webfont.woff') format('woff'),*/
-         /*url('/assets/fonts/crimson-bolditalic-webfont.ttf') format('truetype');*/
-    /*font-weight: bold;*/
-    /*font-style: italic;*/
+@font-face {
+    font-family: 'newfont';
+    src: url('/assets/fonts/alegreya-bolditalic-webfont.eot');
+    src: url('/assets/fonts/alegreya-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/alegreya-bolditalic-webfont.woff') format('woff'),
+         url('/assets/fonts/alegreya-bolditalic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
 
-/*}*/
+}
 
-/*@font-face {*/
-    /*font-family: 'crimson';*/
-    /*src: url('/assets/fonts/crimson-italic-webfont.eot');*/
-    /*src: url('/assets/fonts/crimson-italic-webfont.eot?#iefix') format('embedded-opentype'),*/
-         /*url('/assets/fonts/crimson-italic-webfont.woff') format('woff'),*/
-         /*url('/assets/fonts/crimson-italic-webfont.ttf') format('truetype');*/
-    /*font-weight: normal;*/
-    /*font-style: italic;*/
+@font-face {
+    font-family: 'newfont';
+    src: url('/assets/fonts/alegreya-italic-webfont.eot');
+    src: url('/assets/fonts/alegreya-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/alegreya-italic-webfont.woff') format('woff'),
+         url('/assets/fonts/alegreya-italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
 
-/*}*/
+}
 
 body {
-    font-family: 'Baskerville', serif;
+    font-family: 'newfont', 'Baskerville', serif;
     font-size: larger;
     background-color: #fff1e5;
     color: #33302e;
