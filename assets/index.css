@@ -86,7 +86,7 @@ hr {
     margin: 1rem 0;
 }
 
-#header, h2, h2 {
+h2, h3 {
     font-weight: bold;
     font-family: 'newfont', 'Times', serif;
   }
