@@ -48,8 +48,8 @@ html {
 }
 
 body {
-    font-family: 'newfont', 'Baskerville', serif;
-    /*font-size: larger;*/
+    font-family: 'Times', serif;
+    font-size: larger;
     background-color: #fff1e5;
     color: #33302e;
     margin: 40px 20px;
