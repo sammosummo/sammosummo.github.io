@@ -53,6 +53,7 @@ body {
     background-color: #fff1e5;
     color: #33302e;
     margin: 40px 20px;
+    line-height: 1.5;
 }
 
 h1 {
@@ -92,7 +93,7 @@ hr {
 #title, #title:hover {
     color: black;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: normal;
     font-family: 'newfont', 'Times', serif;
 }
 
