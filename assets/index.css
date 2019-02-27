@@ -84,6 +84,8 @@ hr {
 
 #header, h2, h3, ul, menu, dir {
     margin: 1rem 0;
+    font-weight: bold;
+    font-family: 'newfont', 'Times', serif;
 }
 
 #header {
