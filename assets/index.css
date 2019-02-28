@@ -4,46 +4,13 @@ html {
 }
 
 @font-face {
-    font-family: 'newfont';
+    font-family: 'titlefont';
     src: url('/assets/fonts/trocchi-webfont.eot');
     src: url('/assets/fonts/trocchi-webfont.eot?#iefix') format('embedded-opentype'),
          url('/assets/fonts/trocchi-webfont.woff') format('woff'),
          url('/assets/fonts/trocchi-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'newfont';
-    src: url('/assets/fonts/trocchi-bold-webfont.eot');
-    src: url('/assets/fonts/trocchi-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/trocchi-bold-webfont.woff') format('woff'),
-         url('/assets/fonts/trocchi-bold-webfont.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'newfont';
-    src: url('/assets/fonts/trocchi-bolditalic-webfont.eot');
-    src: url('/assets/fonts/trocchi-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/trocchi-bolditalic-webfont.woff') format('woff'),
-         url('/assets/fonts/trocchi-bolditalic-webfont.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-
-}
-
-@font-face {
-    font-family: 'newfont';
-    src: url('/assets/fonts/andada-italic-webfont.eot');
-    src: url('/assets/fonts/andada-italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/fonts/andada-italic-webfont.woff') format('woff'),
-         url('/assets/fonts/andada-italic-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
 
 }
 
@@ -86,12 +53,6 @@ hr {
     margin: 1rem 0;
 }
 
-h2, h3 {
-    font-weight: normal;
-    font-family: 'newfont', 'Baskerville', serif;
-    margin: 0.5rem 0;
-  }
-
 #header {
     padding: 0 0 1rem 0;
 }
@@ -100,7 +61,7 @@ h2, h3 {
     color: black;
     text-decoration: none;
     font-weight: normal;
-    font-family: 'newfont', 'Times', serif;
+    font-family: 'titlefont', 'Baskerville', serif;
 }
 
 a {
