@@ -88,7 +88,8 @@ hr {
 
 h2, h3 {
     font-weight: bold;
-    font-family: 'newfont', 'Times', serif;
+    font-family: 'newfont', 'Baskerville', serif;
+    margin: 0.5rem 0;
   }
 
 #header {
