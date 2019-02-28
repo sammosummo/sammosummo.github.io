@@ -87,7 +87,7 @@ hr {
 }
 
 h2, h3 {
-    font-weight: bold;
+    font-weight: normal;
     font-family: 'newfont', 'Baskerville', serif;
     margin: 0.5rem 0;
   }
