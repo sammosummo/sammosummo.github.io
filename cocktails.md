@@ -3,7 +3,7 @@ layout: page
 title: Cocktails
 ---
 
-Here are some of my favorite cocktail recipes.
+Here are some of my favorite cocktail recipes. 🍸
 
 <ul>
 {% for cocktail in site.data.cocktails.cocktails %}
