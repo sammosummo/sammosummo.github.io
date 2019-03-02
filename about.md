@@ -36,11 +36,10 @@ The name comes from a fun description—though not an accurate one—of iterated
 noise, an auditory stimulus used in the early days of auditory fMRI research.
 
 The site itself was built using [Jekyll](https://jekyllrb.com/). It is hosted for free
-on [GitHub Pages](https://pages.github.com/). It uses [Cloudflare](https://www.cloudflare.com/),
-also for free.
+on [GitHub Pages](https://pages.github.com/).
 
 It doesn't use a theme—I found all of them to be far too busy, even the ostensibly
-"minimalist" ones. Instead I cloned [Michael Cypher](http://cypher.codes)'s website and
+minimalist ones. Instead I cloned [Michael Cypher](http://cypher.codes)'s website and
 made some minor edits here and there.
 
 The logo is a 1950s black-and-white stock photo colorized using [DeOldify](https://github.com/jantic/DeOldify).
