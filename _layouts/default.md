@@ -25,12 +25,10 @@
                   <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
 
                   <div id="nav-bar">
-                      <a href="/" class="nav-bar__item">Home</a>
                       <a href="/about" class="nav-bar__item">About</a>
                       <a href="/writing" class="nav-bar__item">Writing</a>
                       <a href="/publications" class="nav-bar__item">Publications</a>
                       <a href="/cocktails" class="nav-bar__item">Cocktails</a>
-                      <a href="/contact" class="nav-bar__item">Contact</a>
                   </div>
                 </div>
 
