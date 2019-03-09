@@ -183,3 +183,13 @@ ul {
 .break {
   word-break: break-all;
 }
+
+.short-text {
+    display: none;
+
+}
+
+@media (max-width: 600px) {
+    .short-text { display: inline-block; }
+    .full-text { display: none; }
+}

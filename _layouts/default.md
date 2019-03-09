@@ -22,7 +22,10 @@
             <div id="header" class="border-bottom">
 
                 <div id="title-nav-bar">
-                  <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
+                  <h1><a id="title" href="/">
+                      <span class="full-text">The Cracked Bassoon</span>
+                      <span class="short-text">The CB</span>
+                  </a></h1>
 
                   <div id="nav-bar">
                       <a href="/about" class="nav-bar__item">About</a>
