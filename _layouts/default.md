@@ -22,10 +22,7 @@
             <div id="header" class="border-bottom">
 
                 <div id="title-nav-bar">
-                  <h1><a id="title" href="/">
-                      <div id="title-profile-photo">The Cracked Bassoon</div>
-                      <div id="short-title">The CB</div>
-                  </a></h1>
+                  <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
 
                   <div id="nav-bar">
                       <a href="/about" class="nav-bar__item">About</a>
@@ -35,7 +32,9 @@
                   </div>
                 </div>
 
-                <img id="profile-photo" src="/assets/logos/02.png" />
+                <div id="title-profile-photo">
+                  <img id="profile-photo" src="/assets/logos/02.png" />
+                </div>
 
                 <div style="clear: left; clear right"></div>
             </div
