@@ -24,20 +24,18 @@
                 <div id="title-nav-bar">
                   <h1><a id="title" href="/">
                       <div id="title-profile-photo">The Cracked Bassoon</div>
-                      <div id="short-title">The C.B.</div>
+                      <div id="short-title">The CB</div>
                   </a></h1>
 
                   <div id="nav-bar">
                       <a href="/about" class="nav-bar__item">About</a>
                       <a href="/writing" class="nav-bar__item">Writing</a>
                       <a href="/publications" class="nav-bar__item">Publications</a>
-                      <a href="/cocktails" class="nav-bar__item">Cocktails</a>
+                      <div id="title-profile-photo"><a href="/cocktails" class="nav-bar__item">Cocktails</a></div>
                   </div>
                 </div>
 
-                <div id="title-profile-photo">
-                  <img id="profile-photo" src="/assets/logos/02.png" />
-                </div>
+                <img id="profile-photo" src="/assets/logos/02.png" />
 
                 <div style="clear: left; clear right"></div>
             </div
