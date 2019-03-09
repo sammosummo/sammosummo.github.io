@@ -166,7 +166,7 @@ section img {
 }
 
 .image-label {
-  text-align: center;
+    text-align: center;
 }
 
 .no-wrap {
@@ -182,15 +182,6 @@ ul {
 /*}*/
 
 .break {
-  word-break: break-all;
-}
+    word-break: break-all;
 
-.short-text {
-    display: none;
-
-}
-
-@media (max-width: 600px) {
-    .short-text { display: inline-block; }
-    .full-text { display: none; }
 }
