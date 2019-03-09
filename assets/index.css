@@ -85,7 +85,7 @@ hr {
 #title-profile-photo {
     float: right;
 }
-@media (max-device-width: 480px) {
+@media (max-device-width: 460px) {
   #title-profile-photo {
     display: none;
   }
