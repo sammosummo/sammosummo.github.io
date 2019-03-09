@@ -37,8 +37,10 @@ layout: default
   {% else %}
     <i>{{ paper.journal }}</i>.
   {% endif %}
-  DOI: <a href="{{ paper.doi_link }}">{{ paper.doi }}</a>.
-  PubMed: <a href="{{ paper.pmid_link }}">{{ paper.pmid }}</a>.
+  DOI: <a href="{{ paper.doi_link }}" class="break">{{ paper.doi }}</a>.
+  {% if paper.pmid %}
+    PubMed: <a href="{{ paper.pmid_link }}" class="break">{{ paper.pmid }}</a>.
+  {% endif %}
   </li></p>
 {% endfor %}
 </ul>
