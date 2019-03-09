@@ -93,13 +93,13 @@ hr {
     float: right;
 }
 
-@media (max-device-width: 600px) {
+@media (max-width: 600px) {
   #title-profile-photo {
     display: none;
   }
 }
 
-@media (min-device-width: 600px) {
+@media (min-width: 600px) {
   #short-title {
     display: none;
   }
