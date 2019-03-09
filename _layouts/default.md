@@ -28,7 +28,7 @@
                       <a href="/about" class="nav-bar__item">About</a>
                       <a href="/writing" class="nav-bar__item">Writing</a>
                       <a href="/publications" class="nav-bar__item">Publications</a>
-                      <div id="title-profile-photo"><a href="/cocktails" class="nav-bar__item">Cocktails</a></div>
+                      <a href="/cocktails" class="nav-bar__item">Cocktails</a>
                   </div>
                 </div>
 
