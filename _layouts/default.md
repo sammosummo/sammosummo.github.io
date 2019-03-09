@@ -24,7 +24,7 @@
                 <div id="title-nav-bar">
                   <h1><a id="title" href="/">
                       <div id="title-profile-photo">The Cracked Bassoon</div>
-                      <div id="short-title">The CB</div>
+                      <div id="short-title">The C.B.</div>
                   </a></h1>
 
                   <div id="nav-bar">
