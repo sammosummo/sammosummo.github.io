@@ -23,8 +23,7 @@
 
                 <div id="title-nav-bar">
                   <h1><a id="title" href="/">
-                      <span class="full-text">The Cracked Bassoon</span>
-                      <span class="short-text">The CB</span>
+                      <div id="title-profile-photo">The Cracked Bassoon</div>
                   </a></h1>
 
                   <div id="nav-bar">
