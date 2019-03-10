@@ -20,7 +20,9 @@ layout: default
   {% endif %}
 
   {{ content }}
-  
-  <p class="small"><i>I haven't enabled comments yet. Meanwhile, if you spot an error
-  or have a question, email me at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</i></p>
 </section>
+
+{% if page.has_comments %}
+  <div id="commento"></div>
+  <script src="https://cdn.commento.io/js/commento.js"></script>
+ {% endif %}

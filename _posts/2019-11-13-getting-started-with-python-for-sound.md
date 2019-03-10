@@ -3,6 +3,7 @@ layout: post
 title: Getting started with Python for sound
 date: 2019-02-13 
 has_code: true
+has_comments: true
 ---
 
 This is the first post in a series about generating and playing sounds using the Python
