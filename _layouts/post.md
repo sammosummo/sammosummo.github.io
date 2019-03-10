@@ -22,7 +22,11 @@ layout: default
   {{ content }}
 </section>
 
+### Comments
+
+Want to comment privately? Send an email to <a href="mailto:{{ site.email }}" class="break">{{ site.email }}</a>. 
+
 {% if page.has_comments %}
   <div id="commento"></div>
-  <script src="https://cdn.commento.io/js/commento.js"></script>
+  <script async src="https://cdn.commento.io/js/commento.js"></script>
  {% endif %}
