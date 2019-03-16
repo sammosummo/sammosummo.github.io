@@ -62,7 +62,6 @@ body {
     font-family: 'bodyfont', georgia, 'Georgia', serif;
     font-size: larger;
     background-color: #fff1e5;
-    background-image: url('/assets/imgs/greyfloral_3.png');
     color: #33302e;
     margin: 40px 20px;
     line-height: 1.4;
@@ -158,6 +157,11 @@ a:hover {
     border-bottom: 1px solid #ccc1b7
 }
 
+blockquote {
+	border-left: 1px solid #ccc1b7;
+	padding: 0 1em
+}
+
 .nav-bar__item {
     margin-right: 0.5rem;
 }
@@ -189,11 +193,12 @@ ul {
     padding-left: 20px;
 }
 
-/*.small, code.highlighter-rouge {*/
-    /*font-size: 0.9em;*/
-/*}*/
+.small { font-size: 0.9em; }
+.break { word-break: break-all; }
 
-.break {
-    word-break: break-all;
-
-}
+table {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+tr, td {padding: 0 1em}
+tr:hover {background-color: #f5f5f5;}

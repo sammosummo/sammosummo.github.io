@@ -7,7 +7,7 @@ My name is Sam Mathias. I’m a researcher at Boston Children’s Hospital. I’
 numerous peer-reviewed papers on a range of topics, including psychology, psychiatry,
 and genetics. *The Cracked Bassoon* is my personal website.
 
-### Minibiography
+## Minibiography
 
 I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in the
 North of England perhaps best known for its inaccurately named
@@ -35,7 +35,7 @@ I currently live in [Charlestown](https://en.wikipedia.org/wiki/Charlestown,_Bos
 superior scientist by every metric. Please check out her work. We have a goldendoodle
 named Charlie.
 
-### How I made *The Cracked Bassoon*
+## How I made *The Cracked Bassoon*
 
 The name of this website comes from a fun but inaccurate description of iterated rippled
 noise, an auditory stimulus used in the early days of auditory fMRI research.
@@ -51,5 +51,3 @@ The logo is a 1950s black-and-white stock photo colorized using [DeOldify](https
 
 The typefaces used for the title and main text are [Trocchi](https://www.fontsquirrel.com/fonts/trocchi)
 and [Charter](https://practicaltypography.com/charter.html), respectively.
-
-The background is from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/).

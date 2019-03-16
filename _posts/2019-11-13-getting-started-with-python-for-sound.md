@@ -4,6 +4,9 @@ title: Getting started with Python for sound
 date: 2019-02-13 
 has_code: true
 has_comments: true
+revisions:
+ - date: 2019-03-16
+   reason: Reformatted code blocks
 ---
 
 This is the first post in a series about generating and playing sounds using the Python
@@ -15,7 +18,7 @@ with Python. I assume no prior knowledge, so readers already familiar with Pytho
 core concepts—packages, environments, and so on—may wish to [skip to the next post](#),
 which will actually get down to the business of making sounds.
 
-### Get a GitHub account, fork the repository
+## Get a GitHub account, fork the repository
 
 My first piece of advice on getting started with Python doesn't involve Python at all.
 [GitHub](https://github.com/) is an online service for hosting code, built on top of the
@@ -33,7 +36,7 @@ own copy of) [this repo](https://github.com/sammosummo/klangfarbe). Since
 with a free account, users can create unlimited private repositories, so you can make
 yours private, if you wish.
 
-### Install Git (if not using a Mac)
+## Install Git (if not using a Mac)
 
 In order to follow my recommendations later on, you’ll need [Git](https://git-scm.com/)
 installed on your computer. Macs come with an old version of Git pre-installed, which you
@@ -42,7 +45,7 @@ using Windows, however, you won’t have a pre-installed version so you’ll nee
 and install Git. I’m not sure whether Git comes with Linux; I assume it depends on your
 distribution.
 
-### Install conda and Python
+## Install conda and Python
 
 Programming  languages are either _compiled_ or _interpreted_. [Python](https://www.python.org/)
 is interpreted, meaning that it requires an _interpreter_ to execute the code. There are
@@ -81,7 +84,7 @@ This is fine but requires a little more work, since you’ll need to install at 
 extra thing, [pip](https://pypi.org/project/pip/), yourself. I’ll talk about pip again
 later.
 
-### Create a new environment
+## Create a new environment
 
 _Environments_—sometimes called _virtual environments_ or simply _envs_—are separate
 instances of Python that are isolated from one another. You can modify Python within an
@@ -103,9 +106,9 @@ I like to create a new conda environment for each new project, and give it the s
 as its GitHub repository, in this case `klangfarbe`. Do this yourself by typing the
 following command into a terminal.
 
-{% highlight bash %}
+```bash
 conda create -n klangfarbe
-{% endhighlight %}
+```
 
 While we are on the subject of terminals, I recommend Mac users consider
 [iTerm](https://www.iterm2.com/) as a replacement for the built-in terminal tool. Windows
@@ -116,7 +119,7 @@ utility. Alternatively, if for whatever reason you have a burning desire to run 
 from the command prompt, simply locate and execute `\Scripts\activate.bat`, which should
 be somewhere in your Mini/Anaconda installation directory.
 
-### Install NumPy
+## Install NumPy
 
 Conceivably, we could use nothing but the
 [Python standard library](https://docs.python.org/3/library/) for sound synthesis and
@@ -132,10 +135,10 @@ and inefficient. Our code would be long and slow to run.
 Conda can install packages into specific environments. The simplest way to do this is to
 _activate_ the desired environment, then install the package without additional arguments:
 
-{% highlight bash %}
+```bash
 conda activate klangfarbe
 conda install numpy
-{% endhighlight %}
+```
 
 If you have been following my recommendations up to this point, and are using Miniconda,
 the above commands will install NumPy and all its dependencies for you. One of these
@@ -157,7 +160,7 @@ packages successfully, many of Qt’s features were actually missing (`QtMultime
 instance). This was quickly remedied by installing a newer version of PyQt5 via
 `pip install PyQt5`.
 
-### Install PyCharm, clone the repository, configure
+## Install PyCharm, clone the repository, configure
 
 Serious coding is facilitated enormously by an integrated development environment (IDE).
 Python ships with a bare-bones IDE called [IDLE](https://docs.python.org/3/library/idle.html),
@@ -196,14 +199,14 @@ see later), enabling Pycharm to expand `main` into
 [boilerplate](https://python-reference.readthedocs.io/en/latest/docs/boilerplate/), and
 the darkula theme.
 
-### Install Audacity (optional)
+## Install Audacity (optional)
 
 [Audacity](https://www.audacityteam.org/) has nothing to do with Python—it is software
 for manipulating digital audio. This series won’t require Audacity, but it may be useful
 for occasionally inspecting waveforms, spectrograms etc. of sounds you created. Audacity
 is free, small (at least compared GarageBand or Audition) and easy to use.
 
-### Learn Python
+## Learn Python!
 
 The [Hitchiker’s Guide to Python](https://docs.python-guide.org/intro/learning/) provides
 a comprehensive list of the best resources for learning Python. If you are completely new
@@ -222,7 +225,7 @@ exact same thing on [Stack Overflow](https://stackoverflow.com/questions/tagged/
 Knowing how to describe a problem using the correct terminology is key to efficient
 Googling/Stack Overflowing.
 
-### Make your code “Pythonic”
+## Make your code “Pythonic”
 
 In Python, there is usually a preferred or _Pythonic_ way of doing something. To quote
 the [Zen of Python](There%20should%20be%20one%E2%80%94and%20preferably%20only%20one%E2%80%94obvious%20way%20to%20do%20it.),
@@ -238,14 +241,10 @@ avoid wasting too much time on formatting and instead run all my scripts through
 [black](https://black.readthedocs.io/en/stable/) after they’re done. Black can be
 installed via pip, in your current environment if you wish.
 
-{% highlight bash %}
-pip install black
-{% endhighlight %}
-
 Now code can be formatted directly from the terminal with `black <mysript.py>`
 (or `black *.py` to run it on all Python scripts in the current directory).
 
-### Write comprehensive documentation
+## Write comprehensive documentation
 
 Documenting your own code can feel like a chore but trust me, it is an incredibly
 beneficial habit in the long run and you should try to cultivate it straight away. Force
@@ -258,7 +257,7 @@ is my personal favorite, but
 [NumPy style](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy)
 is good too.
 
-### Make some sounds
+## Make some sounds
 
 Now that Python is installed and configured correctly, we can start to generate our first
-sounds. Continue to the next post.
+sounds. [Continue to the next post](#).
