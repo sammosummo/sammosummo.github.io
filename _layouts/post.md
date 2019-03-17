@@ -39,7 +39,7 @@ layout: default
   <script async src="https://cdn.commento.io/js/commento.js"></script>
  {% endif %}
  
-<p<i>If you’d like to comment privately on anything you’ve seen here,
+<p><i>If you’d like to comment privately on anything you’ve seen here,
 email me at <a href="mailto:{{ site.email }}" class="break">{{ site.email }}</a>.
 
 Along with the rest of this website, this page is distributed under an MIT license. Do what

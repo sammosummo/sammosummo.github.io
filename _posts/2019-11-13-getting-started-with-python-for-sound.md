@@ -7,6 +7,8 @@ has_comments: true
 revisions:
  - date: 2019-03-16
    reason: Reformatted code blocks
+ - date: 2019-03-17
+   reason: Added links to second post
 ---
 
 This is the first post in a series about generating and playing sounds using the Python
@@ -15,7 +17,8 @@ best practices, psychoacoustics, and digital audio. My hope is that by the end, 
 will able to perform sound synthesis with a firm basis in psychoacoustics using idiomatic
 Python. To kick things off, I present my (highly opinionated) guide to getting started
 with Python. I assume no prior knowledge, so readers already familiar with Python and its
-core concepts—packages, environments, and so on—may wish to [skip to the next post](#),
+core concepts—packages, environments, and so on—may wish to
+[skip to the next post](playing-a-pure-tone-interactively),
 which will actually get down to the business of making sounds.
 
 ## Get a GitHub account, fork the repository
@@ -260,4 +263,4 @@ is good too.
 ## Make some sounds
 
 Now that Python is installed and configured correctly, we can start to generate our first
-sounds. [Continue to the next post](#).
+sounds. [Continue to the next post](playing-a-pure-tone-interactively).
