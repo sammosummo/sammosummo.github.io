@@ -4,6 +4,7 @@ title: Pure tones
 date: 2019-03-22
 has_math: true
 has_code: true
+has_comments: true
 ---
 
 
