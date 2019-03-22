@@ -12,11 +12,11 @@ basic stuff. As I wrote in the [first post](getting-started-with-python-for-soun
 want to go slowly and not to assume any prior knowledge of either Python or sound
 synthesis. I do assume, however, that you read and followed the recommendations in my
 first post. In particular, I assume that you installed conda and created a new conda
-environment] called `klangfarbe`. If you didn’t do those things, the code examples below
+environment called `klangfarbe`. If you didn’t do those things, the code examples below
 might not work exactly as described.
 
-**WARNING**: Before running these commands, make sure that the volume on your computer
-is set **very low**, especially if you are using headphones!
+Before running any of these commands, make sure that the volume on your computer is set
+**very low**, especially if you are using headphones!
 
 ## Install sounddevice
 
@@ -132,9 +132,10 @@ Below is a script that will play the same tone when executed.
 
 <script src="https://gist.github.com/sammosummo/ea1b006d1541c4f26ed6d554433d9c96.js"></script>
 
-The script is also available in the `klangfarbe` GitHub repository. If you followed my
-advice from the [first post](getting-started-with-python-for-sound) in this series and
-cloned this repository, you can update it and the file will appear on your computer.
+The script is also available in the [`klangfarbe` GitHub repository](https://github.com/sammosummo/klangfarbe/blob/master/play_tone.py).
+If you followed my advice from the [first post](getting-started-with-python-for-sound)
+in this series and cloned this repository, you can update it and the file will appear on
+your computer.
 
 ## Next steps
 
