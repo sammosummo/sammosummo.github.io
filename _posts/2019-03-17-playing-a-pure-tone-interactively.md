@@ -4,6 +4,9 @@ title: Playing a tone interactively using Python
 date: 2019-03-17 
 has_code: true
 has_comments: true
+revisions:
+ - date: 2019-03-24
+   reason: Added links to third post
 ---
 
 This is the second post in a series about using Python to generate and play sounds.
@@ -140,5 +143,5 @@ your computer.
 ## Next steps
 
 We’ve played our first sound using Python. As I wrote at the beginning, this was basic
-stuff. In the next post, we will go a tiny bit deeper by considering the pure tone in
-more detail.
+stuff. In the [next post](pure-tones), we will go a tiny bit deeper by considering the
+pure tone in more detail.
