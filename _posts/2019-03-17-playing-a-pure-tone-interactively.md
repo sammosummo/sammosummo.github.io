@@ -4,6 +4,9 @@ title: Playing a tone interactively using Python
 date: 2019-03-17 
 has_code: true
 has_comments: true
+tags:
+ - Python
+ - sound
 revisions:
  - date: 2019-03-24
    reason: Added links to third post

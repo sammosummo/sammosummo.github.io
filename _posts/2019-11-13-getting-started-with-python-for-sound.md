@@ -4,40 +4,66 @@ title: Getting started with Python for sound
 date: 2019-02-13 
 has_code: true
 has_comments: true
+tags:
+ - Python
+ - sound
 revisions:
  - date: 2019-03-16
    reason: Reformatted code blocks
  - date: 2019-03-17
    reason: Added links to second post
+ - date: 2019-03-28
+   reason: Edited writing and added images
 ---
 
-This is the first post in a series about generating and playing sounds using the Python
-programming language. The series will go slowly and cover several topics, including Python
-best practices, psychoacoustics, and digital audio. My hope is that by the end, a reader
-will able to perform sound synthesis with a firm basis in psychoacoustics using idiomatic
-Python. To kick things off, I present my (highly opinionated) guide to getting started
-with Python. I assume no prior knowledge, so readers already familiar with Python and its
-core concepts—packages, environments, and so on—may wish to
-[skip to the next post](playing-a-pure-tone-interactively),
-which will actually get down to the business of making sounds.
+
+This is the first post in a series about generating and playing sounds using the [Python
+programming language](https://www.python.org). The series will go slowly and cover several
+topics, including Python best practices, psychoacoustics, and digital audio. I assume no
+prior knowledge of any of these topics.
+
+![](/assets/images/python-logo-generic.svg){: style="max-width: 300px; height: auto;"}
+*Python logo. From [Python.org](https://www.python.org/community/logos/).*
+
+To kick things off, I present my (highly opinionated) guide to getting started with
+Python for the purposes of sound synthesis. Readers already familiar with Python and its
+core concepts—packages, environments, and so on—may wish to [skip to the next 
+post](playing-a-pure-tone-interactively), which actually gets down to the business of
+making sounds.
+
+It’s probably worth mentioning right out the gate that I’m a Mac user. While most of the
+software mentioned on this page is available on all of the major platforms (Windows, Mac,
+and the many flavors of Linux), there are always small differences in the way the same
+application works on each of them. I’ve tried to anticipate these differences, but my
+experience with Windows and Linux is somewhat lacking because I don’t use them on a
+regular basis.
 
 ## Get a GitHub account, fork the repository
 
-My first piece of advice on getting started with Python doesn't involve Python at all.
+![](/assets/images/octocat.svg){: style="max-width: 150px; height: auto;"}
+*[Octocat](https://en.wikipedia.org/wiki/GitHub#Mascot), the GitHub mascot. From [Johan
+Sundström](https://gist.github.com/johan/1007813).*
+
+My first piece of advice on getting started with Python doesn't actually involve Python.
 [GitHub](https://github.com/) is an online service for hosting code, built on top of the
 popular version control software (VCS) [Git](https://git-scm.com/). There are several
 similar alternative services, including [BitBucket](https://bitbucket.org) and
 [GitLab](https://about.gitlab.com), and the internet is replete with comparisons between
-them. GitHub is simply the only one I have tried and I haven't found any reason to switch.
+them. GitHub is simply the first one I tried, and I haven't found any reasons to
+switch.
 
 For this series of posts, I have created a public GitHub repository or _repo_ called
 `klangfarbe`, the German word for timbre (literally, “sound color”). The German language
 makes for an excellent generator for repository names, in my opinion. Head over to the
-[GitHub website](https://github.com/), sign up for a free account and _fork_ (create your
-own copy of) [this repo](https://github.com/sammosummo/klangfarbe). Since
-[Microsoft acquired GitHub](https://www.msn.com/en-us/news/technology/microsoft-completes-github-acquisition/ar-BBOVVOT),
-with a free account, users can create unlimited private repositories, so you can make
-yours private, if you wish.
+[GitHub website](https://github.com/), sign up for a free account (if you don't already
+have one) and _fork_ (create your own copy of) [this
+repo](https://github.com/sammosummo/klangfarbe). Since [Microsoft acquired
+GitHub](https://www.msn.com/en-us/news/technology/microsoft-completes-github-acquisition/ar-BBOVVOT),
+with a free account, users can create unlimited private repos, so you can make your fork
+private, if you wish.
+
+![](/assets/images/klangfarbe-screenshot.png)
+*Click the "Fork" button to create your own copy of the repo.*
 
 ## Install Git (if not using a Mac)
 
@@ -48,12 +74,20 @@ using Windows, however, you won’t have a pre-installed version so you’ll nee
 and install Git. I’m not sure whether Git comes with Linux; I assume it depends on your
 distribution.
 
+![](/assets/images/git-logo.svg){: style="max-width: 200px; height: auto;"}
+*The Git logo. From [Wikimedia
+Commons](https://commons.wikimedia.org/wiki/File:Git-logo.svg).*
+
 ## Install conda and Python
 
 Programming  languages are either _compiled_ or _interpreted_. [Python](https://www.python.org/)
 is interpreted, meaning that it requires an _interpreter_ to execute the code. There are
 many different ways to obtain a Python interpreter, but I strongly recommend using
 [conda](https://conda.io/en/latest/).
+
+![](/assets/images/conda-logo.svg){: style="max-width: 300px; height: auto;"}
+*Conda logo. From the [conda docs](https://docs.conda.io/en/latest/index.html). It annoys
+me that they didn't make the white portions of the "C" transparent.*
 
 Conda is software for managing installing and managing other software. It runs on Windows,
 macOS and Linux. In my opinion, conda is currently the best way to install Python for
@@ -131,6 +165,9 @@ take advantage of third-party packages to perform as much of the heavy lifting a
 possible. For now, install one such package, [NumPy](http://www.numpy.org/). Others will
 be installed later, as and when required.
 
+![](/assets/images/numpy-logo-huge.svg){: style="max-width: 300px; height: auto;"}
+*NumPy logo. From [NumPy](https://github.com/numpy/numpy/tree/master/branding/icons).*
+
 NumPy is the foundational package for scientific Python, adding support for array-based
 computation. Without NumPy, creating and manipulating sound waveforms would be tedious
 and inefficient. Our code would be long and slow to run.
@@ -173,6 +210,11 @@ powerful IDE, but my favorite is [PyCharm](https://www.jetbrains.com/pycharm/). 
 conda, PyCharm is made by a for-profit company, although its community edition is free and
 the professional edition can be obtained for free if you are in full-time education (you
 just need a `.edu` email address).
+
+![](/assets/images/pycharm-logo.svg){: style="max-width: 150px; height: auto;"}
+*PyCharm logo. From [Wikimedia
+Commons](https://commons.wikimedia.org/wiki/File:PyCharm_Logo.svg).*
+
 
 PyCharm is awesome. It has highly sophisticated code introspection tools, a powerful
 debugger, and

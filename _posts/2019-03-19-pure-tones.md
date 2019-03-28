@@ -5,6 +5,13 @@ date: 2019-03-22
 has_math: true
 has_code: true
 has_comments: true
+tags:
+ - Python
+ - sound
+ - psychophysics
+revisions:
+ - date: 2019-03-27
+   reason: Added links
 ---
 
 
@@ -16,38 +23,42 @@ This post fills in these gaps.
 
 ## What is a pure tone?
 
-![](/assets/images/pure_tones_0.svg) 
+![](/assets/images/pure_tones_0.svg)
+*A pure tone. Scaling of the axes is arbitrary.*
 
 A pure tone is a sound whose waveform is _sinusoidal_, or like a sine wave, smoothly
 cycling from positive to negative pressure and back again. They are sometimes called
 _sinusoids_. Pure tones can be fully defined by four features. The first is _duration_,
-normally expressed in seconds (s) or milliseconds (ms). The figure below illustrates two
-pure tones where one of them (orange) has a slightly longer duration.
+normally expressed in seconds (s) or milliseconds (ms).
 
-![](/assets/images/pure_tones_1.svg) 
+![](/assets/images/pure_tones_1.svg)
+*Two pure tones. The tone represented by the solid orange curve has a slightly longer
+duration than the tone represented by the dashed blue curve.*
 
 The second is _frequency_, or rate of change from positive to negative pressure, normally
-expressed in cycles per second (Hz). In the figure below, the green curve represents a
-tone with a higher frequency.
+expressed in cycles per second (Hz).
 
 ![](/assets/images/pure_tones_2.svg)
+*Two more pure tones. The green curve represents a tone with a higher frequency.*
 
 The third is _starting phase_, or where it begins its cycle, normally expressed in radians
-(rad). Below, the red curve represents a tone with a different starting phase.
+(rad).
 
 ![](/assets/images/pure_tones_3.svg)
+*Two pure tones with different phases.*
 
 The fourth is _level_, expressed in decibels (dB). Level is related to _amplitude_, or the
-instantaneous pressure at the peaks. Below, the purple curve represents a tone with a
-larger amplitude, and therefore a higher level. 
+instantaneous pressure at the peaks. 
 
 ![](/assets/images/pure_tones_4.svg) 
+*Two more pure tones. The purple curve represents a tone with a larger amplitude, and
+therefore a higher level*
 
 Conceptually, level is a bit more complicated than duration, frequency, and starting
 phase. Firstly, it depends on several factors that don’t influence the other three
 features, such as the distance and material between you and the sound source. This should
 be obvious: if you stand further away from a loudspeaker, or cover your ears, any sounds
-emitted from the speaker will have a lower level. However, even different models of
+emitted from the speaker will have a lower level at your ears. Even different models of
 headphones will deliver pure tones at wildly different levels, all else being equal.
 
 A second complication is that level is relative rather than absolute. When we say a pure
@@ -197,4 +208,12 @@ def sinusoid(d, f, phi, l, a0=a0, sr=sr):
 Here is the above function inside a complete Python script.
 
 <script src="https://gist.github.com/sammosummo/476a1ad7f07fc66a3bc3da8db81e4e71.js"></script>
+
+BTW, the script that created the waveform plots at the beginning of this post can be found
+[here](https://github.com/sammosummo/klangfarbe/blob/master/plot_pure_tones.py).
+
+## Next steps
+
+The [next post](spectral-splatter) tackles the issue of spectral splatter, which affects
+pure tones and other periodic stimuli.
 
