@@ -513,6 +513,18 @@ my_papers:
    last_page: "501"
    doi_link: "https://www.doi.org/10.1016/B978-0-12-800105-9.00031-7"
 
+ - id: "00000004"
+   authors: "<b><u>Mathias, S. R.</u></b> & von Kriegstein, K."
+   year: "2019"
+   sort: "2019-05"
+   month: "May"
+   title: "Voice processing and voice-identity recognition."
+   journal: "Timbre: Acoustics, Perception, and Cognition: Springer Handbook of Auditory Research"
+   doi: "10.1007/978-3-030-14832-4_7"
+   first_page: "175"
+   last_page: "209"
+   doi_link: "https://www.doi.org/10.1007/978-3-030-14832-4_7"
+
  - id: "28480992"
    pmid: "28480992"
    authors: "Yao, N., Winkler, A. M., Barrett, J., Book, G. A., Beetham, T., Horseman, R., Leach, O., Hodgson, K., Knowles, E. E., <b><u>Mathias, S.</u></b>, Stevens, M. C., Assaf, M., van Erp, T. G. M., Pearlson, G. D., & Glahn, D. C."
