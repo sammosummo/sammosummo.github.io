@@ -118,6 +118,10 @@ for f in nbibs:
                     paper["state"] = data
                 elif name == "CY":
                     paper["publisher"] = data
+                elif name == "CO":
+                    paper["collection"] = data
+                elif name == "BN":
+                    paper["book"] = data
             else:
                 if name in ("TI", "AB"):
                     paper[new_name] += (" " + l.strip())                    
@@ -141,19 +145,20 @@ for paper in papers:
         paper["doi_link"] = "https://www.doi.org/" + paper["doi"]
     if "pmid" in paper:
         paper["pmid_link"] = "https://www.ncbi.nlm.nih.gov/pubmed/" + paper["pmid"]
-    if paper["journal"] == "Frontiers in Bioscience":
-        paper["journal"] = "Frontiers in Bioscience (Scholar Edition)"
-    paper["journal"] = paper["journal"].replace(
-        " : Cb", ""
-    ).replace(
-        " : the", ""
-    ).replace(
-        " Journal of the Association of European Psychiatrists", ""
-    ).replace(
-        " : Official Publication of the American College of", ""
-    ).replace(
-        " Official Journal of the Society For", ""
-    )
+    if "journal" in paper:
+        if paper["journal"] == "Frontiers in Bioscience":
+            paper["journal"] = "Frontiers in Bioscience (Scholar Edition)"
+        paper["journal"] = paper["journal"].replace(
+            " : Cb", ""
+        ).replace(
+            " : the", ""
+        ).replace(
+            " Journal of the Association of European Psychiatrists", ""
+        ).replace(
+            " : Official Publication of the American College of", ""
+        ).replace(
+            " Official Journal of the Society For", ""
+        )
     paper["title"] = paper["title"][0] + paper["title"][1:].lower()
     paper["title"] = paper["title"].replace(
         "african", "African"
