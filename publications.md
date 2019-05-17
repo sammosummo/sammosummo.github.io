@@ -27,7 +27,7 @@ soon as possible.
     ({{ paper.year }}).
     {{ paper.title }}
     {{ paper.editor }},
-    <i>{{ paper.book }}</i>
+    <i>{{ paper.editor }}</i>
     {% if paper.collection %}
       ({{paper.collection }} vol. {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
     {% if paper.volume %}
