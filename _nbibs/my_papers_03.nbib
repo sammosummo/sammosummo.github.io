@@ -25,6 +25,9 @@ ED  - In A. W. Toga & R. A. Poldrack (Eds.)
 LID - 10.1016/B978-0-12-397025-1.00112-3 [doi]
 PG  - 929-932
 VI  - 3
+CI  - Cambridge
+CC  - MA
+CY  - Academic Press
 
 ID  - 00000003
 FAU - Glahn, D C
@@ -42,6 +45,9 @@ ED  - In T. Lehner, B. L. Miller & M. W. State (Eds.)
 JT  - Genomics, circuits, and pathways in clinical neuropsychiatry
 LID - 10.1016/B978-0-12-800105-9.00031-7 [doi]
 PG  - 487-501
+CI  - Cambridge
+CC  - MA
+CY  - Academic Press
 
 ID  - 00000004
 FAU - Mathias, S R
@@ -49,6 +55,10 @@ FAU - von Kriegstein, K
 DP  - 2019 May 13
 TI  - Voice processing and voice-identity recognition.
 ED  - In K. Siedenburg, C. Saitis, S. McAdams, A. Popper, R. Fay (Eds.)
-JT  - Timbre: Acoustics, perception, and cognition. Springer Handbook of Auditory Research (vol. 69)
+JT  - Timbre: Acoustics, perception, and cognition. Springer Handbook of Auditory Research
 LID - 10.1007/978-3-030-14832-4_7 [doi]
 PG  - 175-209
+VI  - 69
+CI  - Cham
+CC  - Switzerland
+CY  - Springer

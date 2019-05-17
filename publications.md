@@ -22,31 +22,45 @@ soon as possible.
 {% assign sorted = site.data.my_papers.my_papers | sort: 'sort' | reverse %}
 {% for paper in sorted %}
   <p><li>
-  {{ paper.authors }}
-  ({{ paper.year }}).
-  {{ paper.title }}
-  {% if paper.first_page %}
-    <i>{{ paper.journal }}</i>,
+  {% if paper.editor %}
+    {{ paper.authors }}
+    ({{ paper.year }}).
+    {{ paper.title }}
+    {{ paper.editor }},
+    <i>{{ paper.journal }}</i>
     {% if paper.volume %}
-      {% if paper.issue %}
-        {{ paper.volume }} ({{ paper.issue }}),
-      {% else %}
-         {{ paper.volume }},
-      {% endif %}
-    {% endif %}
-    {% if paper.last_page %}
-      {{ paper.first_page }}–{{ paper.last_page }}.
+      (vol. {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
     {% else %}
-      {{ paper.first_page }}.
+      (pp. {{ paper.first_page }}–{{ paper.last_page }}).
     {% endif %}
+    {{ paper.city }}, {{ paper.state }}: {{ paper.publisher }}.
   {% else %}
-    <i>{{ paper.journal }}</i>.
+    {{ paper.authors }}
+    ({{ paper.year }}).
+    {{ paper.title }}
+    {% if paper.first_page %}
+      <i>{{ paper.journal }}</i>,
+      {% if paper.volume %}
+        {% if paper.issue %}
+          {{ paper.volume }} ({{ paper.issue }}),
+        {% else %}
+           {{ paper.volume }},
+        {% endif %}
+      {% endif %}
+      {% if paper.last_page %}
+        {{ paper.first_page }}–{{ paper.last_page }}.
+      {% else %}
+        {{ paper.first_page }}.
+      {% endif %}
+    {% else %}
+      <i>{{ paper.journal }}</i>.
+    {% endif %}
+    DOI: <a href="{{ paper.doi_link }}" class="break">{{ paper.doi }}</a>.
+    {% if paper.pmid %}
+      PubMed: <a href="{{ paper.pmid_link }}" class="break">{{ paper.pmid }}</a>.
+    {% endif %}
+    </li></p>
   {% endif %}
-  DOI: <a href="{{ paper.doi_link }}" class="break">{{ paper.doi }}</a>.
-  {% if paper.pmid %}
-    PubMed: <a href="{{ paper.pmid_link }}" class="break">{{ paper.pmid }}</a>.
-  {% endif %}
-  </li></p>
 {% endfor %}
 </ul>
 

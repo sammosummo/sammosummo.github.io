@@ -110,6 +110,14 @@ for f in nbibs:
                             d = len(f) - len(l)
                             l = f[:d] + l
                         paper["first_page"], paper["last_page"] = (f, l)
+                elif name == "ED":
+                    paper["editor"] = data
+                elif name == "CI":
+                    paper["city"] = data
+                elif name == "CC":
+                    paper["state"] = data
+                elif name == "CY":
+                    paper["publisher"] = data
             else:
                 if name in ("TI", "AB"):
                     paper[new_name] += (" " + l.strip())                    
@@ -123,8 +131,8 @@ for paper in papers:
         authors = ", ".join(authors)
     else:
         authors = " ".join(authors)
-    authors = authors.replace("Mathias, S.", "<b><u>Mathias, S.</u></b>")
-    authors = authors.replace("<b><u>Mathias, S.</u></b> R.", "<b><u>Mathias, S. R.</u></b>")
+    authors = authors.replace("Mathias, S.", "<b>Mathias, S.</b>")
+    authors = authors.replace("<b>Mathias, S.</b> R.", "<b>Mathias, S. R.</b>")
     paper["authors"] = authors
     if "pmid" in paper:
         if paper["pmid"] == "24389264":
