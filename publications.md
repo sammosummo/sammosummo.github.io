@@ -22,16 +22,20 @@ soon as possible.
 {% assign sorted = site.data.my_papers.my_papers | sort: 'sort' | reverse %}
 {% for paper in sorted %}
   <p><li>
-  {% if paper.editor %}
+  {% if paper.book %}
     {{ paper.authors }}
     ({{ paper.year }}).
     {{ paper.title }}
     {{ paper.editor }},
-    <i>{{ paper.journal }}</i>
-    {% if paper.volume %}
-      (vol. {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+    <i>{{ paper.book }}</i>
+    {% if paper.collection %}
+      ({{ paper.collection }}, vol. {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
     {% else %}
-      (pp. {{ paper.first_page }}–{{ paper.last_page }}).
+      {% if paper.volume %}
+        (vol. {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+      {% else %}
+        (pp. {{ paper.first_page }}–{{ paper.last_page }}).
+      {% endif %}
     {% endif %}
     {{ paper.city }}, {{ paper.state }}: {{ paper.publisher }}.
   {% else %}
