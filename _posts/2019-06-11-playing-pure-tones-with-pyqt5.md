@@ -3,19 +3,16 @@ layout: post
 title: Playing pure tones with PyQt5
 date: 2019-06-11
 has_code: true
-has_math: true
 has_comments: true
 ---
 
-In an [earlier post](getting-started-with-python-for-sound), I recommended [sounddevice](https://python-sounddevice.readthedocs.io/en/latest/), a third-party [Python](https://www.python.org/) package for sound playback. I also mentioned that there were some alternatives with similar functions. One of these is [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download5), a package that provides bindings for [Qt](https://www.qt.io/). A potential advantage of PyQt5 is that allows the user to build whole graphical user interfaces (GUIs). If you are interested in building some sort of app with an audio is a component, PyQt5 seems like a smart choice.
+In an [earlier post](getting-started-with-python-for-sound), I recommended using a third-party package called [sounddevice](https://python-sounddevice.readthedocs.io/en/latest/) for playing sounds with Python. I also mentioned that there were some alternatives with similar functions. Overall, I still recommend sounddevice because I find it to be the most straitforward to use and the easiest to install on macOS, Windows, and Linux. However, [PyQt5](https://www.riverbankcomputing.com/software/pyqt/download5) is an alternative certainly worth looking at. PyQt5 provides bindings for [Qt](https://www.qt.io/), software for building complete applications with graphical user interfaces (GUIs). So if you are interested in building a Python app with an audio component, PyQt5 seems like a smart choice.
 
-I’ve really struggled to PyQt5 effectively for playing sounds, much to my chagrin. I use PyQt5 _all the time_ for building psychological experiments, so relying on an extra pacakge for sound playback when this is included within PyQt5 is not only infuriating, it makes shipping dependency-free apps all the more difficult because there’s an extra Python package to worry about.
-
-I think a major problem is that there aren’t enough decent working examples online. In this post, I’ve decided to take [this example script](https://wiki.python.org/moin/PyQt/Playing%20a%20sound%20with%20QtMultimedia) and improve it in a few ways.
+Unfortunately, I’ve really struggled to use PyQt5’s built-in audio features effectively. Latency issues, clicking, and clipping can be difficult to avoid. This is much to my own chagrin: I use PyQt5 _all the time_ for building psychological experiments, so relying on an extra pacakge for sound playback when this is included within PyQt5 is infuriating. I think a major problem is that there aren’t enough working examples online. I guess people don't use PyQt5 for audio as often as other tasks. In this post, I decided to try to rectify the balance in a small way, by taking an [already existing script](https://wiki.python.org/moin/PyQt/Playing%20a%20sound%20with%20QtMultimedia) and fixing some of its problems. By the end, we will have a Python script that creates a GUI from which the user can play pure tones of different frequencies and levels.
 
 ## Setup
 
-This example is included in my [`klangfarbe` GitHub repo](https://github.com/sammosummo/klangfarbe/tree/master). If you decide to clone it, I recommend setting up a conda Python environment of the same name, as per my [getting-started post](getting-started-with-python-for-sound). In addition to NumPy, install PyQt5. **Important note**: at the time of writing, the conda version of PyQt5 does not include all the necessary sub-components to get our coding working. Therefore, you should install it via `pip install PyQt5` instead.
+This example is included in my [`klangfarbe` GitHub repo](https://github.com/sammosummo/klangfarbe/tree/master). If you decide to clone it, I recommend setting up a conda Python environment of the same name, as per my [getting-started post](getting-started-with-python-for-sound). You will need to install PyQt5 within this environment. Please note that, at the time of writing, the conda version of PyQt5 does not include all the necessary sub-components to play sounds. Therefore, you should install it via `pip install PyQt5` instead.
 
 ## Original code
 
@@ -132,7 +129,7 @@ from PyQt5.QtWidgets import QApplication, QFormLayout, QLineEdit, QHBoxLayout, Q
 from PyQt5.QtMultimedia import QAudio, QAudioDeviceInfo, QAudioFormat, QAudioOutput
 ```
 
-Note that in addition to changing the base package, the `QtGui` sub-package is now called `QtWidgets`.
+Note that in addition to changing the imported base package, the `QtGui` sub-package is now called `QtWidgets`.
 
 A couple of methods in `QAudioFormat` have also been renamed. Lines 17–18 should read,
 
@@ -185,7 +182,7 @@ Let’s do a little debugging to figure out why this script only plays a single 
         print("played:", self.output.state(), self.output.error())
 ```
 
-Now when rerun the script and press the Play button twice, we see the following:
+When we rerun the script and press the Play button twice, we see the following:
 
 ```
 about to play: 2 0
@@ -323,7 +320,7 @@ played: 0 0
 playing took 42 milliseconds
 ```
 
-Clearly,  it’s re-writing the waveform on each `play` call that’s causing the lion’s share of the lag. We could speed this up by replacing `createData` with a method that uses NumPy, as described in my previous post. But we could also simply move this call out of the `play` method. Now the relevant portion of the code looks like this:
+Clearly,  it’s re-writing the waveform on each `play` call that’s causing the lion’s share of the lag. We could speed this up by replacing `createData` with a method that uses NumPy, as described in my previous posts. But we could also simply move this call out of the `play` method. Now the relevant portion of the code looks like this:
 
 ```python
     def changeFrequency(self, value):
@@ -384,14 +381,16 @@ played: 0 0
 playing took 0 milliseconds
 ```
 
-This modification actually makes the code much less efficient because re-writes the waveform every time either slider moves, rather than only when it actually needs to another waveform. But it did eliminate (most of) the lag.
+This modification actually makes the code much less efficient because it re-writes the waveform every time either slider moves, rather than only when it actually needs to play another waveform. But it did eliminate (most of) the lag.
 
 ## Poor latency on initial play
 
-Latencies are much better for the second play onwards,  but the first one is still poor. I have not figured out the source of this, and I find it annoying as all hell. My hacky workaround is to add a call to `play` to the `__init__` method.  Thus, upon initialization, the object plays an empty buffer. Again, this is inefficient, but it’s the best I could come up with.
+Latencies are much better for the second play onwards,  but the first one is still poor. I have not figured out the source of this, and I find it annoying as all hell. My hacky workaround is to add a call to `play` during the `__init__` method.  Thus, upon initialization, the object plays an empty buffer, which eats up the initial lag. Again, this is inefficient, but it’s the best I could come up with.
 
 ## Final code
 
-Now we have a short, simple script that plays tones with sub-millisecond latencies. This might be sufficient for some purposes, such as behavioral psychological experiments. The complete code, tidied up and with comments and `print` calls removed, is provided as a Gist below. It’s also included in [my repo](https://github.com/sammosummo/klangfarbe/tree/master).
+Now we have a short, simple script that plays tones with sub-millisecond latencies. This might be sufficient for some purposes, such as certain behavioral psychological experiments. The complete code, tidied up and with comments and `print` calls removed, is provided as a Gist below. It’s also included in [my repo](https://github.com/sammosummo/klangfarbe/tree/master).
+
+<script src="https://gist.github.com/sammosummo/0b85e27d6ff02bbf8809dab24be5158b.js"></script>
 
 To be clear, this is not good code! The latency is bellow 1 millisecond but this is still not great. It wouldn’t work in circumstances where timing is absolutely critical, such as in a electrophysiology experiment, and I hate the play-silence-during-init hack. If anyone reading this has any suggestions for further improvements, please feel free to leave a comment below.
