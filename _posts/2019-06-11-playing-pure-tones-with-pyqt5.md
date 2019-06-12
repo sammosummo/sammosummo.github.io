@@ -393,4 +393,4 @@ Now we have a short, simple script that plays tones with sub-millisecond latenci
 
 <script src="https://gist.github.com/sammosummo/0b85e27d6ff02bbf8809dab24be5158b.js"></script>
 
-To be clear, this is not good code! The latency is bellow 1 millisecond but this is still not great. It wouldn’t work in circumstances where timing is absolutely critical, such as in a electrophysiology experiment, and I hate the play-silence-during-init hack. If anyone reading this has any suggestions for further improvements, please feel free to leave a comment below.
+To be clear, this is not good code! The latency is below 1 millisecond but this is still not great. It wouldn’t work in circumstances where timing is absolutely critical, such as in a electrophysiology experiment, and I hate the play-silence-during-init hack. If anyone reading this has any suggestions for further improvements, please feel free to leave a comment below.
