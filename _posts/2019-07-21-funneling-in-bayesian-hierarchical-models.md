@@ -4,13 +4,19 @@ title: Funneling in Bayesian hierarchical models
 date: 2019-07-02
 has_code: true
 has_comments: true
+has_math: true
 ---
 
-Here is a simple Bayesian hierarchical model. At the lower level of the model, there are $n$ random variables with the following prior distributions
+Here is a simple Bayesian hierarchical model. At the lower level of the model, there are $n$ random variables with the
+following prior distributions
 
-$$\begin{equation}x_i\sim\textrm{Normal}\left(\mu,\sigma^2\right)\end{equation}$$
+$$\begin{equation}
+x_i\sim\textrm{Normal}\left(\mu,\sigma^2\right)
+\end{equation}
+$$
  
-where $$i$$ indexes the random variable, and $$\mu$$ and $$\sigma$$ are hyperparameters representing means and standard deviations, respectively. The hyperprior on $$\mu$$ is 
+where $$i$$ indexes the random variable, and $$\mu$$ and $$\sigma$$ are hyperparameters representing means and standard
+deviations, respectively. The hyperprior on $$\mu$$ is 
 
 $$\begin{equation}\mu\sim\textrm{Normal}\left(0,1\right)\end{equation}$$
 
@@ -34,7 +40,10 @@ with pm.Model():
 
 ```
 
-Quite deliberately, this model contains no data, which means that the joint posterior distribution of the model is theoretically identical to its joint prior distribution. Therefore, if we estimate the posterior distributions of the random variables from this model, they should all look like they are supposed to; namely a normal distribution ($\mu$), a half-Cauchy ($sigma$), and two normal-ish curves ($x$).
+Quite deliberately, this model contains no data, which means that the joint posterior distribution of the model is
+theoretically identical to its joint prior distribution. Therefore, if we estimate the posterior distributions of the
+random variables from this model, they should all look like they are supposed to; namely a normal distribution
+($$\mu$$), a half-Cauchy ($$sigma$$), and two normal-ish curves ($$x$$).
 
 Let’s add the following lines to the code and see what happens. I’ve deliberately chosen a very short run, so that the sampling finished quickly and the produced figure is small.
 
