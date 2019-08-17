@@ -3,8 +3,11 @@ layout: page
 title: Writing
 ---
 
-Posts are ordered by when they were originally posted, not last edited. I haven't figured
-out how to do that. <g-emoji class="g-emoji" alias="man_shrugging" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f937-2642.png">🤷‍♂️</g-emoji>
+Posts are uncategorized and ordered by when they were originally posted. I haven't figured
+out how to create separate lists for different categories. 🤷‍
+
+Please be aware that none of the following was peer reviewed and therefore could contain
+nonsense!
 
 <ul>
 {% for post in site.posts %}

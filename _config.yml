@@ -2,16 +2,10 @@ title: The Cracked Bassoon
 email: sam@crackedbassoon.com
 url: "https://crackedbassoon.com"
 baseurl: ""
-
-# Build settings
 markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-redirect-from
-
-include: [_lists]
-
 highlighter: rouge
-
 permalink: /writing/:title
 redirects: yes

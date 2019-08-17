@@ -1,47 +1,103 @@
 ---
 layout: default
 ---
-
-<span/>
-
 {% if page.has_code %}
-  <link rel="stylesheet" type="text/css" href="{{ "/assets/code.css" | relative_url }}">
+  <link rel="stylesheet" type="text/css" href="{{ "/assets/css/code.css" | relative_url }}">
 {% endif %}
 
 {% if page.has_math %}
   {% include mathjax.html %}
 {% endif %}
 
-<section>
-  <h2>{{ page.title }}</h2>
+<h1>{{ page.title }}</h1>
+{{ content }}
+{% if page.include_references %}
+<hr>
+<h2>References</h2>
+<ul class="refs">
+{% assign sorted = site.data.references.references | sort: 'authors' %}
+  {% for paper in sorted %}
+    {% if page.references contains paper.id %}
+    <li><a name="{{ paper.id }}"></a>
+    {{ paper.authors }} ({{ paper.year }}). {{ paper.title }}
+    {% if paper.editor %}{{ paper.editor }},{% endif %}
+    {% if paper.book and paper.collection and paper.volume %}
+      <i>{{ paper.book }}</i> ({{ paper.collection }} vol {{ paper.volume }},
+      pp. {{ paper.first_page }}–{{ paper.last_page }}).
+    {% else %}
+      {% if paper.book and paper.volume %}
+        <i>{{ paper.book }}</i> (vol {{ paper.volume }},
+        pp. {{ paper.first_page }}–{{ paper.last_page }}).
+      {% else %}
+        {% if paper.book and paper.first_page %}
+          <i>{{ paper.book }}</i> (pp. {{ paper.first_page }}–{{ paper.last_page }}).
+          {% else %}
+            {% if paper.book %}<i>{{ paper.book }}</i>.{% endif %}
+          {% endif %}   
+      {% endif %}
+    {% endif %}
+    {% if paper.book %}
+      {{ paper.city }}, {{paper.state }}: {{ paper.publisher }}.
+    {% endif %}
+    {% if paper.journal %}
+      {% if paper.volume or paper.first_page %}
+        <i>{{ paper.journal }}</i>,
+        {% if paper.volume %}
+          {% if paper.issue %}
+            {% if paper.first_page %}
+              <i>{{ paper.volume }}</i>({{ paper.issue }}),
+            {% else %}
+              <i>{{ paper.volume }}</i>({{ paper.issue }}).
+            {% endif %}
+          {% else %}
+            {% if paper.first_page %}
+              <i>{{ paper.volume }}</i>,
+            {% else %}
+              <i>{{ paper.volume }}</i>.
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        {% if paper.first_page %}
+          {% if paper.last_page %}
+            {{ paper.first_page }}–{{paper.last_page }}.   
+          {% else %}
+            {{ paper.first_page }}.
+          {% endif %}
+        {% endif %}
+      {% else %}
+        <i>{{ paper.journal }}</i>.
+      {% endif %}
+    {% endif %}
+    {% if paper.doi %}
+      DOI: <a href="https://doi.org/{{ paper.doi }}">{{ paper.doi }}</a>.
+    {% endif %}
+    {% if paper.arXiv %}
+      arXiv: <a href="https://arxiv.org/abs/{{ paper.arXiv }}">{{ paper.arXiv }}</a>.
+    {% endif %}
+    {% if paper.pmid %}
+      PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{ paper.pmid }}">{{ paper.pmid }}</a>.
+    {% endif %}
+    </li>
+  {% endif %}  
+{% endfor %}
+</ul>
+{% endif %}
 
-  {% if page.date %}
-    <div><p><i>Originally posted {{ page.date | date: '%B %d, %Y' }}.</i></p></div>
-  {% endif %}
-
-  {{ content }}
-  </br>
-  <hr>
-  {% if page.date %}
-    <h2>Version history</h2>
-    <ul><li>Originally posted {{ page.date | date: '%B %d, %Y' }}.</li>
+{% if page.date %}
+<hr>
+  <h2>Version history</h2>
+  <ul>
+    <li>Originally posted {{ page.date | date: '%B %d, %Y' }}.</li>
     {% for revision in page.revisions %}
       <li>{{ revision.reason }} on {{ revision.date | date: '%B %d, %Y' }}.</li>
     {% endfor %}
-    </ul>
-    {% endif %}
-</section>
-</br>
-<hr>
+  </ul>
+{% endif %}
+
 
 {% if page.has_comments %}
+<hr>
+<h2>Comments</h2>
   <div id="commento"></div>
   <script async src="https://cdn.commento.io/js/commento.js"></script>
  {% endif %}
- 
-<p><i>If you’d like to comment privately on anything you’ve seen here,
-email me at <a href="mailto:{{ site.email }}" class="break">{{ site.email }}</a>.
-
-Along with the rest of this website, this page is distributed under an MIT license. Do what
-you like with it. In fact, here’s the <a href="https://github.com/sammosummo/sammosummo.github.io">source code</a>!
-</i></p>

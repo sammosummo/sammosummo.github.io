@@ -176,43 +176,8 @@ The _sample rate_ is how many times per second we should sample. A sensible choi
 Now here’s the code:
 
 ```python
-import numpy as np
-
-a0 = 1e-5  # reference amplitude
-sr = 44100  # sample rate
-
-
-def sinusoid(d, f, phi, l, a0=a0, sr=sr):
-    """Generates a pure tone.
-
-    A pure tone or sinusoid is a periodic waveform that is some variation on the sine
-    wave.
-
-    Args:
-        d (float): Duration in s.
-        f (float): Ordinary in Hz.
-        phi (float): Starting phase in rad.
-        l (float): Level in dB.
-        a0 (:obj:`float`, optional): Amplitude of a 0-dB tone. Default is 1e-5.
-        sr (:obj:`int`, optional): Sample rate in Hz. Default is 44100.
-
-    Returns:
-        waveform (np.ndarray): Sinusoidal waveform.
-
-    """
-    t = np.arange(0, int(round(d * sr))) / sr
-    return a0 * 10 ** (l / 20) * np.sin(2 * np.pi * f * t + phi)
+{{ site.data.code.pure-tones__py }}
 ```
-
-
-## As a script
-
-Here is the above function inside a complete Python script.
-
-<script src="https://gist.github.com/sammosummo/476a1ad7f07fc66a3bc3da8db81e4e71.js"></script>
-
-BTW, the script that created the waveform plots at the beginning of this post can be found
-[here](https://github.com/sammosummo/klangfarbe/blob/master/plot_pure_tones.py).
 
 ## Next steps
 

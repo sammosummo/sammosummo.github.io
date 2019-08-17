@@ -2,21 +2,33 @@
 layout: default
 ---
 
-{% include about_short.html %}
+<h2>What is this?</h2>
 
-<h3>Latest writing</h3>
+<i>The Cracked Bassoon</i> is the personal website of <a href="about">Sam Mathias</a>, a curmudgeonly English researcher based in
+Boston, MA. It contains code snippets, stray observations, and wildly misinformed opinions
+on a range of science-related topics. Perhaps you’ll find something interesting here, but
+probably not. I wouldn’t stick around if I were you.
+
+<h2>Latest writing</h2>
+
+Please note that because the following has not been peer reviewed, it might be pure
+nonsense. <a href="writing">Click here for the archive</a>.
+
 <ul>
+<li>
 {% for post in site.posts limit:1%}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date: '%B %d, %Y'}})
-    </li>
+  <a href="{{ post.url }}">{{ post.title }}</a>, posted {{ post.date | date: '%B %d, %Y'}}.
 {% endfor %}
+</li>
 </ul>
-<h3>Most recent publication</h3>
+<h2>Latest publication</h2>
+
+The following has been peer reviewed, so is less likely to be nonsense.
+<a href="publications">Click here for the complete list</a>.
 <ul>
+<li>
 {% assign sorted = site.data.my_papers.my_papers | sort: 'sort' | reverse %}
 {% for paper in sorted limit:1 %}
-  <p><li>
   {% if paper.book %}
     {{ paper.authors }}
     ({{ paper.year }}).
@@ -58,10 +70,7 @@ layout: default
     {% if paper.pmid %}
       PubMed: <a href="{{ paper.pmid_link }}" class="break">{{ paper.pmid }}</a>.
     {% endif %}
-    </li></p>
   {% endif %}
 {% endfor %}
+</li>
 </ul>
-
-<h3>Contact</h3>
-{% include contact.html %}

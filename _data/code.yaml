@@ -1,0 +1,741 @@
+neals-funnel-b__py: |
+  """Generate data and sample from Neal's funnel distribution.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams
+  import pymc3 as pm
+  from scipy.stats import norm
+  
+  
+  def main():
+  
+      with pm.Model():
+  
+          # set up figure
+          fs = rcParams["figure.figsize"]
+          rcParams["figure.figsize"] = (fs[0], fs[0] / 2)
+          rcParams["lines.linewidth"] = 2
+          rcParams["font.size"] = 14
+  
+          # simulate data
+          np.random.seed(0)
+          k = 9
+          n = 10000
+          v = norm.rvs(0, 3, n)
+          x = norm.rvs(0, np.exp(v / 2), (k, n))
+  
+          # plot simulated data
+          fig, axes = plt.subplots(
+              1, 2, constrained_layout=True, sharex=True, sharey=True
+          )
+          ax = axes[0]
+          ax.scatter(x[0], v, marker=".", alpha=0.05, rasterized=True)
+          ax.set_xlim(-20, 20)
+          ax.set_ylim(-9, 9)
+          ax.set_xlabel("$x_0$")
+          ax.set_ylabel("$v$")
+  
+          # set up model
+          v_ = pm.Normal("v", mu=0, sd=3)
+          x_ = pm.Normal("x", mu=0, sd=pm.math.exp(v_ / 2), shape=k)
+  
+          # sample and save samples
+          trace = pm.sample(n, chains=1)
+          v_samples = trace["v"][:]
+          x_samples = trace["x"][:].T
+  
+          # plot samples
+          ax = axes[1]
+          ax.scatter(
+              x_samples[0], v_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+          )
+          ax.set_xlabel("$x_0$")
+  
+          # save
+          plt.savefig("../images/neals-funnel-b.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+realistic-funnel-a__py: |
+  """Generate data from a more realistic hierarchical distribution.
+  
+  """
+  import numpy as np
+  import pymc3 as pm
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams
+  from scipy.stats import norm, halfcauchy
+  
+  
+  def main():
+  
+      # generate data
+      np.random.seed(0)
+      n = 1
+      m = 10000
+      mu = norm.rvs(0, 1, m)
+      sigma = halfcauchy.rvs(0, 1, m)
+      y = norm.rvs(mu, sigma, (n, m))
+  
+      # set up model
+      with pm.Model():
+  
+          mu_ = pm.Normal("mu", 0, 1)
+          sigma_ = pm.HalfCauchy("sigma", 1)
+          y_ = pm.Normal("y", mu_, sigma_, shape=n)
+  
+          # sample and save samples
+          trace = pm.sample(m, chains=1)
+          mu_samples = trace["mu"][:]
+          sigma_samples = trace["sigma"][:]
+          y_samples = trace["y"].T[:]
+  
+      # plot 2-D figures
+      sc = 5
+      fs = rcParams["figure.figsize"]
+      rcParams["figure.figsize"] = (fs[0], fs[0])
+      rcParams["lines.linewidth"] = 2
+      rcParams["font.size"] = 14
+      fig, axes = plt.subplots(2, 2, constrained_layout=True, sharex=True)
+  
+      ax = axes[0, 0]
+      ax.scatter(y[0], mu, marker=".", alpha=0.05, rasterized=True)
+      ax.set_xlim(-sc, sc)
+      ax.set_ylim(-sc, sc)
+      ax.set_ylabel("$\mu$")
+  
+      ax = axes[0, 1]
+      ax.scatter(
+          y_samples[0], mu_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_ylim(-sc, sc)
+      ax.set_yticklabels([])
+  
+      ax = axes[1, 0]
+      ax.scatter(y[0], sigma, marker=".", alpha=0.05, rasterized=True)
+      ax.set_ylim(0, sc / 2)
+      ax.set_xlabel("$y_0$")
+      ax.set_ylabel("$\sigma$")
+      ax = axes[1, 1]
+      ax.scatter(
+          y_samples[0], sigma_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_ylim(0, sc / 2)
+      ax.set_yticklabels([])
+      ax.set_xlabel("$y_0$")
+  
+      # save
+      plt.savefig("../images/realistic-funnel-a.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+pure-tones__py: |
+  """Contains a function to generate pure tones.
+  
+  """
+  import numpy as np
+  import sounddevice as sd
+  
+  a0 = 1e-5  # reference amplitude
+  sr = 44100  # sample rate
+  
+  
+  def sinusoid(d, f, phi, l, a0=a0, sr=sr):
+      """Generates a pure tone.
+  
+      A pure tone or sinusoid is a periodic waveform that is some variation on the sine
+      wave.
+  
+      Args:
+          d (float): Duration in s.
+          f (float): Ordinary in Hz.
+          phi (float): Starting phase in rad.
+          l (float): Level in dB.
+          a0 (:obj:`float`, optional): Amplitude of a 0-dB tone. Default is 1e-5.
+          sr (:obj:`int`, optional): Sample rate in Hz. Default is 44100.
+  
+      Returns:
+          waveform (np.ndarray): Sinusoidal waveform.
+  
+      """
+      t = np.arange(0, int(round(d * sr))) / sr
+      return a0 * 10 ** (l / 20) * np.sin(2 * np.pi * f * t + phi)
+  
+  
+  if __name__ == "__main__":
+  
+      tone = sinusoid(1, 1000, 0, 60)
+      sd.play(tone, 44100)
+      sd.wait()
+neals-funnel-c__py: |
+  """Generate data and sample from Neal's funnel distribution.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams
+  import pymc3 as pm
+  from scipy.stats import norm
+  
+  
+  def main():
+  
+      with pm.Model():
+  
+          # set up figure
+          fs = rcParams["figure.figsize"]
+          rcParams["figure.figsize"] = (fs[0], fs[0] / 2)
+          rcParams["lines.linewidth"] = 2
+          rcParams["font.size"] = 14
+  
+          # simulate data
+          np.random.seed(0)
+          k = 9
+          n = 10000
+          v = norm.rvs(0, 3, n)
+          x = norm.rvs(0, np.exp(v / 2), (k, n))
+  
+          # set up model
+          v_ = pm.Normal("v", mu=0, sd=3)
+          xt_ = pm.Normal("xt", mu=0, sd=1, shape=k)
+          x_ = pm.Deterministic("x", pm.math.exp(v_ / 2) * xt_)
+  
+          # sample and save samples
+          trace = pm.sample(n, chains=1)
+          v_samples = trace["v"][:]
+          xt_samples = trace["xt"][:].T
+          x_samples = trace["x"][:].T
+  
+          # plot samples
+          # plot simulated data
+          fig, axes = plt.subplots(1, 2, constrained_layout=True)
+          ax = axes[0]
+          ax.scatter(
+              xt_samples[0], v_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+          )
+          ax.set_xlim(-3.5, 3.5)
+          ax.set_ylim(-9, 9)
+          ax.set_xlabel(r"$\tilde{x}_0$")
+          ax.set_ylabel("$v$")
+          ax = axes[1]
+          ax.scatter(
+              x_samples[0], v_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+          )
+          ax.set_xlabel("$x_0$")
+          ax.set_xlim(-20, 20)
+          ax.set_ylim(-9, 9)
+  
+          # save
+          plt.savefig("../images/neals-funnel-c.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+realistic-funnel-b__py: |
+  """Generate data from a more realistic hierarchical distribution.
+  
+  """
+  import numpy as np
+  import pymc3 as pm
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams
+  from scipy.stats import norm, halfcauchy
+  
+  
+  def main():
+  
+      # generate data
+      np.random.seed(0)
+      n = 1
+      m = 10000
+      mu = norm.rvs(0, 1, m)
+      sigma = halfcauchy.rvs(0, 1, m)
+      y = norm.rvs(mu, sigma, (n, m))
+  
+      # set up model
+      with pm.Model():
+  
+          mu_ = pm.Normal("mu", 0, 1)
+          sigma_ = pm.HalfCauchy("sigma", 1)
+          yt_ = pm.Normal("yt", 0, 1, shape=n)
+          pm.Deterministic("y", mu_ + yt_ * sigma_)
+          # y_ = pm.Normal("y", mu_, sigma_, shape=n)
+  
+          # sample and save samples
+          trace = pm.sample(m, chains=1)
+          mu_samples = trace["mu"][:]
+          sigma_samples = trace["sigma"][:]
+          yt_samples = trace["yt"].T[:]
+          y_samples = trace["y"].T[:]
+  
+      # plot 2-D figures
+      sc = 5
+      fs = rcParams["figure.figsize"]
+      rcParams["figure.figsize"] = (fs[0], fs[0])
+      rcParams["lines.linewidth"] = 2
+      rcParams["font.size"] = 14
+      fig, axes = plt.subplots(2, 2, constrained_layout=True)
+  
+      ax = axes[0, 0]
+      ax.scatter(
+          yt_samples[0], mu_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_xlim(-sc, sc)
+      ax.set_ylim(-sc, sc)
+      ax.set_ylabel("$\mu$")
+      ax.set_xticklabels([])
+  
+      ax = axes[0, 1]
+      ax.scatter(
+          y_samples[0], mu_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_xlim(-sc, sc)
+      ax.set_ylim(-sc, sc)
+      ax.set_yticklabels([])
+      ax.set_xticklabels([])
+  
+      ax = axes[1, 0]
+      ax.scatter(
+          yt_samples[0], sigma_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_xlim(-sc, sc)
+      ax.set_ylim(0, sc / 2)
+      ax.set_xlabel(r"$\tilde{y}_0$")
+      ax.set_ylabel("$\sigma$")
+  
+      ax = axes[1, 1]
+      ax.scatter(
+          y_samples[0], sigma_samples, marker=".", alpha=0.05, rasterized=True, color="r"
+      )
+      ax.set_xlim(-sc, sc)
+      ax.set_ylim(0, sc / 2)
+      ax.set_yticklabels([])
+      ax.set_xlabel("$y_0$")
+  
+      # save
+      plt.savefig("../images/realistic-funnel-b.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+play-tone-interactively__py: |
+  """Simply generates a pure tone using numpy and plays it via sounddevice.
+  
+  As always, make sure your volume settings are low before running this script, especially
+  if you are using headphones!
+  
+  """
+  import numpy as np
+  import sounddevice as sd
+  
+  
+  if __name__ == "__main__":
+  
+      tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
+      sd.play(tone, 44100)  # play it
+      sd.wait()  # wait for the tone to finish
+neals-funnel-a__py: |
+  """Generate data from Neal's funnel distribution.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams
+  from scipy.stats import norm
+  
+  
+  def main():
+  
+      # set up figure
+      fs = rcParams["figure.figsize"]
+      rcParams["figure.figsize"] = (fs[0], fs[0] / 2)
+      rcParams["lines.linewidth"] = 2
+      rcParams["font.size"] = 14
+  
+      # generate data
+      np.random.seed(0)
+      k = 9
+      n = 10000
+      v = norm.rvs(0, 3, n)
+      x = norm.rvs(0, np.exp(v / 2), (k, n))
+  
+      # plot data
+      fig, axes = plt.subplots(1, 2, constrained_layout=True)
+      ax = axes[0]
+      ax.scatter(x[0], v, marker=".", alpha=0.05, rasterized=True)
+      ax.set_xlim(-20, 20)
+      ax.set_ylim(-9, 9)
+      ax.set_xlabel("$x_0$")
+      ax.set_ylabel("$v$")
+  
+      # plot analytic log-likelihood
+      ax = axes[1]
+      r = 500
+      x, v = np.meshgrid(np.linspace(-20, 20, r), np.linspace(-9, 9, r))
+      logp = norm.logpdf(v, 0, 3) + norm.logpdf(x, 0, np.exp(v / 2))
+      ax.imshow(logp, vmin=-7.5, vmax=-2.5, cmap="viridis", origin="lower")
+      ax.set_yticks([])
+      ax.set_yticklabels([])
+      ax.set_xticks(np.linspace(0, 499, 5))
+      ax.set_xticklabels(np.linspace(-20, 20, 5).astype(int))
+      ax.set_xlabel("$x_0$")
+  
+      # save
+      plt.savefig("../images/neals-funnel-a.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+code2yaml__py: |
+  """code2yaml.py
+  
+  Convert contents of `scripts` directory to YAML.
+  
+  """
+  import os
+  import black
+  
+  
+  def code2yaml():
+      """Convert contents of `scripts` directory to YAML.
+  
+      """
+  
+      for i, f in enumerate(os.listdir(os.getcwd())):
+  
+          src = os.path.join(os.getcwd(), f)
+          contents = open(src).read()
+          kwargs = {"fast": True, "mode": black.FileMode()}
+          _, ext = os.path.splitext(f)
+          if ext == ".py":
+              try:
+                  # for some reason I can't get "in-place" formatter to work, so I just
+                  # overwrite the file instead
+                  contents = black.format_file_contents(contents, **kwargs)
+              except black.NothingChanged:
+                  pass
+          open(src, "w").write(contents)
+          contents = "  " + contents.replace("\n", "\n  ").rstrip() + "\n"
+          contents = f"{f.replace('.', '__')}: |\n" + contents
+          open("../../_data/code.yaml", "w" if i == 0 else "a").write(contents)
+  
+  
+  if __name__ == "__main__":
+      code2yaml()
+  # """Convert .nbib files to .yaml files.
+  #
+  # """
+  # import copy
+  # import pickle
+  # import os
+  # import re
+  # from pubmed_lookup import PubMedLookup
+  # from pubmed_lookup import Publication
+  #
+  #
+  # nbibs = [os.path.join("_nbibs", f) for f in os.listdir("_nbibs") if ".nbib" in f]
+  # papers = []
+  # paper = {}
+  #
+  # for f in nbibs:
+  #     print(f"reading {f}")
+  #     with open(f) as fp:
+  #         for l in fp:
+  #             l = l.rstrip()
+  #             if l == "":
+  #                 # blank line, new paper
+  #                 if "id" in paper:
+  #                     # save old paper
+  #                     papers.append(copy.copy(paper))
+  #                 # blank paper
+  #                 paper = {}
+  #             elif l[4] == "-":
+  #                 name, data = l.split("-", 1)
+  #                 name = name.rstrip()
+  #                 data = data.strip()
+  #                 if name == "ID":
+  #                     # non-pubmed record
+  #                     paper["id"] = data
+  #                     authors_from_pubmed = None
+  #                 elif name == "PMID":
+  #                      # pubmed record
+  #                      paper["id"] = data
+  #                      paper["pmid"] = data
+  #                      _f = os.path.join("_nbibs", f"{data}.pkl")
+  #                      if os.path.exists(_f):
+  #                          # already saved the author list
+  #                          with open(_f, "rb") as fp2:
+  #                              authors_from_pubmed = pickle.load(fp2)
+  #                      else:
+  #                          # getting the author list with special chars
+  #                          print(f"looking up {data}")
+  #                          url = f"http://www.ncbi.nlm.nih.gov/pubmed/{data}"
+  #                          lookup = PubMedLookup(url, '')
+  #                          publication = Publication(lookup)
+  #                          authors = [a.split() for a in publication._author_list]
+  #                          x = lambda a: all((a == a.upper(),"ENIGMA" not in a, "CNV" not in a))
+  #                          y = lambda a: ", " + ". ".join(a) + "." if x(a) else a
+  #                          authors = [[y(a) for a in b] for b in authors]
+  #                          authors = [" ".join(a).replace(" ,", ",") for a in authors]
+  #                          print("authors ->", authors)
+  #                          with open(_f, "wb") as fp2:
+  #                              pickle.dump(authors, fp2)
+  #                          authors_from_pubmed = copy.copy(authors)
+  #                      paper["authors"] = authors_from_pubmed
+  #                 elif name == "VI":
+  #                      paper["volume"] = data
+  #                 elif name == "IP":
+  #                     paper["issue"] = data
+  #                 elif name == "DP":
+  #                     paper["year"] = data.split()[0]
+  #                     paper["sort"] = "%s" % paper["year"]
+  #                     try:
+  #                         paper["month"] = data.split()[1]
+  #                         month_number = dict(zip([
+  #                             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  #                             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  #                         ], range(12)))[paper["month"]]
+  #                         paper["sort"] = "%s-%02d" % (
+  #                             paper["year"], month_number + 1
+  #                         )
+  #                         paper["month"] = str(paper["month"])
+  #                     except IndexError:
+  #                         pass
+  #                 elif name == "TI":
+  #                     new_name = "title"
+  #                     paper[new_name] = data
+  #                 elif name == "AB":
+  #                     new_name = "abstract"
+  #                     paper[new_name] = data
+  #                 elif name == "FAU" and authors_from_pubmed is None:
+  #                     if "authors" not in paper:
+  #                         paper["authors"] = []
+  #                     surname, fns = data.split(",", 1)
+  #                     fns = fns.strip()
+  #                     fns = fns.split(" ") if " " in fns else [fns]
+  #                     fns = " ".join(f"{n[0].upper()}." for n in fns)
+  #                     author = f"{surname}, {fns}"
+  #                     paper["authors"].append(author)
+  #                 elif name == "JT":
+  #                     data = re.sub(r"\([^)]*\)", "", data)
+  #                     words = data.split()
+  #                     ignore = ("on", "in", "of", "the", "and")
+  #                     words = [w.title() if w not in ignore else w for w in words]
+  #                     words = " ".join(words)
+  #                     words = words.replace(".", ":")
+  #                     paper["journal"] = words
+  #                 elif "[doi]" in data and "doi" not in paper:
+  #                     paper["doi"] = data.split()[0]
+  #                 elif name == "PG":
+  #                     paper["first_page"] = data
+  #                     if "-" in data:
+  #                         f, l = data.split("-")
+  #                         if len(l) < len(f):
+  #                             d = len(f) - len(l)
+  #                             l = f[:d] + l
+  #                         paper["first_page"], paper["last_page"] = (f, l)
+  #                 elif name == "ED":
+  #                     paper["editor"] = data
+  #                 elif name == "CI":
+  #                     paper["city"] = data
+  #                 elif name == "CC":
+  #                     paper["state"] = data
+  #                 elif name == "CY":
+  #                     paper["publisher"] = data
+  #                 elif name == "CO":
+  #                     paper["collection"] = data
+  #                 elif name == "BN":
+  #                     paper["book"] = data
+  #             else:
+  #                 if name in ("TI", "AB"):
+  #                     paper[new_name] += (" " + l.strip())
+  # papers.append(paper)
+  #
+  # for paper in papers:
+  #     authors = copy.copy(paper["authors"])
+  #     if len(authors) > 1:
+  #         authors[-1] = f"& {authors[-1]}"
+  #     if len(authors) > 2:
+  #         authors = ", ".join(authors)
+  #     else:
+  #         authors = " ".join(authors)
+  #     authors = authors.replace("Mathias, S.", "<b>Mathias, S.</b>")
+  #     authors = authors.replace("<b>Mathias, S.</b> R.", "<b>Mathias, S. R.</b>")
+  #     paper["authors"] = authors
+  #     if "pmid" in paper:
+  #         if paper["pmid"] == "24389264":
+  #             paper["doi"] = "10.2741/S417"
+  #     if "doi" in paper:
+  #         paper["doi_link"] = "https://www.doi.org/" + paper["doi"]
+  #     if "pmid" in paper:
+  #         paper["pmid_link"] = "https://www.ncbi.nlm.nih.gov/pubmed/" + paper["pmid"]
+  #     if "journal" in paper:
+  #         if paper["journal"] == "Frontiers in Bioscience":
+  #             paper["journal"] = "Frontiers in Bioscience (Scholar Edition)"
+  #         paper["journal"] = paper["journal"].replace(
+  #             " : Cb", ""
+  #         ).replace(
+  #             " : the", ""
+  #         ).replace(
+  #             " Journal of the Association of European Psychiatrists", ""
+  #         ).replace(
+  #             " : Official Publication of the American College of", ""
+  #         ).replace(
+  #             " Official Journal of the Society For", ""
+  #         )
+  #     paper["title"] = paper["title"][0] + paper["title"][1:].lower()
+  #     paper["title"] = paper["title"].replace(
+  #         "african", "African"
+  #     ).replace(
+  #         "american", "American"
+  #     ).replace(
+  #         "qtl", "QTL"
+  #     ).replace(
+  #         "enigma", "ENIGMA"
+  #     ).replace(
+  #         "mri ", "MRI "
+  #     ).replace(
+  #         ": a", ": A"
+  #     )
+  #
+  # with open("_data/my_papers.yaml", "w") as fw:
+  #     fw.write("my_papers:\n")
+  #     for paper in papers:
+  #         if "Correction:" not in paper["title"]:
+  #             for k, v in paper.items():
+  #                 v = v.replace('"', "'")
+  #                 s = f"""{k}: "{v}"\n"""
+  #                 if k == "id":
+  #                     s = "\n - " + s
+  #                 else:
+  #                     s = "   " + s
+  #                 fw.write(s)
+play_tone__py: |
+  """Simply generates a pure tone using numpy and plays it via sounddevice.
+  
+  As always, make sure your volume settings are low before running this script, especially
+  if you are using headphones!
+  
+  """
+  import numpy as np
+  import sounddevice as sd
+  
+  if __name__ == "__main__":
+      tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
+      sd.play(tone, 44100)  # play it
+      sd.wait()  # wait for the tone to finish
+qt-sound-example__py: |
+  from math import pi, sin
+  import struct, sys
+  
+  from PyQt5.QtCore import QBuffer, QByteArray, QIODevice, Qt
+  from PyQt5.QtWidgets import (
+      QApplication,
+      QFormLayout,
+      QLineEdit,
+      QHBoxLayout,
+      QPushButton,
+      QSlider,
+      QVBoxLayout,
+      QWidget,
+  )
+  from PyQt5.QtMultimedia import QAudio, QAudioDeviceInfo, QAudioFormat, QAudioOutput
+  
+  
+  class Window(QWidget):
+      def __init__(self, parent=None):
+  
+          QWidget.__init__(self, parent)
+  
+          format = QAudioFormat()
+          format.setChannelCount(1)
+          format.setSampleRate(22050)
+          format.setSampleSize(16)
+          format.setCodec("audio/pcm")
+          format.setByteOrder(QAudioFormat.LittleEndian)
+          format.setSampleType(QAudioFormat.SignedInt)
+          self.output = QAudioOutput(format, self)
+  
+          self.frequency = 440
+          self.volume = 0
+          self.buffer = QBuffer()
+          self.data = QByteArray()
+  
+          self.deviceLineEdit = QLineEdit()
+          self.deviceLineEdit.setReadOnly(True)
+          self.deviceLineEdit.setText(QAudioDeviceInfo.defaultOutputDevice().deviceName())
+  
+          self.pitchSlider = QSlider(Qt.Horizontal)
+          self.pitchSlider.setMaximum(100)
+          self.volumeSlider = QSlider(Qt.Horizontal)
+          self.volumeSlider.setMaximum(32767)
+          self.volumeSlider.setPageStep(1024)
+  
+          self.playButton = QPushButton(self.tr("&Play"))
+  
+          self.pitchSlider.valueChanged.connect(self.changeFrequency)
+          self.volumeSlider.valueChanged.connect(self.changeVolume)
+          self.playButton.clicked.connect(self.play)
+  
+          formLayout = QFormLayout()
+          formLayout.addRow(self.tr("Device:"), self.deviceLineEdit)
+          formLayout.addRow(self.tr("P&itch:"), self.pitchSlider)
+          formLayout.addRow(self.tr("&Volume:"), self.volumeSlider)
+  
+          buttonLayout = QVBoxLayout()
+          buttonLayout.addWidget(self.playButton)
+          buttonLayout.addStretch()
+  
+          horizontalLayout = QHBoxLayout(self)
+          horizontalLayout.addLayout(formLayout)
+          horizontalLayout.addLayout(buttonLayout)
+  
+          self.play()
+          self.createData()
+  
+      def changeFrequency(self, value):
+  
+          self.frequency = 440 + (value * 2)
+          self.createData()
+  
+      def play(self):
+  
+          if self.output.state() == QAudio.ActiveState:
+              self.output.stop()
+  
+          if self.buffer.isOpen():
+              self.buffer.close()
+  
+          if self.output.error() == QAudio.UnderrunError:
+              self.output.reset()
+  
+          self.buffer.setData(self.data)
+          self.buffer.open(QIODevice.ReadOnly)
+          self.buffer.seek(0)
+  
+          self.output.start(self.buffer)
+  
+      def changeVolume(self, value):
+  
+          self.volume = value
+          self.createData()
+  
+      def createData(self):
+  
+          self.data.clear()
+          for i in range(2 * 22050):
+              t = i / 22050.0
+              value = int(self.volume * sin(2 * pi * self.frequency * t))
+              self.data.append(struct.pack("<h", value))
+  
+  
+  if __name__ == "__main__":
+  
+      app = QApplication(sys.argv)
+      window = Window()
+      window.show()
+      sys.exit(app.exec_())
