@@ -426,6 +426,56 @@ code2yaml__py: |
   
   if __name__ == "__main__":
       code2yaml()
+play_tone__py: |
+  """Simply generates a pure tone using numpy and plays it via sounddevice.
+  
+  As always, make sure your volume settings are low before running this script, especially
+  if you are using headphones!
+  
+  """
+  import numpy as np
+  import sounddevice as sd
+  
+  if __name__ == "__main__":
+      tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
+      sd.play(tone, 44100)  # play it
+      sd.wait()  # wait for the tone to finish
+_code2yaml__py: |
+  """code2yaml.py
+  
+  Convert contents of `scripts` directory to YAML.
+  
+  """
+  import os
+  import black
+  
+  
+  def code2yaml():
+      """Convert contents of `scripts` directory to YAML.
+  
+      """
+  
+      for i, f in enumerate(os.listdir(os.getcwd())):
+  
+          src = os.path.join(os.getcwd(), f)
+          contents = open(src).read()
+          kwargs = {"fast": True, "mode": black.FileMode()}
+          _, ext = os.path.splitext(f)
+          if ext == ".py":
+              try:
+                  # for some reason I can't get "in-place" formatter to work, so I just
+                  # overwrite the file instead
+                  contents = black.format_file_contents(contents, **kwargs)
+              except black.NothingChanged:
+                  pass
+          open(src, "w").write(contents)
+          contents = "  " + contents.replace("\n", "\n  ").rstrip() + "\n"
+          contents = f"{f.replace('.', '__')}: |\n" + contents
+          open("../../_data/code.yaml", "w" if i == 0 else "a").write(contents)
+  
+  
+  if __name__ == "__main__":
+      code2yaml()
   # """Convert .nbib files to .yaml files.
   #
   # """
@@ -614,20 +664,6 @@ code2yaml__py: |
   #                 else:
   #                     s = "   " + s
   #                 fw.write(s)
-play_tone__py: |
-  """Simply generates a pure tone using numpy and plays it via sounddevice.
-  
-  As always, make sure your volume settings are low before running this script, especially
-  if you are using headphones!
-  
-  """
-  import numpy as np
-  import sounddevice as sd
-  
-  if __name__ == "__main__":
-      tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
-      sd.play(tone, 44100)  # play it
-      sd.wait()  # wait for the tone to finish
 qt-sound-example__py: |
   from math import pi, sin
   import struct, sys
