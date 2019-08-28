@@ -4,6 +4,9 @@ title: Playing pure tones with PyQt5
 date: 2019-06-11
 has_code: true
 has_comments: true
+tags:
+ - Python
+ - sound
 revisions:
  - date: 2019-06-13
    reason: Fixed some typos

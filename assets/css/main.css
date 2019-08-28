@@ -164,6 +164,19 @@ footer {
   font-size: 0.9em;
 }
 
+table {
+  margin-left: auto;
+  margin-right:auto;
+  border: 1px solid #ccc1b7;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+  border: 1px solid #ccc1b7;
+}
+
+
 /*body {*/
 /*  font-family: 'bodyfont', georgia, 'Georgia', serif;*/
 /*  font-size: larger;*/

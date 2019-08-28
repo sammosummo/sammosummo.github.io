@@ -4,6 +4,9 @@ title: Displaying the contents of external files in Jekyll
 date: 2019-08-18
 has_code: true
 has_comments: true
+tags:
+ - Jekyll
+ - Liquid
 ---
 
 The website is written in [Jekyll](https://jekyllrb.com/). I like to display code in my

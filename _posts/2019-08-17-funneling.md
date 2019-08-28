@@ -16,6 +16,11 @@ references:
  - Neal2011a
  - Betancourt2015a
  - Papaspiliopoulos2007a
+tags:
+ - Python
+ - PyMC3
+ - Bayesian
+ - statistics
 ---
 
 Bayesian hierarchical (or multilevel) models have two or more layers of random variables.

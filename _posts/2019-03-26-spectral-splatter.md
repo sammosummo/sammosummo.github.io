@@ -7,6 +7,7 @@ has_comments: true
 tags:
  - Python
  - sound
+ - psychophysics
 ---
 
 So far in this series, we’ve generated and played pure tones using Python. If you’ve been

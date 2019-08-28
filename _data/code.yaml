@@ -59,6 +59,324 @@ neals-funnel-b__py: |
   
   if __name__ == "__main__":
       main()
+nbib2yaml__py: |
+  """Convert .nbib files to .yaml files.
+  
+  """
+  import copy
+  import pickle
+  import os
+  import re
+  from pubmed_lookup import PubMedLookup
+  from pubmed_lookup import Publication
+  
+  
+  def main():
+  
+      p = "../../assets/nbibs"
+      nbibs = [os.path.join(p, f) for f in os.listdir(p) if ".nbib" in f]
+      papers = []
+      paper = {}
+  
+      for f in nbibs:
+          print(f"reading {f}")
+          with open(f) as fp:
+              for l in fp:
+                  l = l.rstrip()
+                  if l == "":
+                      # blank line, new paper
+                      if "id" in paper:
+                          # save old paper
+                          papers.append(copy.copy(paper))
+                      # blank paper
+                      paper = {}
+                  elif l[4] == "-":
+                      name, data = l.split("-", 1)
+                      name = name.rstrip()
+                      data = data.strip()
+                      if name == "ID":
+                          # non-pubmed record
+                          paper["id"] = data
+                          authors_from_pubmed = None
+                      elif name == "PMID":
+                          # pubmed record
+                          paper["id"] = data
+                          paper["pmid"] = data
+                          _f = os.path.join(p, f"{data}.pkl")
+                          if os.path.exists(_f):
+                              # already saved the author list
+                              with open(_f, "rb") as fp2:
+                                  authors_from_pubmed = pickle.load(fp2)
+                          else:
+                              # getting the author list with special chars
+                              print(f"looking up {data}")
+                              url = f"http://www.ncbi.nlm.nih.gov/pubmed/{data}"
+                              lookup = PubMedLookup(url, "")
+                              publication = Publication(lookup)
+                              authors = [a.split() for a in publication._author_list]
+                              x = lambda a: all(
+                                  (a == a.upper(), "ENIGMA" not in a, "CNV" not in a)
+                              )
+                              y = lambda a: ", " + ". ".join(a) + "." if x(a) else a
+                              authors = [[y(a) for a in b] for b in authors]
+                              authors = [" ".join(a).replace(" ,", ",") for a in authors]
+                              print("authors ->", authors)
+                              with open(_f, "wb") as fp2:
+                                  pickle.dump(authors, fp2)
+                              authors_from_pubmed = copy.copy(authors)
+                          paper["authors"] = authors_from_pubmed
+                      elif name == "VI":
+                          paper["volume"] = data
+                      elif name == "IP":
+                          paper["issue"] = data
+                      elif name == "DP":
+                          paper["year"] = data.split()[0]
+                          paper["sort"] = "%s" % paper["year"]
+                          try:
+                              paper["month"] = data.split()[1]
+                              month_number = dict(
+                                  zip(
+                                      [
+                                          "Jan",
+                                          "Feb",
+                                          "Mar",
+                                          "Apr",
+                                          "May",
+                                          "Jun",
+                                          "Jul",
+                                          "Aug",
+                                          "Sep",
+                                          "Oct",
+                                          "Nov",
+                                          "Dec",
+                                      ],
+                                      range(12),
+                                  )
+                              )[paper["month"]]
+                              paper["sort"] = "%s-%02d" % (
+                                  paper["year"],
+                                  month_number + 1,
+                              )
+                              paper["month"] = str(paper["month"])
+                          except IndexError:
+                              pass
+                      elif name == "TI":
+                          new_name = "title"
+                          paper[new_name] = data
+                      elif name == "AB":
+                          new_name = "abstract"
+                          paper[new_name] = data
+                      elif name == "FAU" and authors_from_pubmed is None:
+                          if "authors" not in paper:
+                              paper["authors"] = []
+                          surname, fns = data.split(",", 1)
+                          fns = fns.strip()
+                          fns = fns.split(" ") if " " in fns else [fns]
+                          fns = " ".join(f"{n[0].upper()}." for n in fns)
+                          author = f"{surname}, {fns}"
+                          paper["authors"].append(author)
+                      elif name == "JT":
+                          data = re.sub(r"\([^)]*\)", "", data)
+                          words = data.split()
+                          ignore = ("on", "in", "of", "the", "and")
+                          words = [w.title() if w not in ignore else w for w in words]
+                          words = " ".join(words)
+                          words = words.replace(".", ":")
+                          paper["journal"] = words
+                      elif "[doi]" in data and "doi" not in paper:
+                          paper["doi"] = data.split()[0]
+                      elif name == "PG":
+                          paper["first_page"] = data
+                          if "-" in data:
+                              f, l = data.split("-")
+                              if len(l) < len(f):
+                                  d = len(f) - len(l)
+                                  l = f[:d] + l
+                              paper["first_page"], paper["last_page"] = (f, l)
+                      elif name == "ED":
+                          paper["editor"] = data
+                      elif name == "CI":
+                          paper["city"] = data
+                      elif name == "CC":
+                          paper["state"] = data
+                      elif name == "CY":
+                          paper["publisher"] = data
+                      elif name == "CO":
+                          paper["collection"] = data
+                      elif name == "BN":
+                          paper["book"] = data
+                  else:
+                      if name in ("TI", "AB"):
+                          paper[new_name] += " " + l.strip()
+      papers.append(paper)
+  
+      for paper in papers:
+          authors = copy.copy(paper["authors"])
+          if len(authors) > 1:
+              authors[-1] = f"& {authors[-1]}"
+          if len(authors) > 2:
+              authors = ", ".join(authors)
+          else:
+              authors = " ".join(authors)
+          authors = authors.replace("Mathias, S.", "<b>Mathias, S.</b>")
+          authors = authors.replace("<b>Mathias, S.</b> R.", "<b>Mathias, S. R.</b>")
+          paper["authors"] = authors
+          if "pmid" in paper:
+              if paper["pmid"] == "24389264":
+                  paper["doi"] = "10.2741/S417"
+          if "doi" in paper:
+              paper["doi_link"] = "https://www.doi.org/" + paper["doi"]
+          if "pmid" in paper:
+              paper["pmid_link"] = "https://www.ncbi.nlm.nih.gov/pubmed/" + paper["pmid"]
+          if "journal" in paper:
+              if paper["journal"] == "Frontiers in Bioscience":
+                  paper["journal"] = "Frontiers in Bioscience (Scholar Edition)"
+              paper["journal"] = (
+                  paper["journal"]
+                  .replace(" : Cb", "")
+                  .replace(" : the", "")
+                  .replace(" Journal of the Association of European Psychiatrists", "")
+                  .replace(" : Official Publication of the American College of", "")
+                  .replace(" Official Journal of the Society For", "")
+              )
+          paper["title"] = paper["title"][0] + paper["title"][1:].lower()
+          paper["title"] = (
+              paper["title"]
+              .replace("african", "African")
+              .replace("american", "American")
+              .replace("qtl", "QTL")
+              .replace("enigma", "ENIGMA")
+              .replace("mri ", "MRI ")
+              .replace(": a", ": A")
+          )
+  
+      with open("../../_data/my_papers.yaml", "w") as fw:
+          fw.write("my_papers:\n")
+          for paper in papers:
+              if "Correction:" not in paper["title"]:
+                  for k, v in paper.items():
+                      v = v.replace('"', "'")
+                      s = f"""{k}: "{v}"\n"""
+                      if k == "id":
+                          s = "\n - " + s
+                      else:
+                          s = "   " + s
+                      fw.write(s)
+  
+  
+  if __name__ == "__main__":
+      main()
+sdt-yn-experiment__py: |
+  """Script to perform a simple at-home yes/no experiment and analyze the resulting data
+  using signal detection theory.
+  
+  """
+  import numpy as np
+  from scipy.stats import norm
+  import prettytable as pt
+  import sounddevice as sd
+  
+  
+  def trial(signal, n=None):
+      """Performs a trial in the experiment.
+  
+      Args:
+          signal (bool): Should the trial contain a tone?
+          n (:obj:`bool`, optional): Trial number. If omitted, a "practice" trial is
+              performed which will allow the observer an opportunity to change the volume
+              settings on their computer.
+  
+      Returns:
+          rsp (bool): On practice trials, this indicates whether the real experiment
+              should begin. On real trials, it indicates whether the observer responded
+              "yes".
+  
+      """
+      t = np.arange(0, 0.1, 1 / 44100)
+      tone = 1e-5 * 10 ** (50 / 20) * np.sin(2 * np.pi * 1000 * t + 0)
+      noise = np.random.normal(size=len(t)) * tone.std() / np.sqrt(2)
+      sd.play(noise + tone if signal and isinstance(n, int) else noise, 44100)
+      responses = {"n": False, "y": True}
+      if isinstance(n, int):
+          instr = f"Trial {n}: Did you hear a tone? ([y] or [n])?"
+      else:
+          instr = "Adjust your volume settings until the noise barely audible."
+          instr += "\n([y] to adjust and hear again; [n] to continue)"
+      while 1:
+          try:
+              return responses[input(instr).lower()]
+          except KeyError:
+              pass
+  
+  
+  def experiment():
+      """Performs a series of trials.
+  
+      """
+      adj = True
+      while adj:
+          adj = trial(False)
+      X = [False, True] * 20
+      np.random.shuffle(X)
+      Y = [trial(*p[::-1]) for p in enumerate(X)]
+      c = sum([1 for x, y in zip(X, Y) if x == 0 and y == 0])
+      f = sum([1 for x, y in zip(X, Y) if x == 0 and y == 1])
+      m = sum([1 for x, y in zip(X, Y) if x == 1 and y == 0])
+      h = sum([1 for x, y in zip(X, Y) if x == 1 and y == 1])
+      return c, f, m, h
+  
+  
+  def sdt_yn(c, f, m, h):
+      """Calcualte SDT statistics.
+  
+      """
+      n = m + c
+      s = f + h
+      sens = norm.ppf(h / s) - norm.ppf(f / s)
+      crit = 0.5 * (norm.ppf(h / s) + norm.ppf(f / s))
+      return sens, crit
+  
+  
+  if __name__ == "__main__":
+  
+      print(
+          """
+  ████████╗██╗  ██╗███████╗     ██████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗██████╗ 
+  ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗
+     ██║   ███████║█████╗      ██║     ██████╔╝███████║██║     █████╔╝ █████╗  ██║  ██║
+     ██║   ██╔══██║██╔══╝      ██║     ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══╝  ██║  ██║
+     ██║   ██║  ██║███████╗    ╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝
+     ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+                                                                                       
+  ██████╗  █████╗ ███████╗███████╗ ██████╗  ██████╗ ███╗   ██╗    ██╗██╗██╗██╗██╗██╗██╗
+  ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔═══██╗██╔═══██╗████╗  ██║    ██║██║██║██║██║██║██║
+  ██████╔╝███████║███████╗███████╗██║   ██║██║   ██║██╔██╗ ██║    ██║██║██║██║██║██║██║
+  ██╔══██╗██╔══██║╚════██║╚════██║██║   ██║██║   ██║██║╚██╗██║    ╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝
+  ██████╔╝██║  ██║███████║███████║╚██████╔╝╚██████╔╝██║ ╚████║    ██╗██╗██╗██╗██╗██╗██╗
+  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝    ╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝╚═╝                                                                              
+  
+  Welcome! This script performs a simple experiment and analyzes the data using signal
+  detection theory (SDT)."""
+      )
+      c, f, m, h = experiment()
+      print("Experiment done!")
+      table = pt.PrettyTable()
+      table.field_names = ["", "x = 0", "x = 1"]
+      table.add_row(["y = 0", c, m])
+      table.add_row(["y = 1", f, h])
+      print("Here is your contingency table:")
+      print(table)
+      if any(x == 0 for x in (c, f, m, h)):
+          print(
+              """\
+  Unfortunately, one or more of the cells has a value of 0. SDT statistics can't be
+  calculated without applying some form of correction. Exiting now"""
+          )
+          exit()
+      print("Calculating SDT statistics ...")
+      sens, crit = sdt_yn(c, f, m, h)
+      print("sensitivity (d') = %.2f" % sens)
+      print("criterion (c) = %.2f" % crit)
 realistic-funnel-a__py: |
   """Generate data from a more realistic hierarchical distribution.
   
@@ -440,230 +758,45 @@ play_tone__py: |
       tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
       sd.play(tone, 44100)  # play it
       sd.wait()  # wait for the tone to finish
-_code2yaml__py: |
-  """code2yaml.py
-  
-  Convert contents of `scripts` directory to YAML.
+noise-tone-plus-noise__py: |
+  """Create figurea to illustrate noise and noise plus a pure tone.
   
   """
-  import os
-  import black
-  
-  
-  def code2yaml():
-      """Convert contents of `scripts` directory to YAML.
-  
-      """
-  
-      for i, f in enumerate(os.listdir(os.getcwd())):
-  
-          src = os.path.join(os.getcwd(), f)
-          contents = open(src).read()
-          kwargs = {"fast": True, "mode": black.FileMode()}
-          _, ext = os.path.splitext(f)
-          if ext == ".py":
-              try:
-                  # for some reason I can't get "in-place" formatter to work, so I just
-                  # overwrite the file instead
-                  contents = black.format_file_contents(contents, **kwargs)
-              except black.NothingChanged:
-                  pass
-          open(src, "w").write(contents)
-          contents = "  " + contents.replace("\n", "\n  ").rstrip() + "\n"
-          contents = f"{f.replace('.', '__')}: |\n" + contents
-          open("../../_data/code.yaml", "w" if i == 0 else "a").write(contents)
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import seaborn as sb
   
   
   if __name__ == "__main__":
-      code2yaml()
-  # """Convert .nbib files to .yaml files.
-  #
-  # """
-  # import copy
-  # import pickle
-  # import os
-  # import re
-  # from pubmed_lookup import PubMedLookup
-  # from pubmed_lookup import Publication
-  #
-  #
-  # nbibs = [os.path.join("_nbibs", f) for f in os.listdir("_nbibs") if ".nbib" in f]
-  # papers = []
-  # paper = {}
-  #
-  # for f in nbibs:
-  #     print(f"reading {f}")
-  #     with open(f) as fp:
-  #         for l in fp:
-  #             l = l.rstrip()
-  #             if l == "":
-  #                 # blank line, new paper
-  #                 if "id" in paper:
-  #                     # save old paper
-  #                     papers.append(copy.copy(paper))
-  #                 # blank paper
-  #                 paper = {}
-  #             elif l[4] == "-":
-  #                 name, data = l.split("-", 1)
-  #                 name = name.rstrip()
-  #                 data = data.strip()
-  #                 if name == "ID":
-  #                     # non-pubmed record
-  #                     paper["id"] = data
-  #                     authors_from_pubmed = None
-  #                 elif name == "PMID":
-  #                      # pubmed record
-  #                      paper["id"] = data
-  #                      paper["pmid"] = data
-  #                      _f = os.path.join("_nbibs", f"{data}.pkl")
-  #                      if os.path.exists(_f):
-  #                          # already saved the author list
-  #                          with open(_f, "rb") as fp2:
-  #                              authors_from_pubmed = pickle.load(fp2)
-  #                      else:
-  #                          # getting the author list with special chars
-  #                          print(f"looking up {data}")
-  #                          url = f"http://www.ncbi.nlm.nih.gov/pubmed/{data}"
-  #                          lookup = PubMedLookup(url, '')
-  #                          publication = Publication(lookup)
-  #                          authors = [a.split() for a in publication._author_list]
-  #                          x = lambda a: all((a == a.upper(),"ENIGMA" not in a, "CNV" not in a))
-  #                          y = lambda a: ", " + ". ".join(a) + "." if x(a) else a
-  #                          authors = [[y(a) for a in b] for b in authors]
-  #                          authors = [" ".join(a).replace(" ,", ",") for a in authors]
-  #                          print("authors ->", authors)
-  #                          with open(_f, "wb") as fp2:
-  #                              pickle.dump(authors, fp2)
-  #                          authors_from_pubmed = copy.copy(authors)
-  #                      paper["authors"] = authors_from_pubmed
-  #                 elif name == "VI":
-  #                      paper["volume"] = data
-  #                 elif name == "IP":
-  #                     paper["issue"] = data
-  #                 elif name == "DP":
-  #                     paper["year"] = data.split()[0]
-  #                     paper["sort"] = "%s" % paper["year"]
-  #                     try:
-  #                         paper["month"] = data.split()[1]
-  #                         month_number = dict(zip([
-  #                             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  #                             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-  #                         ], range(12)))[paper["month"]]
-  #                         paper["sort"] = "%s-%02d" % (
-  #                             paper["year"], month_number + 1
-  #                         )
-  #                         paper["month"] = str(paper["month"])
-  #                     except IndexError:
-  #                         pass
-  #                 elif name == "TI":
-  #                     new_name = "title"
-  #                     paper[new_name] = data
-  #                 elif name == "AB":
-  #                     new_name = "abstract"
-  #                     paper[new_name] = data
-  #                 elif name == "FAU" and authors_from_pubmed is None:
-  #                     if "authors" not in paper:
-  #                         paper["authors"] = []
-  #                     surname, fns = data.split(",", 1)
-  #                     fns = fns.strip()
-  #                     fns = fns.split(" ") if " " in fns else [fns]
-  #                     fns = " ".join(f"{n[0].upper()}." for n in fns)
-  #                     author = f"{surname}, {fns}"
-  #                     paper["authors"].append(author)
-  #                 elif name == "JT":
-  #                     data = re.sub(r"\([^)]*\)", "", data)
-  #                     words = data.split()
-  #                     ignore = ("on", "in", "of", "the", "and")
-  #                     words = [w.title() if w not in ignore else w for w in words]
-  #                     words = " ".join(words)
-  #                     words = words.replace(".", ":")
-  #                     paper["journal"] = words
-  #                 elif "[doi]" in data and "doi" not in paper:
-  #                     paper["doi"] = data.split()[0]
-  #                 elif name == "PG":
-  #                     paper["first_page"] = data
-  #                     if "-" in data:
-  #                         f, l = data.split("-")
-  #                         if len(l) < len(f):
-  #                             d = len(f) - len(l)
-  #                             l = f[:d] + l
-  #                         paper["first_page"], paper["last_page"] = (f, l)
-  #                 elif name == "ED":
-  #                     paper["editor"] = data
-  #                 elif name == "CI":
-  #                     paper["city"] = data
-  #                 elif name == "CC":
-  #                     paper["state"] = data
-  #                 elif name == "CY":
-  #                     paper["publisher"] = data
-  #                 elif name == "CO":
-  #                     paper["collection"] = data
-  #                 elif name == "BN":
-  #                     paper["book"] = data
-  #             else:
-  #                 if name in ("TI", "AB"):
-  #                     paper[new_name] += (" " + l.strip())
-  # papers.append(paper)
-  #
-  # for paper in papers:
-  #     authors = copy.copy(paper["authors"])
-  #     if len(authors) > 1:
-  #         authors[-1] = f"& {authors[-1]}"
-  #     if len(authors) > 2:
-  #         authors = ", ".join(authors)
-  #     else:
-  #         authors = " ".join(authors)
-  #     authors = authors.replace("Mathias, S.", "<b>Mathias, S.</b>")
-  #     authors = authors.replace("<b>Mathias, S.</b> R.", "<b>Mathias, S. R.</b>")
-  #     paper["authors"] = authors
-  #     if "pmid" in paper:
-  #         if paper["pmid"] == "24389264":
-  #             paper["doi"] = "10.2741/S417"
-  #     if "doi" in paper:
-  #         paper["doi_link"] = "https://www.doi.org/" + paper["doi"]
-  #     if "pmid" in paper:
-  #         paper["pmid_link"] = "https://www.ncbi.nlm.nih.gov/pubmed/" + paper["pmid"]
-  #     if "journal" in paper:
-  #         if paper["journal"] == "Frontiers in Bioscience":
-  #             paper["journal"] = "Frontiers in Bioscience (Scholar Edition)"
-  #         paper["journal"] = paper["journal"].replace(
-  #             " : Cb", ""
-  #         ).replace(
-  #             " : the", ""
-  #         ).replace(
-  #             " Journal of the Association of European Psychiatrists", ""
-  #         ).replace(
-  #             " : Official Publication of the American College of", ""
-  #         ).replace(
-  #             " Official Journal of the Society For", ""
-  #         )
-  #     paper["title"] = paper["title"][0] + paper["title"][1:].lower()
-  #     paper["title"] = paper["title"].replace(
-  #         "african", "African"
-  #     ).replace(
-  #         "american", "American"
-  #     ).replace(
-  #         "qtl", "QTL"
-  #     ).replace(
-  #         "enigma", "ENIGMA"
-  #     ).replace(
-  #         "mri ", "MRI "
-  #     ).replace(
-  #         ": a", ": A"
-  #     )
-  #
-  # with open("_data/my_papers.yaml", "w") as fw:
-  #     fw.write("my_papers:\n")
-  #     for paper in papers:
-  #         if "Correction:" not in paper["title"]:
-  #             for k, v in paper.items():
-  #                 v = v.replace('"', "'")
-  #                 s = f"""{k}: "{v}"\n"""
-  #                 if k == "id":
-  #                     s = "\n - " + s
-  #                 else:
-  #                     s = "   " + s
-  #                 fw.write(s)
+  
+      from matplotlib import rcParams as defaults
+  
+      figsize = defaults["figure.figsize"]
+      defaults["figure.figsize"] = [figsize[0], int(figsize[1] / 2)]
+      defaults["lines.linewidth"] = 2
+      defaults["font.size"] = 14
+  
+      n = 2000
+      x = np.linspace(0, 40 * np.pi, n)
+      noise = np.random.normal(size=n)
+      tone = np.sin(x)
+      fig, axes = plt.subplots(1, 2, constrained_layout=True, sharex=True, sharey=True)
+      ax0, ax1 = axes
+      ax0.plot(noise, "C0")
+      ax0.set_title(r"Noise ($X=0$)", fontsize=14)
+      ax1.plot(noise + tone, "C0")
+      ax1.set_title(r"Noise plus signal ($X=1$)", fontsize=14)
+      for ax in axes:
+          ax0.set_xticks([], [])
+          ax0.set_yticks([], [])
+          sb.despine(fig, ax, top=True, right=True)
+          ax.set_xlabel("Time")
+          ax.set_ylabel("Pressure")
+      ax1.set_xlim(0, n)
+      ax1.set_ylim((noise + tone).min(), (noise + tone).max())
+      plt.savefig(
+          f"../../assets/images/noise_toneplusnoise.svg", bbox_inches=0, transparent=True
+      )
 qt-sound-example__py: |
   from math import pi, sin
   import struct, sys
