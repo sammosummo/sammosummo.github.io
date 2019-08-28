@@ -11,6 +11,17 @@ references:
    doi: "10.1016/j.jmp.2010.01.001"
    journal: "Journal of Mathematical Psychology"
 
+ - id: "Myung2003a"
+   authors: "Myung, I. J."
+   volume: "47"
+   issue: "1"
+   year: "2003"
+   title: "Tutorial on maximum likelihood estimation"
+   first_page: "90"
+   last_page: "100"
+   doi: "10.1016/S0022-2496(02)00028-7"
+   journal: "Journal of Mathematical Psychology"
+
  - id: "Gelman2006a"
    authors: "Gelman, A."
    volume: "48"
