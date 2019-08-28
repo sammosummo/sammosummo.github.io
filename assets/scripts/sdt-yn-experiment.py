@@ -64,7 +64,7 @@ def sdt_yn(c, f, m, h):
     n = f + c
     s = m + h
     sens = norm.ppf(h / s) - norm.ppf(f / n)
-    crit = 0.5 * (norm.ppf(h / s) + norm.ppf(f / n))
+    crit = - 0.5 * (norm.ppf(h / s) + norm.ppf(f / n))
     return sens, crit
 
 
