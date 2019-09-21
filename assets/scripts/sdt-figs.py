@@ -47,13 +47,9 @@ if __name__ == "__main__":
     ix = np.argmin(np.abs(psi - k))
     x = psi[ix]
     fill = ax.fill_between(psi[ix:], norm.pdf(psi[ix:], 0, 1), alpha=0.3)
-    plt.savefig(
-        f"../../assets/images/sdt-evg-fa.svg", bbox_inches=0, transparent=True
-    )
+    plt.savefig(f"../../assets/images/sdt-evg-fa.svg", bbox_inches=0, transparent=True)
     fill.remove()
 
     fill = ax.fill_between(psi[ix:], norm.pdf(psi[ix:], d, 1), alpha=0.3)
-    plt.savefig(
-        f"../../assets/images/sdt-evg-h.svg", bbox_inches=0, transparent=True
-    )
+    plt.savefig(f"../../assets/images/sdt-evg-h.svg", bbox_inches=0, transparent=True)
     fill.remove()
