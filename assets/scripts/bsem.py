@@ -11,10 +11,10 @@ import pymc3 as pm
 import matplotlib as mp
 import theano.tensor as tt
 from matplotlib import pyplot as plt
-from theano.tensor import fill_diagonal
-from pymc3.math import matrix_dot, matrix_inverse, block_diagonal
-from theano import shared
+from pymc3.math import matrix_dot
 
+
+mp.rc('text', usetex=True)
 mp.rcParams["text.latex.preamble"] = [r"\usepackage{bm}"]
 
 
@@ -77,36 +77,52 @@ def main():
         # counts
         n, p = df.shape
         p_, m = M.shape
-        assert p == p_, "dimensions of data or factor structure not correct"
+        assert p == p_, "incorrect shape for M"
 
         # priors on manifest variable intercepts
-        nu = pm.Normal(name=r"$\nu$", mu=0, sd=1, shape=p, testval=df.mean())
+        nu = pm.Normal(name=r"$\bm{\nu}$", mu=0, sd=10, shape=p, testval=df.mean())
 
         # priors on loadings
         l = pm.Normal(
-            name=r"$\mathbf{\Lambda^{*}}$", mu=0, sd=1, shape=M.shape, testval=M
+            name=r"$\bm{\Lambda^{*}}$", mu=0, sd=10, shape=M.shape, testval=M
         )
-        Lambda = pm.Deterministic(r"$\mathbf{\Lambda}$", l * M)
+        Lambda = pm.Deterministic(r"$\bm{\Lambda}$", l * M)
 
         # priors on latent variable intercepts
-        alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=1, shape=m, testval=[0] * m)
+        alpha = pm.Normal(name=r"$\bm{\alpha}$", mu=0, sd=10, shape=m, testval=0)
 
         # means of manifest variables
         mu = nu + matrix_dot(Lambda, alpha)
 
         # priors on manifest variable standard deviations
-        D_eps = tt.diag(pm.HalfCauchy(
-            name=r"$\mathbf{D_{\epsilon}}$", beta=2.5, shape=p, testval=[1] * p
-        ))
+        D = pm.HalfCauchy(name=r"$\bm{D}$", beta=2.5, shape=p, testval=1)
 
         # prior on manifest variable correlation matrix
-        Theta = matrix_dot(D_eps, np.eye(p), D_eps)
+        Ta = np.eye(p)
+
+        # manifest variable covariance matrix
+        Theta = pm.Deterministic(r'$\bm{\Theta}$', D[None, :] * Ta * D[:, None])
 
         # prior on latent variable correlation matrix
-        Psi = np.eye(m)
+        # Psi = np.eye(m)
+        sd_dist = pm.HalfNormal.dist(sd=1)
+        packed_chol = pm.LKJCholeskyCov(name='_chol_cov', eta=1, n=m, sd_dist=sd_dist)
+        chol = pm.expand_packed_triangular(m, packed_chol, lower=True)
+        cov = tt.dot(chol, chol.T)
+        sd = tt.sqrt(tt.diag(cov))
+        Psi = pm.Deterministic(r"$\bm{Psi$}", cov / sd[:, None] / sd[None, :])
+        # Psi = tt.fill_diagonal(pf[np.zeros((m, m), dtype=np.int64)], 1.)
 
         # covariance of manifest variables
         Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
+
+        # observations
+        pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=df)
+
+        # sample
+        trace = pm.sample(chains=2)
+        pm.traceplot(trace, compact=True)
+        plt.savefig("tmp.png")
 
         # # priors on loadings
         # lambdas = pm.Normal(name=r"$\lambda$", mu=0, sd=1, shape=k, testval=[0] * k)
@@ -169,14 +185,6 @@ def main():
         # # covariance of manifest variables
         # Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
         #
-        # observations
-        pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=df)
-        #
-        # sample and save the results
-        trace = pm.sample(12000, tune=2000)
-        pm.traceplot(trace, compact=True)
-        plt.savefig("tmp.png")
-
 
 if __name__ == "__main__":
     main()
