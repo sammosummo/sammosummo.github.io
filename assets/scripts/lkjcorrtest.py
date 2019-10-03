@@ -2,7 +2,7 @@ import pymc3 as pm
 import matplotlib.pyplot as plt
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     with pm.Model():
 

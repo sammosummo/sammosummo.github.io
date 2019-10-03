@@ -1,3 +1,197 @@
+lkjcorrtest__py: |
+  import pymc3 as pm
+  import matplotlib.pyplot as plt
+  
+  
+  if __name__ == "__main__":
+  
+      with pm.Model():
+  
+          a = pm.Normal(name="a")
+          trace = pm.sample(10000, tune=2000, chains=2)
+          pm.traceplot(trace, compact=True)
+          plt.savefig("test_00.png")
+          pm.autocorrplot(trace, "a")
+          plt.savefig("test_01.png")
+  
+      with pm.Model():
+  
+          a = pm.Normal(name="a")
+          M = pm.LKJCorr(name="C", n=4, eta=1)
+          trace = pm.sample(10000, tune=2000, chains=2)
+          pm.traceplot(trace, compact=True)
+          plt.savefig("test_10.png")
+          pm.autocorrplot(trace, "a")
+          plt.savefig("test_11.png")
+  
+      with pm.Model():
+  
+          a = pm.Normal(name="a")
+          M = pm.LKJCholeskyCov(name="M", n=4, eta=1, sd_dist=pm.HalfCauchy.dist(1))
+          trace = pm.sample(10000, tune=2000, chains=2)
+          pm.traceplot(trace, compact=True)
+          plt.savefig("test_20.png")
+          pm.autocorrplot(trace, "a")
+          plt.savefig("test_21.png")
+bsem__py: |
+  """Bayesian structural equation modeling in PyMC3
+  
+  This is an attempt to implement Bayesian structural equation modeling (BSEM), as
+  described by Muthen and Asparouhov (2012), using the Holzinger and Swineford (1939) data
+  set.
+  
+  """
+  import numpy as np
+  import pandas as pd
+  import pymc3 as pm
+  import theano.tensor as tt
+  from matplotlib import pyplot as plt
+  from pymc3.math import matrix_dot
+  
+  
+  def main():
+      """Construct and fit the model, and create summary.
+  
+      """
+      # load and format the data
+      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
+      df = df[df.school == "Pasteur"]  # just one school
+      df = df[
+          [
+              "visual",
+              "cubes",
+              "paper",
+              "flags",
+              "general",
+              "paragrap",
+              "sentence",
+              "wordc",
+              "wordm",
+              "addition",
+              "code",
+              "counting",
+              "straight",
+              "wordr",
+              "numberr",
+              "figurer",
+              "object",
+              "numberf",
+              "figurew",
+          ]
+      ]  # just the 19 commonly used variables
+      df = (df - df.mean()) / df.std()  # standardize for numerical convenience
+  
+      # hypothesized factor structure
+      M = np.array(
+          [
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+          ]
+      )
+  
+      # construct the model
+      with pm.Model():
+  
+          # counts
+          n, p = df.shape
+          p_, m = M.shape
+          assert p == p_, "incorrect shape for M"
+  
+          # intercepts for manifest variable
+          nu = pm.Normal(name=r"$\nu$", mu=0, sd=5, shape=p, testval=df.mean())
+  
+          # unscaled loadings
+          Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=5, shape=M.shape, testval=M)
+  
+          # scaled loadings
+          Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
+  
+          # intercepts for latent variables
+          alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=5, shape=m, testval=0)
+  
+          # means of manifest variables
+          mu = nu + matrix_dot(Lambda, alpha)
+  
+          # standard deviations of manifest variables
+          D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=1)
+  
+          # correlations between manifest variables
+          Omega = np.eye(p)
+  
+          # covariance matrix for manifest variables
+          Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
+  
+          # covariance matrix on latent variables
+          L = pm.LKJCholeskyCov(name=r"$L$", eta=2, n=m, sd_dist=pm.HalfCauchy.dist(1))
+          ch = pm.expand_packed_triangular(m, L, lower=True)
+          Gamma = tt.dot(ch, ch.T)
+          sd = tt.sqrt(tt.diag(Gamma))
+          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+  
+          # covariance of manifest variables
+          Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
+  
+          # observations
+          # pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=df, shape=df.shape)
+  
+          # sample
+          trace = pm.sample(12000, tune=2000, chains=2)
+          pm.traceplot(trace, compact=True)
+          plt.savefig("tmp.png")
+  
+          # pm.save_trace(trace, "trace")
+  
+  
+  if __name__ == "__main__":
+      main()
+phist__py: |
+  """How to create a partially filled histogram.
+  
+  """
+  import matplotlib.pyplot as plt
+  from matplotlib import rcParams as defaults
+  from numpy.random import normal
+  
+  defaults["lines.linewidth"] = 2
+  defaults["font.size"] = 14
+  
+  
+  if __name__ == "__main__":
+  
+      y = normal(0, 1, 1000)  # generate some data
+      fig, ax = plt.subplots(1, 1, constrained_layout=True)
+      ns, bins, _ = ax.hist(y, 20, histtype="step")  # plot the unfilled histogram
+      start, stop = [-1.96, 1.96]  # range to fill between
+  
+      for n, l, r in zip(ns, bins, bins[1:]):
+  
+          if l > start:
+              if r < stop:
+                  # these bins fall completely within the range
+                  ax.fill_between([l, r], 0, [n, n], alpha=0.5)
+              elif l < stop < r:
+                  ax.fill_between([l, stop], 0, [n, n], alpha=0.5)  # partial fill
+          elif l < start < r:
+              ax.fill_between([start, r], 0, [n, n], alpha=0.5)  # partial fill
+  
+      plt.savefig(f"../../assets/images/phist.svg", bbox_inches=0, transparent=True)
 neals-funnel-b__py: |
   """Generate data and sample from Neal's funnel distribution.
   
@@ -640,6 +834,117 @@ realistic-funnel-b__py: |
   
   if __name__ == "__main__":
       main()
+refs2latex__py: |
+  import yaml
+  
+  
+  def main():
+  
+      lines = ""
+      with open("../../_data/my_papers.yaml") as f:
+  
+          data = yaml.load(f, Loader=yaml.FullLoader)
+          data = sorted(data["my_papers"], key=lambda i: i["sort"])[::-1]
+  
+          for paper in data:
+  
+              line = "%"
+              authors = paper["authors"].replace("</b>", "}").replace("<b>", r"\textbf{")
+              authors = r"\item " + authors.replace("&", r"\&")
+              line += authors
+              line += f" ({paper['year']}). {paper['title']} "
+              line += paper["editor"] if "editor" in paper else ""
+  
+              # this is a book
+              if "book" in paper:
+                  line += r" \emph{" + paper["book"] + "}"
+                  if "collection" in paper and "volume" in paper:
+                      line += f" ({paper['collection']} vol.~{paper['volume']}, pp.~{paper['first_page']}--{paper['last_page']})."
+                  elif "book" in paper and "volume" in paper:
+                      line += f" (vol.~{paper['volume']}, pp.~{paper['first_page']}--{paper['last_page']})."
+                  elif "book" in paper and "first_page" in paper:
+                      line += f" (pp.~{paper['first_page']}--{paper['last_page']})."
+                  else:
+                      line += "."
+                  line += f" {paper['city']}, {paper['state']}: {paper['publisher']}."
+  
+              # this is an article
+              else:
+                  line += r"\emph{" + paper["journal"] + "}"
+                  if "volume" in paper:
+                      line += ", \emph{" + paper["volume"] + "}"
+                  if "issue" in paper:
+                      line += f"({paper['issue']})"
+                  if "first_page" in paper:
+                      line += f", {paper['first_page']}"
+                  if "last_page" in paper:
+                      line += f"--{paper['last_page']}."
+                  else:
+                      line += "."
+  
+              # hyperlinks
+              if "doi" in paper:
+                  line += (
+                      " DOI:~\href{"
+                      + f"https://doi.org/{paper['doi']}"
+                      + "}{"
+                      + paper["doi"]
+                      + "}."
+                  )
+              if "pmid" in paper:
+                  line += (
+                      " PMID:~\href{"
+                      + f"https://www.ncbi.nlm.nih.gov/pubmed/?term={paper['pmid']}"
+                      + "}{"
+                      + paper["pmid"]
+                      + "}."
+                  )
+  
+              """
+              {% if paper.journal %}
+      {% if paper.volume or paper.first_page %}
+        <i>{{ paper.journal }}</i>,
+        {% if paper.volume %}
+          {% if paper.issue %}
+            {% if paper.first_page %}
+              <i>{{ paper.volume }}</i>({{ paper.issue }}),
+            {% else %}
+              <i>{{ paper.volume }}</i>({{ paper.issue }}).
+            {% endif %}
+          {% else %}
+            {% if paper.first_page %}
+              <i>{{ paper.volume }}</i>,
+            {% else %}
+              <i>{{ paper.volume }}</i>.
+            {% endif %}
+          {% endif %}
+        {% endif %}
+        {% if paper.first_page %}
+          {% if paper.last_page %}
+            {{ paper.first_page }}–{{paper.last_page }}.   
+          {% else %}
+            {{ paper.first_page }}.
+          {% endif %}
+        {% endif %}
+      {% else %}
+        <i>{{ paper.journal }}</i>.
+      {% endif %}
+    {% endif %}
+    {% if paper.doi %}
+      DOI: <a href="https://doi.org/{{ paper.doi }}">{{ paper.doi }}</a>.
+    {% endif %}
+    {% if paper.pmid %}
+      PMID: <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{ paper.pmid }}">{{ paper.pmid }}</a>.
+    {% endif %}
+              
+              """
+  
+              print(line)
+  
+  
+  if __name__ == "__main__":
+  
+      main()
 play-tone-interactively__py: |
   """Simply generates a pure tone using numpy and plays it via sounddevice.
   
@@ -1052,6 +1357,28 @@ noise-tone-plus-noise__py: |
       plt.savefig(
           f"../../assets/images/noise_toneplusnoise.svg", bbox_inches=0, transparent=True
       )
+mvnormal__py: |
+  import numpy as np
+  import pymc3 as pm
+  from matplotlib import pyplot as plt
+  
+  
+  if __name__ == "__main__":
+  
+      with pm.Model():
+          mu = np.zeros(3)
+          true_cov = np.array([[1.0, 0.5, 0.1], [0.5, 2.0, 0.2], [0.1, 0.2, 1.0]])
+          data = np.random.multivariate_normal(mu, true_cov, 100)
+          print(data)
+  
+          sd_dist = pm.HalfCauchy.dist(beta=2.5, shape=3)
+          chol_packed = pm.LKJCholeskyCov("chol_packed", n=3, eta=2, sd_dist=sd_dist)
+          chol = pm.expand_packed_triangular(3, chol_packed)
+          vals = pm.MvNormal("vals", mu=mu, chol=chol, observed=data)
+  
+          trace = pm.sample()
+          pm.traceplot(trace)
+          plt.savefig("tmp.png")
 qt-sound-example__py: |
   from math import pi, sin
   import struct, sys

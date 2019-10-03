@@ -47,10 +47,21 @@ def main():
 
             # hyperlinks
             if "doi" in paper:
-                line += " DOI:~\href{" + f"https://doi.org/{paper['doi']}" + "}{" + paper["doi"] + "}."
+                line += (
+                    " DOI:~\href{"
+                    + f"https://doi.org/{paper['doi']}"
+                    + "}{"
+                    + paper["doi"]
+                    + "}."
+                )
             if "pmid" in paper:
-                line += " PMID:~\href{" + f"https://www.ncbi.nlm.nih.gov/pubmed/?term={paper['pmid']}" + "}{" + paper["pmid"] + "}."
-
+                line += (
+                    " PMID:~\href{"
+                    + f"https://www.ncbi.nlm.nih.gov/pubmed/?term={paper['pmid']}"
+                    + "}{"
+                    + paper["pmid"]
+                    + "}."
+                )
 
             """
             {% if paper.journal %}
@@ -94,6 +105,6 @@ def main():
             print(line)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     main()
