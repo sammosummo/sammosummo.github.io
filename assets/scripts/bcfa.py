@@ -1,16 +1,20 @@
-"""Bayesian structural equation model (BSEM) using PyMC3.
+"""Bayesian confirmatory factor analysis in PyMC3.
 
 """
 import numpy as np
 import pandas as pd
 import pymc3 as pm
 import theano.tensor as tt
-from matplotlib import pyplot as plt
+
+from os.path import exists
+
 from pymc3.math import matrix_dot
 
+from fmt_val_latex import format_for_latex
 
-def cfa(Y, M):
-    r"""Bayesian confirmatory factor analysis (CFA) model.
+
+def bcfa(Y, M):
+    r"""Constructs a Bayesian confirmatory factor analysis (BCFA) model.
 
     Args:
         Y (numpy.ndarray): An $n \times p$ matrix of data where $n$ is the sample size
@@ -29,6 +33,9 @@ def cfa(Y, M):
         variable. Values of 0 remove the coefficient from the model entirely, 1
         represents a "full-strength" coefficient, and values (0, 1) are for
         cross-loadings.
+
+    Returns:
+        None: Model is placed in the context.
 
     """
     # counts
@@ -85,8 +92,7 @@ def main():
         for x in (0, 0.1):
 
             name = f"{school}_{'%.1f' % x}"
-            Y = Y[
-                [
+            variables = [
                     "visual",
                     "cubes",
                     "paper",
@@ -107,7 +113,7 @@ def main():
                     "numberf",
                     "figurew",
                 ]
-            ]  # just the 19 commonly used variables
+            Y = Y[variables]  # just the 19 commonly used variables
             Y = (Y - Y.mean()) / Y.std()  # for numerical convenience
             M = np.array(
                 [
@@ -135,12 +141,34 @@ def main():
 
             with pm.Model():
 
-                print(name)
-                cfa(Y, M)
-                trace = pm.sample(15000, tune=5000, chains=2)
-                pm.traceplot(trace, compact=True)
-                plt.savefig(f"{name}.png")
-                pm.save_trace(trace, name)
+                bcfa(Y, M)
+                f = f"../data/{name}"
+
+                if not exists(f):
+
+                    trace = pm.sample(15000, tune=5000, chains=2)
+                    pm.save_trace(trace, name)
+
+                else:
+
+                    trace = pm.load_trace(f)
+
+                # create a nice summary table
+                loadings = pd.DataFrame(
+                    trace[r"$\Lambda$"].mean(axis=0).round(2),
+                    index=[v.title() for v in variables],
+                    columns=["Spatial", "Verbal", "Speed", "Memory"],
+                )
+                print(loadings)
+                correlations = pd.DataFrame(
+                    trace[r"$\Psi$"].mean(axis=0).round(2),
+                    index=["Spatial", "Verbal", "Speed", "Memory"],
+                    columns=["Spatial", "Verbal", "Speed", "Memory"],
+                )
+                print(correlations)
+
+                # hi = pm.hpd(trace[r"$\Lambda$"])[:, :, 0]
+                # lo = pm.hpd(trace[r"$\Lambda$"])[:, :, 1]
 
 
 if __name__ == "__main__":

@@ -5,8 +5,8 @@ date: 2019-10-04
 has_code: true
 has_comments: true
 ---
-The following Python function converts a float to a LaTeX-friendly string, which is
-formatted to three significant digits and presents very large or small values in
+The following Python function converts a float to a LaTeX-friendly string formatted
+to three significant digits and with very large or small values in presented in
 standard notation.
 
 ```python
@@ -14,5 +14,5 @@ standard notation.
 ```
 
 This is probably not the best way to do it. I'm sure there is a much more elegant
-pure-regex solution rand I haven't tested it exhaustively with different values of `p`.
+regex-only solution. I haven't tested it exhaustively with different values of `p`.
 But it seems to do the job.
