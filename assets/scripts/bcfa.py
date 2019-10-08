@@ -89,9 +89,9 @@ def main():
 
     for school, Y in df.groupby("school"):
 
-        for x in (0, 0.1):
+        for x in (0.01,):
 
-            name = f"{school}_{'%.1f' % x}"
+            name = f"{school}_{'%.2f' % x}"
             variables = [
                     "visual",
                     "cubes",
@@ -143,6 +143,7 @@ def main():
 
                 bcfa(Y, M)
                 f = f"../data/{name}"
+                print(f)
 
                 if not exists(f):
 
@@ -167,8 +168,8 @@ def main():
                 )
                 print(correlations)
 
-                # hi = pm.hpd(trace[r"$\Lambda$"])[:, :, 0]
-                # lo = pm.hpd(trace[r"$\Lambda$"])[:, :, 1]
+                hi = pm.hpd(trace[r"$\Lambda$"])[:, :, 0]
+                lo = pm.hpd(trace[r"$\Lambda$"])[:, :, 1]
 
 
 if __name__ == "__main__":
