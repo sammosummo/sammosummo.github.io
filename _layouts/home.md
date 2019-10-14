@@ -23,7 +23,6 @@ nonsense. <a href="writing">Click here for the archive</a>.
 </ul>
 <h2>Latest publication</h2>
 
-The following has been peer reviewed, so is less likely to be nonsense.
 <a href="publications">Click here for the complete list</a>.
 <ul>
 <li>
