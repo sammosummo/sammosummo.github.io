@@ -93,26 +93,26 @@ def main():
 
             name = f"{school}_{'%.2f' % x}"
             variables = [
-                    "visual",
-                    "cubes",
-                    "paper",
-                    "flags",
-                    "general",
-                    "paragrap",
-                    "sentence",
-                    "wordc",
-                    "wordm",
-                    "addition",
-                    "code",
-                    "counting",
-                    "straight",
-                    "wordr",
-                    "numberr",
-                    "figurer",
-                    "object",
-                    "numberf",
-                    "figurew",
-                ]
+                "visual",
+                "cubes",
+                "paper",
+                "flags",
+                "general",
+                "paragrap",
+                "sentence",
+                "wordc",
+                "wordm",
+                "addition",
+                "code",
+                "counting",
+                "straight",
+                "wordr",
+                "numberr",
+                "figurer",
+                "object",
+                "numberf",
+                "figurew",
+            ]
             Y = Y[variables]  # just the 19 commonly used variables
             Y = (Y - Y.mean()) / Y.std()  # for numerical convenience
             M = np.array(

@@ -1,162 +1,3 @@
-bsem2__py: |
-  """Bayesian structural equation modeling in PyMC3
-  
-  This is an attempt to implement Bayesian structural equation modeling (BSEM), as
-  described by Muthen and Asparouhov (2012), using the Holzinger and Swineford (1939) data
-  set.
-  
-  """
-  import numpy as np
-  import pandas as pd
-  import pymc3 as pm
-  import theano.tensor as tt
-  from matplotlib import pyplot as plt
-  from pymc3.math import matrix_dot
-  
-  
-  class Constant(pm.Continuous):
-      """I defined a continuous distribution so that its dist() function could be used to
-      create a JKL correlation prior. All I did was change pm.Constant from a subclass of
-      pm.Discrete to pm.Continuous, and removed the bound function from logp method.
-  
-      """
-  
-      def __init__(self, c, *args, **kwargs):
-          super().__init__(*args, **kwargs)
-          self.mean = self.median = self.mode = self.c = c = tt.as_tensor_variable(c)
-  
-      def random(self, point=None, size=None):
-          c = pm.draw_values([self.c], point=point, size=size)[0]
-          dtype = np.array(c).dtype
-  
-          def _random(c, dtype=dtype, size=None):
-              return np.full(size, fill_value=c, dtype=dtype)
-  
-          return pm.generate_samples(
-              _random, c=c, dist_shape=self.shape, size=size
-          ).astype(dtype)
-  
-      def logp(self, value):
-          c = self.c
-          return tt.eq(value, c)
-  
-      def _repr_latex_(self, name=None, dist=None):
-          if dist is None:
-              dist = self
-          name = r"\text{%s}" % name
-          return r"${} \sim \text{{Constant}}()$".format(name)
-  
-  
-  def main():
-      """Construct and fit the model, and create summary.
-  
-      """
-      # load and format the data
-      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
-      df = df[df.school == "Pasteur"]  # just one school
-      df = df[
-          [
-              "visual",
-              "cubes",
-              "paper",
-              "flags",
-              "general",
-              "paragrap",
-              "sentence",
-              "wordc",
-              "wordm",
-              "addition",
-              "code",
-              "counting",
-              "straight",
-              "wordr",
-              "numberr",
-              "figurer",
-              "object",
-              "numberf",
-              "figurew",
-          ]
-      ]  # just the 19 commonly used variables
-      df = (df - df.mean()) / df.std()  # standardize for numerical convenience
-  
-      # hypothesized factor structure
-      M = np.array(
-          [
-              [1, 0.01, 0.01, 0.01],
-              [1, 0.01, 0.01, 0.01],
-              [1, 0.01, 0.01, 0.01],
-              [1, 0.01, 0.01, 0.01],
-              [0.01, 1, 0.01, 0.01],
-              [0.01, 1, 0.01, 0.01],
-              [0.01, 1, 0.01, 0.01],
-              [0.01, 1, 0.01, 0.01],
-              [0.01, 1, 0.01, 0.01],
-              [0.01, 0.01, 1, 0.01],
-              [0.01, 0.01, 1, 0.01],
-              [0.01, 0.01, 1, 0.01],
-              [0.01, 0.01, 1, 0.01],
-              [0.01, 0.01, 0.01, 1],
-              [0.01, 0.01, 0.01, 1],
-              [0.01, 0.01, 0.01, 1],
-              [0.01, 0.01, 0.01, 1],
-              [0.01, 0.01, 0.01, 1],
-              [0.01, 0.01, 0.01, 1],
-          ]
-      )
-  
-      # construct the model
-      with pm.Model():
-  
-          # counts
-          n, p = df.shape
-          p_, m = M.shape
-          assert p == p_, "incorrect shape for M"
-  
-          # intercepts for manifest variable
-          nu = pm.Normal(name=r"$\nu$", mu=0, sd=5, shape=p, testval=df.mean())
-  
-          # unscaled loadings
-          Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=M.shape, testval=M)
-  
-          # scaled loadings
-          Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
-  
-          # intercepts for latent variables
-          alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=5, shape=m, testval=0)
-  
-          # means of manifest variables
-          mu = nu + matrix_dot(Lambda, alpha)
-  
-          # standard deviations of manifest variables
-          D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=1)
-  
-          # correlations between manifest variables
-          Omega = np.eye(p)
-  
-          # covariance matrix for manifest variables
-          Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
-  
-          # covariance matrix on latent variables
-          L = pm.LKJCholeskyCov(name=r"$L$", eta=1, n=m, sd_dist=Constant.dist(c=1))
-          ch = pm.expand_packed_triangular(m, L, lower=True)
-          Psi = pm.Deterministic(r"$\Psi$", tt.dot(ch, ch.T))
-  
-          # covariance of manifest variables
-          Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
-  
-          # observations
-          # pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=df, shape=df.shape)
-  
-          # sample
-          trace = pm.sample(15000, tune=5000, chains=2)
-          pm.traceplot(trace, compact=True)
-          plt.savefig("tmp.png")
-  
-          # pm.save_trace(trace, "bsem_hs_modelb")
-  
-  
-  if __name__ == "__main__":
-      main()
 lkjcorrtest__py: |
   import pymc3 as pm
   import matplotlib.pyplot as plt
@@ -185,143 +26,15 @@ lkjcorrtest__py: |
   
       with pm.Model():
   
-          a = pm.Normal(name="a")
-          f = pm.HalfNormal.dist()
-          M = pm.LKJCholeskyCov(name="M", n=4, eta=1, sd_dist=f)
-          trace = pm.sample(10000, tune=2000, chains=2)
-          pm.traceplot(trace, compact=True)
-          plt.savefig("test_20.png")
-          pm.autocorrplot(trace, "a")
-          plt.savefig("test_21.png")
-bsem__py: |
-  """Bayesian structural equation modeling in PyMC3
-  
-  This is an attempt to implement Bayesian structural equation modeling (BSEM), as
-  described by Muthen and Asparouhov (2012), using the Holzinger and Swineford (1939) data
-  set.
-  
-  """
-  import numpy as np
-  import pandas as pd
-  import pymc3 as pm
-  import theano.tensor as tt
-  from matplotlib import pyplot as plt
-  from pymc3.math import matrix_dot
-  
-  
-  def main():
-      """Construct and fit the model, and create summary.
-  
-      """
-      # load and format the data
-      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
-      df = df[df.school == "Pasteur"]  # just one school
-      df = df[
-          [
-              "visual",
-              "cubes",
-              "paper",
-              "flags",
-              "general",
-              "paragrap",
-              "sentence",
-              "wordc",
-              "wordm",
-              "addition",
-              "code",
-              "counting",
-              "straight",
-              "wordr",
-              "numberr",
-              "figurer",
-              "object",
-              "numberf",
-              "figurew",
-          ]
-      ]  # just the 19 commonly used variables
-      df = (df - df.mean()) / df.std()  # standardize for numerical convenience
-  
-      # hypothesized factor structure
-      M = np.array(
-          [
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-          ]
-      )
-  
-      # construct the model
-      with pm.Model():
-  
-          # counts
-          n, p = df.shape
-          p_, m = M.shape
-          assert p == p_, "incorrect shape for M"
-  
-          # intercepts for manifest variable
-          nu = pm.Normal(name=r"$\nu$", mu=0, sd=5, shape=p, testval=df.mean())
-  
-          # unscaled loadings
-          Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=M.shape, testval=M)
-  
-          # scaled loadings
-          Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
-  
-          # intercepts for latent variables
-          alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=5, shape=m, testval=0)
-  
-          # means of manifest variables
-          mu = nu + matrix_dot(Lambda, alpha)
-  
-          # standard deviations of manifest variables
-          D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=1)
-  
-          # correlations between manifest variables
-          Omega = np.eye(p)
-  
-          # covariance matrix for manifest variables
-          Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
-  
-          # covariance matrix on latent variables
-          f = pm.Lognormal.dist(sd=0.25)
-          L = pm.LKJCholeskyCov(name=r"$L$", eta=1, n=m, sd_dist=f)
-          ch = pm.expand_packed_triangular(m, L, lower=True)
-          Gamma = tt.dot(ch, ch.T)
-          sd = tt.sqrt(tt.diag(Gamma))
-          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
-  
-          # covariance of manifest variables
-          Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
-  
-          # observations
-          pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=df, shape=df.shape)
-  
-          # sample
-          trace = pm.sample(15000, tune=5000, chains=2)
-          pm.traceplot(trace, compact=True)
-          plt.savefig("tmp.png")
-  
-          pm.save_trace(trace, "bsem_hs_modelc")
-  
-  
-  if __name__ == "__main__":
-      main()
+          a = pm.Normal(name="a", shape=(1, 2))
+          pm.sample()
+          # f = pm.HalfNormal.dist()
+          # M = pm.LKJCholeskyCov(name="M", n=4, eta=1, sd_dist=f)
+          # trace = pm.sample(10000, tune=2000, chains=2)
+          # pm.traceplot(trace, compact=True)
+          # plt.savefig("test_20.png")
+          # pm.autocorrplot(trace, "a")
+          # plt.savefig("test_21.png")
 phist__py: |
   """How to create a partially filled histogram.
   
@@ -353,6 +66,183 @@ phist__py: |
               ax.fill_between([start, r], 0, [n, n], alpha=0.5)  # partial fill
   
       plt.savefig(f"../../assets/images/phist.svg", bbox_inches=0, transparent=True)
+bcfa__py: |
+  """Bayesian confirmatory factor analysis in PyMC3.
+  
+  """
+  import numpy as np
+  import pandas as pd
+  import pymc3 as pm
+  import theano.tensor as tt
+  
+  from os.path import exists
+  
+  from pymc3.math import matrix_dot
+  
+  from fmt_val_latex import format_for_latex
+  
+  
+  def bcfa(Y, M):
+      r"""Constructs a Bayesian confirmatory factor analysis (BCFA) model.
+  
+      Args:
+          Y (numpy.ndarray): An $n \times p$ matrix of data where $n$ is the sample size
+              and $p$ is the number of manifest variables.
+          M (numpy.ndarray): An $p \times m$ matrix to describe model structure where $m$
+              is the number of latent variables.
+  
+      Notes:
+          $$\mathbf{Y}$$ probably should be standardized first if you are using continuous
+          data.
+  
+          Entries in $\mathbf{M}$ should be [0, 1].
+  
+          $\mathbf{M}_{(i,j)}$ represents the variance of the normal prior placed on the
+          regression coefficient from the $j$th latent variable to the $i$th manifest
+          variable. Values of 0 remove the coefficient from the model entirely, 1
+          represents a "full-strength" coefficient, and values (0, 1) are for
+          cross-loadings.
+  
+      Returns:
+          None: Model is placed in the context.
+  
+      """
+      # counts
+      n, p = Y.shape
+      p_, m = M.shape
+      assert p == p_, "M is the wrong shape"
+  
+      # intercepts for manifest variables
+      sd = max(np.abs(Y.mean()).max() * 2.5, 2.5)
+      nu = pm.Normal(name=r"$\nu$", mu=0, sd=sd, shape=p, testval=Y.mean())
+  
+      # unscaled regression coefficients
+      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=M.shape, testval=M)
+  
+      # scaled regression coefficients
+      Lambda = pm.Deterministic(r"$\Lambda$", Phi * np.sqrt(M))
+  
+      # intercepts for latent variables
+      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=2.5, shape=m, testval=0)
+  
+      # means of manifest variables
+      mu = nu + matrix_dot(Lambda, alpha)
+  
+      # standard deviations of manifest variables
+      D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=Y.std())
+  
+      # correlations between manifest variables
+      Omega = np.eye(p)
+  
+      # covariance matrix for manifest variables
+      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
+  
+      # covariance matrix on latent variables
+      f = pm.Lognormal.dist(sd=0.25)
+      L = pm.LKJCholeskyCov(name=r"$L$", eta=1, n=m, sd_dist=f)
+      ch = pm.expand_packed_triangular(m, L, lower=True)
+      Gamma = tt.dot(ch, ch.T)
+      sd = tt.sqrt(tt.diag(Gamma))
+      Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+  
+      # covariance of manifest variables
+      Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
+  
+      # observations
+      pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=Y, shape=Y.shape)
+  
+  
+  def main():
+  
+      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
+  
+      for school, Y in df.groupby("school"):
+  
+          for x in (0.01,):
+  
+              name = f"{school}_{'%.2f' % x}"
+              variables = [
+                  "visual",
+                  "cubes",
+                  "paper",
+                  "flags",
+                  "general",
+                  "paragrap",
+                  "sentence",
+                  "wordc",
+                  "wordm",
+                  "addition",
+                  "code",
+                  "counting",
+                  "straight",
+                  "wordr",
+                  "numberr",
+                  "figurer",
+                  "object",
+                  "numberf",
+                  "figurew",
+              ]
+              Y = Y[variables]  # just the 19 commonly used variables
+              Y = (Y - Y.mean()) / Y.std()  # for numerical convenience
+              M = np.array(
+                  [
+                      [1, x, x, x],
+                      [1, x, x, x],
+                      [1, x, x, x],
+                      [1, x, x, x],
+                      [x, 1, x, x],
+                      [x, 1, x, x],
+                      [x, 1, x, x],
+                      [x, 1, x, x],
+                      [x, 1, x, x],
+                      [x, x, 1, x],
+                      [x, x, 1, x],
+                      [x, x, 1, x],
+                      [x, x, 1, x],
+                      [x, x, x, 1],
+                      [x, x, x, 1],
+                      [x, x, x, 1],
+                      [x, x, x, 1],
+                      [x, x, x, 1],
+                      [x, x, x, 1],
+                  ]
+              )  # hypothesized structure
+  
+              with pm.Model():
+  
+                  bcfa(Y, M)
+                  f = f"../data/{name}"
+                  print(f)
+  
+                  if not exists(f):
+  
+                      trace = pm.sample(15000, tune=5000, chains=2)
+                      pm.save_trace(trace, name)
+  
+                  else:
+  
+                      trace = pm.load_trace(f)
+  
+                  # create a nice summary table
+                  loadings = pd.DataFrame(
+                      trace[r"$\Lambda$"].mean(axis=0).round(2),
+                      index=[v.title() for v in variables],
+                      columns=["Spatial", "Verbal", "Speed", "Memory"],
+                  )
+                  print(loadings)
+                  correlations = pd.DataFrame(
+                      trace[r"$\Psi$"].mean(axis=0).round(2),
+                      index=["Spatial", "Verbal", "Speed", "Memory"],
+                      columns=["Spatial", "Verbal", "Speed", "Memory"],
+                  )
+                  print(correlations)
+  
+                  hi = pm.hpd(trace[r"$\Lambda$"])[:, :, 0]
+                  lo = pm.hpd(trace[r"$\Lambda$"])[:, :, 1]
+  
+  
+  if __name__ == "__main__":
+      main()
 fmt_val_latex__py: |
   """Format a number for inclusion in LaTeX.
   
@@ -450,6 +340,57 @@ neals-funnel-b__py: |
   
           # save
           plt.savefig("../images/neals-funnel-b.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+      main()
+logistic_example__py: |
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import matplotlib.pyplot as plt
+  import pymc3 as pm
+  
+  
+  def main():
+  
+      # format the data
+      # see http://blog.yhat.com/posts/logistic-regression-python-rodeo.html
+      df = pd.read_csv("../../assets/data/binary.csv")
+      df.columns = ["admit", "gre", "gpa", "prestige"]
+      dummy_ranks = pd.get_dummies(df["prestige"], prefix="prestige")
+      cols_to_keep = ["admit", "gre", "gpa"]
+      data = df[cols_to_keep].join(dummy_ranks.ix[:, "prestige_2":])
+      data["intercept"] = 1.0
+  
+      # frequentist logistic regression
+      train_cols = data.columns[1:]
+      logit = sm.Logit(data["admit"], data[train_cols])
+      result = logit.fit()
+      print(result.summary())
+  
+      # Bayesian logistic regression #1
+      with pm.Model():
+  
+          betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
+          pi = pm.math.sigmoid(pm.math.matrix_dot(data[train_cols].values, betas))
+          pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
+          trace = pm.sample(12000, tune=2000)
+          print(pm.summary(trace))
+          print(pm.stats.waic(trace))
+          print(pm.stats.loo(trace))
+  
+      # Bayesian logistic regression #2
+      with pm.Model():
+          betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
+          mu = pm.math.matrix_dot(data[train_cols].values, betas)
+          psi = pm.Normal(name="psi", mu=mu, sd=1, shape=data["admit"].shape)
+          pi = pm.math.sigmoid(psi)
+          pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
+          trace = pm.sample(12000, tune=2000)
+          print(pm.summary(trace, var_names=["betas"]))
+          print(pm.stats.waic(trace))
+          print(pm.stats.loo(trace))
   
   
   if __name__ == "__main__":
@@ -1487,20 +1428,22 @@ code2yaml__py: |
       for i, f in enumerate(os.listdir(os.getcwd())):
   
           src = os.path.join(os.getcwd(), f)
-          contents = open(src).read()
-          kwargs = {"fast": True, "mode": black.FileMode()}
-          _, ext = os.path.splitext(f)
-          if ext == ".py":
-              try:
-                  # for some reason I can't get "in-place" formatter to work, so I just
-                  # overwrite the file instead
-                  contents = black.format_file_contents(contents, **kwargs)
-              except black.NothingChanged:
-                  pass
-          open(src, "w").write(contents)
-          contents = "  " + contents.replace("\n", "\n  ").rstrip() + "\n"
-          contents = f"{f.replace('.', '__')}: |\n" + contents
-          open("../../_data/code.yaml", "w" if i == 0 else "a").write(contents)
+          try:
+              contents = open(src).read()
+              kwargs = {"fast": True, "mode": black.FileMode()}
+              _, ext = os.path.splitext(f)
+              if ext == ".py":
+                  try:
+                      # for some reason I can't get "in-place" formatter to work
+                      contents = black.format_file_contents(contents, **kwargs)
+                  except black.NothingChanged:
+                      pass
+              open(src, "w").write(contents)
+              contents = "  " + contents.replace("\n", "\n  ").rstrip() + "\n"
+              contents = f"{f.replace('.', '__')}: |\n" + contents
+              open("../../_data/code.yaml", "w" if i == 0 else "a").write(contents)
+          except IsADirectoryError:
+              pass
   
   
   if __name__ == "__main__":
@@ -1558,154 +1501,6 @@ noise-tone-plus-noise__py: |
       plt.savefig(
           f"../../assets/images/noise_toneplusnoise.svg", bbox_inches=0, transparent=True
       )
-bsem___py: |
-  """Bayesian structural equation model (BSEM) using PyMC3.
-  
-  """
-  import numpy as np
-  import pandas as pd
-  import pymc3 as pm
-  import theano.tensor as tt
-  from matplotlib import pyplot as plt
-  from pymc3.math import matrix_dot
-  
-  
-  def cfa(Y, M):
-      r"""Bayesian confirmatory factor analysis (CFA) model.
-  
-      Args:
-          Y (numpy.ndarray): An $n \times p$ matrix of data where $n$ is the sample size
-              and $p$ is the number of manifest variables.
-          M (numpy.ndarray): An $p \times m$ matrix to describe model structure where $m$
-              is the number of latent variables.
-  
-      Notes:
-          $$\mathbf{Y}$$ probably should be standardized first if you are using continuous
-          data.
-  
-          Entries in $\mathbf{M}$ should be [0, 1].
-  
-          $\mathbf{M}_{(i,j)}$ represents the variance of the normal prior placed on the
-          regression coefficient from the $j$th latent variable to the $i$th manifest
-          variable. Values of 0 remove the coefficient from the model entirely, 1
-          represents a "full-strength" coefficient, and values (0, 1) are for
-          cross-loadings.
-  
-      """
-      # counts
-      n, p = Y.shape
-      p_, m = M.shape
-      assert p == p_, "M is the wrong shape"
-  
-      # intercepts for manifest variables
-      sd = max(np.abs(Y.mean()).max() * 2.5, 2.5)
-      nu = pm.Normal(name=r"$\nu$", mu=0, sd=sd, shape=p, testval=Y.mean())
-  
-      # unscaled regression coefficients
-      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=M.shape, testval=M)
-  
-      # scaled regression coefficients
-      Lambda = pm.Deterministic(r"$\Lambda$", Phi * np.sqrt(M))
-  
-      # intercepts for latent variables
-      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=2.5, shape=m, testval=0)
-  
-      # means of manifest variables
-      mu = nu + matrix_dot(Lambda, alpha)
-  
-      # standard deviations of manifest variables
-      D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=Y.std())
-  
-      # correlations between manifest variables
-      Omega = np.eye(p)
-  
-      # covariance matrix for manifest variables
-      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
-  
-      # covariance matrix on latent variables
-      f = pm.Lognormal.dist(sd=0.25)
-      L = pm.LKJCholeskyCov(name=r"$L$", eta=1, n=m, sd_dist=f)
-      ch = pm.expand_packed_triangular(m, L, lower=True)
-      Gamma = tt.dot(ch, ch.T)
-      sd = tt.sqrt(tt.diag(Gamma))
-      Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
-  
-      # covariance of manifest variables
-      Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
-  
-      # observations
-      pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=Y, shape=Y.shape)
-  
-  
-  def main():
-  
-      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
-  
-      for school, Y in df.groupby("school"):
-  
-          for x in (0, 0.1):
-  
-              name = f"{school}_{'%.1f' % x}"
-              Y = Y[
-                  [
-                      "visual",
-                      "cubes",
-                      "paper",
-                      "flags",
-                      "general",
-                      "paragrap",
-                      "sentence",
-                      "wordc",
-                      "wordm",
-                      "addition",
-                      "code",
-                      "counting",
-                      "straight",
-                      "wordr",
-                      "numberr",
-                      "figurer",
-                      "object",
-                      "numberf",
-                      "figurew",
-                  ]
-              ]  # just the 19 commonly used variables
-              Y = (Y - Y.mean()) / Y.std()  # for numerical convenience
-              M = np.array(
-                  [
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                  ]
-              )  # hypothesized structure
-  
-              with pm.Model():
-  
-                  print(name)
-                  cfa(Y, M)
-                  trace = pm.sample(15000, tune=5000, chains=2)
-                  pm.traceplot(trace, compact=True)
-                  plt.savefig(f"{name}.png")
-                  pm.save_trace(trace, name)
-  
-  
-  if __name__ == "__main__":
-      main()
 mvnormal__py: |
   import numpy as np
   import pymc3 as pm
