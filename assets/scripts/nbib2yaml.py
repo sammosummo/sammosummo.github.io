@@ -192,6 +192,8 @@ def main():
             paper["title"].replace(f": {s}", f": {s.upper()}")
         paper["authors"] = paper["authors"].replace(".., ", "")
 
+    papers = [p for p in papers if int(p["year"]) >= 2010]
+
     with open("../../_data/my_papers.yaml", "w") as fw:
         fw.write("my_papers:\n")
         for paper in papers:
