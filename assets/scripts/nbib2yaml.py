@@ -5,6 +5,7 @@ import copy
 import pickle
 import os
 import re
+import string
 from pubmed_lookup import PubMedLookup
 from pubmed_lookup import Publication
 
@@ -50,7 +51,7 @@ def main():
                             print(f"looking up {data}")
                             url = f"http://www.ncbi.nlm.nih.gov/pubmed/{data}"
                             lookup = PubMedLookup(url, "")
-                            publication = Publication(lookup)
+                            publication = Publication(lookup, resolve_doi=False)
                             authors = [a.split() for a in publication._author_list]
                             x = lambda a: all(
                                 (a == a.upper(), "ENIGMA" not in a, "CNV" not in a)
@@ -176,6 +177,7 @@ def main():
                 .replace(" Journal of the Association of European Psychiatrists", "")
                 .replace(" : Official Publication of the American College of", "")
                 .replace(" Official Journal of the Society For", "")
+                .replace("Jama", "JAMA")
             )
         paper["title"] = paper["title"][0] + paper["title"][1:].lower()
         paper["title"] = (
@@ -185,8 +187,10 @@ def main():
             .replace("qtl", "QTL")
             .replace("enigma", "ENIGMA")
             .replace("mri ", "MRI ")
-            .replace(": a", ": A")
         )
+        for s in string.ascii_lowercase:
+            paper["title"].replace(f": {s}", f": {s.upper()}")
+        paper["authors"] = paper["authors"].replace(".., ", "")
 
     with open("../../_data/my_papers.yaml", "w") as fw:
         fw.write("my_papers:\n")
