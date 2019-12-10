@@ -1,5 +1,5 @@
 .highlight {
-  overflow: scroll;
+  overflow: hidden;
   margin: 0;
   padding: 10px 10px;
   background: #2d2d2d; 
