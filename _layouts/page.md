@@ -2,5 +2,5 @@
 layout: default
 ---
 
-<h1>{{ page.title }}</h1>
+<h2>{{ page.title }}</h2>
 {{ content }}
