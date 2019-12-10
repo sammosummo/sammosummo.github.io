@@ -9,7 +9,7 @@ layout: default
   {% include mathjax.html %}
 {% endif %}
 
-<h1>{{ page.title }}</h1>
+<h2>{{ page.title }}</h2>
 {{ content }}
 {% if page.include_references %}
   {% include references.html %}
