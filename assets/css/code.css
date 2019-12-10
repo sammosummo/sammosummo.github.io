@@ -8,6 +8,11 @@
 }
 pre.highlight {
   overflow: scroll;
+  font-size: smaller;
+}
+
+pre.highlight::-webkit-scrollbar {
+  display: none;
 }
 .highlight .hll { background-color: #515151 }
 .highlight .c { color: #999999 } /* Comment */
