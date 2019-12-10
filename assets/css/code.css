@@ -6,6 +6,9 @@
   color: #cccccc;
   max-height: 300px;
 }
+pre.highlight {
+  overflow: scroll;
+}
 .highlight .hll { background-color: #515151 }
 .highlight .c { color: #999999 } /* Comment */
 .highlight .err { color: #f2777a } /* Error */
