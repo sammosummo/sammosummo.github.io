@@ -111,18 +111,19 @@ def main():
             print(i, j)
             _, ax = plt.subplots(1, 1, constrained_layout=True)
             omega = np.random.random(4) * 2.5
-            if i < 2:
-                omega = 0
-            elif i < 3:
-                omega = omega[0]
-            else:
-                omega = random_walk(omega, dur)
+            omega = omega[0] if i < 3 else random_walk(omega, dur)
             w = np.random.choice([-1, 1], 4) * 2 ** (np.random.random(4) * 5 + 0.5)
-            w = w[0] if i < 3 else random_walk(w, dur)
+            if i < 2:
+                w = 0
+            elif i == 2:
+                w = w[0]
+            else:
+                w = random_walk(w, dur)
             delta = 0 if i == 0 else 0.9
             y, a = ripple_sound(dur, n, omega, w, delta, *args)
-            f, t, Sxx = spectrogram(y, sr, "hamming", 4096)
-            ax.pcolormesh(t, f, Sxx)
+            f, t, Sxx = spectrogram(y, sr, "hamming", 4096, nfft=4096)
+            print(f)
+            ax.pcolormesh(t, f, np.log(Sxx))
             ax.set_ylim(f0, 1600)
             # ax.set_xlim(0, dur)
             ax.set_yscale('log', basey=2)
