@@ -289,3 +289,13 @@ references:
    last_page: "4131"
    doi: "10.1523/JNEUROSCI.22-10-04114.2002"
    journal: "The Journal of Neuroscience"
+
+ - id: "Glasberg1990a"
+   authors: "Glasberg, B. R., & Moore, B. C. J."
+   volume: "47"
+   year: "1990"
+   title: "Derivation of auditory filter shapes from notched-noise data"
+   first_page: "103"
+   last_page: "138"
+   doi: "10.1016/0378-5955(90)90170-T"
+   journal: "Hearing Research"

@@ -16,6 +16,7 @@ references:
  - Visscher2007a
  - Shapley1985a
  - Escabi2002a
+ - Glasberg1990a
 ---
 
 Ripple sounds are broadband stimuli with sinusoidal spectral envelopes. They were first
@@ -68,7 +69,7 @@ f\left( i \right) = f_0\left(\frac{f_\left(n-1\right)}{f_0}\right)^{\frac{i}{n -
 
 where $$f_0$$ is the frequency of the lowest tone in Hz and $$f_\left(n-1\right)$$ is the
 frequency of the highest tone in Hz. Another option is to space tones evenly in terms
-of equivalent rectangular bandwidths [(Moore & Glasberg, 1983)](#Moore1983a). I'll
+of equivalent rectangular bandwidths [(Glasberg & Moore, 1990)](#Moore1983a). I'll
 implement this in a future post. Starting phases should be random, so we draw them from a 
 circular uniform distribution,
 
