@@ -12,7 +12,7 @@ from scipy.stats import binom
 from scipy.special import expit
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     # simulate some data
     n = 500
@@ -64,4 +64,3 @@ if __name__ == '__main__':
 
         trace = pm.sample(15000, tune=5000)
         print(pm.summary(trace, var_names=["B", "Theta"]))
-

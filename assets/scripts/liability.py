@@ -39,8 +39,9 @@ def main():
         betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
         psi = pm.math.matrix_dot(data[train_cols].values, betas)
         from sys import float_info
+
         eps = float_info.epsilon
-        pi = tt.switch(psi <= 0, eps, 1.-eps)
+        pi = tt.switch(psi <= 0, eps, 1.0 - eps)
         pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
         trace = pm.sample(tune=2000)
         print(pm.summary(trace))
