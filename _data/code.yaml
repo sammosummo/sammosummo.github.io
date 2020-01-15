@@ -1,215 +1,3 @@
-lkjcorrtest__py: |
-  import pymc3 as pm
-  import matplotlib.pyplot as plt
-  
-  
-  if __name__ == "__main__":
-  
-      # with pm.Model():
-      #
-      #     a = pm.Normal(name="a")
-      #     trace = pm.sample(10000, tune=2000, chains=2)
-      #     pm.traceplot(trace, compact=True)
-      #     plt.savefig("test_00.png")
-      #     pm.autocorrplot(trace, "a")
-      #     plt.savefig("test_01.png")
-  
-      # with pm.Model():
-      #
-      #     a = pm.Normal(name="a")
-      #     M = pm.LKJCorr(name="C", n=4, eta=1)
-      #     trace = pm.sample(10000, tune=2000, chains=2)
-      #     pm.traceplot(trace, compact=True)
-      #     plt.savefig("test_10.png")
-      #     pm.autocorrplot(trace, "a")
-      #     plt.savefig("test_11.png")
-  
-      with pm.Model():
-  
-          a = pm.Normal(name="a", shape=(1, 2))
-          pm.sample()
-          # f = pm.HalfNormal.dist()
-          # M = pm.LKJCholeskyCov(name="M", n=4, eta=1, sd_dist=f)
-          # trace = pm.sample(10000, tune=2000, chains=2)
-          # pm.traceplot(trace, compact=True)
-          # plt.savefig("test_20.png")
-          # pm.autocorrplot(trace, "a")
-          # plt.savefig("test_21.png")
-ripple-specgrams-for-jodie__py: |
-  """Generate a bunch of spectrograms of ripple sounds.
-  
-  """
-  import numpy as np
-  import matplotlib.pyplot as plt
-  
-  from scipy.interpolate import interp1d
-  from scipy.signal import spectrogram
-  
-  
-  a0 = 1e-5  # reference amplitude
-  sr = 44100  # sample rate
-  
-  
-  def ripple_sound(dur, n, omega, w, delta, phi, f0, fm1, rand_gamma=True, l=60):
-      """Synthesises a ripple sound.
-  
-      Args:
-          dur (float): Duration of sound in s.
-          n (int): Number of sinusoids.
-          omega (:obj:`float` or `array`-like): Ripple density in Hz. Must be a single
-              value or an array with length `duration * sr`.
-          w (:obj:`float` or `array`-like): Ripple drift in Hz. Must be a single
-              value or an array with length `duration * sr`.
-          delta (:obj:`float` or `array`-like): Normalized ripple depth. Must be a single
-              value or an array with length `duration * sr`. Value(s) must be in
-              the range [0, 1].
-          phi (float): Ripple starting phase in radians.
-          f0 (float): Frequency of the lowest sinusoid in Hz.
-          fm1 (float): Frequency of the highest sinusoid in Hz.
-          rand_gamma (:obj:`bool`, optional): Randomize the normalized amplitudes of the
-              sinusoids prior to scaling. Defaults to `False`.
-          l (:obj:`float`, optional): Level in dB of the sound, assuming a pure tone with
-              peak amplitude `a0` is 0 dB SPL.
-  
-      Returns:
-          y (np.array): The waveform.
-          a (np.array): The envelope (useful for plotting).
-  
-      """
-      # create sinusoids
-      m = int(dur * sr)  # total number of samples
-      shapea = (1, m)
-      shapeb = (n, 1)
-      t = np.linspace(0, dur, int(m)).reshape(shapea)
-      i = np.arange(n).reshape(shapeb)
-      f = f0 * (fm1 / f0) ** (i / (n - 1))
-      sphi = 2 * np.pi * np.random.random(shapeb)
-      s = np.sin(2 * np.pi * f * t + sphi)
-  
-      # create envelope
-      if hasattr(w, "__iter__"):
-          assert len(w) == m, "w vector has incorrect length"
-      else:
-          w = np.tile(w, m)
-      wprime = (np.cumsum(w) / sr).reshape(shapea)
-  
-      if hasattr(omega, "__iter__"):
-          assert len(omega) == m, "w vector has incorrect length"
-      else:
-          omega = np.tile(omega, m)
-      omega = omega.reshape(shapea)
-      x = np.log2(f / f0)
-      a = 1 + delta * np.sin(2 * np.pi * (wprime + omega * x) + phi)
-  
-      # gamma is not traditional; it was added to make sounds from complexity level 1
-      # sound a bit different from one another
-      if rand_gamma:
-          gamma = np.random.random(shapeb)
-      else:
-          gamma = 1
-  
-      # create the waveform
-      y = (gamma * a * s / np.sqrt(f)).sum(axis=0)
-      y /= np.abs(y).max()
-      y *= a0 * 10 ** (l / 20)
-  
-      return y, a
-  
-  
-  def random_walk(points, dur):
-      """Return a smooth random walk.
-  
-      Creates a smooth vector of length `duration` in which the values within `points`
-      are visited. `Points` are spaced equally along the vector.
-  
-      Args:
-          points (:obj:`array`-like): Points to visit.
-  
-  
-      """
-      f = interp1d(np.linspace(0, dur, len(points)), points, "cubic")
-      return f(np.linspace(0, dur, dur * sr))
-  
-  
-  def make_figs(seed, dpi, fontsize, labels, aspect, ticks, ext, cmap):
-      """Create and plot some ripple sounds; saving the figs to the current directory.
-  
-      Args:
-          seed (int): Seed the random-number generator. Choose a different value to create
-              different waveforms.
-          dpi (int): Resolution of figures.
-          fontsize (int): For axis and tick labels.
-          labels (bool): Add the category number to the top of the figure.
-          aspect (float): Makes the figure longer by this factor.
-          ticks (bool): Show ticks on axes.
-          ext (str): File extension. For vector graphics, choose "svg". For raster, choose
-              "png". Either way, the spectrogram itself is a raster; this just effects the
-              axes.
-          cmap (str): Name of the colormap. Default is "viridis". Other good options are
-              "cividis", "plasma" and "inferno". Don't use "jet"!
-  
-      """
-      # don't change these!
-      dur = 1.5
-      n = 1400
-      ran_gamma = True
-      f0 = 125.0
-      fm1 = 16000.0
-      phi = 0.0
-      args = (phi, f0, fm1, ran_gamma)
-  
-      np.random.seed(seed)
-  
-      # set up the figures
-      from matplotlib import rcParams
-  
-      figsize = rcParams["figure.figsize"]
-      rcParams["figure.figsize"] = [figsize[0], int(figsize[1] * aspect)]
-      rcParams["font.size"] = fontsize
-      rcParams["font.family"] = "Arial"
-  
-      for i in range(1, 5):
-  
-          for j in range(1, 3):
-  
-              print(f"Making figure {j} from category {i} ...", end=" ")
-  
-              _, ax = plt.subplots(1, 1, constrained_layout=True)
-              omega = np.random.random(4) * 2.5
-              omega = omega[0] if i < 4 else random_walk(omega, dur)
-              w = np.random.choice([-1, 1], 4) * 2 ** (np.random.random(4) * 5 + 0.5)
-              if i < 3:
-                  w = 0
-              elif i == 3:
-                  w = w[0]
-              else:
-                  w = random_walk(w, dur)
-              delta = 0 if i == 1 else 0.9
-              y, a = ripple_sound(dur, n, omega, w, delta, *args)
-              print("done making sound ...", end=" ")
-              f, t, Sxx = spectrogram(y, sr, "hamming", 521)
-              mask = (f >= f0) & (f <= fm1)
-              f = f[mask]
-              Sxx = Sxx[mask, ...]
-              ax.pcolormesh(t, f, np.log(Sxx), rasterized=True)
-              ax.set_yscale("log", basey=2)
-              ax.set_ylabel("Frequency (Hz)")
-              ax.set_xlabel("Time (s)")
-              if labels:
-                  ax.set_title(f"Category {i}")
-              if not ticks:
-                  ax.set_xticks([], [])
-                  ax.set_yticks([], [])
-              print("done making figure ...", end=" ")
-  
-              f = f"ripple-{i}-{j}.{ext}"
-              plt.savefig(f, dpi=dpi)
-              print(f"saved to {f}")
-  
-  
-  if __name__ == "__main__":
-  
-      make_figs(0, 300, 18, True, 1.5, True, "png", "viridis")
 phist__py: |
   """How to create a partially filled histogram.
   
@@ -241,183 +29,6 @@ phist__py: |
               ax.fill_between([start, r], 0, [n, n], alpha=0.5)  # partial fill
   
       plt.savefig(f"../../assets/images/phist.svg", bbox_inches=0, transparent=True)
-bcfa__py: |
-  """Bayesian confirmatory factor analysis in PyMC3.
-  
-  """
-  import numpy as np
-  import pandas as pd
-  import pymc3 as pm
-  import theano.tensor as tt
-  
-  from os.path import exists
-  
-  from pymc3.math import matrix_dot
-  
-  from fmt_val_latex import format_for_latex
-  
-  
-  def bcfa(Y, M):
-      r"""Constructs a Bayesian confirmatory factor analysis (BCFA) model.
-  
-      Args:
-          Y (numpy.ndarray): An $n \times p$ matrix of data where $n$ is the sample size
-              and $p$ is the number of manifest variables.
-          M (numpy.ndarray): An $p \times m$ matrix to describe model structure where $m$
-              is the number of latent variables.
-  
-      Notes:
-          $$\mathbf{Y}$$ probably should be standardized first if you are using continuous
-          data.
-  
-          Entries in $\mathbf{M}$ should be [0, 1].
-  
-          $\mathbf{M}_{(i,j)}$ represents the variance of the normal prior placed on the
-          regression coefficient from the $j$th latent variable to the $i$th manifest
-          variable. Values of 0 remove the coefficient from the model entirely, 1
-          represents a "full-strength" coefficient, and values (0, 1) are for
-          cross-loadings.
-  
-      Returns:
-          None: Model is placed in the context.
-  
-      """
-      # counts
-      n, p = Y.shape
-      p_, m = M.shape
-      assert p == p_, "M is the wrong shape"
-  
-      # intercepts for manifest variables
-      sd = max(np.abs(Y.mean()).max() * 2.5, 2.5)
-      nu = pm.Normal(name=r"$\nu$", mu=0, sd=sd, shape=p, testval=Y.mean())
-  
-      # unscaled regression coefficients
-      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=M.shape, testval=M)
-  
-      # scaled regression coefficients
-      Lambda = pm.Deterministic(r"$\Lambda$", Phi * np.sqrt(M))
-  
-      # intercepts for latent variables
-      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=2.5, shape=m, testval=0)
-  
-      # means of manifest variables
-      mu = nu + matrix_dot(Lambda, alpha)
-  
-      # standard deviations of manifest variables
-      D = pm.HalfCauchy(name=r"$D$", beta=2.5, shape=p, testval=Y.std())
-  
-      # correlations between manifest variables
-      Omega = np.eye(p)
-  
-      # covariance matrix for manifest variables
-      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
-  
-      # covariance matrix on latent variables
-      f = pm.Lognormal.dist(sd=0.25)
-      L = pm.LKJCholeskyCov(name=r"$L$", eta=1, n=m, sd_dist=f)
-      ch = pm.expand_packed_triangular(m, L, lower=True)
-      Gamma = tt.dot(ch, ch.T)
-      sd = tt.sqrt(tt.diag(Gamma))
-      Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
-  
-      # covariance of manifest variables
-      Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
-  
-      # observations
-      pm.MvNormal(name="Y", mu=mu, cov=Sigma, observed=Y, shape=Y.shape)
-  
-  
-  def main():
-  
-      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
-  
-      for school, Y in df.groupby("school"):
-  
-          for x in (0.01,):
-  
-              name = f"{school}_{'%.2f' % x}"
-              variables = [
-                  "visual",
-                  "cubes",
-                  "paper",
-                  "flags",
-                  "general",
-                  "paragrap",
-                  "sentence",
-                  "wordc",
-                  "wordm",
-                  "addition",
-                  "code",
-                  "counting",
-                  "straight",
-                  "wordr",
-                  "numberr",
-                  "figurer",
-                  "object",
-                  "numberf",
-                  "figurew",
-              ]
-              Y = Y[variables]  # just the 19 commonly used variables
-              Y = (Y - Y.mean()) / Y.std()  # for numerical convenience
-              M = np.array(
-                  [
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [1, x, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, 1, x, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, 1, x],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                      [x, x, x, 1],
-                  ]
-              )  # hypothesized structure
-  
-              with pm.Model():
-  
-                  bcfa(Y, M)
-                  f = f"../data/{name}"
-                  print(f)
-  
-                  if not exists(f):
-  
-                      trace = pm.sample(15000, tune=5000, chains=2)
-                      pm.save_trace(trace, name)
-  
-                  else:
-  
-                      trace = pm.load_trace(f)
-  
-                  # create a nice summary table
-                  loadings = pd.DataFrame(
-                      trace[r"$\Lambda$"].mean(axis=0).round(2),
-                      index=[v.title() for v in variables],
-                      columns=["Spatial", "Verbal", "Speed", "Memory"],
-                  )
-                  print(loadings)
-                  correlations = pd.DataFrame(
-                      trace[r"$\Psi$"].mean(axis=0).round(2),
-                      index=["Spatial", "Verbal", "Speed", "Memory"],
-                      columns=["Spatial", "Verbal", "Speed", "Memory"],
-                  )
-                  print(correlations)
-  
-                  hi = pm.hpd(trace[r"$\Lambda$"])[:, :, 0]
-                  lo = pm.hpd(trace[r"$\Lambda$"])[:, :, 1]
-  
-  
-  if __name__ == "__main__":
-      main()
 fmt_val_latex__py: |
   """Format a number for inclusion in LaTeX.
   
@@ -515,57 +126,6 @@ neals-funnel-b__py: |
   
           # save
           plt.savefig("../images/neals-funnel-b.svg", bbox_inches=0, transparent=True)
-  
-  
-  if __name__ == "__main__":
-      main()
-logistic_example__py: |
-  import numpy as np
-  import pandas as pd
-  import statsmodels.api as sm
-  import matplotlib.pyplot as plt
-  import pymc3 as pm
-  
-  
-  def main():
-  
-      # format the data
-      # see http://blog.yhat.com/posts/logistic-regression-python-rodeo.html
-      df = pd.read_csv("../../assets/data/binary.csv")
-      df.columns = ["admit", "gre", "gpa", "prestige"]
-      dummy_ranks = pd.get_dummies(df["prestige"], prefix="prestige")
-      cols_to_keep = ["admit", "gre", "gpa"]
-      data = df[cols_to_keep].join(dummy_ranks.ix[:, "prestige_2":])
-      data["intercept"] = 1.0
-  
-      # frequentist logistic regression
-      train_cols = data.columns[1:]
-      logit = sm.Logit(data["admit"], data[train_cols])
-      result = logit.fit()
-      print(result.summary())
-  
-      # Bayesian logistic regression #1
-      with pm.Model():
-  
-          betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
-          pi = pm.math.sigmoid(pm.math.matrix_dot(data[train_cols].values, betas))
-          pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
-          trace = pm.sample(12000, tune=2000)
-          print(pm.summary(trace))
-          print(pm.stats.waic(trace))
-          print(pm.stats.loo(trace))
-  
-      # Bayesian logistic regression #2
-      with pm.Model():
-          betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
-          mu = pm.math.matrix_dot(data[train_cols].values, betas)
-          psi = pm.Normal(name="psi", mu=mu, sd=1, shape=data["admit"].shape)
-          pi = pm.math.sigmoid(psi)
-          pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
-          trace = pm.sample(12000, tune=2000)
-          print(pm.summary(trace, var_names=["betas"]))
-          print(pm.stats.waic(trace))
-          print(pm.stats.loo(trace))
   
   
   if __name__ == "__main__":
@@ -894,60 +454,6 @@ sdt-yn-experiment__py: |
       sens, crit = sdt_yn(c, f, m, h)
       print("sensitivity (d') = %.2f" % sens)
       print("criterion (c) = %.2f" % crit)
-liability__py: |
-  import numpy as np
-  import pandas as pd
-  import statsmodels.api as sm
-  import matplotlib.pyplot as plt
-  import pymc3 as pm
-  import theano.tensor as tt
-  
-  
-  def main():
-  
-      # format the data
-      # see http://blog.yhat.com/posts/logistic-regression-python-rodeo.html
-      df = pd.read_csv("../../assets/data/binary.csv")
-      df.columns = ["admit", "gre", "gpa", "prestige"]
-      dummy_ranks = pd.get_dummies(df["prestige"], prefix="prestige")
-      cols_to_keep = ["admit", "gre", "gpa"]
-      data = df[cols_to_keep].join(dummy_ranks.loc[:, "prestige_2":])
-      data["intercept"] = 1.0
-  
-      # frequentist logistic regression
-      train_cols = data.columns[1:]
-      logit = sm.Logit(data["admit"], data[train_cols])
-      result = logit.fit()
-      print(result.summary())
-  
-      # # Bayesian logistic regression
-      # with pm.Model():
-      #
-      #     betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
-      #     pi = pm.math.sigmoid(pm.math.matrix_dot(data[train_cols].values, betas))
-      #     pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
-      #     trace = pm.sample(tune=2000)
-      #     print(pm.summary(trace))
-      #     pm.traceplot(trace, compact=True)
-      #     plt.savefig("tmp1.png")
-  
-      # Bayesian liability treshold model
-      with pm.Model():
-          betas = pm.Normal(name="betas", sd=2.5, shape=len(train_cols), testval=0)
-          psi = pm.math.matrix_dot(data[train_cols].values, betas)
-          from sys import float_info
-  
-          eps = float_info.epsilon
-          pi = tt.switch(psi <= 0, eps, 1.0 - eps)
-          pm.Bernoulli(name="Y", p=pi, observed=data["admit"].values)
-          trace = pm.sample(tune=2000)
-          print(pm.summary(trace))
-          pm.traceplot(trace, compact=True)
-          plt.savefig("tmp1.png")
-  
-  
-  if __name__ == "__main__":
-      main()
 ripple-sounds__py: |
   """Synthesize, plot, and play ripple sounds.
   
@@ -1770,6 +1276,151 @@ neals-funnel-a__py: |
   
   if __name__ == "__main__":
       main()
+ddm-fig__py: |
+  """Create a DDM figure.
+  
+  """
+  import hddm
+  import numpy as np
+  from scipy.stats import norm
+  import matplotlib.pyplot as plt
+  from matplotlib.gridspec import GridSpec
+  from matplotlib import rcParams
+  from tqdm import tqdm
+  
+  
+  def setupfig():
+      """Tweak for the target journal.
+  
+      """
+      fig = plt.figure()
+      gs = GridSpec(3, 1, height_ratios=[1, 2, 1], hspace=0)
+      return fig, gs
+  
+  
+  def delabel(ax):
+      """Strip labels.
+  
+      """
+      ax.xaxis.set_ticklabels([])
+      ax.yaxis.set_ticklabels([])
+      ax.xaxis.set_ticks([])
+      ax.yaxis.set_ticks([])
+  
+  
+  def kde(ax, x, mx, c):
+      """Plot a KDE for reaction times.
+  
+      """
+      x = x[x <= mx]
+      bandwidth = 0.8 * x.std() * x.size ** (-1 / 5.0)
+      support = np.linspace(0, mx, 500)
+      kernels = []
+  
+      for x_i in tqdm(x):
+  
+          kernel = norm(x_i, bandwidth).pdf(support)
+          kernels.append(kernel)
+          density = np.sum(kernels, axis=0)
+  
+      my = np.max(density)
+      ax.plot(support, density, c=c)
+      ax.fill_between(support, 0, density, alpha=0.5, facecolor=c)
+      ax.set_ylim(0, my * 1.05)
+      delabel(ax)
+  
+      return my
+  
+  
+  def traces(ax, n, mx, **params):
+      """Draw example of diffusions.
+  
+      """
+      x = np.linspace(0, mx, 101)
+      delta = x[1]
+      nd_samples = np.round(params["t"] / delta).astype(int)
+      d_samples = len(x) - nd_samples
+      y0 = np.zeros(nd_samples) * np.nan
+      y0[-1] = 0
+  
+      for i in range(n):
+  
+          y1 = np.cumsum(norm.rvs(params["v"] * delta, np.sqrt(delta), size=d_samples))
+          y = params["a"] * params["z"] + np.concatenate([y0, y1])
+  
+          try:
+  
+              idx1 = np.where(y > params["a"])[0][0] + 1
+  
+          except:
+  
+              idx1 = np.inf
+  
+          try:
+  
+              idx2 = np.where(y < 0)[0][0] + 1
+  
+          except:
+  
+              idx2 = np.inf
+  
+          if idx1 < idx2:
+  
+              y[idx1:] = np.nan
+              ax.plot(x, y, c="C0", zorder=-12, alpha=0.25)
+  
+          if idx2 < idx1:
+  
+              y[idx2:] = np.nan
+              ax.plot(x, y, c="C3", zorder=-11, alpha=0.25)
+  
+          ax.set_ylim(0, params["a"])
+          ax.set_xlim(0, mx)
+          delabel(ax)
+  
+  
+  def ddmfig(**params):
+      """Draw a DDM plot with the given parameter values.
+  
+      """
+      mx = 3.5
+      size = 1500
+      ntraces = 2
+  
+      # set up fig
+      fig, gs = setupfig()
+  
+      # traces
+      ax = plt.subplot(gs[1])
+      traces(ax, ntraces, mx, **params)
+  
+      # data for kdes
+      df, _ = hddm.generate.gen_rand_data(params, subjs=1, size=size)
+  
+      # top KDE
+      ax = plt.subplot(gs[0])
+      my = kde(ax, df[df.response == 1].rt.values, mx, "C0")
+  
+      # bottom KDE
+      ax = plt.subplot(gs[2])
+      kde(ax, df[df.response == 0].rt.values, mx, "C3")
+      ax.set_ylim(0, my * 1.05)
+      ax.invert_yaxis()
+  
+      # remove whitespace around fig
+      plt.tight_layout(0)
+  
+  
+  def main():
+  
+      np.random.seed(25)
+      ddmfig(v=0.7, a=1.5, t=0.6, z=0.5)
+      plt.savefig("assets/scripts/ddm-fig.svg", bbox_inches=0, transparent=True)
+  
+  
+  if __name__ == "__main__":
+  
+      main()
 sdt-figs__py: |
   """Create SDT figures.
   
@@ -1878,73 +1529,6 @@ play_tone__py: |
       tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
       sd.play(tone, 44100)  # play it
       sd.wait()  # wait for the tone to finish
-mlvm__py: |
-  """Example of a multivariate latent variable mdoel.
-  
-  """
-  import numpy as np
-  import pymc3 as pm
-  import pandas as pd
-  import statsmodels.api as sm
-  import theano.tensor as tt
-  
-  from numpy.random import multivariate_normal as mvn
-  from scipy.stats import binom
-  from scipy.special import expit
-  
-  
-  if __name__ == "__main__":
-  
-      # simulate some data
-      n = 500
-      X = np.ones((n, 1))
-      B = np.array([[-0.5], [0], [0.5]]).T
-      c = 0.5
-      Sigma = np.array([[1, c, -c], [c, 1, 0], [-c, 0, 1]])
-      E = mvn([0, 0, 0], Sigma, size=n)
-      Psi = np.dot(X, B) + E
-      Pi = expit(Psi)
-      Y = binom.rvs(np.ones_like(Pi).astype(int), Pi)
-  
-      for i in range(3):
-  
-          # frequentist logistic regressions
-          logit = sm.Logit(Y[:, i], X)
-          result = logit.fit()
-          print(result.summary())
-  
-      # Bayesian logistic regressions
-      with pm.Model():
-  
-          for i in range(3):
-              betas = pm.Normal(name=f"betas_{i}", sd=2.5, shape=1, testval=0)
-              pi = pm.math.sigmoid(pm.math.matrix_dot(X, betas))
-              pm.Bernoulli(name=f"Y_{i}", p=pi, observed=Y[:, i])
-  
-          trace = pm.sample(12000, tune=2000)
-          print(pm.summary(trace))
-  
-      # Bayesian multivariate LVM
-      with pm.Model():
-  
-          B = pm.Normal(name=f"B", sd=2.5, shape=B.shape, testval=0)
-          Mu = pm.math.matrix_dot(X, B)
-  
-          # Prior on the correlation matrix ----------------------------------------------
-          f = pm.Lognormal.dist(sd=1)
-          L = pm.LKJCholeskyCov(name="L", eta=1, n=3, sd_dist=f)
-          ch = pm.expand_packed_triangular(3, L, lower=True)
-          cov = pm.math.matrix_dot(ch, ch.T)
-          sd = tt.sqrt(tt.diag(cov))
-          Theta = pm.Deterministic("Theta", cov / sd[:, None] / sd[None, :])
-          # ------------------------------------------------------------------------------
-  
-          Psi = pm.MvNormal(name="Psi", mu=Mu, cov=Theta, shape=Y.shape)
-          Pi = pm.math.sigmoid(Psi)
-          pm.Bernoulli(name="Y", p=Pi, observed=Y)
-  
-          trace = pm.sample(15000, tune=5000)
-          print(pm.summary(trace, var_names=["B", "Theta"]))
 noise-tone-plus-noise__py: |
   """Create figurea to illustrate noise and noise plus a pure tone.
   
@@ -1984,28 +1568,6 @@ noise-tone-plus-noise__py: |
       plt.savefig(
           f"../../assets/images/noise_toneplusnoise.svg", bbox_inches=0, transparent=True
       )
-mvnormal__py: |
-  import numpy as np
-  import pymc3 as pm
-  from matplotlib import pyplot as plt
-  
-  
-  if __name__ == "__main__":
-  
-      with pm.Model():
-          mu = np.zeros(3)
-          true_cov = np.array([[1.0, 0.5, 0.1], [0.5, 2.0, 0.2], [0.1, 0.2, 1.0]])
-          data = np.random.multivariate_normal(mu, true_cov, 100)
-          print(data)
-  
-          sd_dist = pm.HalfCauchy.dist(beta=2.5, shape=3)
-          chol_packed = pm.LKJCholeskyCov("chol_packed", n=3, eta=2, sd_dist=sd_dist)
-          chol = pm.expand_packed_triangular(3, chol_packed)
-          vals = pm.MvNormal("vals", mu=mu, chol=chol, observed=data)
-  
-          trace = pm.sample()
-          pm.traceplot(trace)
-          plt.savefig("tmp.png")
 qt-sound-example__py: |
   from math import pi, sin
   import struct, sys

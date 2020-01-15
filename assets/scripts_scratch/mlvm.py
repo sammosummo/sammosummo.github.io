@@ -37,6 +37,7 @@ if __name__ == "__main__":
 
         for i in range(3):
             betas = pm.Normal(name=f"betas_{i}", sd=2.5, shape=1, testval=0)
+
             pi = pm.math.sigmoid(pm.math.matrix_dot(X, betas))
             pm.Bernoulli(name=f"Y_{i}", p=pi, observed=Y[:, i])
 
