@@ -6,7 +6,6 @@ import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
-from matplotlib import rcParams
 from tqdm import tqdm
 
 
@@ -54,7 +53,7 @@ def kde(ax, x, mx, c):
 
 
 def traces(ax, n, mx, **params):
-    """Draw example of diffusions.
+    """Draw example diffusions.
 
     """
     x = np.linspace(0, mx, 101)
@@ -104,9 +103,9 @@ def ddmfig(**params):
     """Draw a DDM plot with the given parameter values.
 
     """
-    mx = 3.5
-    size = 1500
-    ntraces = 2
+    mx = 3.5  # max x-value; adjust this if simulated RTs are slower/faster
+    size = 1500  # increase this number for better KDEs
+    ntraces = 2  # increase this for more example diffusions
 
     # set up fig
     fig, gs = setupfig()
