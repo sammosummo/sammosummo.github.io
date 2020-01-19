@@ -1,0 +1,254 @@
+---
+layout: post
+title: Bayesian confirmatory factor analysis
+date: 2020-01-19
+has_comments: true
+has_code: true
+has_math: true
+include_references: true
+references:
+ - Spearman1904a
+ - Bollen1989a
+ - Jöreskog1969a
+ - Muthén2012a
+ - Holzinger1939a
+ - Salvatier2016a
+ - Alvarez2014a
+ - Lewandowski2009
+---
+
+Factor analysis tries to explain the relationships between observed variables in terms of a smaller number of unobserved
+variables. Observed variables are variously called _manifest variables_, _indicators_, or _items_, whereas unobserved
+variables are usually called _latent variables_ or _factors_. When researchers talk about factor analysis, they usually
+mean _exploratory factor analysis_ (EFA; [Spearman, 1904](#Spearman1904a)), a collection of statistical techniques whose
+goal is to generate a factor solution from the data. A second, less common form of factor analysis is _confirmatory
+factor analysis_ (CFA; [Jöreskog, 1969](Jöreskog1969a)). In contrast to EFA, in CFA the factor solution is specified
+beforehand. The factor solution may come from theory, other data, or perhaps a previous EFA of the same data. CFA is a
+special case of _structural equation modeling_ (SEM; [Bollen, 1989](Bollen1989a)).
+
+Most CFA is performed within the frequentist statistical framework. However, as discussed by [Muthén and Asparouhov (2012)](#Muthén2012a),
+Bayesian CFA may hold several advantages over frequentist CFA. In this post, I describe how to implement Bayesian CFA
+using [PyMC3](https://docs.pymc.io/) [(Salvatier et al. 2016)](#Salvatier2016a).
+
+## Building a CFA model
+
+### Inputs
+
+CFA requires two inputs. The first is a matrix of data denoted by $$\boldsymbol{Y}$$ with shape $$n \times p$$, where $$n$$ is the
+number of cases and $$p$$ is the number of items. Typically, $$\boldsymbol{Y}$$ is residualized for nuisance covariates and
+standardized or transformed before CFA is performed.
+
+The second input is a factor design matrix denoted by $$\boldsymbol{M}$$ with shape $$p \times m$$, where $$m$$ is the
+number of factors. If the $$i$$th item loads on (is influenced by) the $$j$$th factor, the value of the cell with
+coordinate $$(i, j)$$ is 1; if not, this value is 0.
+
+In frequentist CFA, $$\boldsymbol{M}$$ is always a sparse matrix, meaning that most of the values are 0, and there are
+practical limitations on how many 1s $$\boldsymbol{M}$$ can contain. If there are too many, the model is not
+_identified_, meaning that there is no unique maximum-likelihood solution because there are too many free parameters in
+the resulting model. Identifiability is not necessarily an issue for Bayesian models, but $$\boldsymbol{M}$$ should
+still be sparse.
+
+### Model design
+
+In basic CFA, data are assumed to be multivariate normal,
+
+$$\begin{equation}
+\boldsymbol{Y}\sim\mathrm{Normal}\left(\boldsymbol{\mu},\boldsymbol{\Sigma}\right)
+\end{equation}$$
+
+where $$\boldsymbol{\mu}$$ is a $$p$$-length vector of means and $$\boldsymbol{\Sigma}$$ is an $$n \times p$$
+covariance matrix. For former is given by
+
+$$\begin{align}
+\boldsymbol{\mu}=\boldsymbol{\nu}+\boldsymbol{\Lambda}\boldsymbol{\alpha}
+\end{align}$$
+
+where $$\boldsymbol{\nu}$$ is $$p$$-length vector of item intercepts, $$\boldsymbol{\Lambda}$$ is a $$p \times m$$
+matrix of factor loadings, and $$\boldsymbol{\alpha}$$ is a $$m$$-length vector of factor intercepts.
+
+The covariance matrix $$\boldsymbol{\Sigma}$$ is given by
+
+$$\begin{align}
+\boldsymbol{\Sigma}=\boldsymbol{\Lambda}\boldsymbol{\Psi}\boldsymbol{\Lambda}^\mathrm{T}+\boldsymbol{\Theta}
+\end{align}$$
+
+where $$\boldsymbol{\Psi}$$ is an $$m \times m$$ factor covariance matrix and $$\boldsymbol{\Theta}$$ is a
+$$p \times p$$ item covariance matrix.
+
+### Priors on intercepts
+
+The two intercept vectors, $$\boldsymbol{\nu}$$ and $$\boldsymbol{\alpha}$$, should have univariate normal priors. I
+haven't spent a lot of time experimenting with different priors because my initial choices worked well on a moderately
+sized standardized data set (see later). If the data are not standardized or the data set is small, you may need to be
+more careful.
+
+### Factor loadings
+
+Our factor design matrix $$\boldsymbol{M}$$ dictates which items load on which factors, and the matrix
+$$\boldsymbol{\Lambda}$$ contains the actual factor loadings. In frequentist CFA, both $$\boldsymbol{M}$$ and
+$$\boldsymbol{\Lambda}$$ must be sparse. [Muthén and Asparouhov (2012)](#Muthén2012a) argue that the frequentist approach of assigning values
+of 0 to some elements of $$\boldsymbol{M}$$ and $$\boldsymbol{\Lambda}$$ is analogous to assigning them a univariate normal prior with mean standard deviation of 0 in
+a Bayesian model. (This is impossible of course, but you get the idea). Those authors go on to argue that from a Bayesian perspective, such a prior
+could be considered to be _too_ informative: is it realistic to assume that a given item does not load on a given
+factor at all? An alternative approach is to assign them a prior with a small standard deviation. This way, loadings
+between all items and all factors will be estimated, but the so-called _cross-loadings_ (non-hypothesized loadings)
+will be smaller than the hypothesized loadings.
+
+However, now a question arises: how small should the standard deviation of the cross-loading prior be?
+Muthén and Asparouhov provide some recommendations, such as fitting many models with different choices. In my opinion,
+this is not ideal because typically CFA is performed on large data sets and Bayesian inference takes a long time, so
+it may not be practical to fit numerous models.
+
+An alternative approach is to make the standard deviation of the cross-loading prior a random variable itself. We can
+implement this approach using the equation
+
+$$\begin{equation}
+\boldsymbol{\Lambda} = \boldsymbol{\Phi}\circ\left[\beta\left(1 - \boldsymbol{M}\right) + \boldsymbol{M}\right]
+\end{equation}$$
+
+where $$\boldsymbol{\Phi}$$ is a matrix of unscaled factor loadings, $$\beta$$ is the cross-loading standard deviation,
+and $$\circ$$ denotes the Hadamard product. We assign univariate standard normal priors to all elements in
+$$\boldsymbol{\Phi}$$ and a beta prior to $$\beta$$.
+
+### Priors on factor correlations
+
+CFA runs into a second identifiability issue if neither the variance of each factor nor at least one loading per factor is
+fixed. I feel it makes the most sense to fix the factor variances. This makes $$\boldsymbol{\Psi}$$ a correlation matrix
+rather than a covariance matrix.
+
+The Inverse-Wishart distribution is defined on real-valued positive-definite matrices and is the conjugate prior for the
+covariance matrix of a multivariate normal distribution. However, since Inverse-Wishart has some problematic features
+([Alvarez, Niemi, & Simpson, 2014](#Alvarez2014a)) and we don't care about conjugate priors much these days, a better
+choice is the LKJ prior ([Lewandowski, Kurowicka, & Joe, 2009](#Lewandowski2009)). The LKJ prior has a single shape
+parameter, $$\eta$$. When $$\eta$$ is large, the off-diagonal values of the correlation matrix tend to be small. Factors
+tend to be highly correlated, however, so we should set $$\eta$$ to 1.
+
+Unfortunately, while PyMC3 contains the `LKJCorr` distribution, it is [currently](https://github.com/pymc-devs/pymc3/issues/3473)
+[broken](https://github.com/pymc-devs/pymc3/issues/3641), so we must construct an LKJ prior on $$\boldsymbol{\Psi}$$
+indirectly using `LKJCholeskyCov` instead. This isn't a huge deal, but it's something that could be easily overlooked.
+Hopefully this will get fixed in the future.
+
+### Priors on residual item variances and correlations
+
+The item covariance matrix $$\boldsymbol{\Theta}$$ is the thorniest part of CFA. It soaks up residual item variance and
+correlations between items not explained by the factors. We can model this matrix as
+
+$$\begin{equation}
+\boldsymbol{\Theta}=\boldsymbol{D}\boldsymbol{\Omega}\boldsymbol{D}
+\end{equation}$$
+
+where $$\boldsymbol{D}$$ is a diagonal matrix of standard deviations and $$\boldsymbol{\Omega}$$ is a correlation
+matrix. We can place half-Cauchy priors on all cells in $$\boldsymbol{D}$$ and an LKJ prior on $$\boldsymbol{\Omega}$$.
+
+In the special case where $$\boldsymbol{\Omega}$$ is an identity matrix, the model will attempt to completely explain
+all the correlations between the items using only the factors. Since using factors to explain the relationships between
+items is the whole point of CFA, one could argue that $$\boldsymbol{\Omega}$$ should be an identity matrix all the time!
+Indeed, in frequentist CFA, it is fairly common (and somewhat questionable) practice to iteratively add non-zero 
+residual correlations until the model's goodness of fit passes some threshold of acceptability.
+
+Nevertheless, there may be some circumstances where one should estimate residual correlations. In frequentist CFA,
+$$\boldsymbol{\Omega}$$ needs to be sparse matrix to ensure identifiability. However, it is usually difficult to foresee
+which residuals should be correlated. Bayesian CFA provides a neat solution to this problem: we can choose a very large
+value of $$\eta$$ for the LKJ prior on $$\boldsymbol{\Omega}$$, which forces all residual correlations to be low.
+
+## Application to an example data set
+
+The classic [Holzinger and Swineford (1939)](#Holzinger1939a) data set contains scores of children from two different
+schools on tests of cognitive ability. [Muthén and Asparouhov (2012)](#Muthén2012a) performed EFA followed by Bayesian
+CFA on a subset of 19 of these tests. I've attempted to replicate their results using PyMC3. Below is the working code.
+
+```python
+{{ site.data.code.bcfa__py }}
+```
+
+Anyone wishing to rerun this model or adapt my code for their own purposes may find the following stray observations useful:
+
+* Like Muthén and Asparouhov, I ran CFA on the two schools separately.
+* Values of $$\beta$$ must fall between 0 and 1, where 0 means no cross-loadings and 1 means that cross-loadings are
+just as large as the hypothesized loadings, but should be closer to 0. I ended up using the prior
+$$\beta\sim\mathrm{Beta}\left(1,1\right)$$, which is equivalent to a uniform prior, and to my great surprise the model
+converged on small values that were very close to those that were manually chosen by Muthén and Asparouhov.
+* I had to use the extremely informative prior $$\boldsymbol{\Omega}\sim\mathrm{LKJ}\left(100\right)$$ to ensure that
+residual item correlations were low.
+* Independent chains from Bayesian CFA models can very easily diverge because factor loadings can flip their signs and
+still yield an equivalent model. Setting initial values of random variables via `testval` seems to prevent this, but it
+is an inelegant solution.
+* CFA models tend to be big and sampling is usually quite slow.
+
+### Grant-White
+
+Here are the factor loadings and factor correlations for the first school. They are pretty close to the values reported
+by Muthén and Asparouhov. While my code also produces the residual item correlations, I've omitted it because it's a
+pretty big table.
+
+|          |   Spatial |   Verbal |   Speed |   Memory |
+|:---------|----------:|---------:|--------:|---------:|
+| Visual   |     0.611 |    0.015 |   0.04  |    0.035 |
+| Cubes    |     0.467 |   -0.001 |  -0.003 |   -0.001 |
+| Paper    |     0.477 |    0.023 |   0.028 |    0.027 |
+| Flags    |     0.66  |    0.029 |  -0.017 |    0.003 |
+| General  |     0.033 |    0.794 |   0.033 |   -0.019 |
+| Paragrap |     0.007 |    0.824 |  -0.02  |    0.014 |
+| Sentence |    -0.033 |    0.881 |   0.007 |   -0.028 |
+| Wordc    |     0.036 |    0.637 |   0.063 |    0.035 |
+| Wordm    |    -0.006 |    0.877 |  -0.053 |    0.012 |
+| Addition |    -0.088 |    0.019 |   0.722 |   -0     |
+| Code     |     0.001 |    0.032 |   0.631 |    0.07  |
+| Counting |     0.009 |   -0.059 |   0.766 |   -0.023 |
+| Straight |     0.103 |    0.035 |   0.675 |   -0.015 |
+| Wordr    |    -0.018 |    0.029 |  -0.007 |    0.517 |
+| Numberr  |     0.004 |   -0     |  -0.021 |    0.528 |
+| Figurer  |     0.068 |   -0.009 |  -0.022 |    0.57  |
+| Object   |    -0.069 |    0.012 |   0.017 |    0.666 |
+| Numberf  |     0.054 |   -0.043 |   0.05  |    0.617 |
+| Figurew  |     0.01  |    0.03  |   0.006 |    0.452 |
+
+
+|         |   Spatial |   Verbal |   Speed |   Memory |
+|:--------|----------:|---------:|--------:|---------:|
+| Spatial |     1     |    0.548 |   0.499 |    0.574 |
+| Verbal  |     0.548 |    1     |   0.424 |    0.474 |
+| Speed   |     0.499 |    0.424 |   1     |    0.549 |
+| Memory  |     0.574 |    0.474 |   0.549 |    1     |
+
+### Pasteur
+
+Here are the results for the other school. Again, everything compares well with Muthén and Asparouhov.
+
+|          |   Spatial |   Verbal |   Speed |   Memory |
+|:---------|----------:|---------:|--------:|---------:|
+| Visual   |     0.676 |    0.119 |   0.033 |    0.023 |
+| Cubes    |     0.452 |   -0.016 |  -0.034 |   -0.017 |
+| Paper    |     0.501 |    0.015 |  -0.032 |   -0.093 |
+| Flags    |     0.627 |   -0.08  |   0.031 |    0.082 |
+| General  |    -0.051 |    0.871 |   0.025 |   -0.077 |
+| Paragrap |     0.035 |    0.787 |   0.005 |    0.042 |
+| Sentence |    -0.071 |    0.932 |  -0.019 |   -0.033 |
+| Wordc    |     0.054 |    0.688 |   0.021 |    0.058 |
+| Wordm    |     0.082 |    0.821 |  -0.012 |    0.03  |
+| Addition |    -0.114 |   -0.002 |   0.632 |    0.007 |
+| Code     |     0.011 |    0.088 |   0.708 |    0.039 |
+| Counting |     0.02  |   -0.036 |   0.566 |   -0.031 |
+| Straight |     0.109 |   -0.051 |   0.53  |    0.006 |
+| Wordr    |    -0.042 |    0.002 |  -0.075 |    0.7   |
+| Numberr  |     0.001 |   -0.095 |  -0.084 |    0.611 |
+| Figurer  |     0.122 |    0.041 |   0.063 |    0.526 |
+| Object   |    -0.072 |    0.011 |   0.1   |    0.541 |
+| Numberf  |    -0.013 |    0.039 |  -0.002 |    0.47  |
+| Figurew  |     0.035 |    0.019 |   0.081 |    0.405 |
+
+
+|         |   Spatial |   Verbal |   Speed |   Memory |
+|:--------|----------:|---------:|--------:|---------:|
+| Spatial |     1     |    0.352 |   0.276 |    0.316 |
+| Verbal  |     0.352 |    1     |   0.432 |    0.155 |
+| Speed   |     0.276 |    0.432 |   1     |    0.399 |
+| Memory  |     0.316 |    0.155 |   0.399 |    1     |
+
+## Future directions
+
+The obvious next thing to do is to implement Bayesian SEM more generally. This may be a topic of a future post.
+
+Oftentimes researchers may wish to analyze data that are not normally distributed, such as binary disease states.
+Unfortunately, however, CFA gets really complicated when one tries to relax the assumption of multivariate normal data,
+and to date I have had no luck implementing such models. If I do ever crack this, I'll write about it here.
