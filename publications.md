@@ -20,7 +20,7 @@ manuscript is behind a paywall 🙄  please feel free to
 {% assign sorted = site.data.my_papers.my_papers | sort: 'sort' | reverse %}
 {% for paper in sorted %}
   <li>
-  {{ paper.authors }} ({{ paper.year }}). {{ paper.title }}
+  {{ paper.authors }} ({{ paper.year }}). {{ paper.title }}.
   {% if paper.editor %}{{ paper.editor }},{% endif %}
   {% if paper.book and paper.collection and paper.volume %}
     <i>{{ paper.book }}</i> ({{ paper.collection }} vol {{ paper.volume }},
@@ -78,3 +78,5 @@ manuscript is behind a paywall 🙄  please feel free to
   {% endif %}
   </li>
 {% endfor %}
+
+</ul>

@@ -187,7 +187,7 @@ def main():
                 pm.save_trace(trace, f)
                 pm.traceplot(trace, compact=True)
                 rcParams["font.size"] = 14
-                plt.savefig(f"{f}/traceplot.svg")
+                plt.savefig(f"{f}/traceplot.png")
 
             else:
 
