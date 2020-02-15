@@ -19,6 +19,7 @@ def main():
     print(f"found {len(pmids)} with my full name")
     extras = ["28480992", "28385874", "27744290"]
     pmids += extras
+    pmids = set(pmids)
     print(f"added {len(extras)} more without my full name")
     print(f"getting details of {len(pmids)} papers")
     pmids = ",".join(pmids)
@@ -84,6 +85,7 @@ def main():
 
         k = "Pagination"
         first_page = None if k not in article else article[k]["MedlinePgn"]
+        last_page = None
         if first_page:
             first_page, *last_page = first_page.split("-")
 

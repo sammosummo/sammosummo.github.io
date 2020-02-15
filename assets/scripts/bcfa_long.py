@@ -52,14 +52,9 @@ def bcfa(
         None: Places model in context.
 
     """
+    # get numbers of cases, items, and factors
     n, p = items.shape
     p_, m = factors.shape
-    mu_eta = alpha + matrix_dot(B, eta)
-    eta = pm.Normal(name="$\eta$", mu=mu_eta, sigma=1, shape=(n, m))
-
-
-    # get numbers of cases, items, and factors
-
     assert p == p_, "Mismatch between data and factor-loading matrices"
 
     # place priors on item and factor intercepts
@@ -192,7 +187,7 @@ def main():
                 pm.save_trace(trace, f)
                 pm.traceplot(trace, compact=True)
                 rcParams["font.size"] = 14
-                plt.savefig(f"{f}/traceplot.png")
+                plt.savefig(f"{f}/traceplot.svg")
 
             else:
 
