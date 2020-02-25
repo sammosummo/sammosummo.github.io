@@ -418,3 +418,13 @@ references:
    last_page: "2001"
    doi: "10.1016/j.jmva.2009.04.008"
    journal: "Journal of Multivariate Analysis"
+
+ - id: "Mathias2020a"
+   authors: "Mathias, S. R., Varghese, L., Micheyl, C., & Shinn-Cunningham, B. G."
+   volume: "147"
+   issue: "1"
+   year: "2020"
+   title: "On the utility of perceptual anchors during pure-tone frequency discrimination"
+   first_page: "371"
+   doi: "10.1121/10.0000584"
+   journal: "The Journal of the Acoustical Society of America"
