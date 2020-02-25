@@ -28,7 +28,7 @@ layout: default
 
 {% if page.tags %}
 {% assign sorted = page.tags | sort %}
-<h2>Tags</h2>{% for tag in sorted %}🏷️ <a href="/writing/#{{ tag }}">{{ tag }}</a> {% endfor %}
+<h2>Tags</h2>{% for tag in sorted %}🏷️ <a href="/writing#{{ tag }}">{{ tag }}</a> {% endfor %}
 {% endif %}
 
 
