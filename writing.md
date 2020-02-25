@@ -8,7 +8,7 @@ old nonsense! Click on a tag below to see all posts on a given topic or [click h
 posts.
 {% assign sorted = site.tags | sort %}
 {% for tag in sorted %}
-<a href="/#{{ tag[0] }}/" style="font-size: {{ tag[1] | size | times: 2 | plus: 10 }}px">
+<a href="#{{ tag[0] }}" style="font-size: {{ tag[1] | size | times: 2 | plus: 10 }}px">
 🏷 {{ tag[0] }} </a>{% endfor %}
 {% for tag in sorted %}
 {% assign ttag = tag[0] %}
