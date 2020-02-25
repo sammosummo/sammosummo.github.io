@@ -8,7 +8,7 @@ has_math: false
 tags:
  - Python
  - psychophysics
- - reaction-times
+ - reaction times
 include_references: true
 references:
  - Ratcliff2016a
