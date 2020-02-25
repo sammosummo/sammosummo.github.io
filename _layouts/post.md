@@ -10,13 +10,13 @@ layout: default
 {% endif %}
 
 <h2>{{ page.title }}</h2>
+
 {{ content }}
 {% if page.include_references %}
   {% include references.html %}
 {% endif %}
 
 {% if page.date %}
-<hr>
   <h2>Version history</h2>
   <ul>
     <li>Originally posted {{ page.date | date: '%B %d, %Y' }}.</li>
@@ -24,6 +24,11 @@ layout: default
       <li>{{ revision.reason }} on {{ revision.date | date: '%B %d, %Y' }}.</li>
     {% endfor %}
   </ul>
+{% endif %}
+
+{% if page.tags %}
+{% assign sorted = page.tags | sort %}
+<h2>Tags</h2>{% for tag in sorted %}🏷️ <a href="/writing/#{{ tag }}">{{ tag }}</a> {% endfor %}
 {% endif %}
 
 

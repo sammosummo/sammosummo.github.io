@@ -65,9 +65,9 @@ nonsense. <a href="writing">Click here for the archive</a>.
     {% else %}
       <i>{{ paper.journal }}</i>.
     {% endif %}
-    DOI: <a href="{{ paper.doi_link }}" class="break">{{ paper.doi }}</a>.
+    DOI: <a href="https://doi.org/{{ paper.doi }}" class="break">{{ paper.doi }}</a>.
     {% if paper.pmid %}
-      PubMed: <a href="{{ paper.pmid_link }}" class="break">{{ paper.pmid }}</a>.
+      PubMed: <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{ paper.pmid }}" class="break">{{ paper.pmid }}</a>.
     {% endif %}
   {% endif %}
 {% endfor %}

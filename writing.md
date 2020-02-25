@@ -3,11 +3,26 @@ layout: page
 title: Writing
 ---
 
-Posts are uncategorized and ordered by when they were originally posted. I haven't figured
-out how to create separate lists for different categories. 🤷‍
+Please be aware that none of the following was peer reviewed. Posts could contain typos, specious reasoning, or plain
+old nonsense! Click on a tag below to see all posts on a given topic or [click here](#chron) for a flat, chronological list of
+posts.
+{% assign sorted = site.tags | sort %}
+{% for tag in sorted %}
+<a href="/tags/{{ tag[0] }}/" style="font-size: {{ tag[1] | size | times: 2 | plus: 10 }}px">
+🏷 {{ tag[0] }} </a>{% endfor %}
+{% for tag in sorted %}
+{% assign ttag = tag[0] %}
+<h3><a name="{{ ttag }}"></a>{{ ttag }}</h3>
+<ul>
+{% for post in site.tags[ttag] %}
+    <li>
+        <a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date: '%B %d, %Y'}})
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
 
-Please be aware that none of the following was peer reviewed and therefore could contain
-nonsense!
+<h2><a name="chron"></a>All posts by date</h2>
 
 <ul>
 {% for post in site.posts %}
