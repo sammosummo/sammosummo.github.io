@@ -28,11 +28,12 @@ The code and data are publicly available in a [github repository](https://github
 
 The second paper, which may be of interest to a broader readership, is about the relationship between the amount of
 cortical folding ([gyrification](https://en.wikipedia.org/wiki/Gyrification)) and general cognitive ability
-([*g*](https://en.wikipedia.org/wiki/G_factor_(psychometrics))). In this paper, I attempted to replicate previous
+([*g*](https://en.wikipedia.org/wiki/G_factor_(psychometrics))). In this paper, we attempted to replicate previous
 studies that reported correlations between these traits, and determine whether such correlations were caused by
-overlapping genetic influences. I found that while gyrification and *g* were indeed genetically correlated, the
+overlapping genetic influences. We found that while gyrification and *g* were indeed genetically correlated, the
 relationship between them was incredibly weak [(Mathias et al., 2020)](#Mathias2020b). 
 
-Given that I didn't collect the data from either of the cohorts included in this paper, I'm not at liberty to share the
-data here. However, one of them is the [Human Connectome Project](http://www.humanconnectomeproject.org/), which is
-available for free to all *bone fide* researchers.
+This paper used data from the [Genetics of Brain Structure and Function Study (GOBS)](http://grantome.com/grant/NIH/R01-MH078111-01)
+and the [Human Connectome Project (HCP)](http://www.humanconnectomeproject.org/). Since I wasn't part of the
+investigative teams that collected these data, I'm not at liberty to share them. However, the HCP data is available for
+free to all *bone fide* researchers, and the application process is extremely straightforward.
