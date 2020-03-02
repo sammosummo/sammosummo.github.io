@@ -62,6 +62,12 @@ body {
   text-indent: -1em;
 }
 
+.emoji {
+  height: 1em;
+  display: inline;
+  padding: 0px 0px;
+}
+
 .posttitle {
   font-size: 1.8em;
 }

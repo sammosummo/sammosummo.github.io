@@ -1,17 +1,17 @@
 ---
-layout: post
-title: Play a tone interactively with Python
-date: 2019-03-17 
+date: 2019-03-17
 has_code: true
 has_comments: true
-tags:
- - Python
- - sound
+layout: post
 revisions:
- - date: 2019-03-24
-   reason: Added links to third post
- - date: 2019-08-02
-   reason: Changed the repo
+- date: 2019-03-24
+  reason: Added links to third post
+- date: 2019-08-02
+  reason: Changed the repo
+tags:
+- python
+- hearing
+title: Play a tone interactively with Python
 ---
 
 This is the second post in a series about using Python to generate and play sounds.

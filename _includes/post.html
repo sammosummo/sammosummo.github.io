@@ -1,0 +1,7 @@
+“<a href="{{ post.url }}">{{ post.title }}</a>,”
+{% if post.revisions %}
+    {% assign last = post.revisions | last %}
+    last edited {{ last.date | date: '%b %d, %Y'}}.
+{% else %}
+    posted {{ post.date | date: '%b %d, %Y'}}.
+{% endif %}

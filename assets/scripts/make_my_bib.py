@@ -111,15 +111,14 @@ def make_my_bib():
 
     with open("../../_data/my_papers.yaml", "w") as fw:
 
-        fw.write("my_papers:\n")
-
         for paper in data:
 
-            fw.write(f"""\n - id: "{paper['id']}"\n""")
+            fw.write(f"p{paper['sort'] + paper['title'].split()[0][:2].lower()}:\n")
             del paper["id"]
             [fw.write(f"""   {k}: "{v}"\n""") for k, v in paper.items()]
+            fw.write(f"\n")
 
-        s = "".join(open("../../_data/my_papers_manual.yaml").readlines()[1:])
+        s = "".join(open("../../_data/my_papers_manual.yaml").readlines())
         fw.write(s)
 
 

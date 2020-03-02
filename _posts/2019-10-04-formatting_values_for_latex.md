@@ -1,11 +1,11 @@
 ---
-layout: post
-title: Formatting numbers for LaTeX
 date: 2019-10-04
 has_code: true
 has_comments: true
+layout: post
 tags:
- - LaTeX
+- latex
+title: Formatting numbers for LaTeX
 ---
 The following Python function converts a float to a LaTeX-friendly string formatted
 to three significant digits and with very large or small values in presented in

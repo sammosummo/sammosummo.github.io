@@ -1,17 +1,17 @@
 ---
-layout: post
-title: Playing pure tones with PyQt5
 date: 2019-06-11
 has_code: true
 has_comments: true
-tags:
- - Python
- - sound
+layout: post
 revisions:
- - date: 2019-06-13
-   reason: Fixed some typos
- - date: 2019-08-17
-   reason: Updated to use local scripts
+- date: 2019-06-13
+  reason: Fixed some typos
+- date: 2019-08-17
+  reason: Updated to use local scripts
+tags:
+- python
+- hearing
+title: Playing pure tones with PyQt5
 ---
 
 In an [earlier post](getting-started-with-python-for-sound), I recommended using a third-

@@ -29,12 +29,11 @@ layout: default
 
 {% if page.tags %}
 {% assign sorted = page.tags | sort %}
-<h2>Tags</h2>{% for tag in sorted %}🏷️ <a href="/writing#{{ tag }}">{{ tag }}</a> {% endfor %}
+<b>Tags</b>: {% for tag in sorted %}<a href="/tags#{{ tag }}">{{ tag }} {% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %}</a> {% endfor %}
 {% endif %}
+<br>
 
 {% if page.has_comments %}
-
-<h2>Comments</h2>
   <div id="commento"></div>
   <script async src="https://cdn.commento.io/js/commento.js"></script>
  {% endif %}

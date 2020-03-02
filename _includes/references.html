@@ -1,7 +1,9 @@
 <h2>References</h2>
-  {% assign sorted = site.data.references.references | sort: 'authors' %}
-  {% for paper in sorted %}
-    {% if page.references contains paper.key %}
-      {% include citation.html %}
-    {% endif %}
-  {% endfor %}
+{% assign refs = site.data.refs | sort %}
+{% for paper in refs %}
+    {% for ref in page.references %}
+        {% if ref == paper[0] %}
+            {% include citation.html %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}

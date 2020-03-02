@@ -1,22 +1,23 @@
 ---
-layout: post
-title: Two new papers
 date: 2020-02-25
 has_comments: true
+has_references: true
 include_references: true
+layout: post
 references:
- - Mathias2020a
- - Mathias2020b
-tags:
-  - psychophysics
-  - genetics
-  - neuroimaging
-  - cognition
-  - data
-  - publication
+- Mathias2020a
+- Mathias2020b
 revisions:
- - date: 2020-03-01
-   reason: Gave a few more details
+- date: 2020-03-01
+  reason: Gave a few more details
+tags:
+- hearing
+- genetics
+- neuroimaging
+- cognition
+- open-data
+- publication
+title: Two new papers
 ---
 
 I'm very pleased to announce two new first-author papers, both published in January this
@@ -26,13 +27,13 @@ old work and have been a long time coming.
 
 The first paper was co-written with Lenny Varghese, Christophe Micheyl, and Barbara
 Shinn-Cunnigham, and reports a small experiment I conducted as a postdoc in Barb's lab
-ca. 2014 [(Mathias *et al.*, 2020b)](#Mathias2020b). The paper is perhaps notable because
+circa 2014 {{ site.data.refs.Mathias2020b.citep }}. The paper is perhaps notable because
 it's my first "fully Bayesian" paper, in the sense that it contains absolutely no *p*
 values. Another first is that I've made the data and code publicly available in a
 [github repository](https://github.com/sammosummo/PerceptualAnchorsPublic).
 
 The second paper is from my current lab, and may be of interest to a broader readership,
-given the subject matter [(Mathias et al., 2020a)](#Mathias2020a). It's about the
+given the subject matter {{ site.data.refs.Mathias2020a.citep }}. It's about the
 relationship between cortical folding, or
 [gyrification](https://en.wikipedia.org/wiki/Gyrification), and general cognitive ability
 ([*g*](https://en.wikipedia.org/wiki/G_factor_(psychometrics))). We attempted to replicate

@@ -1,6 +1,4 @@
-my_papers_man:
-
- - id: "00000001"
+p201607xx:
    volume: "26"
    issue: "1"
    year: "2016"
@@ -13,7 +11,7 @@ my_papers_man:
    authors: "Mathias, S. R."
    journal: "Proceedings of Meetings on Acoustics"
 
- - id: "00000002"
+p2015xx:
    authors: "Glahn, D. C., Sprooten, E., Knowles, E. E., McKay, D. R., Mathias, S. R., Almasy, L., & Blangero, J."
    year: "2015"
    sort: "2015"
@@ -28,7 +26,7 @@ my_papers_man:
    state: "MA"
    publisher: "Academic Press"
 
- - id: "00000003"
+p2016xx:
    authors: "Glahn, D. C., Knowles, E. E., Mathias, S. R., Almasy, L., Hodgson, K., Yao, N., Olvera, R. L., Curran, J. E., & Blangero, J."
    year: "2016"
    sort: "2016"
@@ -42,7 +40,7 @@ my_papers_man:
    state: "MA"
    publisher: "Academic Press"
 
- - id: "00000004"
+p201905xx:
    authors: "Mathias, S. R. & von Kriegstein, K."
    year: "2019"
    sort: "2019-05"

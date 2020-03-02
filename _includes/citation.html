@@ -1,62 +1,66 @@
-<p class="refs"><a name="{{ paper.key }}"></a>
-    {{ paper.authors }} ({{ paper.year }}).
-    {% if paper.title %}
-        {{ paper.title }}.
+<p class="refs"><a name="{{ paper[0] }}"></a>
+    {{ paper[1].authors }} ({{ paper[1].year }}).
+    {% if paper[1].title %}
+        {{ paper[1].title }}.
     {% endif %}
-    {% if paper.editor %}
-        {{ paper.editor }},
+    {% if paper[1].editor %}
+        {{ paper[1].editor }},
     {% endif %}
-    {% if paper.book and paper.collection and paper.volume %}
-        <i>{{ paper.book }}</i> ({{ paper.collection }} vol {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+    {% if paper[1].book and paper[1].collection and paper[1].volume %}
+        <i>{{ paper[1].book }}</i> ({{ paper[1].collection }} vol {{ paper[1].volume }}, pp. {{ paper[1].first_page }}–{{ paper[1].last_page }}).
     {% else %}
-        {% if paper.book and paper.volume %}
-            <i>{{ paper.book }}</i> (vol {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+        {% if paper[1].book and paper[1].volume %}
+            <i>{{ paper[1].book }}</i> (vol {{ paper[1].volume }}, pp. {{ paper[1].first_page }}–{{ paper[1].last_page }}).
         {% else %}
-            {% if paper.book and paper.first_page %}
-                <i>{{ paper.book }}</i> (pp. {{ paper.first_page }}–{{ paper.last_page }}).
+            {% if paper[1].book and paper[1].first_page %}
+                <i>{{ paper[1].book }}</i> (pp. {{ paper[1].first_page }}–{{ paper[1].last_page }}).
             {% else %}
-                {% if paper.book %}
-                    <i>{{ paper.book }}</i>.
+                {% if paper[1].book and paper[1].edition %}
+                    <i>{{ paper[1].book }}</i> ({{ paper[1].edition }} ed.).
+                {% else %}
+                    {% if paper[1].book %}
+                        <i>{{ paper[1].book }}</i>.
+                    {% endif %}
                 {% endif %}
             {% endif %}
         {% endif %}
     {% endif %}
-    {% if paper.book %}
-        {{ paper.publisher }}.
+    {% if paper[1].book %}
+        {{ paper[1].publisher }}.
     {% endif %}
-    {% if paper.journal %}
-        {% if paper.volume or paper.first_page %}
-            <i>{{ paper.journal }}</i>,
-            {% if paper.volume %}
-                {% if paper.issue %}
-                    {% if paper.first_page %}
-                        <i>{{ paper.volume }}</i>({{ paper.issue }}),
+    {% if paper[1].journal %}
+        {% if paper[1].volume or paper[1].first_page %}
+            <i>{{ paper[1].journal }}</i>,
+            {% if paper[1].volume %}
+                {% if paper[1].issue %}
+                    {% if paper[1].first_page %}
+                        <i>{{ paper[1].volume }}</i>({{ paper[1].issue }}),
                     {% else %}
-                        <i>{{ paper.volume }}</i>({{ paper.issue }}).
+                        <i>{{ paper[1].volume }}</i>({{ paper[1].issue }}).
                     {% endif %}
                 {% else %}
-                    {% if paper.first_page %}
-                        <i>{{ paper.volume }}</i>,
+                    {% if paper[1].first_page %}
+                        <i>{{ paper[1].volume }}</i>,
                     {% else %}
-                        <i>{{ paper.volume }}</i>.
+                        <i>{{ paper[1].volume }}</i>.
                     {% endif %}
                 {% endif %}
             {% endif %}
-            {% if paper.first_page %}
-                {% if paper.last_page %}
-                    {{ paper.first_page }}–{{paper.last_page }}.
+            {% if paper[1].first_page %}
+                {% if paper[1].last_page %}
+                    {{ paper[1].first_page }}–{{paper[1].last_page }}.
                 {% else %}
-                    {{ paper.first_page }}.
+                    {{ paper[1].first_page }}.
                 {% endif %}
             {% endif %}
         {% else %}
-            <i>{{ paper.journal }}</i>.
+            <i>{{ paper[1].journal }}</i>.
         {% endif %}
     {% endif %}
-    {% if paper.doi %}
-    <a href="https://doi.org/{{ paper.doi }}">https://doi.org/{{ paper.doi }}</a>
+    {% if paper[1].doi %}
+    <a href="https://doi.org/{{ paper[1].doi }}">https://doi.org/{{ paper[1].doi }}</a>
     {% endif %}
-    {% if paper.arXiv %}
-        arXiv:<a href="https://arxiv.org/abs/{{ paper.arXiv }}">{{ paper.arXiv }}</a>.
+    {% if paper[1].arXiv %}
+        arXiv:<a href="https://arxiv.org/abs/{{ paper[1].arXiv }}">{{ paper[1].arXiv }}</a>.
     {% endif %}
 </p>

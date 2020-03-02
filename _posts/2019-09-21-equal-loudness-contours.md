@@ -1,13 +1,12 @@
 ---
-layout: post
-title: Equal-loudness contours
 date: 2019-09-21
 has_code: true
 has_comments: true
+layout: post
 tags:
- - Python
- - sound
- - psychophysics
+- python
+- hearing
+title: Equal-loudness contours
 ---
 Two tones with different frequencies presented at the same sound pressure level (SPL) may
 not sound equally loud. *Equal-loudness contours* represent these variations in perceived

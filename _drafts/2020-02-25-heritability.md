@@ -11,7 +11,8 @@ tags:
  - statistics
 ---
 
-Heritability describes the degree of variation in a trait that is due to genetic variation between individuals.
+Heritability describes the degree of variation in a trait that is due to genetic variation between individuals. It is an
+important concept in animal breeding and quantitative genetics
 
 
 remains one of the core concepts in modern quantitative genetics. A number of methods for estimating

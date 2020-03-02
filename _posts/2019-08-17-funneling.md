@@ -1,29 +1,29 @@
 ---
-layout: post
-title: Funneling
 date: 2019-08-17
 has_code: true
 has_comments: true
 has_math: true
 include_references: true
+layout: post
 references:
- - Neal2003a
- - Gelman2006a
- - Lee2013a
- - Salvatier2016a
- - Hoffman2014a
- - Geman1984a
- - Neal2011a
- - Betancourt2015a
- - Papaspiliopoulos2007a
-tags:
- - Python
- - PyMC3
- - Bayesian
- - statistics
+- Betancourt2013a
+- Gelman2006a
+- Geman1984a
+- Hoffman2014a
+- Lee2013a
+- Neal2003a
+- Neal2012a
+- Papaspiliopoulos2007a
+- Salvatier2016a
 revisions:
- - date: 2020-03-01
-   reason: Shortened the title
+- date: 2020-03-01
+  reason: Shortened the title
+tags:
+- python
+- statistics
+- pymc3
+- bayesian
+title: Funneling
 ---
 
 Bayesian hierarchical (or multilevel) models have two or more layers of random variables.
@@ -32,7 +32,7 @@ depends on the variables from the layer above it. This imposition of structure o
 random variables causes *partial pooling* (or shrinkage), which can lead to hierarchical
 models having drastically improved out-of-sample predictive accuracy compared to their
 non-hierarchical counterparts. For a real-world demonstration of this, see
-[Gelman (2006)](#Gelman2006a).
+{{ site.data.refs.Gelman2006a.citet }}.
 
 Unfortunately, it can be difficult to sample the posterior distributions of hierarchical
 models properly, especially when there are few data, due to a phenomenon sometimes called
@@ -41,15 +41,15 @@ it can be remedied via reparameterization.
 
 While the funneling problem and its solution have been written about before, in my
 opinion, they are not well known enough among Bayesian modelers. For instance, in their
-introductory textbook on Bayesian modeling for cognitive scientists, [Lee and Wagenmakers
-(2013)](#Lee2013a) present numerous models that will likely suffer from funneling if
+introductory textbook on Bayesian modeling for cognitive scientists, {{ site.data.refs.Lee2013a.citet }}
+present numerous models that will likely suffer from funneling if
 applied to psychological experiments containing few data.
 
 ## Neal's funnel
 
-[Neal (2003)](#Neal2003a) provides the classic demonstration of funneling. This
+{{ site.data.refs.Neal2003a.citet }} provides the classic demonstration of funneling. This
 paper was written to show the inadequacies of older Markov chain Monte Carlo (MCMC)
-sampling methods, such as Gibbs sampling ([Geman & Geman, 1984](#Geman1984a)). However, as
+sampling methods, such as Gibbs sampling {{ site.data.refs.Geman1984a.citep }}. However, as
 we shall see momentarily, even contemporary MCMC sampling methods struggle to properly
 sample from Neal's funnel.
 
@@ -76,7 +76,7 @@ $$x_0$$ and $$v$$.*
 
 
 Now let's try to sample from this distribution using [PyMC3](https://docs.pymc.io/), a
-Bayesian modeling package for Python [(Salvatier, Wiecki, & Fonnesbeck, 2016)](#Salvatier2016a).
+Bayesian modeling package for Python {{ site.data.refs.Salvatier2016a.citep }}.
 We will definine our random variables and assign them the correct prior
 distributions, but will not provide any data with which to update the priors. Thus, the
 model's prior and posterior distributions are identical. When we sample from the posterior
@@ -84,8 +84,8 @@ distribution using MCMC, we should obtain samples that are extremely similar to 
 we simulated earlier.
 
 For continuous random variables, PyMC3 uses no-U-turn sampling (NUTS;
-[Hoffman & Gelman, 2014](#Hoffman2014a)), a form of adaptive Hamiltonian Monte Carlo (HMC;
-[Neal, 2011](#Neal2011a)), by default. This sampling method is considered to be state of
+{{ site.data.refs.Hoffman2014a.citenp }}), a form of adaptive Hamiltonian Monte Carlo (HMC;
+{{ site.data.refs.Neal2012a.citenp }}), by default. This sampling method is considered to be state of
 the art and is considerably more efficient than older MCMC sampling methods such as
 Gibbs.
 
@@ -99,9 +99,9 @@ model (right).*
 
 Clearly something has gone wrong. Posterior samples appear to have been drawn from the
 top part of the funnel only; small values of $$v$$ are not represented. As mentioned
-earlier, [Neal (2003)](#Neal2003a) proposed this example to demonstrate the problems of
+earlier, {{ site.data.refs.Neal2003a.citet }} proposed this example to demonstrate the problems of
 older MCMC sampling methods. However, as demonstrated above, NUTS also fails to sample
-Neal's funnel correctly (see [Betancourt & Girolami, 2015](#Betancourt2015a)).
+Neal's funnel correctly (see {{ site.data.refs.Betancourt2013a.citenp }}).
 
 ## A more realistic example
 
@@ -135,7 +135,7 @@ scale of the prior, $$v$$ in Neal's funnel and $$\sigma$$ above, are not represe
 
 ## Reparameterization
 
-As explained by [Betancourt and Girolami (2015)](#Betancourt2015a), the problem is caused
+As explained by {{ site.data.refs.Betancourt2013a.citet }}, the problem is caused
 by the fact that random variables within hierarchical models are necessarily highly
 dependent on one another when the data are sparse. (Actually, Betancourt and Girolami
 describe this as a *correlation* between variables. Perhaps this is the correct term in
@@ -157,7 +157,7 @@ have the luxury of collecting more data. Therefore, a more general solution is r
 
 It has long been known that correlations between random variables in hierarchical models
 can be reduced by adopting *non-centered parameterizations* (NCPs;
-[Papaspiliopoulos, Roberts, & Sköld, 2007](#Papaspiliopoulos2007a)). A successful NCP
+{{ site.data.refs.Papaspiliopoulos2007a.citenp }}). A successful NCP
 of Neal's funnel is
 
 $$\begin{align}

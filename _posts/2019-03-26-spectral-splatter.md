@@ -1,13 +1,12 @@
 ---
-layout: post
-title: Spectral splatter
 date: 2019-03-26
 has_code: true
 has_comments: true
+layout: post
 tags:
- - Python
- - sound
- - psychophysics
+- python
+- hearing
+title: Spectral splatter
 ---
 
 So far in this series, we’ve generated and played pure tones using Python. If you’ve been

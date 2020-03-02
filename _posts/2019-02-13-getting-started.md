@@ -1,21 +1,21 @@
 ---
-layout: post
-title: Getting started with Python for sound
-date: 2019-02-13 
+date: 2019-02-13
 has_code: true
 has_comments: true
-tags:
- - Python
- - sound
+layout: post
 revisions:
- - date: 2019-03-16
-   reason: Reformatted code blocks
- - date: 2019-03-17
-   reason: Added links to second post
- - date: 2019-03-28
-   reason: Edited writing and added images
- - date: 2019-08-02
-   reason: Changed the repo
+- date: 2019-03-16
+  reason: Reformatted code blocks
+- date: 2019-03-17
+  reason: Added links to second post
+- date: 2019-03-28
+  reason: Edited writing and added images
+- date: 2019-08-02
+  reason: Changed the repo
+tags:
+- python
+- hearing
+title: Getting started with Python for sound
 ---
 
 

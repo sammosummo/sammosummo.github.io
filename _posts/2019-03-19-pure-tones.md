@@ -1,19 +1,18 @@
 ---
-layout: post
-title: Pure tones
 date: 2019-03-22
-has_math: true
 has_code: true
 has_comments: true
-tags:
- - Python
- - sound
- - psychophysics
+has_math: true
+layout: post
 revisions:
- - date: 2019-03-27
-   reason: Added links
- - date: 2019-03-28
-   reason: Added figure captions
+- date: 2019-03-27
+  reason: Added links
+- date: 2019-03-28
+  reason: Added figure captions
+tags:
+- python
+- hearing
+title: Pure tones
 ---
 
 

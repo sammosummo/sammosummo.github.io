@@ -2,7 +2,12 @@ zotero__py: |
   """Download my zotero library and convert it to YAML.
   
   """
+  import re
+  
+  from string import ascii_lowercase
+  
   from pyzotero import zotero
+  from unidecode import unidecode
   
   
   def get_ids():
@@ -19,8 +24,103 @@ zotero__py: |
       library_id, api_key = get_ids()
       zot = zotero.Zotero(library_id, "user", api_key)
       results = zot.everything(zot.top())
-      for item in results:
-          print(item["data"].keys())
+      keys = []
+      with open("../../_data/refs.yaml", "w") as fw:
+          for item in results:
+              dic = item["data"]
+              authors = []
+              _cite = []
+              for author in dic["creators"]:
+                  if author["creatorType"] == "author":
+                      if "lastName" in author:
+                          _cite.append(author["lastName"])
+                          name = author["lastName"] + ","
+                          for n in author["firstName"].split():
+                              if n not in ("Jr", "Jr.", "Jnr", "Jnr."):
+                                  n = n[0] + "."
+                              name += f" {n}"
+                      else:
+                          _cite.append(author["name"])
+                          name = author["name"]
+                      authors.append(name)
+              if len(authors) > 1:
+                  authors[-1] = f"& {authors[-1]}"
+              authors = ", ".join(authors)
+              date = re.split(" |,|-|/", dic["date"])
+              for d in date:
+                  try:
+                      if int(d) > 100:
+                          date = str(int(d))
+                  except ValueError:
+                      pass
+              for s in ascii_lowercase:
+                  key = unidecode(authors.split(" ")[0].rstrip(",")) + date + s
+                  if key not in keys:
+                      keys.append(key)
+                      fw.write(f"{key}:\n")
+                      break
+              fw.write(f'   authors: "{authors}"\n')
+              fw.write(f'   year: "{date}"\n')
+              title = dic["title"].replace('"', "''")
+              if dic["itemType"] != "book":
+                  fw.write(f'   title: "{title}"\n')
+              else:
+                  fw.write(f'   book: "{title}"\n')
+              if "publicationTitle" in dic:
+                  if "arXiv" in dic["publicationTitle"]:
+                      arXiv = dic["publicationTitle"].split(":")[1].split()[0]
+                      fw.write(f'   arXiv: "{arXiv}"\n')
+                      del dic["publicationTitle"]
+              _keys = {
+                  "publicationTitle": "journal",
+                  "volume": "volume",
+                  "issue": "issue",
+                  "bookTitle": "book",
+                  "publisher": "publisher",
+                  "edition": "edition",
+                  "DOI": "doi",
+              }
+              for k, v in _keys.items():
+                  if k in dic:
+                      if dic[k] != "":
+                          fw.write(f'   {v}: "{dic[k]}"\n')
+              if "pages" in dic:
+                  if dic["pages"] != "":
+                      pages = re.split("-|–", dic["pages"])
+                      fw.write(f'   first_page: "{pages[0]}"\n')
+                      if len(pages) > 1:
+                          fw.write(f'   last_page: "{pages[1]}"\n')
+              editors = []
+              for editor in dic["creators"]:
+                  if editor["creatorType"] == "editor":
+                      if "lastName" in editor:
+                          name = ""
+                          for n in editor["firstName"].split():
+                              name += f"{n[0]}. "
+                          name += editor["lastName"]
+                      else:
+                          name = editor["name"]
+                      editors.append(name)
+              if len(editors) > 1:
+                  editors[-1] = f"& {editors[-1]} (Eds.)"
+              elif len(editors) == 1:
+                  editors[0] = f"{editors[0]} (Ed.)"
+              editors = ", ".join(editors)
+              if editors != "":
+                  fw.write(f'   editors: "In {editors}"\n')
+              if len(_cite) == 1:
+                  citep = f"({_cite[0]}, {date})"
+                  citet = f"{_cite[0]} ({date})"
+              elif len(_cite) == 2:
+                  citep = f"({_cite[0]} & {_cite[1]}, {date})"
+                  citet = f"{_cite[0]} and {_cite[1]} ({date})"
+              else:
+                  citep = f"({_cite[0]} <i>et al.</i>, {date})"
+                  citet = f"{_cite[0]} <i>et al.</i> ({date})"
+              fw.write(f'   citep: "[{citep}](#{key})"\n')
+              fw.write(f'   citenp: "[{citep[1:-1]}](#{key})"\n')
+              fw.write(f'   citet: "[{citet}](#{key})"\n')
+              fw.write("\n")
   
   
   if __name__ == "__main__":
@@ -289,12 +389,16 @@ run__py: |
   """
   from code2yaml import code2yaml
   from make_my_bib import make_my_bib
+  from zotero import download_refs
+  from add_refs import add_refs
   
   
   if __name__ == "__main__":
   
       code2yaml()
       make_my_bib()
+      download_refs()
+      add_refs()
 phist__py: |
   """How to create a partially filled histogram.
   
@@ -1909,15 +2013,14 @@ make_my_bib__py: |
   
       with open("../../_data/my_papers.yaml", "w") as fw:
   
-          fw.write("my_papers:\n")
-  
           for paper in data:
   
-              fw.write(f"""\n - id: "{paper['id']}"\n""")
+              fw.write(f"p{paper['sort'] + paper['title'].split()[0][:2].lower()}:\n")
               del paper["id"]
               [fw.write(f"""   {k}: "{v}"\n""") for k, v in paper.items()]
+              fw.write(f"\n")
   
-          s = "".join(open("../../_data/my_papers_manual.yaml").readlines()[1:])
+          s = "".join(open("../../_data/my_papers_manual.yaml").readlines())
           fw.write(s)
   
   
@@ -2436,6 +2539,69 @@ noise-tone-plus-noise__py: |
       plt.savefig(
           f"../../assets/images/noise_toneplusnoise.svg", bbox_inches=0, transparent=True
       )
+add_refs__py: |
+  """Add cited references to the front matter of each markdown page.
+  
+  """
+  import os
+  import re
+  import sys
+  
+  import yaml
+  
+  
+  def get_frontmatter(f):
+      """Return front matter from a markdown file in dictionary format.
+  
+      """
+      with open(f) as fp:
+          s = fp.read().partition("---")[2].partition("---")[0]
+          d = yaml.safe_load(s)
+      return d
+  
+  
+  def find_cites(f):
+      """Return keys to cited papers.
+  
+      """
+      with open(f) as fp:
+          lst = re.findall(r"{{(.+?)}}", fp.read())
+      refs = []
+      for l in lst:
+          if "site.data.refs" in l:
+              refs.append(l.split(".")[3])
+      return sorted(set(refs))
+  
+  
+  def replace_frontmatter(f, d):
+      """Replace the front matter with new front matter.
+  
+      """
+      with open(f) as fp:
+          s = fp.read().partition("---\n")[2].partition("---\n")[2]
+      with open(f, "w") as fw:
+          fw.write("---\n")
+          yaml.safe_dump(d, fw)
+          fw.write(f"---\n{s}")
+  
+  
+  def add_refs():
+      """Add all references.
+  
+      """
+      posts = [p for p in os.listdir("../../_posts") if ".md" in p]
+      for p in posts:
+          f = f"../../_posts/{p}"
+          d = get_frontmatter(f)
+          r = find_cites(f)
+          if r:
+              d["include_references"] = True
+              d["references"] = r
+          replace_frontmatter(f, d)
+  
+  
+  if __name__ == "__main__":
+      add_refs()
 qt-sound-example__py: |
   from math import pi, sin
   import struct, sys

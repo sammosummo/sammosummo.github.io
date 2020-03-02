@@ -1,31 +1,31 @@
 ---
-layout: post
-title: Ripple sounds
 date: 2019-12-12
 has_code: true
 has_comments: true
 has_math: true
-tags:
- - Python
- - sound
- - psychophysics
+has_references: true
 include_references: true
+layout: post
 references:
- - Kowalski1996a
- - Shamma2001a
- - Visscher2007a
- - Shapley1985a
- - Escabi2002a
- - Glasberg1990a
+- Escabi2002a
+- Glasberg1990a
+- Kowalski1996a
+- Shamma2001a
+- Shapley1985a
+- Visscher2007a
+tags:
+- python
+- hearing
+title: Ripple sounds
 ---
 
 Ripple sounds are broadband stimuli with sinusoidal spectral envelopes. They were first
-proposed by [Kowalski *et al.* (1996)](#Kowalski1996a) to measure the response properties of
-neurons within the auditory system (reviewed by [Shamma, 2001](#Shamma2001a)). They are
-frequently described as the auditory equivalent to visual gratings (cf. [Shapley & Lennie,
-1985](#Shapley1985a)). Indeed, as we shall see shortly, plotted ripple envelopes look
+proposed by {{ site.data.refs.Kowalski1996a.citep }} to measure the response properties of
+neurons within the auditory system (reviewed by {{ site.data.refs.Shamma2001a.citenp }}). They are
+frequently described as the auditory equivalent to visual gratings (cf.
+{{ site.data.refs.Shapley1985a.citenp }} ). Indeed, as we shall see shortly, plotted ripple envelopes look
 exactly like gratings. Ripple sounds have also been used to study auditory short-term
-memory [(Visscher *et al.*, 2007)](#Visscher2007a).
+memory {{ site.data.refs.Visscher2007a.citep }}.
 
 ## Mathematical definition
 
@@ -69,7 +69,7 @@ f\left( i \right) = f_0\left(\frac{f_\left(n-1\right)}{f_0}\right)^{\frac{i}{n -
 
 where $$f_0$$ is the frequency of the lowest tone in Hz and $$f_\left(n-1\right)$$ is the
 frequency of the highest tone in Hz. Another option is to space tones evenly in terms
-of equivalent rectangular bandwidths [(Glasberg & Moore, 1990)](#Glasberg1990a). I'll
+of equivalent rectangular bandwidths {{ site.data.refs.Glasberg1990a.citep }}. I'll
 implement this in a future post. Starting phases should be random, so we draw them from a 
 circular uniform distribution,
 
@@ -134,7 +134,7 @@ sound has a shallower ripple depth ($$\Delta$$).*
 
 Setting $$\Delta\left( t \right)$$, $$\Omega\left( t \right)$$, and $$w\left( t \right)$$
 to constant, non-zero values creates "moving" ripple sounds. These are the most common
-kind of ripple sound found in the literature [(Shamma, 2001)](#Shamma2001a).
+kind of ripple sound found in the literature {{site.data.refs.Shamma2001a.citep }}.
 
 ![](/assets/images/moving-ripples.svg)
 *Envelopes of moving ripple sounds. The middle
@@ -142,8 +142,8 @@ sound has a greater ripple drift ($$w$$) than the leftmost sound, while the righ
 sound has a negative drift.*
 
 Finally, we can create "dynamic" moving ripples by defining $$\Delta\left( t \right)$$,
-$$\Omega\left( t \right)$$, and $$w\left( t \right)$$ as time-varying functions [(Escabi,
-2002)](#Escabi2002a).
+$$\Omega\left( t \right)$$, and $$w\left( t \right)$$ as time-varying functions
+{{ site.data.refs.Escabi2002a.citep }}.
 
 ![](/assets/images/dynamic-ripples.svg)
 *Envelopes of dynamic moving ripple sounds. In each example, one of

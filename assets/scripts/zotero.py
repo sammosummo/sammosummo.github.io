@@ -6,6 +6,7 @@ import re
 from string import ascii_lowercase
 
 from pyzotero import zotero
+from unidecode import unidecode
 
 
 def get_ids():
@@ -23,8 +24,7 @@ def download_refs():
     zot = zotero.Zotero(library_id, "user", api_key)
     results = zot.everything(zot.top())
     keys = []
-    with open("../../_data/references.yaml", "w") as fw:
-        fw.write("references:\n\n")
+    with open("../../_data/refs.yaml", "w") as fw:
         for item in results:
             dic = item["data"]
             authors = []
@@ -53,10 +53,10 @@ def download_refs():
                 except ValueError:
                     pass
             for s in ascii_lowercase:
-                key = authors.split(" ")[0].rstrip(",") + date + s
+                key = unidecode(authors.split(" ")[0].rstrip(",")) + date + s
                 if key not in keys:
                     keys.append(key)
-                    fw.write(f' - key: "{key}"\n')
+                    fw.write(f"{key}:\n")
                     break
             fw.write(f'   authors: "{authors}"\n')
             fw.write(f'   year: "{date}"\n')
@@ -65,7 +65,6 @@ def download_refs():
                 fw.write(f'   title: "{title}"\n')
             else:
                 fw.write(f'   book: "{title}"\n')
-            arXiv = None
             if "publicationTitle" in dic:
                 if "arXiv" in dic["publicationTitle"]:
                     arXiv = dic["publicationTitle"].split(":")[1].split()[0]
@@ -108,7 +107,6 @@ def download_refs():
             editors = ", ".join(editors)
             if editors != "":
                 fw.write(f'   editors: "In {editors}"\n')
-            print(authors, dic["itemType"], dic["itemType"] == "book", "book" if dic["itemType"] == "book" else "journal")
             if len(_cite) == 1:
                 citep = f"({_cite[0]}, {date})"
                 citet = f"{_cite[0]} ({date})"
@@ -118,10 +116,10 @@ def download_refs():
             else:
                 citep = f"({_cite[0]} <i>et al.</i>, {date})"
                 citet = f"{_cite[0]} <i>et al.</i> ({date})"
-            fw.write(f'   citep: "<a href=\'#{key}\'>{citep}</a>"\n')
-            fw.write(f'   citet: "<a href=\'#{key}\'>{citet}</a>"\n')
+            fw.write(f'   citep: "[{citep}](#{key})"\n')
+            fw.write(f'   citenp: "[{citep[1:-1]}](#{key})"\n')
+            fw.write(f'   citet: "[{citet}](#{key})"\n')
             fw.write("\n")
-
 
 
 if __name__ == "__main__":
