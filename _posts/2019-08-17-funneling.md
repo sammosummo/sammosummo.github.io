@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Non-centered parameterizations of Bayesian hierarchical models
+title: Funneling
 date: 2019-08-17
 has_code: true
 has_comments: true
@@ -21,6 +21,9 @@ tags:
  - PyMC3
  - Bayesian
  - statistics
+revisions:
+ - date: 2020-03-01
+   reason: Shortened the title
 ---
 
 Bayesian hierarchical (or multilevel) models have two or more layers of random variables.

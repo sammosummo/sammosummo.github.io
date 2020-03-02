@@ -1,0 +1,15 @@
+art:
+  -
+    artist: "Carel Fabritius"
+    title: "The Goldfinch"
+    date: "1954"
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Fabritius-vink.jpg/503px-Fabritius-vink.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Fabritius-vink.jpg"
+    source: "Wikimedia Commons"
+  -
+    artist: "Hector Giacomelli"
+    title: "A Perch of Birds"
+    date: "circa 1880 s"
+    img_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Hector_Giacomelli_-_A_Perch_of_Birds_-_Walters_37963.jpg/800px-Hector_Giacomelli_-_A_Perch_of_Birds_-_Walters_37963.jpg"
+    page_url: "https://commons.wikimedia.org/wiki/File:Hector_Giacomelli_-_A_Perch_of_Birds_-_Walters_37963.jpg"
+    source: "Wikimedia Commons"

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Partially filled histograms in Matplotlib
+title: Partially filled histograms
 date: 2019-10-03
 has_code: true
 has_comments: true

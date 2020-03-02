@@ -20,12 +20,12 @@ references:
 ---
 
 Ripple sounds are broadband stimuli with sinusoidal spectral envelopes. They were first
-proposed by [Kowalski et al. (1996)](#Kowalski1996a) to measure the response properties of
+proposed by [Kowalski *et al.* (1996)](#Kowalski1996a) to measure the response properties of
 neurons within the auditory system (reviewed by [Shamma, 2001](#Shamma2001a)). They are
 frequently described as the auditory equivalent to visual gratings (cf. [Shapley & Lennie,
 1985](#Shapley1985a)). Indeed, as we shall see shortly, plotted ripple envelopes look
 exactly like gratings. Ripple sounds have also been used to study auditory short-term
-memory [(Visscher et al., 2007)](#Visscher2007a).
+memory [(Visscher *et al.*, 2007)](#Visscher2007a).
 
 ## Mathematical definition
 

@@ -6,22 +6,18 @@ from Bio import Entrez
 import re
 
 
-def main():
+def make_my_bib():
     """Grab all my publications and format them into a YAML bibliography.
 
     """
-    print("searching pubmed for my papers")
     Entrez.email = "your.email@example.com"
     handle = Entrez.esearch(
         db="pubmed", sort="date", retmax="200", retmode="xml", term="mathias sr[author]"
     )
     pmids = Entrez.read(handle)["IdList"]
-    print(f"found {len(pmids)} with my full name")
     extras = ["28480992", "28385874", "27744290"]
     pmids += extras
     pmids = set(pmids)
-    print(f"added {len(extras)} more without my full name")
-    print(f"getting details of {len(pmids)} papers")
     pmids = ",".join(pmids)
     handle = Entrez.efetch(db="pubmed", retmode="xml", id=pmids)
     papers = Entrez.read(handle)["PubmedArticle"]
@@ -128,4 +124,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    make_my_bib()

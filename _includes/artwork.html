@@ -1,0 +1,7 @@
+{% assign min = 0 %}
+{% assign max = site.data.artwork.art.size %}
+{% assign diff = max | minus: min %}
+{% assign x = "now" | date: "%s" | modulo: diff | plus: min %}
+{% assign art = site.data.artwork.art[x] %}
+![]({{ art.img_url }}){: style="max-width: 400px; height: auto;"}
+*{{ art.title }} by {{ art.artist }}. From [{{ art.source }}]({{ art.page_url }}).*

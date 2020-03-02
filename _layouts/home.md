@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<h2>What is this?</h2>
+<h2>Where am I?</h2>
 
 <i>The Cracked Bassoon</i> is the personal website of <a href="about">Sam Mathias</a>, a curmudgeonly English researcher based in
 Boston, MA. It contains code snippets, stray observations, and wildly misinformed opinions
@@ -11,7 +11,7 @@ probably not. I wouldn’t stick around if I were you.
 
 <h2>Latest writing</h2>
 
-Please note that because the following has not been peer reviewed, it might be pure
+Fair warning—because none of what appears on this website has been peer-reviewed, it might be pure
 nonsense. <a href="writing">Click here for the archive</a>.
 
 <ul>
@@ -23,7 +23,8 @@ nonsense. <a href="writing">Click here for the archive</a>.
 </ul>
 <h2>Latest publication</h2>
 
-<a href="publications">Click here for the complete list</a>.
+Below is my latest co-authored peer-reviewed publication. <a href="publications">Click here</a> for
+the complete list of my publications.
 <ul>
 <li>
 {% assign sorted = site.data.my_papers.my_papers | sort: 'sort' | reverse %}

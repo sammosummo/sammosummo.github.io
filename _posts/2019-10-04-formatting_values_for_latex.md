@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Formatting floating-point numbers for LaTeX
+title: Formatting numbers for LaTeX
 date: 2019-10-04
 has_code: true
 has_comments: true

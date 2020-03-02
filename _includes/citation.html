@@ -1,0 +1,62 @@
+<p class="refs"><a name="{{ paper.key }}"></a>
+    {{ paper.authors }} ({{ paper.year }}).
+    {% if paper.title %}
+        {{ paper.title }}.
+    {% endif %}
+    {% if paper.editor %}
+        {{ paper.editor }},
+    {% endif %}
+    {% if paper.book and paper.collection and paper.volume %}
+        <i>{{ paper.book }}</i> ({{ paper.collection }} vol {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+    {% else %}
+        {% if paper.book and paper.volume %}
+            <i>{{ paper.book }}</i> (vol {{ paper.volume }}, pp. {{ paper.first_page }}–{{ paper.last_page }}).
+        {% else %}
+            {% if paper.book and paper.first_page %}
+                <i>{{ paper.book }}</i> (pp. {{ paper.first_page }}–{{ paper.last_page }}).
+            {% else %}
+                {% if paper.book %}
+                    <i>{{ paper.book }}</i>.
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% if paper.book %}
+        {{ paper.publisher }}.
+    {% endif %}
+    {% if paper.journal %}
+        {% if paper.volume or paper.first_page %}
+            <i>{{ paper.journal }}</i>,
+            {% if paper.volume %}
+                {% if paper.issue %}
+                    {% if paper.first_page %}
+                        <i>{{ paper.volume }}</i>({{ paper.issue }}),
+                    {% else %}
+                        <i>{{ paper.volume }}</i>({{ paper.issue }}).
+                    {% endif %}
+                {% else %}
+                    {% if paper.first_page %}
+                        <i>{{ paper.volume }}</i>,
+                    {% else %}
+                        <i>{{ paper.volume }}</i>.
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+            {% if paper.first_page %}
+                {% if paper.last_page %}
+                    {{ paper.first_page }}–{{paper.last_page }}.
+                {% else %}
+                    {{ paper.first_page }}.
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <i>{{ paper.journal }}</i>.
+        {% endif %}
+    {% endif %}
+    {% if paper.doi %}
+    <a href="https://doi.org/{{ paper.doi }}">https://doi.org/{{ paper.doi }}</a>
+    {% endif %}
+    {% if paper.arXiv %}
+        arXiv:<a href="https://arxiv.org/abs/{{ paper.arXiv }}">{{ paper.arXiv }}</a>.
+    {% endif %}
+</p>

@@ -1,17 +1,17 @@
 ---
 layout: page
-title: About
+title: What’s all this then?
 ---
 
 ![](/assets/images/me-glacier.png)
 *Me on [Exit Glacier](https://en.wikipedia.org/wiki/Exit_Glacier) at Kenai Fjords National
 Park, AK.*
 
-My full name is **Samuel Robert Mathias**. I’m a researcher at Boston Children’s Hospital.
+My name is **Samuel Robert Mathias**. I’m a researcher at [Boston Children’s Hospital](http://www.childrenshospital.org/).
 I’ve published numerous peer-reviewed papers on a range of topics, including hearing,
 psychology, psychiatry, and genetics. You can find my list of publications [here](/publications)
 or on [Google Scholar](https://scholar.google.com/citations?user=fRRZs_4AAAAJ&hl=en&oi=ao).
-*The Cracked Bassoon* is my personal website.
+[*The Cracked Bassoon*](https://crackedbassoon.com) is my personal website.
 
 I was born in [Wigan](https://en.wikipedia.org/wiki/Wigan), a medium-sized town in the
 North of England perhaps best known for its inaccurately named
@@ -38,6 +38,7 @@ I currently live in [Charlestown](https://en.wikipedia.org/wiki/Charlestown,_Bos
 superior scientist by every metric. Please check out her work. We have a goldendoodle
 named Charlie.
 
+## How I made *The Cracked Bassoon*
 This website was built using [Jekyll](https://jekyllrb.com/) and is hosted
 on [GitHub Pages](https://pages.github.com/). I bought the domain from [Google Domains](https://domains.google/).
 I didn’t like any of the available Jekyll “themes” and don’t know how to build my own, so

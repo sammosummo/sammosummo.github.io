@@ -1,3 +1,300 @@
+zotero__py: |
+  """Download my zotero library and convert it to YAML.
+  
+  """
+  from pyzotero import zotero
+  
+  
+  def get_ids():
+      """Read file containing ID and API key.
+  
+      """
+      return [l.strip() for l in open("../../_data/zotero.txt").readlines()]
+  
+  
+  def download_refs():
+      """Download my enitre zotero library.
+  
+      """
+      library_id, api_key = get_ids()
+      zot = zotero.Zotero(library_id, "user", api_key)
+      results = zot.everything(zot.top())
+      for item in results:
+          print(item["data"].keys())
+  
+  
+  if __name__ == "__main__":
+      download_refs()
+bsem__py: |
+  """Example of Bayesian confirmatory factor analysis in PyMC3.
+  
+  """
+  import numpy as np
+  import pandas as pd
+  import pymc3 as pm
+  import theano.tensor as tt
+  import matplotlib.pyplot as plt
+  from os.path import exists
+  
+  from matplotlib import rcParams
+  from pymc3.math import matrix_dot, matrix_inverse
+  from tabulate import tabulate
+  
+  
+  def bsem(
+      items,
+      factors,
+      paths,
+      beta="estimate",
+      nu_sd=2.5,
+      alpha_sd=2.5,
+      d_beta=2.5,
+      corr_items=True,
+      corr_factors=False,
+      g_eta=100,
+      l_eta=1,
+      beta_beta=1,
+  ):
+      r"""Constructs Bayesian SEM.
+  
+      Args:
+          items (np.array): Array of item data.
+          factors (np.array): Factor design.
+          paths (np.array): Array of directed factor paths.
+          beta (:obj:`float` or `'estimate'`, optional): Standard deviation of normal
+              prior on cross loadings. If `'estimate'`,  beta is estimated from the data.
+          nu_sd (:obj:`float`, optional): Standard deviation of normal prior on item
+              intercepts.
+          alpha_sd (:obj:`float`, optional): Standard deviation of normal prior on factor
+              intercepts.
+          d_beta (:obj:`float`, optional): Scale parameter of half-Cauchy prior on factor
+              standard deviation.
+          corr_factors (:obj:`bool`, optional): Allow correlated factors.
+          corr_items (:obj:`bool`, optional): Allow correlated items.
+          g_eta (:obj:`float`, optional): Shape parameter of LKJ prior on residual item
+              correlation matrix.
+          l_eta (:obj:`float`, optional): Shape parameter of LKJ prior on factor
+              correlation matrix.
+          beta_beta (:obj:`float`, optional): Beta parameter of beta prior on beta.
+  
+      Returns:
+  
+          None: Places model in context.
+  
+      """
+      # get numbers of cases, items, and factors
+      n, p = items.shape
+      p_, m = factors.shape
+      assert p == p_, "Mismatch between data and factor-loading matrices"
+      assert paths.shape == (m, m), "Paths matrix has wrong shape"
+      I = tt.eye(m, m)
+  
+      # place priors on item and factor intercepts
+      nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=items.mean(axis=0))
+      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=alpha_sd, shape=m, testval=np.zeros(m))
+  
+      # place priors on unscaled factor loadings
+      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=factors.shape, testval=factors)
+  
+      # place priors on paths
+      B = tt.zeros(paths.shape)
+      npths = np.sum(paths, axis=None)
+      if npths > 0:
+          b = pm.Normal(name=r"$b$", mu=0, sd=1, shape=npths, testval=np.ones(npths))
+          # create the paths matrix
+          k = 0
+          for i in range(m):
+              for j in range(m):
+                  if paths[i, j] == 1:
+                      B = tt.set_subtensor(B[i, j], b[k])
+                      k += 1
+      B = pm.Deterministic("$B$", B)
+  
+      # create masking matrix for factor loadings
+      if isinstance(beta, str):
+          assert beta == "estimate", f"Don't know what to do with '{beta}'"
+          beta = pm.Beta(name=r"$\beta$", alpha=1, beta=beta_beta, testval=0.1)
+      M = (1 - np.asarray(factors)) * beta + np.asarray(factors)
+  
+      # create scaled factor loadings
+      Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
+  
+      # determine item means
+      mu = nu + matrix_dot(Lambda, alpha)
+  
+      # place priors on item standard deviations
+      D = pm.HalfCauchy(name=r"$D$", beta=d_beta, shape=p, testval=items.std(axis=0))
+  
+      # place priors on item correlations
+      f = pm.Lognormal.dist(sd=0.25)
+      if not corr_items:
+          Omega = np.eye(p)
+      else:
+          G = pm.LKJCholeskyCov(name=r"$G$", eta=g_eta, n=p, sd_dist=f)
+          ch1 = pm.expand_packed_triangular(p, G, lower=True)
+          K = tt.dot(ch1, ch1.T)
+          sd1 = tt.sqrt(tt.diag(K))
+          Omega = pm.Deterministic(r"$\Omega$", K / sd1[:, None] / sd1[None, :])
+  
+      # determine residual item variances and covariances
+      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
+  
+      # place priors on factor correlations
+      if not corr_factors:
+          Psi = np.eye(m)
+      else:
+          L = pm.LKJCholeskyCov(name=r"$L$", eta=l_eta, n=m, sd_dist=f)
+          ch = pm.expand_packed_triangular(m, L, lower=True)
+          Gamma = tt.dot(ch, ch.T)
+          sd = tt.sqrt(tt.diag(Gamma))
+          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+  
+      # determine variances and covariances of items
+      A = matrix_inverse(I - B)
+      C = matrix_inverse(I - B.T)
+      Sigma = matrix_dot(Lambda, A, Psi, C, Lambda.T) + Theta
+  
+      # place priors on observations
+      pm.MvNormal(name="$Y$", mu=mu, cov=Sigma, observed=items, shape=items.shape)
+  
+  
+  def main():
+  
+      # load the data
+      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
+  
+      # define items to keep
+      item_names = [
+          "visual",
+          "cubes",
+          "paper",
+          "flags",
+          "general",
+          "paragrap",
+          "sentence",
+          "wordc",
+          "wordm",
+          "addition",
+          "code",
+          "counting",
+          "straight",
+          "wordr",
+          "numberr",
+          "figurer",
+          "object",
+          "numberf",
+          "figurew",
+      ]
+  
+      # define the factor structure
+      factors = np.array(
+          [
+              [1, 0, 0, 0, 0],
+              [1, 0, 0, 0, 0],
+              [1, 0, 0, 0, 0],
+              [1, 0, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 1, 0, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 1, 0, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 0],
+              [0, 0, 0, 1, 0],
+          ]
+      )
+  
+      paths = np.array(
+          [
+              [0, 0, 0, 0, 1],
+              [0, 0, 0, 0, 1],
+              [0, 0, 0, 0, 1],
+              [0, 0, 0, 0, 1],
+              [0, 0, 0, 0, 0],
+          ]
+      )
+  
+      # iterate over the two schools
+      for school, sdf in df.groupby("school"):
+  
+          # define the path to save results
+          f = f"../data/{school}"
+  
+          # select the 19 commonly used variables
+          items = sdf[item_names]
+  
+          # for numerical convenience, standardize the data
+          items = (items - items.mean()) / items.std()
+  
+          with pm.Model():
+  
+              # construct the model
+              bsem(items, factors, paths)
+  
+              if not exists(f):
+  
+                  # sample and save
+                  trace = pm.sample(chains=2)  # 19000, tune=1000,
+                  pm.save_trace(trace, f)
+                  pm.traceplot(trace, compact=True)
+                  rcParams["font.size"] = 14
+                  plt.savefig(f"{f}/traceplot.png")
+  
+              else:
+  
+                  trace = pm.load_trace(f)
+  
+          # create a nice summary table
+          loadings = pd.DataFrame(
+              trace[r"$\Lambda$"].mean(axis=0).round(3),
+              index=[v.title() for v in item_names],
+              columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          )
+          loadings.to_csv(f"{f}/loadings.csv")
+  
+          # correlations = pd.DataFrame(
+          #     trace[r"$\Psi$"].mean(axis=0).round(3),
+          #     index=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          #     columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          # )
+          # correlations.to_csv(f"{f}/factor_correlations.csv")
+  
+          correlations = pd.DataFrame(
+              trace[r"$B$"].mean(axis=0).round(3),
+              index=["Spatial", "Verbal", "Speed", "Memory", "g"],
+              columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          )
+          correlations.to_csv(f"{f}/factor_paths.csv")
+  
+          correlations = pd.DataFrame(
+              trace[r"$\Omega$"].mean(axis=0).round(3),
+              index=item_names,
+              columns=item_names,
+          )
+          correlations.to_csv(f"{f}/item_correlations.csv")
+  
+  
+  if __name__ == "__main__":
+      main()
+run__py: |
+  """Run this script before committing.
+  
+  """
+  from code2yaml import code2yaml
+  from make_my_bib import make_my_bib
+  
+  
+  if __name__ == "__main__":
+  
+      code2yaml()
+      make_my_bib()
 phist__py: |
   """How to create a partially filled histogram.
   
@@ -219,7 +516,7 @@ bcfa__py: |
                   pm.save_trace(trace, f)
                   pm.traceplot(trace, compact=True)
                   rcParams["font.size"] = 14
-                  plt.savefig(f"{f}/traceplot.svg")
+                  plt.savefig(f"{f}/traceplot.png")
   
               else:
   
@@ -853,228 +1150,6 @@ ripple-sounds__py: |
           plot_env(a, ax, ax == axes[0])
       print("making a figure")
       plt.savefig(fn % "dynamic", bbox_inches=0, transparent=True)
-  
-  
-  if __name__ == "__main__":
-      main()
-bcfa_bckup__py: |
-  """Example of Bayesian confirmatory factor analysis in PyMC3.
-  
-  """
-  import numpy as np
-  import pandas as pd
-  import pymc3 as pm
-  import theano.tensor as tt
-  import matplotlib.pyplot as plt
-  from os.path import exists
-  
-  from matplotlib import rcParams
-  from pymc3.math import matrix_dot
-  from tabulate import tabulate
-  
-  
-  def bcfa(
-      items,
-      factors,
-      beta="estimate",
-      nu_sd=2.5,
-      alpha_sd=2.5,
-      d_beta=2.5,
-      corr_items=True,
-      corr_factors=True,
-      g_eta=100,
-      l_eta=1,
-      beta_beta=1,
-  ):
-      r"""Constructs a Bayesian CFA model.
-  
-      Args:
-          items (np.array): Array of item data.
-          factors (np.array): Factor design matrix.
-          beta (:obj:`float` or `'estimate'`, optional): Standard deviation of normal
-              prior on cross loadings. If `'estimate'`,  beta is estimated from the data.
-          nu_sd (:obj:`float`, optional): Standard deviation of normal prior on item
-              intercepts.
-          alpha_sd (:obj:`float`, optional): Standard deviation of normal prior on factor
-              intercepts.
-          d_beta (:obj:`float`, optional): Scale parameter of half-Cauchy prior on factor
-              standard deviation.
-          corr_factors (:obj:`bool`, optional): Allow correlated factors.
-          corr_items (:obj:`bool`, optional): Allow correlated items.
-          g_eta (:obj:`float`, optional): Shape parameter of LKJ prior on residual item
-              correlation matrix.
-          l_eta (:obj:`float`, optional): Shape parameter of LKJ prior on factor
-              correlation matrix.
-          beta_beta (:obj:`float`, optional): Beta parameter of beta prior on beta.
-  
-      Returns:
-  
-          None: Places model in context.
-  
-      """
-      # get numbers of cases, items, and factors
-      n, p = items.shape
-      p_, m = factors.shape
-      assert p == p_, "Mismatch between data and factor-loading matrices"
-  
-      # place priors on item and factor intercepts
-      nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=items.mean(axis=0))
-      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=alpha_sd, shape=m, testval=np.zeros(m))
-  
-      # place priors on unscaled factor loadings
-      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=factors.shape, testval=factors)
-  
-      # create masking matrix for factor loadings
-      if isinstance(beta, str):
-          assert beta == "estimate", f"Don't know what to do with '{beta}'"
-          beta = pm.Beta(name=r"$\beta$", alpha=1, beta=beta_beta, testval=0.1)
-      M = (1 - np.asarray(factors)) * beta + np.asarray(factors)
-  
-      # create scaled factor loadings
-      Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
-  
-      # determine item means
-      mu = nu + matrix_dot(Lambda, alpha)
-  
-      # place priors on item standard deviations
-      D = pm.HalfCauchy(name=r"$D$", beta=d_beta, shape=p, testval=items.std(axis=0))
-  
-      # place priors on item correlations
-      f = pm.Lognormal.dist(sd=0.25)
-      if not corr_items:
-          Omega = np.eye(p)
-      else:
-          G = pm.LKJCholeskyCov(name=r"$G$", eta=g_eta, n=p, sd_dist=f)
-          ch1 = pm.expand_packed_triangular(p, G, lower=True)
-          K = tt.dot(ch1, ch1.T)
-          sd1 = tt.sqrt(tt.diag(K))
-          Omega = pm.Deterministic(r"$\Omega$", K / sd1[:, None] / sd1[None, :])
-  
-      # determine residual item variances and covariances
-      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
-  
-      # place priors on factor correlations
-      if not corr_factors:
-          Psi = np.eye(m)
-      else:
-          L = pm.LKJCholeskyCov(name=r"$L$", eta=l_eta, n=m, sd_dist=f)
-          ch = pm.expand_packed_triangular(m, L, lower=True)
-          Gamma = tt.dot(ch, ch.T)
-          sd = tt.sqrt(tt.diag(Gamma))
-          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
-  
-      # determine variances and covariances of items
-      Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
-  
-      # place priors on observations
-      pm.MvNormal(name="$Y$", mu=mu, cov=Sigma, observed=items, shape=items.shape)
-  
-  
-  def main():
-  
-      # load the data
-      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
-  
-      # define items to keep
-      item_names = [
-          "visual",
-          "cubes",
-          "paper",
-          "flags",
-          "general",
-          "paragrap",
-          "sentence",
-          "wordc",
-          "wordm",
-          "addition",
-          "code",
-          "counting",
-          "straight",
-          "wordr",
-          "numberr",
-          "figurer",
-          "object",
-          "numberf",
-          "figurew",
-      ]
-  
-      # define the factor structure
-      factors = np.array(
-          [
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [1, 0, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 1, 0, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 1, 0],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-              [0, 0, 0, 1],
-          ]
-      )
-  
-      # iterate over the two schools
-      for school, sdf in df.groupby("school"):
-  
-          # define the path to save results
-          f = f"../data/{school}"
-  
-          # select the 19 commonly used variables
-          items = sdf[item_names]
-  
-          # for numerical convenience, standardize the data
-          items = (items - items.mean()) / items.std()
-  
-          with pm.Model():
-  
-              # construct the model
-              bcfa(items, factors)
-  
-              if not exists(f):
-  
-                  # sample and save
-                  trace = pm.sample(19000, tune=1000, chains=2)
-                  pm.save_trace(trace, f)
-                  pm.traceplot(trace, compact=True)
-                  rcParams["font.size"] = 14
-                  plt.savefig(f"{f}/traceplot.svg")
-  
-              else:
-  
-                  trace = pm.load_trace(f)
-  
-          # create a nice summary table
-          loadings = pd.DataFrame(
-              trace[r"$\Lambda$"].mean(axis=0).round(3),
-              index=[v.title() for v in item_names],
-              columns=["Spatial", "Verbal", "Speed", "Memory"],
-          )
-          loadings.to_csv(f"{f}/loadings.csv")
-          print(tabulate(loadings, tablefmt="pipe", headers="keys"))
-          correlations = pd.DataFrame(
-              trace[r"$\Psi$"].mean(axis=0).round(3),
-              index=["Spatial", "Verbal", "Speed", "Memory"],
-              columns=["Spatial", "Verbal", "Speed", "Memory"],
-          )
-          correlations.to_csv(f"{f}/factor_correlations.csv")
-          print("\n")
-          print(tabulate(correlations, tablefmt="pipe", headers="keys"))
-          correlations = pd.DataFrame(
-              trace[r"$\Omega$"].mean(axis=0).round(3),
-              index=item_names,
-              columns=item_names,
-          )
-          correlations.to_csv(f"{f}/item_correlations.csv")
   
   
   if __name__ == "__main__":
@@ -1720,6 +1795,134 @@ neals-funnel-a__py: |
   
   if __name__ == "__main__":
       main()
+make_my_bib__py: |
+  """Create the bibliography file my_papers.yml.
+  
+  """
+  
+  from Bio import Entrez
+  import re
+  
+  
+  def make_my_bib():
+      """Grab all my publications and format them into a YAML bibliography.
+  
+      """
+      Entrez.email = "your.email@example.com"
+      handle = Entrez.esearch(
+          db="pubmed", sort="date", retmax="200", retmode="xml", term="mathias sr[author]"
+      )
+      pmids = Entrez.read(handle)["IdList"]
+      extras = ["28480992", "28385874", "27744290"]
+      pmids += extras
+      pmids = set(pmids)
+      pmids = ",".join(pmids)
+      handle = Entrez.efetch(db="pubmed", retmode="xml", id=pmids)
+      papers = Entrez.read(handle)["PubmedArticle"]
+      data = []
+  
+      for paper in papers:
+  
+          article = paper["MedlineCitation"]["Article"]
+          journal = article["Journal"]
+          date = journal["JournalIssue"]["PubDate"]
+          year = date["Year"]
+          month = "00" if "Month" not in date else date["Month"]
+          if len(month) == 3:
+              month = dict(
+                  zip(
+                      [
+                          "Jan",
+                          "Feb",
+                          "Mar",
+                          "Apr",
+                          "May",
+                          "Jun",
+                          "Jul",
+                          "Aug",
+                          "Sep",
+                          "Oct",
+                          "Nov",
+                          "Dec",
+                      ],
+                      range(1, 13),
+                  )
+              )[month]
+          sort = year + "%02d" % int(month)
+          ids = paper["PubmedData"]["ArticleIdList"]
+  
+          authors = []
+          for _a in article["AuthorList"]:
+              if "LastName" in _a:
+                  a = _a["LastName"] + ", " + ". ".join(_a["Initials"]) + "."
+              else:
+                  a = _a["CollectiveName"].rstrip()
+              authors.append(a)
+          if len(authors) > 1:
+              authors[-1] = "& " + authors[-1]
+  
+          jt = journal["Title"].title().replace("Of The", "of the").replace("And", "and")
+          jt = jt.replace("Of", "of").replace(" (New York, N.Y. : 1991)", "")
+          jt = jt.split(" : ")[0]
+          jt = jt.replace(". ", ": ").replace("In ", "in ").replace(": Cb", "")
+          jt = jt.replace("Jama", "JAMA")
+  
+          ji = journal["JournalIssue"]
+          volume = None if "Volume" not in ji else ji["Volume"]
+          issue = None if "Issue" not in ji else ji["Issue"]
+  
+          title = article["ArticleTitle"]
+          rtn = re.split("([:] *)", title)
+          title = "".join([i.capitalize() for i in rtn])
+          keep = ["BP1-BP2", "African", "American", "Americans", "MRI", "QTL", "ENIGMA"]
+          title = " ".join(s.upper() if s.upper() in keep else s for s in title.split())
+  
+          k = "Pagination"
+          first_page = None if k not in article else article[k]["MedlinePgn"]
+          last_page = None
+          if first_page:
+              first_page, *last_page = first_page.split("-")
+  
+          dic = {
+              "authors": ", ".join(authors),
+              "title": title if title[-1] != "." else title[:-1],
+              "journal": jt,
+              "year": year,
+              "sort": sort,
+              "pmid": str(paper["MedlineCitation"]["PMID"]),
+              "doi": [str(i) for i in ids if str(i)[:3] == "10."][0].lower(),
+          }
+          dic["id"] = dic["pmid"]
+  
+          if volume:
+              dic["volume"] = volume
+          if issue:
+              dic["issue"] = issue
+          if first_page:
+              dic["first_page"] = first_page
+          if last_page:
+              dic["last_page"] = last_page[0]
+  
+          if int(year) >= 2010 and "Correction:" not in title:
+  
+              data.append(dic)
+  
+      with open("../../_data/my_papers.yaml", "w") as fw:
+  
+          fw.write("my_papers:\n")
+  
+          for paper in data:
+  
+              fw.write(f"""\n - id: "{paper['id']}"\n""")
+              del paper["id"]
+              [fw.write(f"""   {k}: "{v}"\n""") for k, v in paper.items()]
+  
+          s = "".join(open("../../_data/my_papers_manual.yaml").readlines()[1:])
+          fw.write(s)
+  
+  
+  if __name__ == "__main__":
+      make_my_bib()
 ddm-fig__py: |
   """Create a DDM figure.
   
@@ -1972,6 +2175,228 @@ play_tone__py: |
       tone = np.sin(2 * np.pi * 440 * np.arange(0, 1, 1 / 44100))  # generate the tone
       sd.play(tone, 44100)  # play it
       sd.wait()  # wait for the tone to finish
+bcfa_long__py: |
+  """Example of Bayesian confirmatory factor analysis in PyMC3.
+  
+  """
+  import numpy as np
+  import pandas as pd
+  import pymc3 as pm
+  import theano.tensor as tt
+  import matplotlib.pyplot as plt
+  from os.path import exists
+  
+  from matplotlib import rcParams
+  from pymc3.math import matrix_dot
+  from tabulate import tabulate
+  
+  
+  def bcfa(
+      items,
+      factors,
+      beta="estimate",
+      nu_sd=2.5,
+      alpha_sd=2.5,
+      d_beta=2.5,
+      corr_items=True,
+      corr_factors=True,
+      g_eta=100,
+      l_eta=1,
+      beta_beta=1,
+  ):
+      r"""Constructs a Bayesian CFA model.
+  
+      Args:
+          items (np.array): Array of item data.
+          factors (np.array): Factor design matrix.
+          beta (:obj:`float` or `'estimate'`, optional): Standard deviation of normal
+              prior on cross loadings. If `'estimate'`,  beta is estimated from the data.
+          nu_sd (:obj:`float`, optional): Standard deviation of normal prior on item
+              intercepts.
+          alpha_sd (:obj:`float`, optional): Standard deviation of normal prior on factor
+              intercepts.
+          d_beta (:obj:`float`, optional): Scale parameter of half-Cauchy prior on factor
+              standard deviation.
+          corr_factors (:obj:`bool`, optional): Allow correlated factors.
+          corr_items (:obj:`bool`, optional): Allow correlated items.
+          g_eta (:obj:`float`, optional): Shape parameter of LKJ prior on residual item
+              correlation matrix.
+          l_eta (:obj:`float`, optional): Shape parameter of LKJ prior on factor
+              correlation matrix.
+          beta_beta (:obj:`float`, optional): Beta parameter of beta prior on beta.
+  
+      Returns:
+  
+          None: Places model in context.
+  
+      """
+      # get numbers of cases, items, and factors
+      n, p = items.shape
+      p_, m = factors.shape
+      assert p == p_, "Mismatch between data and factor-loading matrices"
+  
+      # place priors on item and factor intercepts
+      nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=items.mean(axis=0))
+      alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=alpha_sd, shape=m, testval=np.zeros(m))
+  
+      # place priors on unscaled factor loadings
+      Phi = pm.Normal(name=r"$\Phi$", mu=0, sd=1, shape=factors.shape, testval=factors)
+  
+      # create masking matrix for factor loadings
+      if isinstance(beta, str):
+          assert beta == "estimate", f"Don't know what to do with '{beta}'"
+          beta = pm.Beta(name=r"$\beta$", alpha=1, beta=beta_beta, testval=0.1)
+      M = (1 - np.asarray(factors)) * beta + np.asarray(factors)
+  
+      # create scaled factor loadings
+      Lambda = pm.Deterministic(r"$\Lambda$", Phi * M)
+  
+      # determine item means
+      mu = nu + matrix_dot(Lambda, alpha)
+  
+      # place priors on item standard deviations
+      D = pm.HalfCauchy(name=r"$D$", beta=d_beta, shape=p, testval=items.std(axis=0))
+  
+      # place priors on item correlations
+      f = pm.Lognormal.dist(sd=0.25)
+      if not corr_items:
+          Omega = np.eye(p)
+      else:
+          G = pm.LKJCholeskyCov(name=r"$G$", eta=g_eta, n=p, sd_dist=f)
+          ch1 = pm.expand_packed_triangular(p, G, lower=True)
+          K = tt.dot(ch1, ch1.T)
+          sd1 = tt.sqrt(tt.diag(K))
+          Omega = pm.Deterministic(r"$\Omega$", K / sd1[:, None] / sd1[None, :])
+  
+      # determine residual item variances and covariances
+      Theta = pm.Deterministic(r"$\Theta$", D[None, :] * Omega * D[:, None])
+  
+      # place priors on factor correlations
+      if not corr_factors:
+          Psi = np.eye(m)
+      else:
+          L = pm.LKJCholeskyCov(name=r"$L$", eta=l_eta, n=m, sd_dist=f)
+          ch = pm.expand_packed_triangular(m, L, lower=True)
+          Gamma = tt.dot(ch, ch.T)
+          sd = tt.sqrt(tt.diag(Gamma))
+          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+  
+      # determine variances and covariances of items
+      Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
+  
+      # place priors on observations
+      pm.MvNormal(name="$Y$", mu=mu, cov=Sigma, observed=items, shape=items.shape)
+  
+  
+  def main():
+  
+      # load the data
+      df = pd.read_csv("../../assets/data/HS.csv", index_col=0)
+  
+      # define items to keep
+      item_names = [
+          "visual",
+          "cubes",
+          "paper",
+          "flags",
+          "general",
+          "paragrap",
+          "sentence",
+          "wordc",
+          "wordm",
+          "addition",
+          "code",
+          "counting",
+          "straight",
+          "wordr",
+          "numberr",
+          "figurer",
+          "object",
+          "numberf",
+          "figurew",
+      ]
+  
+      # define the factor structure
+      factors = np.array(
+          [
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [1, 0, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 1, 0],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+              [0, 0, 0, 1],
+          ]
+      )
+  
+      # iterate over the two schools
+      for school, sdf in df.groupby("school"):
+  
+          # define the path to save results
+          f = f"../data/{school}"
+  
+          # select the 19 commonly used variables
+          items = sdf[item_names]
+  
+          # for numerical convenience, standardize the data
+          items = (items - items.mean()) / items.std()
+  
+          with pm.Model():
+  
+              # construct the model
+              bcfa(items, factors)
+  
+              if not exists(f):
+  
+                  # sample and save
+                  trace = pm.sample(19000, tune=1000, chains=2)
+                  pm.save_trace(trace, f)
+                  pm.traceplot(trace, compact=True)
+                  rcParams["font.size"] = 14
+                  plt.savefig(f"{f}/traceplot.svg")
+  
+              else:
+  
+                  trace = pm.load_trace(f)
+  
+          # create a nice summary table
+          loadings = pd.DataFrame(
+              trace[r"$\Lambda$"].mean(axis=0).round(3),
+              index=[v.title() for v in item_names],
+              columns=["Spatial", "Verbal", "Speed", "Memory"],
+          )
+          loadings.to_csv(f"{f}/loadings.csv")
+          print(tabulate(loadings, tablefmt="pipe", headers="keys"))
+          correlations = pd.DataFrame(
+              trace[r"$\Psi$"].mean(axis=0).round(3),
+              index=["Spatial", "Verbal", "Speed", "Memory"],
+              columns=["Spatial", "Verbal", "Speed", "Memory"],
+          )
+          correlations.to_csv(f"{f}/factor_correlations.csv")
+          print("\n")
+          print(tabulate(correlations, tablefmt="pipe", headers="keys"))
+          correlations = pd.DataFrame(
+              trace[r"$\Omega$"].mean(axis=0).round(3),
+              index=item_names,
+              columns=item_names,
+          )
+          correlations.to_csv(f"{f}/item_correlations.csv")
+  
+  
+  if __name__ == "__main__":
+      main()
 noise-tone-plus-noise__py: |
   """Create figurea to illustrate noise and noise plus a pure tone.
   

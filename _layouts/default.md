@@ -16,8 +16,8 @@
         <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
         <nav>
           <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/writing">Writing</a></li>
+            <li><a href="/about">About</a></li>|
+            <li><a href="/writing">Writing</a></li>|
             <li><a href="/publications">Publications</a></li>
           </ul>
         </nav>
@@ -27,16 +27,13 @@
       <article>
         {{ content }}
       </article>
+      <hr>
       <footer>
-        <hr>
-        <h3>Disclaimer</h3>
         <p>Opinions expressed here do not necessarily reflect those of my employer or
         colleagues. Distributed under an MIT license. Find the source code
         <a href="https://github.com/sammosummo/sammosummo.github.io">here</a>. Private
-        comments can be made via email
-        (<a href="mailto:{{ site.email }}" class="break">{{ site.email }}</a>).</p>
-          </li>
-          </ul>
+        comments can be made via <a href="mailto:{{ site.email }}" class="break">email</a>.</p>
+          
       </footer>
     </div>
   </body>

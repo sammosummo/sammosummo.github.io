@@ -9,9 +9,10 @@ layout: default
   {% include mathjax.html %}
 {% endif %}
 
-<h2>{{ page.title }}</h2>
+<h1 class="posttitle">{{ page.title }}</h1>
 
 {{ content }}
+<hr>
 {% if page.include_references %}
   {% include references.html %}
 {% endif %}
@@ -31,9 +32,8 @@ layout: default
 <h2>Tags</h2>{% for tag in sorted %}🏷️ <a href="/writing#{{ tag }}">{{ tag }}</a> {% endfor %}
 {% endif %}
 
-
 {% if page.has_comments %}
-<hr>
+
 <h2>Comments</h2>
   <div id="commento"></div>
   <script async src="https://cdn.commento.io/js/commento.js"></script>

@@ -57,7 +57,13 @@ body {
 }
 
 .refs {
-  font-size:0.9em;
+  font-size: 1em;
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.posttitle {
+  font-size: 1.8em;
 }
 
 @media (min-width: 580px) {
@@ -117,6 +123,9 @@ header {
   header h1 {
     text-align: center;
   }
+  .posttitle{
+    text-align: center;
+  }
 }
 
 header ul, header li {
@@ -161,7 +170,7 @@ header ul, header li {
 }
 
 footer {
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 table {

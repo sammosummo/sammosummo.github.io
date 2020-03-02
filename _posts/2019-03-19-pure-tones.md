@@ -156,7 +156,7 @@ use a different value of $$a_0$$.
 ## Python function
 
 In a moment, we will write a Python function that creates digital representations of pure
-tones with specified durations, frequencies, phases, and levels by sampling from equation
+tones with specified durations, frequencies, phases, and levels by sampling from Eq.
 $$\eqref{eq:one}$$ at regular time intervals. But first we need to choose a reference
 amplitude and a sample rate.
 

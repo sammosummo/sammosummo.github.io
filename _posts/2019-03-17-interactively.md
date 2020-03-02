@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Playing a tone interactively using Python
+title: Play a tone interactively with Python
 date: 2019-03-17 
 has_code: true
 has_comments: true

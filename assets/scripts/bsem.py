@@ -183,13 +183,15 @@ def main():
         ]
     )
 
-    paths = np.array([
-        [0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 0],
-    ])
+    paths = np.array(
+        [
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0],
+        ]
+    )
 
     # iterate over the two schools
     for school, sdf in df.groupby("school"):
@@ -211,7 +213,7 @@ def main():
             if not exists(f):
 
                 # sample and save
-                trace = pm.sample(chains=2) #19000, tune=1000,
+                trace = pm.sample(chains=2)  # 19000, tune=1000,
                 pm.save_trace(trace, f)
                 pm.traceplot(trace, compact=True)
                 rcParams["font.size"] = 14
