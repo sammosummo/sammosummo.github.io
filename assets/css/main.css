@@ -64,6 +64,7 @@ body {
 
 .emoji {
   height: 1em;
+  width: 1em;
   display: inline;
   padding: 0px 0px;
 }

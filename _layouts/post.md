@@ -11,6 +11,12 @@ layout: default
 
 <h1 class="posttitle">{{ page.title }}</h1>
 
+{% if page.tags %}
+{% assign sorted = page.tags | sort %}
+{% assign last = sorted | last %}
+<b>Tags</b>: {% for tag in sorted %}<a href="/tags#{{ tag }}">{% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %} {{ tag }}</a>{% if tag == last %}{% else %} | {% endif %}{% endfor %}
+{% endif %}
+
 {{ content }}
 <hr>
 {% if page.include_references %}
@@ -27,10 +33,6 @@ layout: default
   </ul>
 {% endif %}
 
-{% if page.tags %}
-{% assign sorted = page.tags | sort %}
-<b>Tags</b>: {% for tag in sorted %}<a href="/tags#{{ tag }}">{{ tag }} {% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %}</a> {% endfor %}
-{% endif %}
 <br>
 
 {% if page.has_comments %}

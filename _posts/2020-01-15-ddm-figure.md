@@ -14,11 +14,9 @@ references:
 - Wiecki2013a
 tags:
 - python
-- psychophysics
 - reaction-times
 - matplotlib
 - visualization
-- drift-diffusion model
 - hddm
 title: Drift-diffusion plots
 ---
