@@ -16,7 +16,7 @@ tags:
 - neuroimaging
 - cognition
 - open-data
-- publication
+- news
 title: Two new papers
 ---
 

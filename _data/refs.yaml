@@ -1,3 +1,17 @@
+Wixted2020a:
+   authors: "Wixted, J. T."
+   year: "2020"
+   title: "The forgotten history of signal detection theory"
+   journal: "Journal of Experimental Psychology: Learning, Memory, and Cognition"
+   volume: "46"
+   issue: "2"
+   doi: "10.1037/xlm0000732"
+   first_page: "201"
+   last_page: "233"
+   citep: "[(Wixted, 2020)](#Wixted2020a)"
+   citenp: "[Wixted, 2020](#Wixted2020a)"
+   citet: "[Wixted (2020)](#Wixted2020a)"
+
 Kolmogorov2018a:
    authors: "Kolmogorov, A. N., Bharucha-Reid, A. T., & Morrison, N."
    year: "2018"
@@ -425,20 +439,6 @@ Wickens2002a:
    citep: "[(Wickens, 2002)](#Wickens2002a)"
    citenp: "[Wickens, 2002](#Wickens2002a)"
    citet: "[Wickens (2002)](#Wickens2002a)"
-
-Wixted2020a:
-   authors: "Wixted, J. T."
-   year: "2020"
-   title: "The forgotten history of signal detection theory."
-   journal: "Journal of Experimental Psychology: Learning, Memory, and Cognition"
-   volume: "46"
-   issue: "2"
-   doi: "10.1037/xlm0000732"
-   first_page: "201"
-   last_page: "233"
-   citep: "[(Wixted, 2020)](#Wixted2020a)"
-   citenp: "[Wixted, 2020](#Wixted2020a)"
-   citet: "[Wixted (2020)](#Wixted2020a)"
 
 Peterson1954a:
    authors: "Peterson, W., Birdsall, T., & Fox, W."

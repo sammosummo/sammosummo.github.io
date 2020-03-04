@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg843"
+   version="1.1"
+   height="1000"
+   width="1000">
+  <defs
+     id="defs847" />
+  <metadata
+     id="metadata833">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:creator>art designer at PLoS, modified by Wikipedia users Nina, Beao, JakobVoss, and AnonMoos</dc:creator>
+        <dc:description>Open Access logo, converted into svg, designed by PLoS. This version with transparent background.</dc:description>
+        <dc:source>http://commons.wikimedia.org/wiki/File:Open_Access_logo_PLoS_white.svg</dc:source>
+        <dc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/3.0/" />
+        <cc:attributionName>art designer at PLoS, modified by Wikipedia users Nina, Beao, JakobVoss, and AnonMoos</cc:attributionName>
+        <cc:attributionURL>http://www.plos.org/</cc:attributionURL>
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(177.08333,3.4722222)"
+     id="g839"
+     fill="none"
+     stroke-width="104.764"
+     stroke="#f68212">
+    <path
+       id="path835"
+       d="m 111.387,308.135 v -35.727 a 209.21,209.214 0 0 1 418.42,0 v 258.426" />
+    <circle
+       id="circle837"
+       r="256.08301"
+       cy="680.729"
+       cx="320.004" />
+  </g>
+  <circle
+     id="circle841"
+     r="86.428703"
+     cy="685.13123"
+     cx="498.09335"
+     fill="#f68212" />
+</svg>

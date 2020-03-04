@@ -127,12 +127,20 @@ header {
 }
 
 @media (max-width: 580px) {
-  header h1 {
+  header h1, nav {
     text-align: center;
   }
   .posttitle{
     text-align: center;
   }
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+  body li {
+    margin-left: 1em;
+  }
+
 }
 
 header ul, header li {

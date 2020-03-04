@@ -15,11 +15,9 @@
         <img id="logo" src="/assets/images/logo-big-cropped.png" />
         <h1><a id="title" href="/">The Cracked Bassoon</a></h1>
         <nav>
-          <ul>
-            <li><a href="/about">About</a></li>|
-            <li><a href="/writing">Writing</a></li>|
-            <li><a href="/publications">Publications</a></li>
-          </ul>
+          <a href="/about">About</a> |
+          <a href="/writing">Writing</a> |
+          <a href="/publications">Publications</a>
         </nav>
         <p></p>
         <hr>

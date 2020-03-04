@@ -21,7 +21,7 @@ probably not. I wouldn’t stick around if I were you.
 Fair warning: because none of what appears on this website has been peer-reviewed, it might be pure
 nonsense! <a href="writing">Click here for the archive</a>.
 
-<h2>Latest peer-reviewed publication</h2>
+<h2>Latest publication</h2>
 
 {% assign paper = site.data.my_papers | sort | last %}
 {% include citation.html %}

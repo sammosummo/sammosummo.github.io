@@ -1,12 +1,12 @@
-open-data: 📂
+open-data: '<img src="/assets/emojis/oa.svg" class="emoji">'
 python: 🐍
 cognition: '<img src="/assets/emojis/cog.png" class="emoji">'
 neuroimaging: 🧠
 genetics: 🧬
 hearing: 👂
-vision: 👀
-statistics: 🧮
-publication: 🎉
+jasa: '<img src="/assets/emojis/asa.png" class="emoji">'
+vision: '<img src="/assets/emojis/gabor.png" class="emoji">'
+news: 🎉
 visualization: 📊
 cocktails: 🍸
 books: 📚
