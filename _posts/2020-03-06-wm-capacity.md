@@ -128,8 +128,9 @@ where
 
 $$ q=\min\left(1,\frac{k}{M}\right) $$
 
-### Transformations
+### Hierarchical estimation
 
+Suppose that we have data from several observers and we want to estimate $$ k $$, $$ g $$, and $$ z $$ for each of them.
 It is generally a good idea to do inference on normally distributed variables. However, $$ k $$ cannot be normal, because
 negative values of $$ k $$ are impossible. Similarly, $$ g $$ and $$ z $$ cannot be normal either, because they are probabilities
 and must fall between 0 and 1. Therefore, we apply these transformations:
@@ -139,11 +140,8 @@ $$ k=\max\left(\kappa, 0\right)\\ g=\textrm{logistic}\left(\gamma\right)\\ z=\te
 The new Greek-lettered variables can take any values. {{ site.data.refs.Morey2011b.citet }} recommends the $$\max$$ transformation
 for $$ k $$, rather than something like $$ \exp $$, because 0 is a meaningful value of $$ k $$.
 
-### Hierarchical estimation
-
-Suppose that we have data from several observers and we want to estimate $$ \k $$, $$ \g $$, and $$ z $$ for each of them.
-We'll estimate these parameters hierarchically in order to produce partial pooling, and we'll use a non-centered parameterization
-in order to avoid [funneling](funneling):
+Next we'll estimate these parameters hierarchically in order to produce partial pooling, and we'll use a non-centered
+parameterization in order to avoid [funneling](funneling):
 
 $$ \kappa_i=\mu_{(\kappa)}+\delta_{(\kappa)_i}\sigma_{(\kappa)}\\
 \gamma_i=\mu_{(\gamma)}+\delta_{(\gamma)_i}\sigma_{(\gamma)}\\
@@ -164,16 +162,20 @@ $$ \mu_{(\kappa)}, \mu_{(\gamma)}, \mu_{(\zeta)} \sim \mathrm{Cauchy}\left(0, 5\
 
 Now we will apply this model to the [data set]((https://raw.githubusercontent.com/PerceptionCognitionLab/data0/master/wmPNAS2008/lk2clean.csv))
 provided by {{site.data.refs.Rouder2008a.citet}}. The following script will download the data, construct the model, sample
-from its joint posterior and produce a figure.
+from its joint posterior, and produce a figure.
+
+```python
+{{ site.data.code.wm-capacity__py }}
+```
+
+![](/assets/images/wm-cap.png)
+*Posterior traces under the model.*
 
 ## Next steps
 
-As mentioned above, this model does not allow us to look for factors that might affect $$ \k $$, $$ \g $$, and $$ z $$.
-Such factors could be related to the experiment design or the observer. I'll do this in a future post.
-
-```python
-{{ site.data.code.wmm__py }}
-```
+As mentioned above, this model does not allow us to look for factors that might affect $$ k $$, $$ g $$, and $$ z $$,
+such as different conditions in an experiment, or observer-related effects, such as age. This can be achieved by placing
+linear models on the group-level parameters. I'll do this in a future post.
 
 ## Shameless plug
 
