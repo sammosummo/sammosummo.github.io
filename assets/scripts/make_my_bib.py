@@ -15,7 +15,7 @@ def make_my_bib():
         db="pubmed", sort="date", retmax="200", retmode="xml", term="mathias sr[author]"
     )
     pmids = Entrez.read(handle)["IdList"]
-    extras = ["28480992", "28385874", "27744290"]
+    extras = ["28480992", "28385874", "27744290", "32170019"]
     pmids += extras
     pmids = set(pmids)
     pmids = ",".join(pmids)
@@ -65,6 +65,7 @@ def make_my_bib():
 
         jt = journal["Title"].title().replace("Of The", "of the").replace("And", "and")
         jt = jt.replace("Of", "of").replace(" (New York, N.Y. : 1991)", "")
+        jt = jt.replace(" (New York, N.Y.)", "")
         jt = jt.split(" : ")[0]
         jt = jt.replace(". ", ": ").replace("In ", "in ").replace(": Cb", "")
         jt = jt.replace("Jama", "JAMA")

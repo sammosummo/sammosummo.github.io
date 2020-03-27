@@ -32,6 +32,6 @@ def sinusoid(d, f, phi, l, a0=a0, sr=sr):
 
 if __name__ == "__main__":
 
-    tone = sinusoid(1, 1000, 0, 60)
+    tone = sinusoid(1, 400, 0, 60)
     sd.play(tone, 44100)
     sd.wait()

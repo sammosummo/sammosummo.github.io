@@ -1394,7 +1394,7 @@ pure-tones__py: |
   
   if __name__ == "__main__":
   
-      tone = sinusoid(1, 1000, 0, 60)
+      tone = sinusoid(1, 400, 0, 60)
       sd.play(tone, 44100)
       sd.wait()
 neals-funnel-c__py: |
@@ -1944,7 +1944,7 @@ make_my_bib__py: |
           db="pubmed", sort="date", retmax="200", retmode="xml", term="mathias sr[author]"
       )
       pmids = Entrez.read(handle)["IdList"]
-      extras = ["28480992", "28385874", "27744290"]
+      extras = ["28480992", "28385874", "27744290", "32170019"]
       pmids += extras
       pmids = set(pmids)
       pmids = ",".join(pmids)
@@ -1994,6 +1994,7 @@ make_my_bib__py: |
   
           jt = journal["Title"].title().replace("Of The", "of the").replace("And", "and")
           jt = jt.replace("Of", "of").replace(" (New York, N.Y. : 1991)", "")
+          jt = jt.replace(" (New York, N.Y.)", "")
           jt = jt.split(" : ")[0]
           jt = jt.replace(". ", ": ").replace("In ", "in ").replace(": Cb", "")
           jt = jt.replace("Jama", "JAMA")
