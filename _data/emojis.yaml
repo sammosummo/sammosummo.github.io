@@ -1,22 +1,23 @@
 open-data: '<img src="/assets/emojis/oa.svg" class="emoji">'
-python: 🐍
+python: '<img src="/assets/emojis/python.svg" class="emoji">'
 cognition: '<img src="/assets/emojis/cog.png" class="emoji">'
-neuroimaging: 🧠
-genetics: 🧬
-hearing: 👂
+neuroimaging: '<img src="/assets/emojis/brain.png" class="emoji">'
+genetics: '<img src="/assets/emojis/dna.svg" class="emoji">'
+hearing: '<img src="/assets/emojis/ear.svg" class="emoji">'
 jasa: '<img src="/assets/emojis/asa.png" class="emoji">'
 vision: '<img src="/assets/emojis/gabor.png" class="emoji">'
-news: 🎉
+news: '<img src="/assets/emojis/birthday.svg" class="emoji">'
 visualization: 📊
 cocktails: 🍸
-books: 📚
+books: '<img src="/assets/emojis/open-book.svg" class="emoji">'
 bayesian: '<img src="/assets/emojis/bayesian.png" class="emoji">'
 memory: '<img src="/assets/emojis/memory.png" class="emoji">'
 hddm: '<img src="/assets/emojis/hddm.png" class="emoji">'
 jekyll: '<img src="/assets/emojis/jekyll.png" class="emoji">'
-latex: '<img src="/assets/emojis/LaTeX_logo.svg" class="emoji">'
-liquid: 💧
+latex: '<img src="/assets/emojis/font.svg" class="emoji">'
+liquid: '<img src="/assets/emojis/water.svg" class="emoji">'
 matplotlib: '<img src="/assets/emojis/Matplotlib_icon.svg" class="emoji">'
 pymc3: '<img src="/assets/emojis/pymc3.svg" class="emoji">'
-reaction-times: 🕹️
+reaction-times: '<img src="/assets/emojis/joystick.svg" class="emoji">'
 statistics: '<img src="/assets/emojis/Fisher_iris_versicolor_sepalwidth.svg" class="emoji">'
+qt: '<img src="/assets/emojis/qt.svg" class="emoji">'

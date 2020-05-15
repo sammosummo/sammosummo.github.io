@@ -17,11 +17,11 @@ def bsem(
     items,
     factors,
     paths,
-    beta="estimate",
+    beta=0,
     nu_sd=2.5,
     alpha_sd=2.5,
     d_beta=2.5,
-    corr_items=True,
+    corr_items=False,
     corr_factors=False,
     g_eta=100,
     l_eta=1,
@@ -71,6 +71,7 @@ def bsem(
     # place priors on paths
     B = tt.zeros(paths.shape)
     npths = np.sum(paths, axis=None)
+    print(npths)
     if npths > 0:
         b = pm.Normal(name=r"$b$", mu=0, sd=1, shape=npths, testval=np.ones(npths))
         # create the paths matrix
@@ -80,7 +81,7 @@ def bsem(
                 if paths[i, j] == 1:
                     B = tt.set_subtensor(B[i, j], b[k])
                     k += 1
-    B = pm.Deterministic("$B$", B)
+    Gamma = pm.Deterministic("$\Gamma$", B)
 
     # create masking matrix for factor loadings
     if isinstance(beta, str):
@@ -122,8 +123,8 @@ def bsem(
         Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
 
     # determine variances and covariances of items
-    A = matrix_inverse(I - B)
-    C = matrix_inverse(I - B.T)
+    A = matrix_inverse(I - Gamma)
+    C = matrix_inverse(I - Gamma.T)
     Sigma = matrix_dot(Lambda, A, Psi, C, Lambda.T) + Theta
 
     # place priors on observations
@@ -197,7 +198,7 @@ def main():
     for school, sdf in df.groupby("school"):
 
         # define the path to save results
-        f = f"../data/{school}"
+        f = f"../data/BSEM examples/{school}"
 
         # select the 19 commonly used variables
         items = sdf[item_names]
@@ -215,13 +216,14 @@ def main():
                 # sample and save
                 trace = pm.sample(chains=2)  # 19000, tune=1000,
                 pm.save_trace(trace, f)
-                pm.traceplot(trace, compact=True)
-                rcParams["font.size"] = 14
-                plt.savefig(f"{f}/traceplot.png")
 
             else:
 
                 trace = pm.load_trace(f)
+
+        pm.traceplot(trace, compact=True)
+        rcParams["font.size"] = 14
+        plt.savefig(f"{f}/traceplot.png")
 
         # create a nice summary table
         loadings = pd.DataFrame(
@@ -230,27 +232,29 @@ def main():
             columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
         )
         loadings.to_csv(f"{f}/loadings.csv")
-
-        # correlations = pd.DataFrame(
-        #     trace[r"$\Psi$"].mean(axis=0).round(3),
-        #     index=["Spatial", "Verbal", "Speed", "Memory", "g"],
-        #     columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
-        # )
-        # correlations.to_csv(f"{f}/factor_correlations.csv")
-
-        correlations = pd.DataFrame(
-            trace[r"$B$"].mean(axis=0).round(3),
+        print(tabulate(loadings, tablefmt="pipe", headers="keys"))
+        #
+        # # correlations = pd.DataFrame(
+        # #     trace[r"$\Psi$"].mean(axis=0).round(3),
+        # #     index=["Spatial", "Verbal", "Speed", "Memory", "g"],
+        # #     columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
+        # # )
+        # # correlations.to_csv(f"{f}/factor_correlations.csv")
+        #
+        _paths = pd.DataFrame(
+            trace[r"$\Gamma$"].mean(axis=0).round(3),
             index=["Spatial", "Verbal", "Speed", "Memory", "g"],
             columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
         )
-        correlations.to_csv(f"{f}/factor_paths.csv")
-
-        correlations = pd.DataFrame(
-            trace[r"$\Omega$"].mean(axis=0).round(3),
-            index=item_names,
-            columns=item_names,
-        )
-        correlations.to_csv(f"{f}/item_correlations.csv")
+        _paths.to_csv(f"{f}/factor_paths.csv")
+        print(tabulate(_paths, tablefmt="pipe", headers="keys"))
+        #
+        # correlations = pd.DataFrame(
+        #     trace[r"$\Omega$"].mean(axis=0).round(3),
+        #     index=item_names,
+        #     columns=item_names,
+        # )
+        # correlations.to_csv(f"{f}/item_correlations.csv")
 
 
 if __name__ == "__main__":

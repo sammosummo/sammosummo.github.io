@@ -6,7 +6,6 @@ layout: post
 tags:
 - visualization
 - python
-- matplotlib
 title: Partially filled histograms
 ---
 Here is a recipe for plotting a histogram with its bars partially filled and partially

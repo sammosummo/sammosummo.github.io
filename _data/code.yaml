@@ -145,11 +145,11 @@ bsem__py: |
       items,
       factors,
       paths,
-      beta="estimate",
+      beta=0,
       nu_sd=2.5,
       alpha_sd=2.5,
       d_beta=2.5,
-      corr_items=True,
+      corr_items=False,
       corr_factors=False,
       g_eta=100,
       l_eta=1,
@@ -199,6 +199,7 @@ bsem__py: |
       # place priors on paths
       B = tt.zeros(paths.shape)
       npths = np.sum(paths, axis=None)
+      print(npths)
       if npths > 0:
           b = pm.Normal(name=r"$b$", mu=0, sd=1, shape=npths, testval=np.ones(npths))
           # create the paths matrix
@@ -208,7 +209,7 @@ bsem__py: |
                   if paths[i, j] == 1:
                       B = tt.set_subtensor(B[i, j], b[k])
                       k += 1
-      B = pm.Deterministic("$B$", B)
+      Gamma = pm.Deterministic("$\Gamma$", B)
   
       # create masking matrix for factor loadings
       if isinstance(beta, str):
@@ -250,8 +251,8 @@ bsem__py: |
           Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
   
       # determine variances and covariances of items
-      A = matrix_inverse(I - B)
-      C = matrix_inverse(I - B.T)
+      A = matrix_inverse(I - Gamma)
+      C = matrix_inverse(I - Gamma.T)
       Sigma = matrix_dot(Lambda, A, Psi, C, Lambda.T) + Theta
   
       # place priors on observations
@@ -325,7 +326,7 @@ bsem__py: |
       for school, sdf in df.groupby("school"):
   
           # define the path to save results
-          f = f"../data/{school}"
+          f = f"../data/BSEM examples/{school}"
   
           # select the 19 commonly used variables
           items = sdf[item_names]
@@ -343,13 +344,14 @@ bsem__py: |
                   # sample and save
                   trace = pm.sample(chains=2)  # 19000, tune=1000,
                   pm.save_trace(trace, f)
-                  pm.traceplot(trace, compact=True)
-                  rcParams["font.size"] = 14
-                  plt.savefig(f"{f}/traceplot.png")
   
               else:
   
                   trace = pm.load_trace(f)
+  
+          pm.traceplot(trace, compact=True)
+          rcParams["font.size"] = 14
+          plt.savefig(f"{f}/traceplot.png")
   
           # create a nice summary table
           loadings = pd.DataFrame(
@@ -358,27 +360,29 @@ bsem__py: |
               columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
           )
           loadings.to_csv(f"{f}/loadings.csv")
-  
-          # correlations = pd.DataFrame(
-          #     trace[r"$\Psi$"].mean(axis=0).round(3),
-          #     index=["Spatial", "Verbal", "Speed", "Memory", "g"],
-          #     columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
-          # )
-          # correlations.to_csv(f"{f}/factor_correlations.csv")
-  
-          correlations = pd.DataFrame(
-              trace[r"$B$"].mean(axis=0).round(3),
+          print(tabulate(loadings, tablefmt="pipe", headers="keys"))
+          #
+          # # correlations = pd.DataFrame(
+          # #     trace[r"$\Psi$"].mean(axis=0).round(3),
+          # #     index=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          # #     columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
+          # # )
+          # # correlations.to_csv(f"{f}/factor_correlations.csv")
+          #
+          _paths = pd.DataFrame(
+              trace[r"$\Gamma$"].mean(axis=0).round(3),
               index=["Spatial", "Verbal", "Speed", "Memory", "g"],
               columns=["Spatial", "Verbal", "Speed", "Memory", "g"],
           )
-          correlations.to_csv(f"{f}/factor_paths.csv")
-  
-          correlations = pd.DataFrame(
-              trace[r"$\Omega$"].mean(axis=0).round(3),
-              index=item_names,
-              columns=item_names,
-          )
-          correlations.to_csv(f"{f}/item_correlations.csv")
+          _paths.to_csv(f"{f}/factor_paths.csv")
+          print(tabulate(_paths, tablefmt="pipe", headers="keys"))
+          #
+          # correlations = pd.DataFrame(
+          #     trace[r"$\Omega$"].mean(axis=0).round(3),
+          #     index=item_names,
+          #     columns=item_names,
+          # )
+          # correlations.to_csv(f"{f}/item_correlations.csv")
   
   
   if __name__ == "__main__":
@@ -559,9 +563,9 @@ bcfa__py: |
       else:
           L = pm.LKJCholeskyCov(name=r"$L$", eta=l_eta, n=m, sd_dist=f)
           ch = pm.expand_packed_triangular(m, L, lower=True)
-          Gamma = tt.dot(ch, ch.T)
-          sd = tt.sqrt(tt.diag(Gamma))
-          Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+          _psi = tt.dot(ch, ch.T)
+          sd = tt.sqrt(tt.diag(_psi))
+          Psi = pm.Deterministic(r"$\Psi$", _psi / sd[:, None] / sd[None, :])
   
       # determine variances and covariances of items
       Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
@@ -627,7 +631,7 @@ bcfa__py: |
       for school, sdf in df.groupby("school"):
   
           # define the path to save results
-          f = f"../data/{school}"
+          f = f"../data/BCFA examples/{school}"
   
           # select the 19 commonly used variables
           items = sdf[item_names]
@@ -780,6 +784,89 @@ neals-funnel-b__py: |
   
   if __name__ == "__main__":
       main()
+audiobooks__py: |
+  import json
+  import urllib
+  import yaml
+  import re
+  from bs4 import BeautifulSoup
+  import pandas as pd
+  from tqdm import tqdm
+  
+  
+  def get_audioboook_details(url):
+      """Return dictionary containing audiobook details from audible.
+  
+      """
+      html = urllib.request.urlopen(url).read()
+      soup = BeautifulSoup(html, features="html.parser")
+      jsn = soup.find_all("script", type="application/ld+json")[1]
+      data = json.loads(jsn.contents[0])[0]
+      m = data["duration"].lstrip("PT").split("H")[1].split("M")[0]
+      if "abridged" not in data:
+          data["abridged"] = "false"
+      return {
+          "abridged": data["abridged"] == "true",
+          "audible_popularity": int(data["aggregateRating"]["ratingCount"]),
+          "audible_score": float(data["aggregateRating"]["ratingValue"]),
+          "year": int(data["datePublished"].split("-")[0]),
+          "month": int(data["datePublished"].split("-")[1]),
+          "day": int(data["datePublished"].split("-")[2]),
+          "hours": int(data["duration"].lstrip("PT").split("H")[0]),
+          "minutes": int(m) if m else 0,
+          "image": data["image"],
+          "title": data["name"],
+          "author": data["author"][0]["name"],
+          "narrator": [r["name"] for r in data["readBy"]],
+      }
+  
+  
+  def get_series(url):
+      """Return dictionary with series name, if there is one.
+  
+      """
+      html = urllib.request.urlopen(url).read()
+      soup = BeautifulSoup(html, features="html.parser")
+      try:
+          series = soup.find("div", class_="authorsandseries").find_all("a")[1:]
+          series = [re.sub(r"\([^()]*\)", "", s.contents[0]).rstrip() for s in series][0]
+          return {"series": series}
+      except:
+          return {}
+  
+  
+  def simple(x):
+      """Simplify a string.
+  
+      """
+      return "".join(e for e in re.sub(r"\[[^()]*\]", "", str(x)) if e.isalnum()).lower()
+  
+  
+  def audiobooks():
+  
+      df = pd.read_csv("../../_data/awards.csv", encoding="latin")
+      df["Year"] = df.Year.apply(simple)
+      df["Title"] = df.Title.apply(simple)
+      df["Recipient"] = df.Recipient.apply(simple)
+      df["lookup"] = df.Title + df.Recipient
+  
+      f = "../../_data/audiobooks.yaml"
+      books = yaml.load(open(f), Loader=yaml.FullLoader)
+      data = []
+  
+      for book in tqdm(books):
+  
+          dic = get_audioboook_details(book["audible"])
+          dic.update(get_series(book["librarything"]))
+          dic.update(book)
+          data.append(dic)
+  
+      yaml.dump(data, open(f, "w"))
+  
+  
+  if __name__ == "__main__":
+  
+      audiobooks()
 nbib2yaml__py: |
   """Convert .nbib files to .yaml files.
   
@@ -1461,6 +1548,59 @@ neals-funnel-c__py: |
   
   if __name__ == "__main__":
       main()
+sem-graphs__py: |
+  """Create some graphs of SEM models.
+  
+  """
+  from graphviz import Digraph
+  
+  
+  g = Digraph("../images/hs-1", format="svg")
+  items = [
+      "visual",
+      "cubes",
+      "paper",
+      "flags",
+      "general",
+      "paragrap",
+      "sentence",
+      "wordc",
+      "wordm",
+      "addition",
+      "code",
+      "counting",
+      "straight",
+      "wordr",
+      "numberr",
+      "figurer",
+      "object",
+      "numberf",
+      "figurew",
+  ]
+  factors = ["Spatial", "Verbal", "Speed", "Memory", "g"]
+  loadings = [
+      [1, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0],
+      [1, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 1, 0, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 1, 0],
+  ]
+  [g.node(s, shape="box") for s in items]
+  [g.node(s) for s in factors]
 realistic-funnel-b__py: |
   """Generate data from a more realistic hierarchical distribution.
   

@@ -15,15 +15,16 @@ references:
 - Pashler1988a
 - Rouder2008a
 - Salvatier2016a
+revisions:
+- date: 2020-03-27
+  reason: Corrected definition of g
+short_title: Working-memory capacity
 tags:
-- vision
 - python
-- statistics
 - cognition
 - open-data
 - memory
 - bayesian
-- hearing
 title: Measuring working-memory capacity
 ---
 *Working memory* (WM) is the name given to the memory system that stores information over short periods, which is strictly
@@ -78,7 +79,7 @@ equal to $$ k $$, all of the items are remembered, but if $$ M > k $$, a random 
 
 If the probed item was one of the ones remembered, the observer correctly responds same or different, depending on the type
 of trial. If the probed item was not remembered, the observer guesses, just like on a lapse trial. The probability that the
-observer guesses same is assumed to be fixed, and is denoted by $$ g $$.
+observer guesses different is assumed to be fixed, and is denoted by $$ g $$.
 
 We have fully defined the decision process. Now we can simulate the observer's response on a trial, provided we know the 
 set size $$ M $$, whether the correct response was same or different, and the values of the decision variables, $$ z $$,

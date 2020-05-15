@@ -99,9 +99,9 @@ def bcfa(
     else:
         L = pm.LKJCholeskyCov(name=r"$L$", eta=l_eta, n=m, sd_dist=f)
         ch = pm.expand_packed_triangular(m, L, lower=True)
-        Gamma = tt.dot(ch, ch.T)
-        sd = tt.sqrt(tt.diag(Gamma))
-        Psi = pm.Deterministic(r"$\Psi$", Gamma / sd[:, None] / sd[None, :])
+        _psi = tt.dot(ch, ch.T)
+        sd = tt.sqrt(tt.diag(_psi))
+        Psi = pm.Deterministic(r"$\Psi$", _psi / sd[:, None] / sd[None, :])
 
     # determine variances and covariances of items
     Sigma = matrix_dot(Lambda, Psi, Lambda.T) + Theta
@@ -167,7 +167,7 @@ def main():
     for school, sdf in df.groupby("school"):
 
         # define the path to save results
-        f = f"../data/{school}"
+        f = f"../data/BCFA examples/{school}"
 
         # select the 19 commonly used variables
         items = sdf[item_names]

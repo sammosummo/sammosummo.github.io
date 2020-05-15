@@ -11,6 +11,7 @@ revisions:
 tags:
 - python
 - hearing
+- qt
 title: Playing pure tones with PyQt5
 ---
 

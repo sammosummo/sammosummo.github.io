@@ -20,8 +20,6 @@ revisions:
   reason: Shortened the title
 tags:
 - python
-- statistics
-- pymc3
 - bayesian
 title: Funneling
 ---

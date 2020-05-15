@@ -11,10 +11,6 @@ revisions:
 - date: 2020-03-01
   reason: Gave a few more details
 tags:
-- hearing
-- genetics
-- neuroimaging
-- cognition
 - open-data
 - news
 title: Two new papers

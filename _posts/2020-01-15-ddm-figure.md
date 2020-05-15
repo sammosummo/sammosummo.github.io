@@ -15,9 +15,7 @@ references:
 tags:
 - python
 - reaction-times
-- matplotlib
 - visualization
-- hddm
 title: Drift-diffusion plots
 ---
 
