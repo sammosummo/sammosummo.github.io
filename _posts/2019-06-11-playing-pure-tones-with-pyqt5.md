@@ -12,7 +12,7 @@ tags:
 - python
 - hearing
 - qt
-title: Playing pure tones with PyQt5
+title: Playing pure tones with PyQt5 on Mac
 ---
 
 In an [earlier post](getting-started-with-python-for-sound), I recommended using a third-
