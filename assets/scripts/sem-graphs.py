@@ -4,11 +4,11 @@
 from graphviz import Digraph
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     g = Digraph("../images/hs-1", format="svg")
     g.attr("graph", bgcolor="transparent")
-    g.attr("graph",  rankdir="RL")
+    g.attr("graph", rankdir="RL")
     items = [
         "visual",
         "cubes",
@@ -76,8 +76,5 @@ if __name__ == '__main__':
             if p == 1:
 
                 g.edge(f2, f1)
-
-
-
 
     g.view()

@@ -1,0 +1,27 @@
+
+
+
+## Logistic model
+
+Looking closely at the {{ site.data.refs.Holzinger1939a.citet }} data, one can see that they are test scores. Unlike
+normally distributed random variables, they are integers and have lower and upper bounds (0 and whatever the maximum
+score on a particular test was). Thus, one might argue that they are binomially distributed,
+
+$$\begin{equation}
+\boldsymbol{y}\sim\mathrm{Binomial}\left(\boldsymbol{\pi}, \boldsymbol{k}\right)
+\end{equation}$$
+
+where $$\boldsymbol{\pi}$$ is the probability of a correct response on a question on the test and $$\boldsymbol{k}$$ is the
+maximum possible score. We can now use the same logic as logistic regression to connect items to our latent variables:
+
+$$\begin{equation}
+\boldsymbol{\pi}=\mathrm{logistic}\left(\boldsymbol{\hat{\pi}}\right)\\
+\boldsymbol{\hat{\pi}}=\boldsymbol{\nu}+\boldsymbol{\Lambda}\boldsymbol{\eta}+\boldsymbol{\epsilon}\\
+\boldsymbol{\eta} = (\boldsymbol{I} - \boldsymbol{\Gamma})^{-1} (\boldsymbol{\alpha}+\boldsymbol{\zeta})\\
+\boldsymbol{\epsilon}\sim\mathrm{Normal}\left(0, \boldsymbol{\theta}\right)\\
+\boldsymbol{\zeta}\sim\mathrm{Normal}\left(0, \boldsymbol{\psi}\right)
+\end{equation}$$
+
+The most commonly used generalization of linear models for binomial data is logistic regression. It is relatively easy
+to modify the univariate model in the previous section so that the logit of the probability of a correct response is a
+normally distributed latent variable which loads on the previously defined latent variables
