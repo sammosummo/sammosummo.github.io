@@ -58,7 +58,7 @@
         {% endif %}
     {% endif %}
     {% if paper[1].doi %}
-    <a href="https://doi.org/{{ paper[1].doi }}">https://doi.org/{{ paper[1].doi }}</a>
+    <a href="https://doi.org/{{ paper[1].doi }}">{{ paper[1].doi }}</a>
     {% endif %}
     {% if paper[1].arXiv %}
         arXiv:<a href="https://arxiv.org/abs/{{ paper[1].arXiv }}">{{ paper[1].arXiv }}</a>.

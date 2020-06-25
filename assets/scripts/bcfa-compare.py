@@ -17,90 +17,7 @@ from tabulate import tabulate
 from theano.tensor.nlinalg import matrix_inverse
 
 
-def bcfam(items, factors, paths, nu_sd=2.5, alpha_sd=2.5, d_beta=2.5):
-    r"""Constructs a Bayesian CFA model in "multivariate form".
-
-    Args:
-        items (np.array): Data.
-        factors (np.array): Factor design matrix.
-        paths (np.array): Paths design matrix.
-        nu_sd (:obj:`float`, optional): Standard deviation of normal prior on item
-            intercepts.
-        alpha_sd (:obj:`float`, optional): Standard deviation of normal prior on factor
-            intercepts.
-        d_beta (:obj:`float`, optional): Scale parameter of half-Cauchy prior on factor
-            standard deviation.
-
-    Returns:
-        None: Places model in context.
-
-    """
-    # get numbers of cases, items, and factors
-    n, p = items.shape
-    p_, m = factors.shape
-    assert p == p_, "Mismatch between data and factor-loading matrices"
-
-    # priors on item intercepts
-    nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=items.mean(axis=0))
-
-    # priors on factor intercepts
-    alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=alpha_sd, shape=m, testval=np.zeros(m))
-
-    # priors on factor loadings
-    l = np.asarray(factors).sum()
-    lam = pm.Normal(name=r"$\lambda$", mu=0, sd=1, shape=l, testval=np.ones(l))
-
-    # loading matrix
-    Lambda = tt.zeros(factors.shape)
-    k = 0
-    for i, j in product(range(p), range(m)):
-        if factors[i, j] == 1:
-            Lambda = tt.inc_subtensor(Lambda[i, j], lam[k])
-            k += 1
-    pm.Deterministic(name=r"$\Lambda$", var=Lambda)
-
-    # item means
-    mu = nu + matrix_dot(Lambda, alpha)
-
-    # item residual covariance matrix
-    d = pm.HalfCauchy(
-        name=r"$\sqrt{\theta}$", beta=d_beta, shape=p, testval=items.std(axis=0)
-    )
-    Theta = tt.diag(d) ** 2
-
-    # factor covariance matrix
-    Psi = I = np.eye(m)
-
-    # priors on paths
-    g = np.asarray(paths).sum()
-    gam = pm.Normal(name=r"$\gamma$", mu=0, sd=1, shape=g, testval=np.ones(g))
-
-    # path matrix
-    Gamma = tt.zeros(paths.shape)
-    k = 0
-    for i, j in product(range(m), range(m)):
-        if paths[i, j] == 1:
-            Gamma = tt.inc_subtensor(Gamma[i, j], gam[k])
-            k += 1
-    pm.Deterministic(name=r"$\Gamma$", var=Gamma)
-
-    # item covariance matrix
-    Sigma = (
-        matrix_dot(
-            Lambda,
-            matrix_inverse(I - Gamma),
-            Psi,
-            matrix_inverse(I - Gamma.T),
-            Lambda.T,
-        )
-        + Theta
-    )
-
-    # observations
-    pm.MvNormal(name="$Y$", mu=mu, cov=Sigma, observed=items, shape=items.shape)
-
-
-def bcfau(items, factors, paths, nu_sd=2.5, alpha_sd=2.5, d_beta=2.5):
+def bcfau(items, factors, paths, nu_sd=100, alpha_sd=100, d_beta=10):
     r"""Constructs a Bayesian CFA model in "univariate form" by directly estimating the
     factors.
 
@@ -125,14 +42,14 @@ def bcfau(items, factors, paths, nu_sd=2.5, alpha_sd=2.5, d_beta=2.5):
     assert p == p_, "Mismatch between data and factor-loading matrices"
 
     # priors on item intercepts
-    nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=items.mean(axis=0))
+    nu = pm.Normal(name=r"$\nu$", mu=0, sd=nu_sd, shape=p, testval=np.zeros(p))
 
     # priors on factor intercepts
     alpha = pm.Normal(name=r"$\alpha$", mu=0, sd=alpha_sd, shape=m, testval=np.zeros(m))
 
     # priors on factor loadings
     l = np.asarray(factors).sum()
-    lam = pm.Normal(name=r"$\lambda$", mu=0, sd=1, shape=l, testval=np.ones(l))
+    lam = pm.Normal(name=r"$\lambda$", mu=0, sd=1, shape=l, testval=np.zeros(l))
 
     # loading matrix
     Lambda = tt.zeros(factors.shape)
@@ -145,7 +62,7 @@ def bcfau(items, factors, paths, nu_sd=2.5, alpha_sd=2.5, d_beta=2.5):
 
     # priors on paths
     g = np.asarray(paths).sum()
-    gam = pm.Normal(name=r"$\gamma$", mu=0, sd=1, shape=g, testval=np.ones(g))
+    gam = pm.Normal(name=r"$\gamma$", mu=0, sd=1, shape=g, testval=np.zeros(g))
 
     # path matrix
     Gamma = tt.zeros(paths.shape)
@@ -174,7 +91,7 @@ def bcfau(items, factors, paths, nu_sd=2.5, alpha_sd=2.5, d_beta=2.5):
     pm.Normal(name="$Y$", mu=M, sigma=S, observed=items, shape=items.shape)
 
 
-def bcfab(items, factors, paths, nu_sd=2.5, alpha_sd=2.5):
+def bcfab(items, factors, paths, nu_sd=100, alpha_sd=100):
     r"""Constructs a Bayesian CFA model in "binomial form".
 
     Args:
@@ -241,6 +158,69 @@ def bcfab(items, factors, paths, nu_sd=2.5, alpha_sd=2.5):
     pm.Binomial(
         name="$Y$", p=Pi, n=items.max(axis=0), observed=items, shape=items.shape
     )
+
+
+def sampleandsave(f):
+    """Sample from the model in context.
+
+    """
+    if not exists(f):
+
+        # sample and save
+
+        trace = pm.sample(8000, tune=2000, chains=1)
+        pm.save_trace(trace, f)
+        pm.traceplot(trace, compact=True)
+        rcParams["font.size"] = 14
+        plt.savefig(f"{f}/traceplot.png")
+        ppc = pm.sample_posterior_predictive(trace)["$Y$"]
+        np.savez_compressed(f"{f}/ppc.npz", ppc)
+
+    else:
+
+        trace = pm.load_trace(f)
+
+    return trace
+
+
+def tables(trace):
+    """Print loading and path tables to stdout.
+
+    """
+    item_names = [
+        "visual",
+        "cubes",
+        "paper",
+        "flags",
+        "general",
+        "paragrap",
+        "sentence",
+        "wordc",
+        "wordm",
+        "addition",
+        "code",
+        "counting",
+        "straight",
+        "wordr",
+        "numberr",
+        "figurer",
+        "object",
+        "numberf",
+        "figurew",
+    ]
+    loadings = pd.DataFrame(
+        trace[r"$\Lambda$"].mean(axis=0).round(2)[:, :-1],
+        index=[v.title() for v in item_names],
+        columns=["Spatial", "Verbal", "Speed", "Memory"],
+    )
+    print(tabulate(loadings, tablefmt="pipe", headers="keys"))
+
+    _paths = pd.DataFrame(
+        trace[r"$\Gamma$"].mean(axis=0).round(2)[:-1, -1],
+        index=["Spatial", "Verbal", "Speed", "Memory"],
+        columns=["g"],
+    )
+    print(tabulate(_paths, tablefmt="pipe", headers="keys"))
 
 
 def main():
@@ -310,49 +290,30 @@ def main():
     # iterate over the two schools
     for school, sdf in df.groupby("school"):
 
-        # define the path to save results
-        f = f"../data/BSEM (long) examples/{school} (bin)"
+        models = {}
 
-        # select the 19 commonly used variables
-        items = sdf[item_names]
+        for func, name in zip([bcfau, bcfab], ["uni", "bin"]):
 
-        # for numerical convenience, standardize the data
-        # items = (items - items.mean()) / items.std()
+            # define the path to save results
+            f = f"../data/BSEM (compare) examples/{school} ({name})"
 
-        with pm.Model():
+            # select the 19 commonly used variables
+            items = sdf[item_names]
 
-            # construct the model
-            bcfab(items, factors, paths)
+            with pm.Model() as m:
 
-            if not exists(f):
+                func(items, factors, paths)
+                trace = sampleandsave(f)
+                print(trace.varnames)
+                tables(trace)
 
-                # sample and save
-                trace = pm.sample(5000, tune=1000, chains=1)
-                pm.save_trace(trace, f)
-                pm.traceplot(trace, compact=True)
-                rcParams["font.size"] = 14
-                plt.savefig(f"{f}/traceplot.png")
+                approx = pm.fit(200000)
+                trace = approx.sample()
+                tables(trace)
 
-            else:
+            models[name] = trace
 
-                trace = pm.load_trace(f)
-
-        # create a nice summary table
-        loadings = pd.DataFrame(
-            trace[r"$\Lambda$"].mean(axis=0).round(2)[:, :-1],
-            index=[v.title() for v in item_names],
-            columns=["Spatial", "Verbal", "Speed", "Memory"],
-        )
-        loadings.to_csv(f"{f}/loadings.csv")
-        print(tabulate(loadings, tablefmt="pipe", headers="keys"))
-
-        _paths = pd.DataFrame(
-            trace[r"$\Gamma$"].mean(axis=0).round(2)[:-1, -1],
-            index=["Spatial", "Verbal", "Speed", "Memory"],
-            columns=["g"],
-        )
-        _paths.to_csv(f"{f}/factor_paths.csv")
-        print(tabulate(_paths, tablefmt="pipe", headers="keys"))
+        # print(pm.compare(models))
 
 
 if __name__ == "__main__":

@@ -1,34 +1,57 @@
 <p class="audiobooks">
 <img src="{{ book.image }}" width="40%" />
-<h3><i>{{ book.title }}</i> by {{ book.author }}</h3>
+<h3><i>{{ book.title }}</i> by {{ book.authors[0] }}</h3>
 <ul>
     {% if book.series %}
-
-        <li><b>Series</b>: {{ book.series }} (part {{ book.position }})</li>
-    {% endif %}
-    <li><b>Narrated by</b>:
-        {% for n in book.narrator %}
-            {% if n == book.narrator.last %}
-                {% if book.narrator.size == 1 %}
-                    {{ n }}.
-                {% else %}
-                    and {{ n }}.
-                {% endif %}
+        <li>
+            {% if book.series.size == 1 %}
+                <b>Series</b>: {{ book.series }} (part {{ book.position_in_series }})
             {% else %}
-                    {{ n }},
+                <b>Series</b>:
+                <ul>
+                    {% assign n = book.series.size | minus: 1 %}
+                    {% for i in (0..n) %}
+                        <li>
+                            {% if book.position_in_series[i] %}
+                                {{ book.series[i] }} (part {{ book.position_in_series[i] }})
+                            {% else %}
+                                {{ book.series[i] }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endif %}
+    <li>
+        {% if book.narrators.size == 1 %}
+            <b>Narrator</b>: {{ book.narrators }}
+        {% else %}
+            <b>Narrators</b>:
+            <ul>
+                {% for narrator in book.narrators %}
+                    <li>
+                        {{ narrator }}
+                    </li>
+                {% endfor %}
+            </ul>
         {% endif %}
-    {% endfor %}</li>
-    <li><b>Running time</b>: {{ book.hours }} hours {{ book.minutes }} minutes.</li>
-    <li><b>Abridgement or dramatization</b>:
+    </li>
+    <li>
+        <b>Running time</b>: {{ book.hours }}h {{ book.minutes }}m
+    </li>
+    <li>
+        <b>Abridgement or dramatization</b>:
         {% if book.abridged %}
             Yes.
         {% else %}
             No.
-    {% endif %}</li>
+        {% endif %}
+    </li>
+    <li>
+        <b>Book review</b>: {{ book.book_review }} <b>{{ book.book }}/10.</b>
+    </li>
+    <li>
+        <b>Performance review</b>: {{ book.performance_review }} <b>{{ book.performance }}/10.</b>
+    </li>
 </ul>
-<h4>My verdict:</h4>
-<ul>
-    <li><b>The book</b>: {{ book.book_review }} <b>{{ book.book }}/10.</b></li>
-    <li><b>The performance</b>: {{ book.performance_review }} <b>{{ book.performance }}/10.</b></li>
-</ul>
-<hr>

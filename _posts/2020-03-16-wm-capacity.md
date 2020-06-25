@@ -22,7 +22,6 @@ short_title: Working-memory capacity
 tags:
 - python
 - cognition
-- open-data
 - memory
 - bayesian
 title: Measuring working-memory capacity
