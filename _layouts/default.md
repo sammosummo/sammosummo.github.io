@@ -1,3 +1,6 @@
+---
+layout: compress
+---
 <!doctype html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 	<head>

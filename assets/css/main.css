@@ -66,11 +66,11 @@ body {
   height: 1em;
   width: 1em;
   display: inline;
-  padding: 0px 0px;
+  padding: 0 0.2em;
 }
 
 .posttitle {
-  font-size: 1.8em;
+  font-size: 2em;
 }
 
 @media (min-width: 580px) {
@@ -85,9 +85,10 @@ body {
   }
 }
 
-a {
+a, .spoiler::before, .spoiler::after {
   color: #005792;
   text-decoration: none;
+  background-color: #fff1e5;
 }
 
 a:hover {
@@ -200,19 +201,29 @@ th, td {
   border: 1px solid #ccc1b7;
 }
 
-.spoiler, .spoiler2{
-  color: black;
-  background-color:black;
+.related {
+  font-size: 0.8em;
 }
 
-.spoiler:hover{
-  color: white;
-  }
+.audiobooks {
+    padding-left: 0;
+    margin-left: 0;
+    list-style-type: none;
+}
 
-.spoiler2:hover {
-  background-color:white;
-  }
+/*.spoiler:not(:active) {*/
+/*  !*user-select: none; !* if you want it to be copyable, may highlight spoiler text when they click *!*!*/
+/*}*/
 
+.spoiler::before {
+  content: 'Spoliers ahead! Click and hold in the shaded area to reveal: '; /* non-breaking spaces probably necessary */
+  display: inline;
+}
+
+.spoiler:not(:active) {
+  background-color: #9c918b;
+  color: #9c918b;
+}
 
 /*body {*/
 /*  font-family: 'bodyfont', georgia, 'Georgia', serif;*/

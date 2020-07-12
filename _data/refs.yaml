@@ -1,3 +1,31 @@
+Visser2017a:
+   authors: "Visser, I., & Poessé, R."
+   year: "2017"
+   title: "Parameter recovery, bias and standard errors in the linear ballistic accumulator model"
+   journal: "British Journal of Mathematical and Statistical Psychology"
+   volume: "70"
+   issue: "2"
+   doi: "10.1111/bmsp.12100"
+   first_page: "280"
+   last_page: "296"
+   citep: "[(Visser & Poessé, 2017)](#Visser2017a)"
+   citenp: "[Visser & Poessé, 2017](#Visser2017a)"
+   citet: "[Visser and Poessé (2017)](#Visser2017a)"
+
+Moore1973a:
+   authors: "Moore, B. C. J."
+   year: "1973"
+   title: "Frequency difference limens for short‐duration tones"
+   journal: "The Journal of the Acoustical Society of America"
+   volume: "54"
+   issue: "3"
+   doi: "10.1121/1.1913640"
+   first_page: "610"
+   last_page: "619"
+   citep: "[(Moore, 1973)](#Moore1973a)"
+   citenp: "[Moore, 1973](#Moore1973a)"
+   citet: "[Moore (1973)](#Moore1973a)"
+
 Jonsson2019a:
    authors: "Jonsson, B. A., Bjornsdottir, G., Thorgeirsson, T. E., Ellingsen, L. M., Walters, G. B., Gudbjartsson, D. F., Stefansson, H., Stefansson, K., & Ulfarsson, M. O."
    year: "2019"

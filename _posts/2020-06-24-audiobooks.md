@@ -3,27 +3,28 @@ date: 2020-06-24
 has_code: true
 has_comments: true
 layout: post
+revisions:
+- date: 2020-07-02
+  reason: Re-wrote lots of text
 short_title: Audiobooks I
 tags:
-- books
+- audiobooks
 - jekyll
 - liquid
 - python
-title: Audiobooks
+title: Audiobooks-o-rama
 ---
 
-I love fiction, but I'm a very slow reader. I'm 35 now, and I've read about 50 books in my
-life, which is pretty terrible: if I'd read the same number per year as the average person
-([which is 12, apparently](https://irisreading.com/how-many-books-does-the-average-person-read/)),
-I should be well past 200 by now.
-
-My wife—a prolific reader herself [with a blog on the topic](https://emmablogsbooks.com)—suggested
-I try audiobooks. In March 2019 I discovered [Libby](https://www.overdrive.com/apps/libby/),
-and it has completely transformed how I consume literature. Now, just over a year and
+I love fiction, but I'm a very slow reader. I'm 35 now, and I've read about 50 books in my life, which is pretty terrible.
+If I'd read the same number of books per year as the average person ([which is 12, apparently](https://irisreading.com/how-many-books-does-the-average-person-read/)),
+I should be well past 200 by now. My wife—a prolific reader herself [with a blog on the
+topic](https://emmablogsbooks.com)—suggested I try audiobooks. I discovered [Libby](https://www.overdrive.com/apps/libby/) in March 2019,
+and it completely transformed how I consume literature. Now, just over a year and around
 100 audiobooks later, I decided to compile some thoughts on the topic and review everything
 I've listened to so far. This post goes covers [how I acquire audiobooks](#acquisition), [what I like](#taste),
-and provides geeky details of how I compiled [a database of my reviews](#code). If you don't care about any of this and just want
-some recommendations, I suggesting jumping to my [index of lists](#lists).
+and provides geeky details of how I compiled [a database of my reviews](#code). If you don't
+care about any of this and just want some recommendations, I suggest jumping to my [next post, which lists
+my favorites](audiobooks-2).
 
 ## Where I get them<a name="acquisition"></a>
 
@@ -97,7 +98,7 @@ is that I'm enjoying them regardless.
 
 I get through books pretty quickly. I listen any time I'm doing something repetitious and
 nonverbal, such as walking the dog, laundry, and the daily commute—that is, when I had a
-daily commute in the pre-COVID-19 world! I'm able to finish a novella in a day, which
+daily commute in the pre-COVID-19 world. I'm able to finish a novella in a day, which
 puts me roughly on par with my wife's book-reading.
 
 ## What I like<a name="taste"></a>
@@ -118,15 +119,13 @@ I haven't tried any non-fiction yet.
 
 ## My reviews 
 
-I've reviewed every audiobook I've listened to since March 2019; that's exactly 100 audiobooks
-at the time of writing. I have given each book and performance a rating independently, both
-out of 10. Five seemed a too coarse and anything greater than 10 seemed like overkill.
-I take the mean to get an overall score.
+I've reviewed every audiobook I've listened to since March 2019. I have given each book
+and performance a rating independently, both out of 10. I take the mean to get an overall score.
 
 I'm neither a critic nor a particularly good writer, and there are few things in the world
 that interest me less than some amateur's prolix opinions about art on the internet. So
-I try to keep my reviews sparse and direct. This is especially true of my reviews of
-performances: since one narrator will read many books with little appreciable variation in
+I try to keep my reviews sparse and direct. This is especially true of my performance reviews:
+since one narrator will read many books with little appreciable variation in
 quality, there isn't always much to say.
 
 ## The geeky bit<a name="code"></a>
@@ -291,7 +290,6 @@ I've listened to **{{ counter }}** audiobooks. That number was generated using t
 ```
 {% endraw %}
 
-## Lists <a name="lists"></a>
-
-Check out my [top 10](audiobooks-2) and [bottom 10](audiobooks-3) audiobooks, and my [list of every audiobook ordered by
-score](audiobooks-4).
+I will probably add to and modify this method as my ideas about how to present my reviews develop over time. For now,
+feel free to peruse [my favorite audiobooks](audiobooks-2), [least favorite audiobooks](audiobooks-3), or [just a
+list of everything I've reviewed so far](audiobooks-4).

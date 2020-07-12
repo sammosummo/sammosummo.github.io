@@ -32,8 +32,16 @@
     >Frank Sidebottom</a> meets <i>Game of Thrones</i>."
   position_in_series:
   - '0.5'
+  recommendation:
+  - audible_url: https://www.audible.com/pd/The-Blade-Itself-Audiobook/B014LL6R5U?qid=1592783910&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=14HQ8K77GDBNCV2ZWGA2
+    reason: "Although \u201Clower\u201D fantasy, Abercrombie\u2019s The First Law\
+      \ series is immeasurably more enternaining, in my opinion."
   series:
   - The Witcher
+  series_nested:
+  - name: The Witcher
+    position: '0.5'
+  sorting_key: sapkowskithewitcher005thelastwish
   title: The Last Wish
   year: 2015
 - audible: true
@@ -47,9 +55,9 @@
     \ to the <i>The Last Wish</i>, it\u2019s a mixed bag. One of the stories, \u201C\
     A Little Sacrifice,\u201D really irked me, hence the lower score for this collection.\
     \ All of the stories are sexist to some degree\u2014unfortunately not surprising\
-    \ for male-written Fantasy\u2014but this one was beyond the pale. Details: <span\
-    \ class=\"spoiler2\">At one point, while literally fleeing for his life, Geralt\
-    \ turns for a perv on ] his pursuer\u2019s \u201Cbeautiful breasts\u201D\u2014\
+    \ for male-written Fantasy\u2014but this one was beyond the pale. <span\
+    \ class=\"spoiler\">At one point, while literally fleeing for his life, Geralt\
+    \ turns for a perv on his pursuer\u2019s \u201Cbeautiful breasts\u201D\u2014\
     come on, mate. Also, there is a female character (I forget her name) who exists\
     \ solely to have sex with Geralt then die.</span>"
   day: 1
@@ -67,8 +75,25 @@
   performance_review: Same narrator as <i>The Last Wish</i>.
   position_in_series:
   - '0.75'
+  recommendation:
+  - goodreads_id: '68428'
+    reason: "While not the best Sanderson series on the whole (that\u2019s The Stormlight\
+      \ Archive, in my opinion), the first book in the Mistborn series is still pretty\
+      \ good."
   series:
   - The Witcher
+  series_nested:
+  - name: The Witcher
+    position: '0.75'
+  sorting_key: sapkowskithewitcher008swordofdestiny
+  tags:
+  - fantasy
+  - sexist
+  - games
+  - tv
+  - translated
+  - short-stories
+  - polish
   title: Sword of Destiny
   year: 2015
 - audible: true
@@ -97,8 +122,23 @@
   performance_review: Kenny is as good as always.
   position_in_series:
   - '1'
+  recommendation:
+  - goodreads_id: '140671'
+    reason: Far superior fantasy series.
   series:
   - The Witcher
+  series_nested:
+  - name: The Witcher
+    position: '1'
+  sorting_key: sapkowskithewitcher010bloodofelves
+  tags:
+  - fantasy
+  - sexist
+  - games
+  - tv
+  - translated
+  - short-stories
+  - polish
   title: Blood of Elves
   year: 2015
 - audible: true
@@ -136,6 +176,14 @@
     \ Saunders himself is OK, but sounded quite monotone\u2014a shame, because for\
     \ me the Rev\u2019s journey had the most pathos. Much of the remaining cast is\
     \ good, making the occasional dud all the more jarring."
+  sorting_key: saunderslincolninthebardo
+  tags:
+  - epistolary
+  - death
+  - ghosts
+  - alt-history
+  - usa
+  - surreal
   title: Lincoln in the Bardo
   year: 2017
 - audible: true
@@ -146,9 +194,9 @@
   - Denis Johnson
   book: 10
   book_review: "My favorite audiobook so far. The story might sound clich\xE9d, but\
-    \ the writing just stunning: sad, grimy, surreal, even hopeful in places.\
-    \ Best stories: \u201CCar Crash While Hitchhiking\u201D and \u201CWork,\u201D\
-    \ but they\u2019re all great."
+    \ the writing just stunning: sad, grimy, surreal, even hopeful in places. Best\
+    \ stories: \u201CCar Crash While Hitchhiking\u201D and \u201CWork,\u201D but they\u2019\
+    re all great."
   day: 21
   goodreads_id: '608287'
   goodreads_popularity: 26473
@@ -162,6 +210,14 @@
   overall_score: 10.0
   performance: 10
   performance_review: Casting Will Patton was a masterstroke.
+  sorting_key: johnsonjesusson
+  tags:
+  - short-stories
+  - drugs
+  - surreal-elements
+  - usa
+  - poverty
+  - unreliable-narrator
   title: "Jesus\u2019 Son"
   year: 2009
 - audible: true
@@ -171,9 +227,9 @@
   authors:
   - Walter M. Miller Jr.
   book: 10
-  book_review: Completely bonkers. Lauded as a SF classic, I expected something along
-    the lines of Arthur C. Clarke or Robert Heinlein. Instead, I think its closer
-    in tone to Vonnegut, and just as good as his best work.
+  book_review: Completely bonkers. I expected something along the lines of Clarke
+    or Heinlein. Instead, I think its closer in tone to Vonnegut, and just as good
+    as his best work.
   day: 1
   goodreads_id: '164154'
   goodreads_popularity: 81465
@@ -189,8 +245,17 @@
   performance_review: Great performance.
   position_in_series:
   - '1'
+  recommendation:
+    goodreads_id: '135479'
+    reason: "Like <i>Leibowitz</i>, <i>Cat\u2019s Cradle</i> is a post-apocalyptic\
+      \ sci-fi classic with an irreverent, ironic tone. Both are among my favorite\
+      \ novels."
   series:
   - St. Leibowitz
+  series_nested:
+  - name: St. Leibowitz
+    position: '1'
+  sorting_key: jrstleibowitz010acanticleforleibowitz
   title: A Canticle for Leibowitz
   year: 2011
 - audible: true
@@ -216,6 +281,7 @@
   overall_score: 8.5
   performance: 8
   performance_review: Fantastic.
+  sorting_key: millerthesongofachilles
   title: The Song of Achilles
   year: 2012
 - audible: true
@@ -240,6 +306,7 @@
   overall_score: 10.0
   performance: 10
   performance_review: Performance nails it.
+  sorting_key: millercirce
   title: Circe
   year: 2018
 - audible: true
@@ -267,6 +334,7 @@
   performance: 9
   performance_review: "Performances are great. There\u2019s a nice contrast between\
     \ the two primary narrators as they deliver the main text of the memoir and footnotes."
+  sorting_key: yanagiharathepeopleinthetrees
   title: The People in the Trees
   year: 2013
 - audible: true
@@ -292,6 +360,7 @@
   performance: 6
   performance_review: Listened a while ago and vaguely remember thinking the narration
     was a mixed bag. May relisten and reevaluate.
+  sorting_key: schweblinmouthfulofbirds
   title: Mouthful of Birds
   year: 2019
 - audible: true
@@ -323,6 +392,10 @@
   - '1'
   series:
   - "L\u2019amica geniale/The Neapolitan Novels"
+  series_nested:
+  - name: "L\u2019amica geniale/The Neapolitan Novels"
+    position: '1'
+  sorting_key: ferrantelamicagenialetheneapolitannovels010mybrilliantfriend
   title: My Brilliant Friend
   year: 2014
 - audible: true
@@ -350,6 +423,10 @@
   - '2'
   series:
   - "L\u2019amica geniale/The Neapolitan Novels"
+  series_nested:
+  - name: "L\u2019amica geniale/The Neapolitan Novels"
+    position: '2'
+  sorting_key: ferrantelamicagenialetheneapolitannovels020thestoryofanewname
   title: The Story of a New Name
   year: 2015
 - audible: true
@@ -382,6 +459,10 @@
   - '3'
   series:
   - "L\u2019amica geniale/The Neapolitan Novels"
+  series_nested:
+  - name: "L\u2019amica geniale/The Neapolitan Novels"
+    position: '3'
+  sorting_key: ferrantelamicagenialetheneapolitannovels030thosewholeaveandthosewhostay
   title: Those Who Leave and Those Who Stay
   year: 2015
 - audible: true
@@ -418,6 +499,7 @@
   overall_score: 7.5
   performance: 7
   performance_review: Great.
+  sorting_key: oconnoreverythingthatrisesmustconverge
   title: Everything That Rises Must Converge
   year: 2010
 - audible: true
@@ -446,6 +528,7 @@
   performance: 7
   performance_review: "I don\u2019t recall much about the narration, so I assume it\
     \ was good."
+  sorting_key: oconnoragoodmanishardtofindandotherstories
   title: A Good Man Is Hard to Find and Other Stories
   year: 2020
 - audible: true
@@ -469,6 +552,7 @@
   overall_score: 6.0
   performance: 7
   performance_review: Good.
+  sorting_key: oconnorwiseblood
   title: Wise Blood
   year: 2010
 - audible: true
@@ -492,6 +576,7 @@
   overall_score: 7.0
   performance: 7
   performance_review: Good.
+  sorting_key: connortheviolentbearitaway
   title: The Violent Bear It Away
   year: 2010
 - audible: true
@@ -515,15 +600,16 @@
   overall_score: 8.0
   performance: 8
   performance_review: Refreshing to hear a bit of Northern English in the performance.
+  sorting_key: mossghostwall
   title: Ghost Wall
   year: 2019
-- audible: true
+- abridged: true
+  audible: true
   audible_popularity: 2900
   audible_score: 4.448275862068965
   audible_url: https://www.audible.com/pd/The-Princess-Bride-Audiobook/B002V0K2VE?qid=1588676727&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=X0YHWKVW2QH7H7801J0A
   authors:
   - William Goldman
-  abridged: true
   book: 9
   book_review: This is genuinely hilarious.
   day: 16
@@ -543,6 +629,7 @@
     \ seems very aggressive. Considering that the movie already exists and is of similar\
     \ length, why not record the whole thing? One day I\u2019ll read it and find out,\
     \ perhaps."
+  sorting_key: goldmantheprincessbride
   title: The Princess Bride
   year: 1999
 - audible: true
@@ -567,18 +654,19 @@
   overall_score: 8.0
   performance: 8
   performance_review: Great.
+  sorting_key: burnsmilkman
   title: Milkman
   year: 2018
-- audible: true
-  abridged: true
+- abridged: true
+  audible: true
   audible_popularity: 67
   audible_score: 4.417910447761194
   audible_url: https://www.audible.com/pd/Classic-Radio-Sci-Fi-Audiobook/B002V8MPW0?qid=1588677160&sr=1-9&ref=a_search_c3_lProduct_1_9&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=QTCE9Q25PKXS2Z0WSCEE
   authors:
   - Stanislaw Lem
-  book: 8
-  book_review: "Wittgenstein\u2019s lion in space. Heavyweight SF classic with a killer\
-    \ premise."
+  book: 7
+  book_review: "Wittgenstein\u2019s lion in space. Heavyweight sci-fi classic with\
+    \ a killer premise."
   day: 15
   goodreads_id: '95558'
   goodreads_popularity: 56038
@@ -590,11 +678,12 @@
   narrators:
   - Ron Cook
   - Joanne Froggatt
-  overall_score: 9.0
+  overall_score: 8.5
   performance: 10
   performance_review: "It\u2019s a proper BBC radio play! Makes sense to have done\
     \ it this way since Lem hated the original English translation, although the more\
     \ recent Audible version is supposed to be good as well."
+  sorting_key: lemclassicradioscifi
   title: Classic Radio Sci-Fi
   year: 2008
 - audible: true
@@ -620,6 +709,7 @@
   overall_score: 8.0
   performance: 7
   performance_review: Good.
+  sorting_key: ishiguroneverletmego
   title: Never Let Me Go
   year: 2005
 - audible: true
@@ -643,6 +733,7 @@
   overall_score: 7.5
   performance: 7
   performance_review: Good.
+  sorting_key: fullerbitterorange
   title: Bitter Orange
   year: 2018
 - audible: true
@@ -668,6 +759,7 @@
   overall_score: 5.5
   performance: 6
   performance_review: Fine.
+  sorting_key: fullerourendlessnumbereddays
   title: Our Endless Numbered Days
   year: 2015
 - audible: true
@@ -696,6 +788,10 @@
   - '1'
   series:
   - New Crobuzon
+  series_nested:
+  - name: New Crobuzon
+    position: '1'
+  sorting_key: mievillenewcrobuzon010perdidostreetstation
   title: Perdido Street Station
   year: 2009
 - audible: true
@@ -720,6 +816,7 @@
   overall_score: 8.0
   performance: 8
   performance_review: Lee's down-to-earth, deadpan narration fits wonderfully.
+  sorting_key: mievillethecitythecity
   title: The City & The City
   year: 2009
 - audible: true
@@ -745,6 +842,7 @@
   overall_score: 8.0
   performance: 8
   performance_review: Narration is, again, brilliantly deadpan.
+  sorting_key: mievillekraken
   title: Kraken
   year: 2010
 - audible: true
@@ -780,6 +878,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the North
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '1'
+  - name: The Books of the North
+    position: '1'
+  sorting_key: cookthechroniclesoftheblackcompany010theblackcompany
   title: The Black Company
   year: 2010
 - audible: true
@@ -810,6 +914,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the North
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '2'
+  - name: The Books of the North
+    position: '2'
+  sorting_key: cookthechroniclesoftheblackcompany020shadowslinger
   title: Shadows Linger
   year: 2010
 - audible: true
@@ -842,6 +952,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the North
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '3'
+  - name: The Books of the North
+    position: '3'
+  sorting_key: cookthechroniclesoftheblackcompany030thewhiterose
   title: The White Rose
   year: 2010
 - audible: true
@@ -851,8 +967,8 @@
   authors:
   - Glen Cook
   book: 9
-  book_review: "Techincally a spin-off from the main series because it doesn\u2019t The Company proper.\
-    \ Tied with <i>The White Rose</i> for my favorite in the series."
+  book_review: "Techincally a spin-off from the main series because it doesn\u2019\
+    t The Company proper. Tied with <i>The White Rose</i> for my favorite in the series."
   day: 31
   goodreads_id: '400914'
   goodreads_popularity: 6968
@@ -872,6 +988,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the South
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '3.5'
+  - name: The Books of the South
+    position: '0.5'
+  sorting_key: cookthechroniclesoftheblackcompany035thesilverspike
   title: The Silver Spike
   year: 2010
 - audible: true
@@ -902,6 +1024,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the South
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '4'
+  - name: The Books of the South
+    position: '1'
+  sorting_key: cookthechroniclesoftheblackcompany040shadowgames
   title: Shadow Games
   year: 2010
 - audible: true
@@ -933,6 +1061,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the South
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '5'
+  - name: The Books of the South
+    position: '2'
+  sorting_key: cookthechroniclesoftheblackcompany050dreamsofsteel
   title: Dreams of Steel
   year: 2010
 - audible: true
@@ -962,6 +1096,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the Glittering Stone
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '6'
+  - name: The Books of the Glittering Stone
+    position: '1'
+  sorting_key: cookthechroniclesoftheblackcompany060bleakseasons
   title: Bleak Seasons
   year: 2010
 - audible: true
@@ -992,6 +1132,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the Glittering Stone
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '7'
+  - name: The Books of the Glittering Stone
+    position: '2'
+  sorting_key: cookthechroniclesoftheblackcompany070sheisthedarkness
   title: She Is the Darkness
   year: 2010
 - audible: true
@@ -1024,6 +1170,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the Glittering Stone
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '8'
+  - name: The Books of the Glittering Stone
+    position: '3'
+  sorting_key: cookthechroniclesoftheblackcompany080watersleeps
   title: Water Sleeps
   year: 2010
 - audible: true
@@ -1054,6 +1206,12 @@
   series:
   - The Chronicles of the Black Company
   - The Books of the Glittering Stone
+  series_nested:
+  - name: The Chronicles of the Black Company
+    position: '9'
+  - name: The Books of the Glittering Stone
+    position: '4'
+  sorting_key: cookthechroniclesoftheblackcompany090soldierslive
   title: Soldiers Live
   year: 2010
 - audible: true
@@ -1084,6 +1242,12 @@
   series:
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
+  series_nested:
+  - name: World of the Five Gods (Publication order)
+    position: '1'
+  - name: World of the Five Gods (Chronological order)
+    position: '2'
+  sorting_key: bujoldworldofthefivegodspublicationorder010thecurseofchalion
   title: The Curse of Chalion
   year: 2004
 - audible: true
@@ -1115,6 +1279,12 @@
   series:
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
+  series_nested:
+  - name: World of the Five Gods (Publication order)
+    position: '2'
+  - name: World of the Five Gods (Chronological order)
+    position: '3'
+  sorting_key: bujoldworldofthefivegodspublicationorder020paladinofsouls
   title: Paladin of Souls
   year: 2005
 - audible: true
@@ -1149,6 +1319,16 @@
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
   - Penric and Desdemona (Chronological order)
+  series_nested:
+  - name: Penric and Desdemona (Publication order)
+    position: '1'
+  - name: World of the Five Gods (Publication order)
+    position: '3.1'
+  - name: World of the Five Gods (Chronological order)
+    position: '1.1'
+  - name: Penric and Desdemona (Chronological order)
+    position: '1'
+  sorting_key: bujoldpenricanddesdemonapublicationorder010penricsdemon
   title: "Penric\u2019s Demon"
   year: 2016
 - audible: true
@@ -1182,6 +1362,16 @@
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
   - Penric and Desdemona (Chronological order)
+  series_nested:
+  - name: Penric and Desdemona (Publication order)
+    position: '2'
+  - name: World of the Five Gods (Publication order)
+    position: '3.2'
+  - name: World of the Five Gods (Chronological order)
+    position: '1.2'
+  - name: Penric and Desdemona (Chronological order)
+    position: '2'
+  sorting_key: bujoldpenricanddesdemonapublicationorder020penricandtheshaman
   title: Penric and the Shaman
   year: 2016
 - audible: true
@@ -1191,9 +1381,9 @@
   authors:
   - Claire-Louise Bennett
   book: 7
-  book_review: I imagine that many people will be annoyed by this book. There's no
-    story, and the unnamed protagonist, who I assume is basically just Bennett herself,
-    is self-indulgent and trivial. I found it hilarious nevertheless.
+  book_review: "I imagine that many people will be annoyed by this book. There\u2019\
+    s no story, and the unnamed protagonist\u2014who I assume is basically Bennett\
+    \ herself\u2014is self-indulgent and trivial. Nevertheless, I found it hilarious."
   day: 2
   goodreads_id: '25333047'
   goodreads_popularity: 2557
@@ -1207,6 +1397,7 @@
   overall_score: 7.5
   performance: 8
   performance_review: Great.
+  sorting_key: bennettpond
   title: Pond
   year: 2016
 - audible: true
@@ -1232,10 +1423,11 @@
   performance: 7
   performance_review: "Author is also the narrator, and does a good job. There\u2019\
     s a quick, interesting interview with him at the end."
+  sorting_key: mcewanonchesilbeach
   title: On Chesil Beach
   year: 2007
-- audible: true
-  abridged: true
+- abridged: true
+  audible: true
   audible_popularity: 145
   audible_score: 4.186206896551724
   audible_url: https://www.audible.com/pd/The-Master-and-Margarita-Audiobook/B004XNIJRG?qid=1588678440&sr=1-2&ref=a_search_c3_lProduct_1_2&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=HY9QST9XT9K3WZSSRRKY
@@ -1243,10 +1435,10 @@
   - Mikhail Bulgakov
   book: 7
   book_review: Look, obviously this is a masterpiece of Russian literature, and normally
-    I love surrealism, but this was so off the wall I had no idea what was going on
-    for huge chunks of it. I still enjoyed myself, but feel like some deeper significance
-    passed over me. There are two versions of this on audible; I think I listened
-    to the shorter one.
+    I love surrealism, but this was so off the wall that I had no almost idea what
+    was going on for huge chunks of it. I still enjoyed myself, but feel like some
+    deeper significance passed over me. There are two versions of this on audible;
+    I think I listened to the shorter one.
   day: 25
   goodreads_id: '117833'
   goodreads_popularity: 183628
@@ -1260,6 +1452,7 @@
   overall_score: 7.0
   performance: 7
   performance_review: Fun.
+  sorting_key: bulgakovthemasterandmargarita
   title: The Master and Margarita
   year: 2011
 - audible: true
@@ -1283,6 +1476,7 @@
   overall_score: 7.0
   performance: 7
   performance_review: Good.
+  sorting_key: pollockthedevilallthetime
   title: The Devil All the Time
   year: 2011
 - audible: true
@@ -1307,6 +1501,7 @@
   overall_score: 6.5
   performance: 7
   performance_review: Good.
+  sorting_key: pollocktheheavenlytable
   title: The Heavenly Table
   year: 2016
 - audible: true
@@ -1331,6 +1526,7 @@
   overall_score: 7.0
   performance: 7
   performance_review: Good.
+  sorting_key: jacksonwehavealwayslivedinthecastle
   title: We Have Always Lived in the Castle
   year: 2010
 - audible: true
@@ -1355,7 +1551,8 @@
   overall_score: 7.0
   performance: 7
   performance_review: Some find the performance hard to follow; fine for me.
-  title: "The Underground Railroad"
+  sorting_key: whiteheadtheundergroundrailroad
+  title: The Underground Railroad
   year: 2016
 - audible: true
   audible_popularity: 4725
@@ -1380,6 +1577,7 @@
   overall_score: 6.0
   performance: 6
   performance_review: Not bad.
+  sorting_key: wilsonnothingtoseehere
   title: Nothing to See Here
   year: 2019
 - audible: true
@@ -1406,6 +1604,7 @@
   overall_score: 7.5
   performance: 8
   performance_review: Performances are splendid.
+  sorting_key: atwoodtheheartgoeslast
   title: The Heart Goes Last
   year: 2015
 - audible: true
@@ -1437,6 +1636,10 @@
   - '1'
   series:
   - Thomas Cromwell Trilogy
+  series_nested:
+  - name: Thomas Cromwell Trilogy
+    position: '1'
+  sorting_key: mantelthomascromwelltrilogy010wolfhall
   title: Wolf Hall
   year: 2009
 - audible: true
@@ -1447,7 +1650,8 @@
   - Hilary Mantel
   book: 10
   book_review: 'Every bit as good as <i>Wolf Hall</i>. Cannot wait to listen to the
-    final installment. Words I learned while listening: <a href="https://www.lexico.com/en/definition/milksop">milksop</a>, <a href="https://www.lexico.com/en/definition/obdurate">obdurate</a>, <a href="https://www.lexico.com/en/definition/sophistry">sophistry</a>.'
+    final installment. Words I learned while listening: <a href="https://www.lexico.com/en/definition/milksop">milksop</a>,
+    <a href="https://www.lexico.com/en/definition/obdurate">obdurate</a>, <a href="https://www.lexico.com/en/definition/sophistry">sophistry</a>.'
   day: 8
   goodreads_id: '13507212'
   goodreads_popularity: 52523
@@ -1465,6 +1669,10 @@
   - '2'
   series:
   - Thomas Cromwell Trilogy
+  series_nested:
+  - name: Thomas Cromwell Trilogy
+    position: '2'
+  sorting_key: mantelthomascromwelltrilogy020bringupthebodies
   title: Bring Up the Bodies
   year: 2012
 - audible: true
@@ -1491,6 +1699,7 @@
   overall_score: 8.0
   performance: 10
   performance_review: Vance is on top form.
+  sorting_key: hardythereturnofthenative
   title: The Return of the Native
   year: 2010
 - audible: true
@@ -1522,6 +1731,10 @@
   - '1'
   series:
   - The Broken Earth
+  series_nested:
+  - name: The Broken Earth
+    position: '1'
+  sorting_key: jemisinthebrokenearth010thefifthseason
   title: The Fifth Season
   year: 2015
 - audible: true
@@ -1552,6 +1765,10 @@
   - '2'
   series:
   - The Broken Earth
+  series_nested:
+  - name: The Broken Earth
+    position: '2'
+  sorting_key: jemisinthebrokenearth020theobeliskgate
   title: The Obelisk Gate
   year: 2016
 - audible: true
@@ -1562,13 +1779,13 @@
   - N. K. Jemisin
   book: 4
   book_review: "I liked the first one, but I don\u2019t understand the praise for\
-    \ the rest of this series. By the end, I was straight-up annoyed. Numerous aspects of the plot simply didn\u2019t make sense to me. For\
-    \ example: <span class=\"spoiler2\">Why is Hoa so attached to Essun? Who made\
-    \ the guardians exactly? Why does Nassun decide to destroy the world in the first\
-    \ place, then why does she change her mind? Who the\
-    \ hell was that guy right at the beginning of the first novel and what did that\
-    \ have to do with anything?</span> The writing was so plodding it felt like I\
-    \ was turning to stone myself."
+    \ the rest of this series. By the end, I was straight-up annoyed. The writing\
+    \ was so plodding it felt like I was turning to stone myself. Numerous aspects\
+    \ of the plot simply didn\u2019t make sense to me. <span class=\"spoiler\">For\
+    \ example:  why is Hoa so attached to Essun initially? Who made the guardians\
+    \ exactly? Why does Nassun decide to destroy the world in the first place, then\
+    \ why does she change her mind? Who the hell was that guy right at the beginning\
+    \ of the first novel and what did that scene have to do with anything that followed?</span>"
   day: 15
   goodreads_id: '31817749'
   goodreads_popularity: 46384
@@ -1586,6 +1803,10 @@
   - '3'
   series:
   - The Broken Earth
+  series_nested:
+  - name: The Broken Earth
+    position: '3'
+  sorting_key: jemisinthebrokenearth030thestonesky
   title: The Stone Sky
   year: 2017
 - audible: true
@@ -1624,6 +1845,12 @@
   series:
   - The Stormlight Archive
   - The Cosmere
+  series_nested:
+  - name: The Stormlight Archive
+    position: '1'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonthestormlightarchive010thewayofkings
   title: The Way of Kings
   year: 2010
 - audible: true
@@ -1661,6 +1888,12 @@
   series:
   - The Stormlight Archive
   - The Cosmere
+  series_nested:
+  - name: The Stormlight Archive
+    position: '2'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonthestormlightarchive020wordsofradiance
   title: Words of Radiance
   year: 2014
 - audible: true
@@ -1693,6 +1926,12 @@
   series:
   - The Stormlight Archive
   - The Cosmere
+  series_nested:
+  - name: The Stormlight Archive
+    position: '3'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonthestormlightarchive030oathbringer
   title: Oathbringer
   year: 2017
 - audible: true
@@ -1702,8 +1941,8 @@
   authors:
   - Brandon Sanderson
   book: 4
-  book_review: "I found this book to be a painful slog. It is the least interesting\
-    \ of Sanderson\u2019s worlds\u2014I don\u2019t know why, but the color stuff just\
+  book_review: "I found this to be a painful slog. It is the least interesting of\
+    \ Sanderson\u2019s worlds\u2014I don\u2019t know why, but the color stuff just\
     \ doesn\u2019t land for me\u2014and the characters are excruciatingly generic.\
     \ Gave up about halfway through."
   day: 3
@@ -1727,6 +1966,12 @@
   series:
   - Warbreaker
   - The Cosmere
+  series_nested:
+  - name: Warbreaker
+    position: '1'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonwarbreaker010warbreaker
   title: Warbreaker
   year: 2015
 - audible: true
@@ -1760,6 +2005,12 @@
   series:
   - Mistborn
   - The Cosmere
+  series_nested:
+  - name: Mistborn
+    position: '1'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonmistborn010thefinalempire
   title: The Final Empire
   year: 2008
 - audible: true
@@ -1769,12 +2020,14 @@
   authors:
   - Brandon Sanderson
   book: 7
-  book_review: "Sanderson is a fantastic world-builder, but his characters are mostly\
-    \ disappointing. So it is major bummer that <span class=\"spoiler2\">Kelsier,\
-    \ the best character in the series, is gone.</span> One of characters is described\
-    \ blandly as \u201Cinsane\u201D and hears voices that order him to kill people\u2014\
-    I was disappointed that Sanderson employed this trope given that he is one of\
-    \ the less problematic fantasy writers in general. It is eventually explained away, but still. Good twist at the end though!"
+  book_review:
+    Sanderson is a fantastic world-builder, but his characters are mostly
+    disappointing. <span class="spoiler">So it is major bummer that Kelsier,
+    the best character in the series, is gone.</span> One of characters is described
+    blandly as “insane,” hearing voices that order him to kill people;
+    I was disappointed that Sanderson employed this trope given that he is one of
+    the less problematic fantasy writers in general. It is eventually explained
+    away, but still. Good twist at the end though!
   day: 28
   goodreads_id: '68429'
   goodreads_popularity: 226514
@@ -1794,6 +2047,12 @@
   series:
   - Mistborn
   - The Cosmere
+  series_nested:
+  - name: Mistborn
+    position: '2'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonmistborn020thewellofascension
   title: The Well of Ascension
   year: 2008
 - audible: true
@@ -1804,11 +2063,11 @@
   - Brandon Sanderson
   book: 4
   book_review: "I was really disappointed. Vin and Eland\u2019s relationship is neither\
-    \ convincing nor interesting. I don\u2019t understand why Sanderson decided to <span\
-    \ class=\"spoiler2\">turn Eland into a mistborn, the fact that he WASN\u2019T\
-    \ a great fighter was one of the only moderately interesting things about him.</span>\
-    \ Sazed spends the whole book moping about and whinging. To top it off, he also\
-    \ delivers the worst final line ever ever written."
+    \ convincing nor interesting. \
+    \ <span class=\"spoiler\">I don\u2019t understand why Sanderson decided to turn Eland into a mistborn, the fact that he WASN\u2019\
+    T a great fighter was one of the only moderately interesting things about him.</span>\
+    \ Sazed spends the whole book moping about and whinging. Finally, to top it off, he\
+    \ delivers possibly the worst final line ever ever written."
   day: 30
   goodreads_id: '2767793'
   goodreads_popularity: 213935
@@ -1828,6 +2087,12 @@
   series:
   - Mistborn
   - The Cosmere
+  series_nested:
+  - name: Mistborn
+    position: '3'
+  - name: The Cosmere
+    position: null
+  sorting_key: sandersonmistborn030theheroofages
   title: The Hero of Ages
   year: 2007
 - audible: true
@@ -1861,6 +2126,12 @@
   series:
   - The Expanse
   - The Expanse (Chronological order)
+  series_nested:
+  - name: The Expanse
+    position: '1'
+  - name: The Expanse (Chronological order)
+    position: '1'
+  sorting_key: coreytheexpanse010leviathanwakes
   title: Leviathan Wakes
   year: 2017
 - audible: true
@@ -1884,6 +2155,7 @@
   overall_score: 7.5
   performance: 8
   performance_review: Cumberbatch magnificently chews the scenery.
+  sorting_key: goldingthespire
   title: The Spire
   year: 2014
 - audible: true
@@ -1911,6 +2183,10 @@
   - '4'
   series:
   - Hyperion Cantos
+  series_nested:
+  - name: Hyperion Cantos
+    position: '4'
+  sorting_key: simmonshyperioncantos040theriseofendymion
   title: The Rise of Endymion
   year: 2009
 - audible: true
@@ -1939,6 +2215,10 @@
   - '3'
   series:
   - Hyperion Cantos
+  series_nested:
+  - name: Hyperion Cantos
+    position: '3'
+  sorting_key: simmonshyperioncantos030endymion
   title: Endymion
   year: 2009
 - audible: true
@@ -1962,6 +2242,7 @@
   overall_score: 6.5
   performance: 6
   performance_review: Performance was fine.
+  sorting_key: greerless
   title: Less
   year: 2017
 - audible: true
@@ -1995,6 +2276,14 @@
   - "Ender\u2019s Saga"
   - 'Enderverse:  Publication Order'
   - The Enderverse
+  series_nested:
+  - name: "Ender\u2019s Saga"
+    position: '2'
+  - name: 'Enderverse:  Publication Order'
+    position: '2'
+  - name: The Enderverse
+    position: '12'
+  sorting_key: cardenderssaga020speakerforthedead
   title: Speaker for the Dead
   year: 2001
 - audible: true
@@ -2025,6 +2314,10 @@
   - '1'
   series:
   - Zones of Thought
+  series_nested:
+  - name: Zones of Thought
+    position: '1'
+  sorting_key: vingezonesofthought010afireuponthedeep
   title: A Fire Upon the Deep
   year: 2010
 - audible: true
@@ -2035,8 +2328,8 @@
   - Tade Thompson
   book: 5
   book_review: "The story had some very interesting elements but the main character\
-    \ so two-dimensional that ultimately I didn\u2019t care about him. Can\u2019t\
-    \ get excited about the rest of the series."
+    \ was rather two-dimensional and ultimately I didn\u2019t care about him. Can\u2019\
+    t get excited about the rest of the series."
   day: 18
   goodreads_id: '38362809'
   goodreads_popularity: 5116
@@ -2054,9 +2347,14 @@
   - '1'
   series:
   - The Wormwood Trilogy
+  series_nested:
+  - name: The Wormwood Trilogy
+    position: '1'
+  sorting_key: thompsonthewormwoodtrilogy010rosewater
   title: Rosewater
   year: 2018
-- audible: true
+- abridged: true
+  audible: true
   audible_popularity: 161
   audible_score: 4.086956521739131
   audible_url: https://www.audible.com/pd/The-Left-Hand-of-Darkness-Audiobook/B01GVUWD84?qid=1589035489&sr=1-2&ref=a_search_c3_lProduct_1_2&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=DFWRZEFAC99783D84B38
@@ -2083,8 +2381,11 @@
   - '4'
   series:
   - Hainish Cycle
+  series_nested:
+  - name: Hainish Cycle
+    position: '4'
+  sorting_key: guinhainishcycle040thelefthandofdarkness
   title: The Left Hand of Darkness
-  abridged: true
   year: 2016
 - audible: true
   audible_popularity: 2925
@@ -2107,6 +2408,7 @@
   overall_score: 5.5
   performance: 6
   performance_review: Decent.
+  sorting_key: braithwaitemysistertheserialkiller
   title: My Sister, the Serial Killer
   year: 2018
 - audible: true
@@ -2140,6 +2442,10 @@
   - '1'
   series:
   - The Wheel of Time
+  series_nested:
+  - name: The Wheel of Time
+    position: '1'
+  sorting_key: jordanthewheeloftime010theeyeoftheworld
   title: The Eye of the World
   year: 2006
 - audible: true
@@ -2151,17 +2457,18 @@
   book: 4
   book_review: "I remember reading this in paper form as a teenager and being blown\
     \ away by it. What was I thinking?! Certainly there\u2019s some iconic stuff in\
-    \ here\u2014the spice, the sandworms, \u201Cfear is the mind killer,\u201D etc.\u2014\
-    but the writing is crap and there is no tension. Paul and company are in no real\
-    \ danger at any point. <span class=\"spoiler2\">Paul starts to display prodigious\
-    \ talents right away. By the halfway point, he\u2019s a mentat, a military genius,\
-    \ a master duelist, the messiah to the Fremen AND the Bene Gesserit, and can see\
-    \ into the bloody future!</span> Also, there are some gaping plot holes I never\
-    \ noticed the first time. Exhibit A: <span class=\"spoiler2\">if spice\
-    \ is necessary for creating mentats and therefore interstellar travel, how did\
-    \ anybody get to Arrakis and find the stuff in the first place?</span> Exhibit\
-    \ B: <span class=\"spoiler2\">Yueh devises the worst assassination plot in history\
-    \ with no backup plan.</span> I could go on."
+    \ here\u2014the spice, the sandworms, fear is the mind killer, etc.\u2014but the\
+    \ writing is crap and there is absolutely no tension. <span class=\"spoiler\"\
+    >Paul is in no real danger at any point during the novel. He starts to display\
+    \ prodigious talents right away, and by the halfway point, he\u2019s a mentat,\
+    \ a military genius, a master duelist, messiah to the Fremen, chosen one to the\
+    \ Bene Gesserit, and can see into the bloody future! There are some enormous plot\
+    \ holes I missed the first time. For instance, if the spice is necessary for creating\
+    \ mentats and therefore interstellar travel, how did anybody get to Arrakis in\
+    \ the first place? Is it just me, or is Yueh\u2019s assassination plot the dumbest\
+    \ ever devised? Surely it would\u2019ve been simpler to shoot/blow-up/poison the\
+    \ guy himself rather than drag poor old Leto into it. Or maybe <b>just not kill\
+    \ Leto in the first place!</b></span>"
   day: 31
   goodreads_id: '44767458'
   goodreads_popularity: 56110
@@ -2187,6 +2494,10 @@
   - '1'
   series:
   - Dune
+  series_nested:
+  - name: Dune
+    position: '1'
+  sorting_key: herbertdune010dune
   title: Dune
   year: 2006
 - audible: true
@@ -2221,6 +2532,12 @@
   series:
   - Dune
   - Dune Universe
+  series_nested:
+  - name: Dune
+    position: '2'
+  - name: Dune Universe
+    position: '12'
+  sorting_key: herbertdune020dunemessiah
   title: Dune Messiah
   year: 2007
 - audible: true
@@ -2253,6 +2570,10 @@
   - '1'
   series:
   - Imperial Radch
+  series_nested:
+  - name: Imperial Radch
+    position: '1'
+  sorting_key: leckieimperialradch010ancillaryjustice
   title: Ancillary Justice
   year: 2018
 - audible: true
@@ -2281,6 +2602,10 @@
   - '1'
   series:
   - Holes
+  series_nested:
+  - name: Holes
+    position: '1'
+  sorting_key: sacharholes010holes
   title: Holes
   year: 2003
 - audible: true
@@ -2295,7 +2620,7 @@
     \ one of the finest books about writing ever written. Some online reviews suggest\
     \ that <i>Revival</i> is a partial return to form, but I thought it was rubbish.\
     \ It\u2019s not badly written or anything, it\u2019s just so clear that King didn\u2019\
-    t do any research whatsoever. For instance, <span class=\"spoiler2\">one of the\
+    t do any research whatsoever. For instance, <span class=\"spoiler\">one of the\
     \ characters gets into a motor accident that renders him totally mute, yet without\
     \ any other physical or neurological problems. What on earth would cause this?</span>\
     \ \u201CSchlocky\u201D is a good word for it."
@@ -2313,6 +2638,7 @@
   overall_score: 4.0
   performance: 7
   performance_review: Morse is actually very good! Shame about the content.
+  sorting_key: kingrevival
   title: Revival
   year: 2014
 - audible: true
@@ -2324,7 +2650,8 @@
   book: 2
   book_review: My second attempt at a more recent King novel. I was going with it
     for a while, but then the protagonist started reading an article in <i>The Journal
-    of Parapsychology</i>. At that point, I knew exactly where we were headed, and bailed.
+    of Parapsychology</i>. At that point, I knew exactly where we were headed, and
+    bailed.
   day: 22
   dnf: true
   goodreads_id: '472343'
@@ -2339,6 +2666,7 @@
   overall_score: 3.5
   performance: 5
   performance_review: "I didn\u2019t hear enough to form a strong opinion."
+  sorting_key: kingdumakey
   title: Duma Key
   year: 2008
 - audible: true
@@ -2348,10 +2676,10 @@
   authors:
   - Richard Matheson
   book: 1
-  book_review: The titular story is lauded by sci-fi fans, mainly for its ending I
-    think. In my opinion, its actually quite dumb (though I admit, not as dumb as the Will
-    Smith movie). The other stories in the collection range from forgettable to cringeworthy.
-    I could not get through them all.
+  book_review: The titular story is lauded by sci-fi fans, mainly for its ending.
+    In my opinion, the whole thing actually quite dumb (though I admit, not as dumb
+    as the Will Smith movie). The other stories in the collection range from forgettable
+    to cringeworthy; I could not get through them all.
   day: 29
   dnf: true
   goodreads_id: '547094'
@@ -2369,6 +2697,7 @@
   performance_review: I think I listened to an older edition of this (cover was different).
     If this is a new narrator, they would need to do an incredible job to make this
     worth a listen.
+  sorting_key: mathesoniamlegendandotherstories
   title: I Am Legend and Other Stories
   year: 2015
 - audible: true
@@ -2394,6 +2723,7 @@
   overall_score: 3.0
   performance: 5
   performance_review: I don't recall.
+  sorting_key: tremblayaheadfullofghosts
   title: A Head Full of Ghosts
   year: 2015
 - audible: true
@@ -2427,6 +2757,10 @@
   - '1'
   series:
   - "The Handmaid\u2019s Tale"
+  series_nested:
+  - name: "The Handmaid\u2019s Tale"
+    position: '1'
+  sorting_key: atwoodthehandmaidstale010thehandmaidstalespecialedition
   title: "The Handmaid\u2019s Tale: Special Edition"
   year: 2017
 - audible: true
@@ -2439,9 +2773,9 @@
   book_review: "<i>Handmaid\u2019s</i> is the more important work from a literary\
     \ standpoint, but I think that <i>The Testaments</i> is the better book. It is\
     \ more plot-driven, and the multiple points of view makes the book feel deeper\
-    \ and more rounded. I found the exploration of Aunt\
-    \ Lydia\u2019s character both fascinating and totally believable. She reminded\
-    \ of <a href=\"https://en.wikipedia.org/wiki/Mike_Rinder\">Mike Rinder</a>."
+    \ and more rounded. I found the exploration of Aunt Lydia\u2019s character both\
+    \ fascinating and totally believable. She reminded of <a href=\"https://en.wikipedia.org/wiki/Mike_Rinder\"\
+    >Mike Rinder</a>."
   day: 10
   goodreads_id: '38447'
   goodreads_popularity: 1173547
@@ -2464,6 +2798,10 @@
   - '2'
   series:
   - "The Handmaid\u2019s Tale"
+  series_nested:
+  - name: "The Handmaid\u2019s Tale"
+    position: '2'
+  sorting_key: atwoodthehandmaidstale020thetestaments
   title: The Testaments
   year: 2019
 - audible: true
@@ -2492,13 +2830,19 @@
   performance: 8
   performance_review: Same narrator as Murgen from the Black Company. He has an odd
     style, which actually fits well with the overall strangeness of this series.
-  title: The Shadow of the Torturer
   position_in_series:
-    - '1'
-    - '1'
+  - '1'
+  - '1'
   series:
-    - The Book of the New Sun
-    - Solar Cycle
+  - The Book of the New Sun
+  - Solar Cycle
+  series_nested:
+  - name: The Book of the New Sun
+    position: '1'
+  - name: Solar Cycle
+    position: '1'
+  sorting_key: wolfethebookofthenewsun010theshadowofthetorturer
+  title: The Shadow of the Torturer
   year: 2010
 - audible: true
   audible_popularity: 953
@@ -2531,6 +2875,12 @@
   series:
   - The Book of the New Sun
   - Solar Cycle
+  series_nested:
+  - name: The Book of the New Sun
+    position: '2'
+  - name: Solar Cycle
+    position: '2'
+  sorting_key: wolfethebookofthenewsun020theclawoftheconciliator
   title: The Claw of the Conciliator
   year: 2009
 - audible: true
@@ -2560,6 +2910,12 @@
   series:
   - The Book of the New Sun
   - Solar Cycle
+  series_nested:
+  - name: The Book of the New Sun
+    position: '4'
+  - name: Solar Cycle
+    position: '4'
+  sorting_key: wolfethebookofthenewsun040thecitadeloftheautarch
   title: The Citadel of the Autarch
   year: 2010
 - audible: true
@@ -2589,6 +2945,12 @@
   series:
   - The Book of the New Sun
   - Solar Cycle
+  series_nested:
+  - name: The Book of the New Sun
+    position: '3'
+  - name: Solar Cycle
+    position: '3'
+  sorting_key: wolfethebookofthenewsun030theswordofthelictor
   title: The Sword of the Lictor
   year: 2010
 - audible: true
@@ -2622,6 +2984,12 @@
   series:
   - The Book of the New Sun
   - Solar Cycle
+  series_nested:
+  - name: The Book of the New Sun
+    position: '5'
+  - name: Solar Cycle
+    position: '5'
+  sorting_key: wolfethebookofthenewsun050theurthofthenewsun
   title: The Urth of the New Sun
   year: 2018
 - audible: true
@@ -2637,9 +3005,8 @@
     \ each embodying a one-note archetype (feral ultra-warrior and object of the male\
     \ gaze). The world of The First Law seems a bit bland compared to others (cf.\
     \ The Black Company; Malazan Book of the Fallen). But despite all of this, I actually\
-    \ enjoyed <i>The Blade Itself</i> very much! I found Logen and Sand interesting\
-    \ characters, and I laughed out loud at several points, usually at Jezal\u2019\
-    s internal monologues."
+    \ enjoyed <i>The Blade Itself</i> very much! I found all the POV characters interesting\
+    \ and engaging and laughed out loud multiple times."
   day: 8
   goodreads_id: '60215'
   goodreads_popularity: 4816
@@ -2650,13 +3017,18 @@
   month: 9
   narrators:
   - Steven Pacey
-  overall_score: 8.0
-  performance: 8
-  performance_review: Great job.
+  overall_score: 9.0
+  performance: 10
+  performance_review: "Pacey\u2019s top-notch delivery is perhaps part of the reason\
+    \ I enjoyed this so much."
   position_in_series:
   - '1'
   series:
   - The First Law
+  series_nested:
+  - name: The First Law
+    position: '1'
+  sorting_key: abercrombiethefirstlaw010thebladeitself
   title: The Blade Itself
   year: 2015
 - audible: true
@@ -2685,7 +3057,11 @@
   position_in_series:
   - '1'
   series:
-  - QualityLand - Saga
+  - QualityLand
+  series_nested:
+  - name: QualityLand
+    position: '1'
+  sorting_key: klingqualityland010qualityland
   title: Qualityland
   year: 2020
 - audible: true
@@ -2714,6 +3090,10 @@
   - '1'
   series:
   - Three Men
+  series_nested:
+  - name: Three Men
+    position: '1'
+  sorting_key: jeromethreemen010threemeninaboattosaynothingofthedog
   title: Three Men in a Boat (To Say Nothing of the Dog)
   year: 2011
 - audible: true
@@ -2748,6 +3128,16 @@
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
   - Penric and Desdemona (Chronological order)
+  series_nested:
+  - name: Penric and Desdemona (Publication order)
+    position: '3'
+  - name: World of the Five Gods (Publication order)
+    position: '3.3'
+  - name: World of the Five Gods (Chronological order)
+    position: '1.4'
+  - name: Penric and Desdemona (Chronological order)
+    position: '4'
+  sorting_key: bujoldpenricanddesdemonapublicationorder030penricsmissionanovellaintheworldofthefivegods
   title: "Penric\u2019s Mission: A Novella in the World of the Five Gods"
   year: 2017
 - audible: true
@@ -2773,6 +3163,7 @@
   performance: 6
   performance_review: "The narration is decent but I\u2019m not sure it translates\
     \ from print entirely successfully. I would go for the book."
+  sorting_key: offillweather
   title: Weather
   year: 2020
 - audible: true
@@ -2803,6 +3194,12 @@
   series:
   - World of the Five Gods (Publication order)
   - World of the Five Gods (Chronological order)
+  series_nested:
+  - name: World of the Five Gods (Publication order)
+    position: '3'
+  - name: World of the Five Gods (Chronological order)
+    position: '1'
+  sorting_key: bujoldworldofthefivegodspublicationorder030thehallowedhunt
   title: The Hallowed Hunt
   year: 2007
 - audible: true
@@ -2830,6 +3227,7 @@
   performance: 7
   performance_review: "Guidall doesn\u2019t do more than deliver the text with the\
     \ gravity it deserves, nor should he."
+  sorting_key: herseyhiroshima
   title: Hiroshima
   year: 2019
 - audible: true
@@ -2840,9 +3238,9 @@
   - Cixin Liu
   - Joel Martinsen - translator
   book: 5
-  book_review: So impressively thought-through that the theory and experiments feel
-    authentic despite the outlandish premise. But I can’t say I enjoyed it, probably
-    because of the somewhat dull central character.
+  book_review: "So impressively thought-out that the theory and experiments feel authentic\
+    \ despite the outlandish premise. But I can\u2019t say I enjoyed it, probably\
+    \ because of the dull characters."
   day: 14
   goodreads_id: '27323'
   goodreads_popularity: 54065
@@ -2856,6 +3254,7 @@
   overall_score: 5.0
   performance: 5
   performance_review: Fine.
+  sorting_key: liuballlightning
   title: Ball Lightning
   year: 2018
 - audible: true
@@ -2880,6 +3279,7 @@
   overall_score: 9.0
   performance: 10
   performance_review: "Superb, one of the best I\u2019ve heard."
+  sorting_key: moshfeghmcglue
   title: McGlue
   year: 2019
 - audible: true
@@ -2903,6 +3303,7 @@
   overall_score: 8.0
   performance: 8
   performance_review: Great.
+  sorting_key: moshfegheileen
   title: Eileen
   year: 2015
 - audible: true
@@ -2930,5 +3331,143 @@
   overall_score: 8.0
   performance: 8
   performance_review: Great.
+  sorting_key: moshfeghmyyearofrestandrelaxation
   title: My Year of Rest and Relaxation
   year: 2018
+- audible: true
+  audible_popularity: 28621
+  audible_score: 4.736766709758569
+  audible_url: https://www.audible.com/pd/The-Great-Hunt-Audiobook/B002UP1LXS?qid=1593523447&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=4W9SN8WVNY8Z64P61SYH
+  authors:
+  - Robert Jordan
+  book: 5
+  book_review: "I just don\u2019t get it, why do people love this series so much?\
+    \ It's lauded for its complexity and depth\u2014but is having five or six almost\
+    \ identical female characters complex or deep? Seriously: all of them can \u201C\
+    channel,\u201D all of them are beautiful, even their <i>names</i> sound similar!\
+    \ I understand that Jordan is building a world where the genders are fairly equal\
+    \ overall in order to avoid the misogynistic tropes of the genre and he certainly\
+    \ deserves credit for doing that. But that effort is sorely undermined when the\
+    \ women are so bland. The men are pretty dull as well, though, especially Rand."
+  day: 28
+  goodreads_id: 233649
+  goodreads_popularity: 199950
+  goodreads_score: 4.23
+  hours: 26
+  image: https://m.media-amazon.com/images/I/51OSpV9NnsL._SL500_.jpg
+  minutes: 34
+  month: 12
+  narrators:
+  - Kate Reading
+  - Michael Kramer
+  overall_score: 5.5
+  performance: 6
+  performance_review: Kramer/Reading do as well as they can under the circumstances.
+  position_in_series:
+  - '2'
+  series:
+  - The Wheel of Time
+  series_nested:
+  - name: The Wheel of Time
+    position: '2'
+  sorting_key: jordanthewheeloftime020thegreathunt
+  title: The Great Hunt
+  year: 2003
+- audible: true
+  audible_popularity: 10203
+  audible_score: 4.7880035283740074
+  audible_url: https://www.audible.com/pd/Before-They-Are-Hanged-Audiobook/B014LL69TO?qid=1593692824&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=XKJXFAKR28JADTRYSHSG
+  authors:
+  - Joe Abercrombie
+  book: 8
+  book_review: "Although it shares the shortcomings of the previous book in the series,\
+    \ Abercrombie is still far a better writer of characters than many in the fantasy\
+    \ genre. Structurally, development of the six POV characters is impeccable. Each\
+    \ of them change to varying degrees throughout the story, without losing their\
+    \ clear and unique voices, which were established excellently in the first novel.\
+    \ (Five out of six of them are men, but I suppose you can\u2019t have everything.)\
+    \ Above all, <i>Before They Are Hanged</i> is just fun."
+  day: 8
+  goodreads_id: '902715'
+  goodreads_popularity: 92083
+  goodreads_score: 4.3
+  hours: 22
+  image: https://m.media-amazon.com/images/I/61pbE8bm42L._SL500_.jpg
+  minutes: 39
+  month: 9
+  narrators:
+  - Steven Pacey
+  overall_score: 9.0
+  performance: 10
+  performance_review: "The narration is among the of the best I\u2019ve heard. Pacey\
+    \ shows off a truly impressive range of accents and his comic timing is superb."
+  position_in_series:
+  - '2'
+  - '2'
+  series:
+  - The First Law
+  - First Law World
+  series_nested:
+  - name: The First Law
+    position: '2'
+  - name: First Law World
+    position: '2'
+  sorting_key: abercrombiethefirstlaw020beforetheyarehanged
+  title: Before They Are Hanged
+  year: 2015
+- audible: true
+  audible_popularity: 1223
+  audible_score: 4.229762878168438
+  audible_url: https://www.audible.com/pd/The-North-Water-Audiobook/B01F935ID6?qid=1593817122&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=TH81C2VFQXF99CYYWA52
+  authors:
+  - Ian McGuire
+  book: 7
+  book_review: Visceral, grimy nautical tale not dissimilar in content and tone to
+    <i>McGlue</i> and <i>The Terror</i>. I enjoyed it.
+  day: 9
+  goodreads_id: '25666046'
+  goodreads_popularity: 15003
+  goodreads_score: 3.99
+  hours: 9
+  image: https://m.media-amazon.com/images/I/61jgOg7oe1L._SL500_.jpg
+  minutes: 40
+  month: 5
+  narrators:
+  - John Keating
+  overall_score: 7.0
+  performance: 7
+  performance_review: Keating is very pleasant to listen to and he does a good job
+    here.
+  sorting_key: mcguirethenorthwater
+  title: The North Water
+  year: 2016
+- audible: true
+  audible_popularity: 454
+  audible_score: 3.9140969162995596
+  audible_url: https://www.audible.com/pd/Wilder-Girls-Audiobook/1982602023?qid=1593864929&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=Y4EFGD45PCKCR7R28Q24
+  authors:
+  - Rory Power
+  book: 4
+  book_review: "Often lazily and inaccurately compared to <i>Lord of the Flies</I>,\
+    \ a bunch of nothing characters quarantined in an all-girl\u2019s school gradually\
+    \ succumb to a sci-fi disease with idiosyncratic and seemingly completely random\
+    \ symptoms. The body-horror elements were mildly interesting at first, but the\
+    \ dull writing and lack of anything close to an interesting relationship between\
+    \ any of the girls meant I could only get through about half before giving up."
+  day: 9
+  goodreads_id: 42505366
+  goodreads_popularity: 21878
+  goodreads_score: 3.58
+  hours: 8
+  image: https://m.media-amazon.com/images/I/51UrFpgkwOL._SL500_.jpg
+  minutes: 49
+  month: 7
+  narrators:
+  - Eileen Stevens
+  - Jesse Vilinsky
+  overall_score: 4.0
+  performance: 4
+  performance_review: "The rather somber narration doesn\u2019t help matters."
+  sorting_key: powerwildergirls
+  title: Wilder Girls
+  year: 2019

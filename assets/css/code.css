@@ -1,14 +1,15 @@
 .highlight {
   overflow: hidden;
   margin: 0;
-  padding: 10px 10px;
+  padding: 5px 5px;
   background: #2d2d2d; 
   color: #cccccc;
-  max-height: 300px;
+  max-height: 500px;
 }
 pre.highlight {
   overflow: scroll;
-  font-size: smaller;
+  font-family: 'Monaco', monospace;
+  line-height: 1;
 }
 
 pre.highlight::-webkit-scrollbar {

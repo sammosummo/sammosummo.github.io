@@ -33,9 +33,47 @@ layout: default
   </ul>
 {% endif %}
 
-<br>
+<h2>Related posts</h2>
+<ul>
 
-{% if page.has_comments %}
-  <div id="commento"></div>
-  <script async src="https://cdn.commento.io/js/commento.js"></script>
- {% endif %}
+{% assign sorted = page.tags | sort %}
+<li>Filed under: {% for tag in sorted %}<a href="/tags#{{ tag }}">{% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %} {{ tag }}</a>{% if tag == last %}{% else %} | {% endif %}{% endfor %}</li>
+<li>Related:
+<div class="related"><ul>
+{% assign maxRelated = 4 %}
+{% assign minCommonTags =  2 %}
+{% assign maxRelatedCounter = 0 %}
+{% for post in site.posts %}
+  {% assign sameTagCount = 0 %}
+  {% assign commonTags = '' %}
+  {% for tag in post.tags %}
+    {% if post.url != page.url %}
+      {% if page.tags contains tag %}
+        {% assign sameTagCount = sameTagCount | plus: 1 %}
+        {% capture tagmarkup %}{% if site.data.emojis contains tag %}<a href="/tags#{{ tag }}">{{ site.data.emojis[tag] }}</a>{% endif %}{% endcapture %}
+        {% assign commonTags = commonTags | append: tagmarkup %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if sameTagCount >= minCommonTags %}
+    <li>{% include post.html %}</li>
+    {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+    {% if maxRelatedCounter >= maxRelated %}
+      {% break %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+</ul></div>
+</li>
+{% if page.previous.url %}
+  {% assign post = page.previous %}
+  <li>Previous:<ul><div class="related"><li>{% include post.html %}</li></div></ul></li>
+{% endif %}
+{% if page.next.url %}
+  {% assign post = page.next %}
+  <li>Next:<ul><div class="related"><li>{% include post.html %}</li></div></ul></li>
+{% endif %}
+
+
+
+</ul>

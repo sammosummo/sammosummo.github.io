@@ -1,3 +1,5 @@
+import re
+
 import goodreads_api_client as gr
 import json
 import urllib.request
@@ -68,14 +70,67 @@ def updated(book):
         book = {**goodreads(book["goodreads_id"]), **book}
 
     book["overall_score"] = (book["book"] + book["performance"]) / 2
+    a = [book["authors"][0].split()[-1]]
+
+    if "Jr" in a:
+
+        a = [book["authors"][0].split()[-2]]
+
+    if "series" in book:
+
+        a += book["series"][0].split()
+        a.append(f"{float(book['position_in_series'][0]):05.2f}")
+
+    a += book["title"].split(" ")
+    a = [b for b in a if b not in ("The", "A")]
+    book["sorting_key"] = "-".join(re.sub("[^A-Za-z0-9]+", "", b) for b in a)
+    print(book["sorting_key"])
+
+    if "series" in book:
+
+        book["series_nested"] = [
+            {"name": a, "position": b}
+            for a, b in zip(book["series"], book["position_in_series"])
+        ]
+
+    if "tags" not in book:
+
+        book["tags"] = []
+
+    book["tags"] = sorted(set(book["tags"] + input("Tags (space delimited):").split()))
 
     return book
+
+
+def add_tags(books):
+    """Adds tags t books.
+
+    """
+    tags = [
+        "short-stories",
+        "novella",
+        "fixup",
+        "bildungsroman",
+        "sci-fi",
+        "dnf",
+        "fantasy",
+        "lgbt-characters",
+        "feminism",
+        "mental-illness",
+        "epistolary",
+        "racism",
+        "bechdel-pass",
+        "bechdel-fail",
+        "surreal",
+        "dark",
+        "light",
+    ]
 
 
 def main():
     f = "../../_data/audiobooks.yaml"
     books = yaml.load(open(f), Loader=yaml.FullLoader)
-    books = [updated(book) for book in tqdm(books)]
+    books = [updated(book) for book in books]
     yaml.dump(books, open(f, "w"))
 
 

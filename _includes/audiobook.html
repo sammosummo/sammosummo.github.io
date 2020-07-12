@@ -1,7 +1,7 @@
-<p class="audiobooks">
-<img src="{{ book.image }}" width="40%" />
-<h3><i>{{ book.title }}</i> by {{ book.authors[0] }}</h3>
-<ul>
+<p>
+<img src="{{ book.image }}" width="35%" />
+<h3>{% if counter %}No. {{ counter }}: {% endif %}<i>{{ book.title }}</i> by {{ book.authors[0] }}</h3>
+<ul class="audiobooks">
     {% if book.series %}
         <li>
             {% if book.series.size == 1 %}
@@ -55,3 +55,4 @@
         <b>Performance review</b>: {{ book.performance_review }} <b>{{ book.performance }}/10.</b>
     </li>
 </ul>
+</p>
