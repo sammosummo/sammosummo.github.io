@@ -3448,12 +3448,12 @@
   authors:
   - Rory Power
   book: 4
-  book_review: "Often lazily and inaccurately compared to <i>Lord of the Flies</I>,\
+  book_review: "Lazily and inaccurately compared to <i>Lord of the Flies</I>,\
     \ a bunch of nothing characters quarantined in an all-girl\u2019s school gradually\
-    \ succumb to a sci-fi disease with idiosyncratic and seemingly completely random\
+    \ succumb to a sci-fi disease with seemingly completely random\
     \ symptoms. The body-horror elements were mildly interesting at first, but the\
     \ dull writing and lack of anything close to an interesting relationship between\
-    \ any of the girls meant I could only get through about half before giving up."
+    \ any of the characters meant I could only get through about half before giving up."
   day: 9
   goodreads_id: 42505366
   goodreads_popularity: 21878
@@ -3471,3 +3471,12 @@
   sorting_key: powerwildergirls
   title: Wilder Girls
   year: 2019
+- audible_url: https://www.audible.com/pd/Horseman-Pass-By-Audiobook/B004NMWTCI?qid=1594595897&sr=1-1&ref=a_search_c3_lProduct_1_1&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=NXWPSV2G039YN08FTJF4
+  goodreads_id: 54825
+  book: 6
+  book_review: Well written and interesting characters but it just didn’t  grab me for whatever reason.
+  performance: 1
+  perfromance_review: My guess is that this was initially recorded on tape in the ‘80s or ‘90s. The digitization is a complete mess; the bit rate seemingly drops around halfway through and they couldn’t be bothered to chop out the “this concludes disk X” markers. Hands down my worst listening experience so far from a purely aural perspective. Narration is also a little flat.
+- audible_url: https://www.audible.com/pd/The-Assassination-of-Margaret-Thatcher-Stories-Audiobook/B00MQ2TL96?qid=1594596830&sr=1-14&ref=a_search_c3_lProduct_1_14&pf_rd_p=e81b7c27-6880-467a-b5a7-13cef5d729fe&pf_rd_r=7SGFFK6F2PMQDFB99JH8
+  goodreads_id:
+

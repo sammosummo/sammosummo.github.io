@@ -122,9 +122,10 @@ def add_tags(books):
         "bechdel-pass",
         "bechdel-fail",
         "surreal",
-        "dark",
-        "light",
     ]
+    for tag in tags:
+        for book in books:
+            print(tag)
 
 
 def main():

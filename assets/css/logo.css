@@ -1,0 +1,45 @@
+#logo {
+  float: right;
+  width: 105px;
+  padding: 0;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  #logo {
+    display: block;
+  }
+}
+
+#title, #title:hover {
+    text-decoration: none;
+    font-family: 'trocchi', 'Baskerville', serif;
+    font-weight: normal;
+    font-size: 0.75em;
+    line-height: 0rem;
+    color: #34312f;
+    background: none;
+    -webkit-background-size: 0;
+    -moz-background-size: 0;
+    background-size: 0;
+}
+
+@media (min-width: 640px) {
+    #title, #title:hover {
+        font-size: 1em;
+    }
+}
+
+nav {
+    line-height: 0rem;
+    margin-top: -1rem;
+    margin-bottom: 0rem;
+    font-size: 0.75em;
+}
+
+@media (min-width: 640px) {
+    nav {
+        font-size: 1.3rem;
+        margin-top: 0rem;
+    }
+}

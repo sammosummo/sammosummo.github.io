@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'charter';
+  src: url('/assets/fonts/charter_regular-webfont.woff2') format('woff2'),
+       url('/assets/fonts/charter_regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'charter';
+  src: url('/assets/fonts/charter_italic-webfont.woff2') format('woff2'),
+       url('/assets/fonts/charter_italic-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'charter';
+  src: url('/assets/fonts/charter_bold-webfont.woff2') format('woff2'),
+       url('/assets/fonts/charter_bold-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'charter';
+  src: url('/assets/fonts/charter_bold_italic-webfont.woff2') format('woff2'),
+       url('/assets/fonts/charter_bold_italic-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'trocchi';
+  src: url('/assets/fonts/trocchi-webfont.woff2') format('woff2'),
+       url('/assets/fonts/trocchi-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

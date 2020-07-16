@@ -1,12 +1,12 @@
 ---
 layout: default
 ---
-<br>
 
-This is the personal website of <a href="about">Sam Mathias</a>, a curmudgeonly English researcher based in
+<div class="tags"></div>
+<p>This is the personal website of <a href="about">Sam Mathias</a>, a curmudgeonly English researcher based in
 Boston, MA. It contains code snippets, stray observations, and wildly misinformed opinions
 on a range of science-related topics. Perhaps you’ll find something interesting here, but
-probably not. I wouldn’t stick around if I were you.
+probably not. I wouldn’t stick around if I were you.</p>
 
 <h2>Latest writing</h2>
     
@@ -18,8 +18,8 @@ probably not. I wouldn’t stick around if I were you.
 </li>
 </ul>
 
-Fair warning: because none of what appears on this website has been peer-reviewed, it might be pure
-nonsense! <a href="writing">Click here for the archive</a>.
+<p>Fair warning: because none of what appears on this website has been peer-reviewed, it might be pure
+nonsense! <a href="writing">Click here for the archive</a>.</p>
 
 <h2>Latest publication</h2>
 

@@ -18,6 +18,8 @@ references:
 revisions:
 - date: 2020-03-01
   reason: Shortened the title
+- date: 2020-07-15
+  reason: Fixed strange new mathjax/kramdown bug
 tags:
 - python
 - bayesian
@@ -53,10 +55,10 @@ sample from Neal's funnel.
 
 Suppose we have the following ten normally distributed random variables:
 
-$$\begin{align}
-v&\sim\textrm{Normal}\left(0, 3\right)\\
-x_i&\sim\textrm{Normal}\left(0,e^v\right)\textrm{ for }i=0\textrm{ to }8\textrm{.}
-\end{align}$$
+$$\begin{equation}
+v\sim\textrm{Normal}\left(0, 3\right)\\
+x_i\sim\textrm{Normal}\left(0,e^v\right)\textrm{ for }i=0\textrm{ to }8
+\end{equation}$$
 
 (Actually, we don't need $$x_1$$ to $$x_8$$ to demonstrate funneling, but this is what Neal
 used, so we'll stick with it.) Let's simulate some data and visualize this probability
@@ -107,11 +109,11 @@ Neal's funnel is a somewhat unrealistic distribution to propose as a model for a
 real-world data-analysis problem. Let's define a distribution that more closely resembles
 something we might actually use:
 
-$$\begin{align}
-\mu&\sim\textrm{Normal}\left(0,1\right)\\
-\sigma&\sim\textrm{Half-Cauchy}\left(1\right)\\
-y_{i}&\sim\textrm{Normal}\left(\mu, \sigma^2\right)\textrm{ for }i=0\textrm{ to }n\textrm{.}
-\end{align}$$
+$$\begin{equation}
+\mu\sim\textrm{Normal}\left(0,1\right)\\
+\sigma\sim\textrm{Half-Cauchy}\left(1\right)\\
+y_{i}\sim\textrm{Normal}\left(\mu, \sigma^2\right)\textrm{ for }i=0\textrm{ to }n
+\end{equation}$$
 
 Here, $$y_0$$ to $$y_n$$ could plausibly be some observed data drawn from the same
 distribution whose mean and variance are unknown. For the sake of simplicity we
@@ -158,11 +160,11 @@ can be reduced by adopting *non-centered parameterizations* (NCPs;
 {{ site.data.refs.Papaspiliopoulos2007a.citenp }}). A successful NCP
 of Neal's funnel is
 
-$$\begin{align}
-v&\sim\textrm{Normal}\left(0, 3\right)\\
-\tilde{x_i}&\sim\textrm{Normal}\left(0,1\right)\textrm{ for }i=0\textrm{ to }8\\
-x_i&=e^v\tilde{x_i}\textrm{.}
-\end{align}$$
+$$\begin{equation}
+v\sim\textrm{Normal}\left(0, 3\right)\\
+\tilde{x_i}\sim\textrm{Normal}\left(0,1\right)\textrm{ for }i=0\textrm{ to }8\\
+x_i=e^v\tilde{x_i}
+\end{equation}$$
 
 There are two differences between the NCP and the original, centered parameterization:
 first, $$x_0$$ through $$x_8$$ are now *deterministic* rather than *stochastic* random
@@ -190,12 +192,12 @@ unnecessary lower-level variables in Neal's funnel.)
 
 Similarly, our second example distribution can be reparameterized as
 
-$$\begin{align}
-\mu&\sim\textrm{Normal}\left(0,1\right)\\
-\sigma&\sim\textrm{Half-Cauchy}\left(1\right)\\
-\tilde{y}_{i}&\sim\textrm{Normal}\left(0, 1\right)\textrm{ for }i=0\textrm{ to }n\\
-y&=\mu+\tilde{y}_{i}\sigma\textrm{.}
-\end{align}$$
+$$\begin{equation}
+\mu\sim\textrm{Normal}\left(0,1\right)\\
+\sigma\sim\textrm{Half-Cauchy}\left(1\right)\\
+\tilde{y}_{i}\sim\textrm{Normal}\left(0, 1\right)\textrm{ for }i=0\textrm{ to }n\\
+y=\mu+\tilde{y}_{i}\sigma
+\end{equation}$$
 
 Again, the NCP removes the dependencies between all the stochastic random variables, and
 reduces funneling, as shown below.

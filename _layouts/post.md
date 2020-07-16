@@ -9,16 +9,23 @@ layout: default
   {% include mathjax.html %}
 {% endif %}
 
-<h1 class="posttitle">{{ page.title }}</h1>
+{% if page.title contains ":" %}
+  {% assign parts = page.title | split: ":" %}
+  <h1 class="posttitle">{{ parts[0] | append: ":" }}</h1>
+  <div class="subtitle">{{ parts[1] }}</div>
+{% else %}
+  <h1 class="posttitle">{{ page.title | replace: ":", ": <br>"}}</h1>
+{% endif %}
+
 
 {% if page.tags %}
-{% assign sorted = page.tags | sort %}
-{% assign last = sorted | last %}
-<b>Tags</b>: {% for tag in sorted %}<a href="/tags#{{ tag }}">{% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %} {{ tag }}</a>{% if tag == last %}{% else %} | {% endif %}{% endfor %}
+  {% assign sorted = page.tags | sort %}
+  {% assign last = sorted | last %}
+  <div class="tags">Filed under {% for tag in sorted %}<a href="/tags#{{ tag }}">{{ tag }}</a>{% if tag == last %}.{% else %}, {% endif %}{% endfor %}</div>
 {% endif %}
 
 {{ content }}
-<hr>
+
 {% if page.include_references %}
   {% include references.html %}
 {% endif %}
@@ -34,12 +41,8 @@ layout: default
 {% endif %}
 
 <h2>Related posts</h2>
-<ul>
 
-{% assign sorted = page.tags | sort %}
-<li>Filed under: {% for tag in sorted %}<a href="/tags#{{ tag }}">{% if site.data.emojis contains tag %}{{ site.data.emojis[tag] }}{% else %}🏷️{% endif %} {{ tag }}</a>{% if tag == last %}{% else %} | {% endif %}{% endfor %}</li>
-<li>Related:
-<div class="related"><ul>
+<ul>
 {% assign maxRelated = 4 %}
 {% assign minCommonTags =  2 %}
 {% assign maxRelatedCounter = 0 %}
@@ -63,17 +66,12 @@ layout: default
     {% endif %}
   {% endif %}
 {% endfor %}
-</ul></div>
-</li>
-{% if page.previous.url %}
-  {% assign post = page.previous %}
-  <li>Previous:<ul><div class="related"><li>{% include post.html %}</li></div></ul></li>
-{% endif %}
-{% if page.next.url %}
-  {% assign post = page.next %}
-  <li>Next:<ul><div class="related"><li>{% include post.html %}</li></div></ul></li>
-{% endif %}
-
-
-
+{% assign sorted = page.tags | sort %}
+{% assign last = sorted | last %}
+<li>All posts filed under {% for tag in sorted %}<a href="/tags#{{ tag }}">{{ tag }}</a>{% if tag == last %}.{% else %}, {% endif %}{% endfor %}</li>
 </ul>
+
+{% if page.has_comments %}
+  <div id="commento"></div>
+  <script async src="https://cdn.commento.io/js/commento.js"></script>
+{% endif %}
