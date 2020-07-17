@@ -97,7 +97,7 @@ def updated(book):
 
         book["tags"] = []
 
-    book["tags"] = sorted(set(book["tags"] + input("Tags (space delimited):").split()))
+    # book["tags"] = sorted(set(book["tags"] + input("Tags (space delimited):").split()))
 
     return book
 
