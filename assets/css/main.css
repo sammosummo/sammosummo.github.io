@@ -4,8 +4,14 @@ body {
   max-width: 720px;
   margin: auto;
   font-family: 'charter', georgia, 'Georgia', serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
+@media (min-width: 500px) {
+    body {
+      font-size: 1.3rem;
+    }
+}
+
 
 h1.posttitle {
     font-weight: bold;
