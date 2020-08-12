@@ -1147,7 +1147,7 @@ audiobooks__py: |
   
           book["tags"] = []
   
-      book["tags"] = sorted(set(book["tags"] + input("Tags (space delimited):").split()))
+      # book["tags"] = sorted(set(book["tags"] + input("Tags (space delimited):").split()))
   
       return book
   
@@ -3185,6 +3185,10 @@ make_my_bib__py: |
           if first_page:
               first_page, *last_page = first_page.split("-")
   
+          cit = ", ".join([a.replace(",", "").replace(". ", "") for a in authors])
+          cit = cit.replace(".", "").replace("& ", "")
+          cit = f"{cit}. {title} {jt}. {year};{first_page}–{last_page}."
+          print(cit)
           dic = {
               "authors": ", ".join(authors),
               "title": title if title[-1] != "." else title[:-1],
