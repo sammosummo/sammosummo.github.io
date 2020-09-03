@@ -986,6 +986,106 @@ fmt_val_latex__py: |
   
   if __name__ == "__main__":
       test()
+anscombe__py: |
+  import matplotlib.pyplot as plt
+  import numpy as np
+  
+  x = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5]
+  y1 = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
+  y2 = [9.14, 8.14, 8.74, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74]
+  y3 = [7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73]
+  x4 = [8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8]
+  y4 = [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.50, 5.56, 7.91, 6.89]
+  
+  datasets = {"I": (x, y1), "II": (x, y2), "III": (x, y3), "IV": (x4, y4)}
+  
+  from matplotlib import rcParams as defaults
+  
+  # figsize = defaults["figure.figsize"]
+  # defaults["figure.figsize"] = [figsize[0], int(figsize[0] / 2)]
+  # defaults["lines.linewidth"] = 2
+  # defaults["font.size"] = 14
+  
+  fig, axs = plt.subplots(
+      2,
+      2,
+      sharex=True,
+      sharey=True,
+      figsize=(4, 4),
+      gridspec_kw={"wspace": 0.08, "hspace": 0.08},
+      constrained_layout=True,
+  )
+  axs[0, 0].set(xlim=(0, 20), ylim=(2, 14))
+  axs[0, 0].set(xticks=(0, 10, 20), yticks=(4, 8, 12))
+  
+  for ax, (label, (x, y)) in zip(axs.flat, datasets.items()):
+      ax.text(0.1, 0.9, label, fontsize=20, transform=ax.transAxes, va="top")
+      ax.tick_params(direction="in", top=True, right=True)
+      ax.plot(x, y, "o")
+  
+      # linear regression
+      p1, p0 = np.polyfit(x, y, deg=1)
+      x_lin = np.array([np.min(x), np.max(x)])
+      y_lin = p1 * x_lin + p0
+      ax.plot(x_lin, y_lin, "r-", lw=2)
+  
+      # add text box for the statistics
+      stats = (
+          f"$\\mu$ = {np.mean(y):.2f}\n"
+          f"$\\sigma$ = {np.std(y):.2f}\n"
+          f"$r$ = {np.corrcoef(x, y)[0][1]:.2f}"
+      )
+      bbox = dict(boxstyle="round", fc="blanchedalmond", ec="orange", alpha=0.5)
+      ax.text(
+          0.95,
+          0.07,
+          stats,
+          fontsize=9,
+          bbox=bbox,
+          transform=ax.transAxes,
+          horizontalalignment="right",
+      )
+  
+  plt.savefig(f"../../assets/images/anscombe.svg", bbox_inches=0, transparent=True)
+mle-fig__py: |
+  """Figure illustrating a bimodal distribution.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import seaborn as sb
+  
+  from scipy.stats import norm
+  
+  if __name__ == "__main__":
+  
+      from matplotlib import rcParams as defaults
+  
+      figsize = defaults["figure.figsize"]
+      defaults["figure.figsize"] = [figsize[0], int(figsize[0] / 2)]
+      defaults["lines.linewidth"] = 2
+      defaults["font.size"] = 14
+  
+      fig, axes = plt.subplots(1, 2, constrained_layout=True)
+      data = norm.rvs(1, 1, size=1000)
+      x = np.linspace(-3.5, 3.5)
+      y = norm.pdf(x)
+      axes[0].hist(data, bins=50, normed=True)
+      axes[0].plot(x, y, "k")
+      axes[0].set_xticks([], [])
+      axes[0].set_yticks([], [])
+      sb.despine(fig, axes[0], top=True, right=True)
+      axes[0].set_title("Unfitted model")
+  
+      axes[1].hist(data, bins=50, normed=True)
+      y = norm.pdf(x, 1, 1)
+      axes[1].plot(x, y, "k")
+      axes[1].set_xticks([], [])
+      axes[1].set_yticks([], [])
+      sb.despine(fig, axes[1], top=True, right=True)
+      axes[1].set_title("Fitted model")
+  
+      plt.savefig(f"../../assets/images/mle-fig.svg", bbox_inches=0, transparent=True)
 neals-funnel-b__py: |
   """Generate data and sample from Neal's funnel distribution.
   
@@ -2190,6 +2290,45 @@ neals-funnel-c__py: |
   
   if __name__ == "__main__":
       main()
+data-and-stats__py: |
+  """Figure showing my perception on the relationship between the utility of statistics
+  and data quality.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import seaborn as sb
+  
+  if __name__ == "__main__":
+  
+      from matplotlib import rcParams as defaults
+  
+      figsize = defaults["figure.figsize"]
+      defaults["figure.figsize"] = [figsize[0], int(figsize[0] / 2)]
+      defaults["lines.linewidth"] = 2
+      defaults["font.size"] = 14
+  
+      fig, ax = plt.subplots(1, 1, constrained_layout=True)
+      x = np.linspace(-1, 1, 50)
+      y = -(x ** 2)
+      ax.plot(x, y, lw=4)
+      ax.set_xticks([], [])
+      ax.set_yticks([], [])
+      sb.despine(fig, ax, top=True, right=True)
+      ax.set_xlabel("Data quality")
+      ax.set_xticks([])
+      ax.set_ylabel("Usefulness of statistics")
+  
+      props = dict(facecolor="black", shrink=0.05)
+      plt.annotate("Garbage in, garbage out", (-1, -1), (-0.8, -0.9), arrowprops=props)
+      plt.annotate("Stating the obvious", (1, -1), (-0.1, -0.7), arrowprops=props)
+  
+      ax.vlines([-0.5, 0.5], -0.5, 0.1, ls="--")
+      plt.annotate("Most real-world data", (-0.35, 0.07))
+  
+      plt.savefig(
+          f"../../assets/images/data-and-stats.svg", bbox_inches=0, transparent=True
+      )
 sem-graphs__py: |
   """Create some graphs of SEM models.
   
@@ -3185,10 +3324,6 @@ make_my_bib__py: |
           if first_page:
               first_page, *last_page = first_page.split("-")
   
-          cit = ", ".join([a.replace(",", "").replace(". ", "") for a in authors])
-          cit = cit.replace(".", "").replace("& ", "")
-          cit = f"{cit}. {title} {jt}. {year};{first_page}–{last_page}."
-          print(cit)
           dic = {
               "authors": ", ".join(authors),
               "title": title if title[-1] != "." else title[:-1],
@@ -3804,6 +3939,47 @@ add_refs__py: |
   
   if __name__ == "__main__":
       add_refs()
+bimodal-distribution__py: |
+  """Figure illustrating a bimodal distribution.
+  
+  """
+  import numpy as np
+  import matplotlib.pyplot as plt
+  import seaborn as sb
+  
+  from scipy.stats import norm
+  
+  if __name__ == "__main__":
+  
+      from matplotlib import rcParams as defaults
+  
+      figsize = defaults["figure.figsize"]
+      # defaults["figure.figsize"] = [figsize[0], int(figsize[0] / )]
+      defaults["lines.linewidth"] = 2
+      defaults["font.size"] = 14
+  
+      fig, ax = plt.subplots(1, 1, constrained_layout=True)
+      a = norm.rvs(size=1000)
+      b = norm.rvs(6, 2, size=1000)
+      x = np.concatenate([a, b])
+      ax.hist(x, bins=50)
+      ax.set_xticks([], [])
+      ax.set_yticks([], [])
+      sb.despine(fig, ax, top=True, right=True)
+      ax.set_xlabel("Bimodal data")
+      ax.set_xticks([])
+      ax.set_ylabel("Count")
+      #
+      # props = dict(facecolor='black', shrink=0.05)
+      # plt.annotate("Garbage in, garbage out", (-1, -1), (-0.8, -0.9), arrowprops=props)
+      # plt.annotate("Stating the obvious", (1, -1), (-0.1, -0.7), arrowprops=props)
+      #
+      ax.axvline([x.mean()], ls="--", c="k")
+      # plt.annotate("Most real-world data", (-0.35, 0.07))
+  
+      plt.savefig(
+          f"../../assets/images/bimodal-distribution.svg", bbox_inches=0, transparent=True
+      )
 wm-capacity__py: |
   import matplotlib.pyplot as plt
   import numpy as np
