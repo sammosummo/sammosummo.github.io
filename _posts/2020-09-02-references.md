@@ -20,24 +20,23 @@ quotations) and _bibliographies_ (complete lists of relevant work, alphabeticall
 found at the end of the document). Unfortunately, references in non-traditional media, such as blog posts, can be
 frustratingly lackluster.
 
-Since this website is mostly about science, I really wanted it to have a strong reference system, like those found in
+Since this website is mostly about science, I wanted it to have a strong reference system, like those found in
 academic journals, with both inline citations and bibliographies. Crucially, I didn't want to simply type everything by
 hand every time, since doing so would take forever and would likely introduce many errors. Like many academics, I use
 [reference management software](https://en.wikipedia.org/wiki/Reference_management_software) routinely as part of my day
-job, which really takes the sting out of references. So I cobbled together a loose "system" that vaguely resembles the
-functionality of a reference manager specifically for this website. It's not a particularly elegant solution, but it
-gets the job done reasonably well. This post describes my system.
+job, which takes the sting out of references when writing manuscripts. So I cobbled together a loose "system" that
+vaguely resembles the functionality of a reference manager specifically for this website. It's not a particularly
+elegant solution, but it gets the job done reasonably well. This post describes my system.
 
 ## Getting references
 
 I've used practically every major reference manager over the years. My favorite by, a long way, is [Zotero](https://www.zotero.org/).
-Among Zotero's many useful feature is the "magic wand" button, which will quickly add items along with all metadata to
-the library given the ISBN, DOI, or PubMed ID. You get slight but annoying differences in the metadata for a given
-item if you use the different identifiers, but so long as you use DOI wherever possible, it works well most of the
-time.
+Among Zotero's many useful features is the "magic wand" button, which quickly adds items along with all metadata to
+the library given the ISBN, DOI, or PubMed ID. You get slight but annoying differences in the metadata if you use the
+different identifiers, but so long as you use DOI wherever possible, it works well most of the time.
 
-My Zotero library contains all the references I need for work. Since the references for this website are generally a
-subset of those, I wanted to make Jekyll talk to my Zotero library to grab the references for each blog post. I couldn't
+My Zotero library contains all the references I need for work. Since the references for this website are a
+subset of those, I wanted to make Jekyll talk to my Zotero library to grab the references needed for each blog post. I couldn't
 come up with a fully automated way of doing this, unfortunately. Instead, I wrote a Python script to extract metadata
 from each item in my Zotero library and store it in a [YAML](https://yaml.org/) file. By placing this YAML file in
 Jekyll's special `_data` directory, the metadata gets read into Jekyll and is accessible via [Liquid](https://shopify.github.io/liquid/)
@@ -70,25 +69,27 @@ Myung2003a:
 ## Citations
 
 In the YAML snippet from the previous section, the meanings of most of the different variables are probably obvious. The
-last three are used to create inline citations via Liquid. For example, to cite {{ site.data.refs.Myung2003a.citet}},
-I use:
+last three are used to create inline citations via Liquid. For example, to include a citation I include the following in
+the body of the text.
 
 {% raw %}
 ```liquid
-{{ site.data.refs.Myung2003a.citet}}
+{{ site.data.refs.Myung2003a.citet }}
 ```
 {% endraw %}
 
-Notice how the citation is also an internal link to the corresponding item in the bibliography! I'm quite proud of that
-bit. `citet` is for text citations, `citep` is for parenthetical citations, and `citenp` is for parenthetical citations
-without the parentheses. `citenp` is is useful for constructing parenthetical citations containing extra text (e.g.,
+This produces: {{ site.data.refs.Myung2003a.citet }}. Notice how the citation is also an internal link to the
+corresponding item in the bibliography! I'm quite proud of that bit. `citet` is for text citations, `citep` is for
+parenthetical citations {{ site.data.refs.Myung2003a.citep }}, and `citenp` is for parenthetical citations
+without the parentheses. `citenp` is useful for constructing parenthetical citations containing extra text (e.g.,
 {{ site.data.refs.Myung2003a.citenp}}).
 
 ## Pulling out citations
 
 My system requires that every post containing a reference needs that reference's key (e.g., `Myung2003a`) in a YAML list
-called `references` in its front matter. I have another Python script for this. It would be nice to make Jekyll do it,
-but I don't know how. Here's that script:
+called `references` in its front matter. I have another Python script that scans through all my existing posts to find
+all citations and create this YAML list. It would be nice to make Jekyll do this instead of Python, but I don't know
+how. Here's that script:
 
 ```python
 {{ site.data.code.add_refs__py }}
@@ -199,5 +200,5 @@ template called `citation.html`:
 ```
 {% endraw %}
 
-The above code is a quite involved and difficult to read. Basically, it takes the information stored within `paper` and
-formats it into a style I call "APAish". You can see the results immediately below.
+The above code is quite involved and difficult to read. Basically, it takes the information stored within `paper` and
+formats it into a style I call "APAish." You can see the results immediately below.
