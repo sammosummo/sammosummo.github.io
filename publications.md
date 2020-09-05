@@ -18,5 +18,5 @@ manuscript is behind a paywall 🙄 please feel free to
 
 {% assign papers = site.data.my_papers | sort %}
 {% for paper in papers reversed %}
-{% include citation.html %}
+  {% include citation.html %}
 {% endfor %}
